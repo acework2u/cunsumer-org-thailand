@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="<?php echo base_url('assets/css/stylesheet.css'); ?>" rel="stylesheet" media="screen" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
+</head>
+<body>
+<header>
+    <div class="container">
+        <div class="row m-auto">
+            <div class="col-sm-3 bg-light-blue text-right py-3">
+                <img src="<?php echo base_url('assets/image/logo.png');?>" class="img-responsive">
+            </div>
+            <div class="col-sm-9 bg-blue py-3">
+                <div class="h-50">
+                    <div class="lang-container text-right px-2 pointer">
+                        <!-- Js line 52 -->
+                        <span class="active lang">TH</span>
+                        <span>|</span>
+                        <span class="lang">ENG</span>
+                        <!-- End -->
+                    </div>
+                </div>
+                <div class="row m-auto h-50">
+                    <div class="col-sm px-0 nav-tap text-white text-center pointer" id="home">
+                        <span class="px-2 pb-2 active">หน้าหลัก</span>
+                    </div>
+                    <div class="col-sm px-0 nav-tap text-white text-center pointer" id="about">
+                        <span class="px-2 pb-2">รู้จักเรา</span>
+                    </div>
+                    <div class="col-sm px-0 nav-tap text-white text-center pointer">
+                        <span class="px-2 pb-2">ผลงาน</span>
+                    </div>
+                    <div class="col-sm-4 px-0 nav-tap text-white text-center pointer" id="reg">
+                        <span class="pb-2">ลงทะเบียน/เข้าสู่ระบบ</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+<img src="<?php echo base_url('assets/image/banner.png');?>" class="w-100">
+<div id="topic" class="topic">
+    <div class="container text-left py-5 ">
+        <h1 class="topic-header pt-5 pb-4 text-center">เราคือใคร</h1>
+        <p class="topic-paragraph px-3 ">“สภาองค์กรผู้บริโภค”  เกิดขึ้น โดยมีแนวคิดริเริ่มจากการผลักดันให้เกิด<br>
+            “องค์การอิสระเพื่อการคุ้มครองผู้บริโภค” ถือกำเนิดและก่อร่างสร้างตัวขึ้นในรัฐธรรมนูญปี 2540 และระบุชัดเจนมากขึ้นในรัฐธรรมนูญปี 2550 และได้มีการจัดทำร่างกฎหมายเหลือเพียงการพิจารณาของสส. หลังจากขั้นตอนผ่านกรรมาธิการร่วม เกิดการยุบสภาและรัฐประหาร ต่อมาเมื่อมีรัฐธรรรมนูญปี 2560 มาตรา 46 ได้บัญญัติรับรองการคุ้มครองสิทธิผู้บริโภคไว้และกำหนดให้องค์กรผู้บริโภครวมตัวกันจัดตั้งองค์กรที่มีความเป็นอิสระเพื่อให้เกิดพลังในการคุ้มครองและพิทักษ์สิทธิของผู้บริโภค หลักเกณฑ์และวิธีการจัดตั้ง อำนาจในการเป็นตัวแทนผู้บริโภคให้มีการออกกฎหมาย โดยได้รับการสนับสนุนด้านการเงินจากรัฐ
+            โดยคณะรัฐมนตรีได้มอบหมายให้สำนักงานคณะกรรมการคุ้มครองผู้บริโภค หรือ สคบ. เป็นเจ้าภาพในการจัดทำร่างกฎหมายตามมาตรา46 ดังกล่าว มีการยกร่างกฎหมายและจัดเวทีรับฟังความคิดเห็นจากองค์กรผู้บริโภคในภูมิภาคต่างๆ และถูกส่งต่อไปพิจารณาในคณะกรรมการกฤษฎีกาคณะพิเศษ ถูกปรับแก้ไขหลักการกฎหมาย เป็นร่างกฎหมายการจัดตั้งสภาองค์กรของผู้บริโภค ส่งกลับให้คณะรัฐมนตรีเห็นชอบ และวันที่ 15 กุมภาพันธ์ 2562 สภานิติบัญญัติได้มีมติเห็นชอบผ่านร่างพระราชบัญญัติการจัดตั้งสภาองค์กรของผู้บริโภค ซึ่งทำให้องค์กรผู้บริโภคสามารถรวมตัวกันเพื่อจัดตั้งเป็นสภาองค์กรของผู้บริโภค เป็นนิติบุคคลที่มีวัตถุประสงค์คุ้มครองผู้บริโภคในทุกด้าน มีอำนาจเป็นตัวแทนของผู้บริโภค มีความเป็นอิสระจากหน่วยงานรัฐ และพรรคการเมือง โดยรัฐสนับสนุนด้านการเงิน
+        </p>
+        <h1 class="topic-header pt-5 pb-4 text-center">บทบาท หน้าที่</h1>
+        <p class="topic-paragraph px-3 pb-5">สภาองค์กรของผู้บริโภค มีอำนาจเป็นตัวแทนของผู้บริโภค และมีบทบาทสำคัญในการส่งเสริมการรวมตัวขององค์กรผู้บริโภคให้มีพลังในการคุ้มครองและพิทักษ์สิทธิของผู้บริโภคมากขึ้น จึงเห็นความสำคัญในการมี “ฐานข้อมูลองค์กรผู้บริโภค นักวิชาการและแกนนำคนทำงานคุ้มครองผู้บริโภคร่วมกัน” เพื่อให้เป็นแหล่งข้อมูลที่ทุกคนสามารถใช้ประโยชน์ในการประสานทำงานกับทั้งภาครัฐและเอกชนในการคุ้มครองผู้บริโภค และสภาองค์กรของผู้บริโภค ยังมีบทบาทสำคัญอีกหลายประการ ได้แก่ <br>
+            1. เป็นตัวแทนของผู้บริโภค ให้ความคุ้มครองและพิทักษ์สิทธิของผู้บริโภค รวมตลอดทั้งเสนอแนะนโยบายเกี่ยวกับการคุ้มครองผู้บริโภคต่อคณะรัฐมนตรีหรือหน่วยงานของรัฐและเอกชนที่เกี่ยวข้อง <br>
+            2. ส่งเสริม สนับสนุนและดำเนินการ ตรวจสอบ ติดตาม เฝ้าระวังสถานการณ์ปัญหาสินค้าและบริการ แจ้งหรือโฆษณาข่าวสารหรือเตือนภัยเกี่ยวกับสินค้าหรือบริการที่อาจกระทบต่อสิทธิของผู้บริโภค <br>
+            3. รายงานการกระทำหรือละเลยการกระทำอันมีผลกระทบต่อสิทธิของผู้บริโภคไปยังหน่วยงานของรัฐหรือหน่วยงานอื่นที่รับผิดชอบและเผยแพร่ให้ประชาชนทราบ<br>
+            4. สนับสนุนการศึกษาและการวิจัยเพื่อประโยชน์ในการดำเนินงานคุ้มครองและพิทักษ์สิทธิของผู้บริโภค<br>
+            5. ดำเนินคดีเกี่ยวกับการละเมิดสิทธิของผู้บริโภคหรือให้ความช่วยเหลือในการดำเนินคดีในกรณีที่ผู้บริโภคหรือองค์กรของผู้บริโภคถูกฟ้องคดีจากการใช้สิทธิในฐานะผู้บริโภคหรือใช้สิทธิแทนผู้บริโภค แล้วแต่กรณี และมีอำนาจประนีประนอมยอมความ
+        </p>
+    </div>
+</div>
+<div id="connection" class="connection">
+    <div class="container">
+        <div class="row m-auto pt-2">
+            <div class="col-sm mt-5">
+                <div class="connection-container w-100 text-center p-relative">
+                    <img src="<?php echo base_url('assets/image/network.jpg');?>" class="p-absolute">
+                    <div class="d-flex p-relative connection-container-text  p-absolute w-100">
+                        <p class="">เครือข่ายองค์กรผู้บริโภค</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm mt-5">
+                <div class="connection-container w-100 text-center p-relative">
+                    <img src="<?php echo base_url('assets/image/training.jpg'); ?>" class="p-absolute">
+                    <div class="d-flex p-relative connection-container-text p-absolute w-100">
+                        <p class="">ภาคีเครือข่าย<br>(กพย., คคส., และอื่นๆ)</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm mt-5">
+                <div class="connection-container w-100 text-center p-relative">
+                    <img src="<?php echo base_url('assets/image/meeting.jpg');?>" class="p-absolute">
+                    <div class="d-flex connection-container-text p-absolute w-100">
+                        <p class="">นักวิชาการ และ ผู้เชี่ยวชาญ <br>ด้านต่างๆ</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="corporate-networ" class="bg-yellow">
+    <div class="container text-center p-relative">
+        <h1 class="corporate-networ-header pt-4 pb-2">องค์กรที่ลงทะเบียนล่าสุด</h1>
+        <img src="<?php echo base_url('assets/image/foundation.png');?>" class="pb-4">
+        <span class="p-absolute corporate-networ-more">เพิ่มเติม <i class="fa fa-caret-right"></i></span>
+    </div>
+</div>
+<div id="register" class="register p-relative">
+    <div class="container">
+        <div class="form-header p-absolute text-right">
+            <h1>ลงทะเบียนสมาชิกองค์การผู้บริโภค</h1>
+            <p class="text-white">ร่วมสานพลัง เพื่อพิทักษ์สิธิผู้บริโภค</p>
+        </div>
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm">
+                <div class="register-container w-100 p-absolute">
+                    <div class="row m-auto text-center">
+                        <div class="col-sm-1"></div>
+                        <!-- Js line 2 - 14 -->
+                        <div class="col-sm register-tap pointer" id="login-tap">
+                            <span class="px-3 pb-2">เข้าสู่ระบบ</span>
+                        </div>
+                        <div class="col-sm register-tap pointer" id="register-tap">
+                            <span class="px-3 pb-2 active">ลงทะเบียน</span>
+                        </div>
+                        <!-- End -->
+                        <div class="col-sm-1"></div>
+                    </div>
+                </div>
+                <div class="d-none" id="login-form">
+                    <div class="form-container p-4 p-absolute">
+                        <div class="d-flex w-100 pb-4">
+                            <img src="<?php echo base_url('assets/image/google+.png');?>">
+                            <img src="<?php echo base_url('assets/image/facebook.png');?>" class="px-2">
+                            <img src="<?php echo base_url('assets/image/twitter.png');?>">
+                        </div>
+                        <input type="text" name="email" placeholder="อีเมล" class="w-100 mb-3 form-input">
+                        <input type="password" name="password" placeholder="ป้อนรหัสผ่าน" class="w-100 mb-4 form-input">
+                        <div class="d-flex w-100">
+                            <label class="label-container">จดจำรหัส
+                                <input type="checkbox" name="remember" value="remember">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                        <div class="d-flex w-100 mt-4 pb-4">
+                            <button class="form-btn text-white py-2 px-4">เข้าสู่ระบบ</button>
+                        </div>
+                    </div>
+                    <div class="login-container-shadow p-absolute"></div>
+                </div>
+                <div class="" id="register-form">
+                    <div id="step-1">
+                        <div class="form-container p-4 p-absolute">
+                            <div class="d-flex w-100 pb-4">
+                                <img src="<?php echo base_url('assets/image/google+.png');?>">
+                                <img src="<?php echo base_url('assets/image/facebook.png');?>" class="px-2">
+                                <img src="<?php echo base_url('assets/image/twitter.png');?>">
+                            </div>
+                            <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input">
+                            <input type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input">
+                            <div class="d-flex w-100">
+                                <label class="label-container">นิติบุคคล
+                                    <input type="radio" name="type" value="" checked="checked">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                                <label class="label-container">บุคคลธรรมดา
+                                    <input type="radio" name="type" value="">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                                <label class="label-container">อื่นๆ
+                                    <input type="radio" name="type" value="">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                            </div>
+                            <input type="text" name="foundation" placeholder="มูลนิธิ*" class="w-100 mb-2 form-input">
+                            <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input">
+                            <div class="row m-auto pb-2">
+                                <div class="col-sm-5 p-0">
+                                    <select class="form-input w-100" name="district">
+                                        <option value="">อำเภอ*</option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-7 pl-2 pr-0">
+                                    <select class="form-input w-100" name="province">
+                                        <option value="">จังหวัด*</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row m-auto pb-2">
+                                <div class="col-sm-6 p-0">
+                                    <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-3 form-input">
+                                </div>
+                            </div>
+                            <div id="googleMap" style="width:100%;height:200px;"></div>
+                            <label class="pt-2">ชื่อผู้ติดต่อ</label>
+                            <div class="row m-auto pb-2">
+                                <div class="col-sm-5 p-0">
+                                    <input type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input">
+                                </div>
+                                <div class="col-sm-7 pl-2 pr-0">
+                                    <input type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input">
+                                </div>
+                            </div>
+                            <input type="text" name="tel" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*">
+                            <input type="text" name="register-email" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*">
+                            <div class="d-flex w-100 mt-4 pb-4">
+                                <!-- Js line 16 -->
+                                <button class="form-btn text-white py-2 px-4" id="register-step-2">หน้าต่อไป</button>
+                                <!-- End -->
+                            </div>
+                        </div>
+                        <div class="register-container-shadow p-absolute"></div>
+                    </div>
+                    <div id="step-2" class="d-none">
+                        <div class="form-container p-4 p-absolute">
+                            <label>วัตถุประสงค์</label>
+                            <textarea rows="5" class="w-100 mb-2 form-input" name="objective"></textarea>
+                            <label>ผู้ประสานงานหลัก</label>
+                            <div class="row m-auto pb-2">
+                                <div class="col-sm-5 p-0">
+                                    <input type="text" name="coordinator-name" placeholder="ชื่อ*" class="w-100 mb-2 form-input">
+                                </div>
+                                <div class="col-sm-7 pl-2 pr-0">
+                                    <input type="text" name="coordinator-lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input">
+                                </div>
+                            </div>
+                            <input type="text" name="coordinator-tel" placeholder="เบอร์ติดต่อ*" class="w-100 mb-2 form-input">
+                            <input type="text" name="coordinator-email" placeholder="Email*" class="w-100 mb-2 form-input">
+                            <label>รายชื่อคณะกรรมการ</label>
+                            <input type="text" name="judge-name" placeholder="ชื่อ-นาสกุล*" class="w-100 mb-2 form-input">
+                            <div class="d-flex w-100 py-2">
+                                <button class="add-btn py-2 px-4"><i class="fa fa-plus-circle"></i> เพิ่ม</button>
+                            </div>
+                            <label>ผลงานย้อนหลังในรอบ 10 ปี</label>
+                            <textarea rows="5" class="w-100 mb-2 form-input" name="past-performance"></textarea>
+                            <label>รายชื่ออาสาสมัคร</label>
+                            <input type="text" name="volunteers-name" placeholder="ชื่อ-นาสกุล*" class="w-100 mb-2 form-input">
+                            <div class="d-flex w-100 py-2">
+                                <button class="add-btn py-2 px-4"><i class="fa fa-plus-circle"></i> เพิ่ม</button>
+                            </div>
+                            <div class="d-flex w-100 mt-5 pb-4">
+                                <!-- Js line 21 -->
+                                <button class="form-btn text-white py-2 px-4" id="register-step-3">หน้าต่อไป</button>
+                                <!-- End -->
+                            </div>
+                        </div>
+                        <div class="register-container-shadow-back p-absolute"></div>
+                    </div>
+                    <div id="step-3" class="d-none">
+                        <div class="form-container p-4 p-absolute">
+                            <h1 class="condition-header text-center py-3">ข้อตกลงและเงื่อนไข</h1>
+                            <div class="row m-auto">
+                                <div class="col-sm p-3 condition-container w-100">
+                                    <p>ข้อตกลงและเงื่อนไขการลงทะเบียนขอรับชื่อผู้ใช้งานและรหัสผ่าน (Username & Password)<br>
+                                        ข้อตกลงและเงื่อนไขนี้ใช้บังคับระหว่าง คณะกรรมการองค์การอิสระเพื่อการคุ้มครองผู้บริโภคภาคประชาชนซึ่งต่อไปนี้จะเรียกว่า “ผู้ให้บริการ” กับผู้สมัครขอลงทะเบียนรับชื่อผู้ใช้งานและรหัสผ่าน (Username & Password) เพื่อใช้บริการระบบลงทะเบียนองค์กรผู้บริโภคหรืออาสาสมัครคุ้มครองผู้บริโภคทางอิเล็กทรอนิกส์ (e‐Registration) ซึ่งต่อไปนี้จะเรียกว่า “ผู้ใช้บริการ” โดยผู้ใช้บริการตกลงยินยอมผูกพันยินยอมผูกพันและปฏิบัติตาม ข้อตกลงและเงื่อนไข ดังต่อไปนี้<br>
+                                        1. ข้อตกลงและเงื่อนไขนี้ใช้บังคับระหว่าง กรมพัฒนาธุรกิจการค้า กระทรวงพาณิชย์ ซึ่งต่อไปนี้จะเรียกว่า “ผู้ให้บริการ” กับผู้สมัครขอรับชื่อผู้ใช้และรหัสผ่าน (Username & Password) เพื่อใช้บริการระบบ) เพื่อใช้บริการระบบลงทะเบียนองค์กรผู้บริโภคหรืออาสาสมัครคุ้มครองผู้บริโภคทางอิเล็กทรอนิกส์ ซึ่งต่อไปนี้จะเรียกว่า “ผู้ใช้บริการ” <br>
+                                        2. การสมัครขอรับชื่อผู้ใช้และรหัสผ่าน (Username & Password) เพื่อใช้บริการระบบลงทะเบียนองค์กรผู้บริโภคหรืออาสาสมัครคุ้มครองผู้บริโภคทางอิเล็กทรอนิกส์ ไม่ต้องเสียค่าใช้จ่ายใด ๆ ทั้งสิ้น <br>
+                                        3. ผู้ใช้บริการ จะต้องกรอกหรือระบุข้อมูลรายละเอียดต่าง ๆ ตามความเป็นจริงให้ครบถ้วน ทั้งนี้เพื่อประโยชน์แก่ตัวผู้ใช้บริการ และผู้ให้บริการ หากตรวจพบว่าข้อมูลของผู้ใช้บริการไม่เป็นความจริง ผู้ให้บริการอาจระงับหรือยกเลิกสิทธิ์การใช้งานของผู้ใช้บริการได้โดยไม่ต้องแจ้งให้ทราบล่วงหน้า และผู้ใช้บริการจะต้องรับผิดชอบในความเสียหายที่เกิดขึ้นจากการกรอกข้อมูลอันเป็นเท็จดังกล่าว <br>
+                                        4. ผู้ใช้บริการ ตกลงยินยอมให้ ผู้ให้บริการ ตรวจสอบความถูกต้องและเปิดเผยข้อมูลตามที่ได้ระบุไว้ในการสมัครขอรับ ชื่อผู้ใช้และรหัสผ่าน (Username & Password) นี้ เพื่อใช้ประโยชน์ของผู้ให้บริการ และในกรณีที่ผู้ให้บริการตรวจสอบพบว่าข้อมูลที่ผู้ใช้บริการระบุไว้ไม่ชัดเจนหรือเป็นเท็จ ผู้ให้บริการมีสิทธิที่จะปฏิเสธการรับลงทะเบียนหรือยกเลิกชื่อผู้ใช้และรหัสผ่านของผู้ใช้บริการได้ โดยไม่ต้องแจ้งให้ผู้ใช้บริการทราบ <br>
+                                        5. ผู้ใช้บริการต้องไม่นำชื่อผู้ใช้และรหัสผ่าน (Username & Password) ไปใช้ในทางที่ขัดต่อกฎหมาย และความสงบ เรียบร้อย หรือศีลธรรมอันดีของประชาชน <br>
+                                        7. ผู้ใช้บริการตกลงและเข้าใจดีว่า การใช้ชื่อผู้ใช้ (Username) เพื่อสร้างลายมือชื่ออิเล็กทรอนิกส์ จะต้องใช้คู่กับรหัสผ่าน (Password) ซึ่งผู้ใช้บริการเป็นผู้กำหนดขึ้นด้วยตนเอง และใช้ร่วมกับรหัสลับแบบใช้ครั้งเดียว (One Time Password : OTP) ในกรณีที่ผู้ใช้บริการไม่สามารถจำรหัสผ่านที่ตนกำหนดได้ <br>ผู้ใช้บริการจะต้องทำการตั้งรหัสผ่านใหม่ผ่านทางหน้าจอระบบจดทะเบียนนิติบุคคลทางอิเล็กทรอนิกส์ (e-Registration) โดยคลิกปุ่ม “เข้าสู่ระบบ” และคลิกเลือก “ลืมรหัสผ่าน”
+                                        8. ในกรณีที่เหตุอันควรสงสัยว่ารหัสผ่าน (Password) ของผู้ใช้บริการ ล่วงรู้ไปถึงบุคคลอื่นซึ่งไม่มีหน้าที่เกี่ยวข้อง ผู้ใช้บริการมีหน้าที่ต้องทำการตั้งรหัสผ่านใหม่ โดยทันทีผ่านทางหน้าจอระบบลงทะเบียน (e-Registration) ทั้งนี้ หากมีผู้อื่นนำรหัสผ่าน (Password) ไปใช้และก่อให้เกิดผลเสียหายหรือค่าใช้จ่าย ผู้ใช้บริการต้องรับผิดชอบการกระทำดังกล่าวด้วย<br>
+                                        9. ผู้ใช้บริการตกลงและยอมรับว่าผู้ให้บริการมีสิทธิที่จะแก้ไข เปลี่ยนแปลง หรือยกเลิกข้อตกลงและเงื่อนไขการสมัครขอรับชื่อผู้ใช้และรหัสผ่าน (Username & Password) นี้ได้ ตามที่ผู้ให้บริการได้พิจารณาแล้วเห็นสมควร เพื่อประโยชน์ในการพัฒนาหรือปรับปรุงการให้บริการ หรือเพื่อปฏิบัติการให้เป็นไปตามบทบัญญัติของกฎหมายที่เกี่ยวข้องทั้งที่ใช้บังคับอยู่ และที่จะออกมาใช้บังคับในอนาคต หรือในกรณีที่ผู้ให้บริการเห็นสมควรที่จะแก้ไข เปลี่ยนแปลง หรือยกเลิกข้อตกลงและเงื่อนไข ในข้อตกลงฉบับนี้ ทั้งนี้ผู้ให้บริการจะแจ้งให้ผู้ใช้บริการทราบล่วงหน้าทาง e-mail, SMS หรือโดยวิธีการทางอิเล็กทรอนิกส์อื่นใด ที่ผู้ให้บริการกำหนด ล่วงหน้าไม่น้อยกว่า 30 วันก่อนวันที่การแก้ไข เปลี่ยนแปลง หรือยกเลิกข้อตกลงและเงื่อนไขจะมีผลบังคับใช้ <br>
+                                        10. ผู้ใช้บริการต้องเก็บรักษาชื่อผู้ใช้และรหัสผ่าน (Username & Password) ที่ได้รับไว้เป็นความลับ และผู้ใช้บริการตกลงและยอมรับว่าในกรณีที่มีการใช้ชื่อผู้ใช้และรหัสผ่าน (Username & Password) เพื่อสร้างลายมือชื่ออิเล็กทรอนิกส์ และบันทึกข้อมูลอิเล็กทรอนิกส์ที่ใช้ในการติดต่อสื่อสารบนเครือข่ายคอมพิวเตอร์ เพื่อก่อให้เกิดนิติสัมพันธ์ระหว่างบุคคล ผู้ใช้บริการตกลงและยินยอมให้ถือเสมือนว่าลายมือชื่ออิเล็กทรอนิกส์ที่บันทึกลงบนข้อมูลอิเล็กทรอนิกส์มีความผูกพันตามกฎหมายเสมือนเป็นการลงลายมือชื่อของผู้ใช้บริการในเอกสารการจดทะเบียนและยินยอมผูกพันตามเนื้อหาหรือข้อมูลนั้นทุกประการ ทั้งนี้ โดยรวมถึงกรณีที่มีการสร้างหรือนำลายมือชื่ออิเล็กทรอนิกส์ไปใช้ผิดวัตถุประสงค์ของผู้ใช้บริการ หรือใช้โดยผิดข้อตกลง หรือเงื่อนไขการใช้ชื่อผู้ใช้และรหัสผ่าน (Username & Password) และการใช้นั้นได้ก่อให้เกิดความเสียหายต่อบุคคลหนึ่งบุคคลใด ผู้ใช้บริการจะเป็นผู้รับผิดชอบต่อความเสียหายที่เกิดขึ้นทุกประการด้วยตนเอง <br>
+                                        11. ผู้ใช้บริการต้องปฏิบัติตามข้อตกลงและเงื่อนไขการสมัครและการใช้บริการของผู้ให้บริการโดยเคร่งครัดเพื่อความปลอดภัย ในข้อมูลส่วนบุคคลของผู้ใช้บริการ ในกรณีที่ข้อมูลดังกล่าวถูกโจรกรรม สูญหาย หรือเสียหายอันเนื่องจากเหตุสุดวิสัยหรือไม่ว่ากรณีใด ๆ ก็ตาม ผู้ให้บริการมีสิทธิปฏิเสธและไม่ต้องรับผิดชอบในความเสียหายที่เกิดขึ้นจากเหตุต่าง ๆ ดังกล่าวได้ <br>
+                                        12. ผู้ใดแอบอ้างหรือกระทำการใด ๆ อันเป็นการละเมิดสิทธิส่วนบุคคลโดยใช้ข้อมูลของผู้อื่นมาแอบอ้างในการสมัครขอรับชื่อผู้ใช้และรหัสผ่าน (Username & Password) ถือเป็นความผิดและต้องได้รับโทษตามที่กฎหมายกำหนดไว้ <br>
+                                        13. ผู้ให้บริการอาจส่งข้อมูลหรือแจ้งข่าวประชาสัมพันธ์ผ่านช่องทางต่าง ๆ เช่น e-mail, SMS หรือช่องทางอื่นใดที่จะ มีขึ้นในอนาคต ให้แก่ผู้ใช้บริการได้ตามที่ผู้ให้บริการเห็นสมควร ทั้งนี้ผู้ให้บริการมีระบบการตรวจจับ Virus ก่อนส่งข่าวสารใด ๆ ให้แก่ผู้ใช้บริการทุกครั้ง ดังนั้น หากเครื่องคอมพิวเตอร์ของผู้ใช้บริการเกิดความผิดปกติอันเนื่องมาจากการติด Virus หรือ Spam mail ผู้ใช้บริการไม่สามารถเรียกร้องให้ผู้ให้บริการรับผิดชอบใด ๆ ได้ทั้งสิ้น <br>
+                                        14. ผู้ให้บริการมีสิทธิระงับหรือยกเลิกการให้บริการกับผู้ใช้บริการได้ทันที ถ้าปรากฏว่าผู้ใช้บริการปฏิบัติผิดข้อตกลง และเงื่อนไขนี้แม้เพียงข้อใดข้อหนึ่ง
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="d-flex w-100 mt-4">
+                                <label class="label-container label-condition">ยืนยอมเงื่อนไข
+                                    <input type="checkbox" name="remember" value="remember">
+                                    <span class="checkmark"></span>
+                                </label>
+                            </div>
+                            <div class="d-flex w-100 mt-2 pb-4">
+                                <button class="form-btn text-white py-2 px-4" data-toggle="modal" data-target="#register-modal">หน้าต่อไป</button>
+                            </div>
+                        </div>
+                        <div class="register-container-shadow-back p-absolute"></div>
+                    </div>
+                    <div id="step-4" class="d-none">
+                        <div class="form-container p-4 p-absolute step-4">
+                            <div class="h-100 d-flex">
+                                <img src="<?php echo base_url('assets/image/done.png');?>">
+                            </div>
+                        </div>
+                        <div class="step-4-shadow-back p-absolute"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="register-modal">
+    <div class="modal-dialog register-modal">
+        <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
+            <div class="d-flex">
+                <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
+            </div>
+            <div class="row m-auto">
+                <div class="col-sm">
+                    <p class="mb-1">วัตถุประสงค์</p>
+                    <ol class="modal-ol">
+                        <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษา แก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                        <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ์</li>
+                        <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                        <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                    </ol>
+                    <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
+                    <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
+                    <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
+                    <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
+                    <p class="mb-1">รายชื่อคณะกรรมการ</p>
+                    <ol class="modal-ol pb-5">
+                        <li>คุณหญิงประณีตศิลป์ วัชรพล (ประธานกรรมการ)</li>
+                        <li>นางยิ่งลักษณ์ วัชรพล (รองประธานกรรมการและเหรัญญิก)</li>
+                        <li>นายวิเชน โพชนุกูล (กรรมการและเลขาธิการ)</li>
+                        <li>นายมานิจ สุขสมจิตร (กรรมการ)</li>
+                        <li>นายเลิศ อัศเวศน์ (กรรมการ)</li>
+                        <li>นายสมชาย กรุสวนสมบัติ (กรรมการ)</li>
+                        <li>นายไพโรจน์ โล่ห์สุนทร (กรรมการ)</li>
+                        <li>นายสราวุธ วัชรพล (กรรมการ)</li>
+                        <li>นายสมปอง พรทวีวัฒน์ (กรรมการ)</li>
+                        <li>นายธงชัย ณ นคร (กรรมการ)</li>
+                        <li>นายดำฤทธิ์ วิริยะกุล (กรรมการ)</li>
+                        <li>นายวัชร วัชรพล (กรรมการ)</li>
+                        <li>นางฐิติวรรณ ไสวแสนยากร (กรรมการ)</li>
+                        <li>นางสาวจิตสุภา วัชรพล (กรรมการ)</li>
+                        <li>นางสาวสิริพร โคตระวีระ (กรรมการ)</li>
+                    </ol>
+                </div>
+                <div class="col-sm">
+                    <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                    <ol class="modal-ol">
+                        <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                        <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
+                        <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                        <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                    </ol>
+                    <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                    <ol class="modal-ol">
+                        <li>กำพล วัชรพล</li>
+                    </ol>
+                </div>
+            </div>
+            <div class="modal-btn-container p-absolute">
+                <!-- Js line 26 - 34 -->
+                <button class="edit-btn text-white mx-2" data-dismiss="modal">แก้ไข</button>
+                <button class="save-btn text-white mx-2" data-dismiss="modal">บันทึก</button>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+</div>
+<div id="member" class="member p-relative">
+    <div class="container">
+        <div class="member-header p-absolute text-right">
+            <h1>ลงทะเบียนสมาชิกองค์การผู้บริโภค</h1>
+            <p class="text-white">ร่วมสานพลัง เพื่อพิทักษ์สิธิผู้บริโภค</p>
+        </div>
+    </div>
+    <div class="container h-100">
+        <div class="row m-auto h-100">
+            <div class="col-sm p-0"></div>
+            <div class="col-sm p-0 h-100 d-flex">
+                <div class="nationwide text-center mt-5" id="all">
+                    <h1 class="mb-0">70%</h1>
+                    <p class="text-white">ทั่วประเทศ</p>
+                    <!-- Js line 47 -->
+                    <button class="more-btn px-3 py-1">ดูทั้งหมด <i class="fa fa-caret-right"></i></button>
+                    <!-- End -->
+                </div>
+                <div class="nationwide text-left w-100 d-none" id="chart">
+                    <p class="nationwide-label text-white mb-1">กรุงเทพฯและปริมณฑล <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage bangkok"></div>
+                    </div>
+                    <p class="nationwide-label text-white mt-3 mb-1">ภาคกลาง <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage central"></div>
+                    </div>
+                    <p class="nationwide-label text-white mt-3 mb-1">ภาคเหนือ <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage north"></div>
+                    </div>
+                    <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันตก <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage west"></div>
+                    </div>
+                    <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออก <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage east"></div>
+                    </div>
+                    <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออกเฉียงเหนือ <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage north-east"></div>
+                    </div>
+                    <p class="nationwide-label text-white mt-3 mb-1">ภาคใต้ <span class="float-right">70%</span></p>
+                    <div class="w-100 chart-bg">
+                        <div class="percentage southern"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="search" class="search text-center">
+    <h1 class="mt-5 mb-0">ค้นหาสภาองค์กรผู้บริโภคทั่วประเทศ</h1>
+    <div class="container py-5">
+        <div class="row m-auto">
+            <div class="col-sm">
+                <select class="w-100 py-1 search-select text-white" name="district">
+                    <option value="">เลือกภูมิภาค</option>
+                </select>
+            </div>
+            <div class="col-sm">
+                <select class="w-100 py-1 search-select text-white" name="district">
+                    <option value="">เลือกจังหวัด</option>
+                </select>
+            </div>
+            <div class="col-sm">
+                <button class="search-btn w-100 py-1"><i class="fa fa-search" aria-hidden="true"></i> ค้นหา</button>
+            </div>
+        </div>
+    </div>
+    <div class="row m-auto">
+        <div class="col-sm-8 p-0">
+            <div id="googleMap-2" class="w-100 h-100"></div>
+        </div>
+        <div class="col-sm-4 p-0">
+            <div class="location">
+                <!-- Js line 36 -->
+                <div class="location-container p-relative" data-toggle="modal" data-target="#search-modal">
+                    <div class="row m-auto h-100">
+                        <div class="col-sm-4 p-0 h-100">
+                            <img src="<?php echo base_url('assets/image/location/img-1.png');?>" class="w-100 h-100">
+                        </div>
+                        <div class="col-sm-8 pl-2 pr-0 text-left d-flex">
+                            <div class="px-2">
+                                <p class="mb-2"><b>มูลนิธิสร้างรอยยิ้ม <br> Operation Smile Thailand</b></p>
+                                <p class="mb-0">12/2 Soi Methinivete, Sukhumvit Soi 24, Klongton, แขวง คลองเตย เขต คลองเตย กรุงเทพมหานคร 10110</p>
+                                <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-container" data-toggle="modal" data-target="#search-modal">
+                    <div class="row m-auto h-100">
+                        <div class="col-sm-4 p-0 h-100">
+                            <img src="<?php echo base_url('assets/image/location/img-2.png');?>" class="w-100 h-100">
+                        </div>
+                        <div class="col-sm-8 pl-2 pr-0 text-left d-flex">
+                            <div class="px-2">
+                                <p class="mb-2"><b>มูลนิธิรามาธิบดี</b></p>
+                                <p class="mb-0">270 อาคาร จอดรถมูลนิธิรามาธิบดี ถนน พระราม6 แขวง ทุ่งพญาไท เขต ราชเทวี กรุงเทพมหานคร 10400</p>
+                                <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-container" data-toggle="modal" data-target="#search-modal">
+                    <div class="row m-auto h-100">
+                        <div class="col-sm-4 p-0 h-100">
+                            <img src="<?php echo base_url('assets/image/location/img-3.png');?>" class="w-100 h-100">
+                        </div>
+                        <div class="col-sm-8 pl-2 pr-0 text-left d-flex">
+                            <div class="px-2">
+                                <p class="mb-2"><b>มูลนิธิส่งเสริมอาชีพคนตาบอด</b></p>
+                                <p class="mb-0">2218/86 ถนนจันทน์เก่า ช่องนนทรี ยานนาวา กรุงเทพฯ 10120</p>
+                                <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-container" data-toggle="modal" data-target="#search-modal">
+                    <div class="row m-auto h-100">
+                        <div class="col-sm-4 p-0 h-100">
+                            <img src="<?php echo base_url('assets/image/location/img-4.png');?>" class="w-100 h-100">
+                        </div>
+                        <div class="col-sm-8 pl-2 pr-0 text-left d-flex">
+                            <div class="px-2">
+                                <p class="mb-2"><b>มูลนิธิการศึกษาเพื่อพัฒนาทักษะชีวิต</b></p>
+                                <p class="mb-0">65 ถนน นราธิวาสราชนครินทร์ ซอย18 กท กรุงเทพมหานคร 10120</p>
+                                <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-container" data-toggle="modal" data-target="#search-modal">
+                    <div class="row m-auto h-100">
+                        <div class="col-sm-4 p-0 h-100">
+                            <img src="<?php echo base_url('assets/image/location/img-5.png');?>" class="w-100 h-100">
+                        </div>
+                        <div class="col-sm-8 pl-2 pr-0 text-left d-flex">
+                            <div class="px-2">
+                                <p class="mb-2"><b>มูลนิธิทิสโก้ เพื่อการกุศล</b></p>
+                                <p class="mb-0">อาคาร Tisco Tower ชั้น 5 ถนน สาทรเหนือ  แขวง สีลม เขต บางรัก กร</p>
+                                <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="location-container" data-toggle="modal" data-target="#search-modal">
+                    <div class="row m-auto h-100">
+                        <div class="col-sm-4 p-0 h-100">
+                            <img src="<?php echo base_url('assets/image/location/img-6.png');?>" class="w-100 h-100">
+                        </div>
+                        <div class="col-sm-8 pl-2 pr-0 text-left d-flex">
+                            <div class="px-2">
+                                <p class="mb-2"><b>มูลนิธิกระจกเงา</b></p>
+                                <p class="mb-0">191 ซอย วิภาวดีรังสิต 62 แยก 4-7 แขวง ตลาดบางเขน เขต หลักสี่ กรุงเทพมหานคร 10210</p>
+                                <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- End -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="search-modal">
+    <div class="modal-dialog register-modal">
+        <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
+            <div class="d-flex">
+                <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
+            </div>
+            <div class="row m-auto">
+                <div class="col-sm">
+                    <p class="mb-1">วัตถุประสงค์</p>
+                    <ol class="modal-ol">
+                        <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษา แก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                        <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ์</li>
+                        <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                        <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                    </ol>
+                    <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
+                    <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
+                    <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
+                    <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
+                    <p class="mb-1">รายชื่อคณะกรรมการ</p>
+                    <ol class="modal-ol pb-5">
+                        <li>คุณหญิงประณีตศิลป์ วัชรพล (ประธานกรรมการ)</li>
+                        <li>นางยิ่งลักษณ์ วัชรพล (รองประธานกรรมการและเหรัญญิก)</li>
+                        <li>นายวิเชน โพชนุกูล (กรรมการและเลขาธิการ)</li>
+                        <li>นายมานิจ สุขสมจิตร (กรรมการ)</li>
+                        <li>นายเลิศ อัศเวศน์ (กรรมการ)</li>
+                        <li>นายสมชาย กรุสวนสมบัติ (กรรมการ)</li>
+                        <li>นายไพโรจน์ โล่ห์สุนทร (กรรมการ)</li>
+                        <li>นายสราวุธ วัชรพล (กรรมการ)</li>
+                        <li>นายสมปอง พรทวีวัฒน์ (กรรมการ)</li>
+                        <li>นายธงชัย ณ นคร (กรรมการ)</li>
+                        <li>นายดำฤทธิ์ วิริยะกุล (กรรมการ)</li>
+                        <li>นายวัชร วัชรพล (กรรมการ)</li>
+                        <li>นางฐิติวรรณ ไสวแสนยากร (กรรมการ)</li>
+                        <li>นางสาวจิตสุภา วัชรพล (กรรมการ)</li>
+                        <li>นางสาวสิริพร โคตระวีระ (กรรมการ)</li>
+                    </ol>
+                </div>
+                <div class="col-sm">
+                    <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                    <ol class="modal-ol">
+                        <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                        <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
+                        <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                        <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                    </ol>
+                    <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                    <ol class="modal-ol">
+                        <li>กำพล วัชรพล</li>
+                    </ol>
+                </div>
+            </div>
+            <span class="close modal-close p-absolute pointer" data-dismiss="modal">&times;</span>
+        </div>
+    </div>
+</div>
+<div id="volunteer" class="volunteer p-relative">
+    <div class="container">
+        <img src="<?php echo base_url('assets/image/volunteer.png');?>" class="h-100 w-auto p-absolute volunteer-img">
+        <div class="row justify-content-center m-auto pb-4">
+            <div class="col-sm-8 p-0">
+                <h1 class="mt-4 pt-4">อาสาสมัครเพื่อผู้บริโภค</h1>
+                <p class="pb-4">“หนึ่งพลังผู้บริโภครุ่นใหม่  สร้างแรงบันดาลใจ เปลี่ยนแปลงสังคม”  ทุกคนเป็นผู้บริโภคตั้งแต่เกิดจนตาย ชีวิตของเราย่อมต้องซื้อ ใช้ เลือกสินค้าบริการต่างๆ และหากเกิดความเสียหายก็ต้องการสิ่งชดเชยที่เป็นธรรม ทุกวันนี้มีคนถูกหลอก ถูกโกงจากการซื้อขายสินค้าหรือบริการต่างๆ อยู่ตลอดเวลา งานอาสาสมัครผู้บริโภค นอกจากจะทำให้เรารู้จักสิทธิผู้บริโภค เพื่อปกป้องตนเอง ยังสามารถช่วยเหลือ คุ้มครองสิทธิคนอื่นได้  ปัจจุบัน องค์กรผู้บริโภคยังต้องการอาสาสมัครมาช่วยงานคุ้มครองสิทธิอยู่ไม่น้อย ทั้งการช่วยรับเรื่องร้องเรียน เผยแพร่ข้อมูล หรือทำสื่อประชาสัมพันธ์ความรู้ รวมทั้งกิจกรรมรณรงค์ต่างๆ ที่เกี่ยวกับการคุ้มครองสิทธิของผู้บริโภค“เจอนมหมดอายุ  ต้องทำยังไง”  “ถูกเก็บค่าโทรศัพท์เกินจริง จะใช้สิทธิอย่างไร”  “ซื้อไอโฟน ได้ก้อนหิน ใครต้องรับผิดชอบ”   “เป็นหนี้บัตรเครดิต ต้องจัดการอย่างไร” “ค่ารักษาพยาบาลแพง ใครต้องดูแล”เรื่องเหล่านี้ ท่านสามารถเรียนรู้ได้ผ่านการทำงานอาสาสมัครเพื่อผู้บริโภค นอกจากใช้ปกป้องตนเองได้แล้ว ยังสามารถแนะนำช่วยเหลือผู้อื่นได้ด้วย มาร่วมกันคุ้มครองสิทธิผู้บริโภค  ยิ่งผู้บริโภครู้สิทธิมาก การถูกเอาเปรียบจะยิ่งลดลง หนึ่งพลังของท่านช่วยให้สังคมเปลี่ยนแปลงได้
+                </p>
+                <button class="join-btn py-1 px-5" data-toggle="modal" data-target="#join-modal">เข้าร่วม</button>
+            </div>
+            <div class="col-sm-4 p-0"></div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="join-modal">
+    <div class="modal-dialog join-modal pt-4">
+        <div class="modal-content register-modal-container w-100 px-5 py-4 p-relative mt-5" id="join-form">
+            <span class="join-tap text-white p-absolute">ลงทะเบียนอาสาสมัคร</span>
+            <div class="px-5">
+                <label>เลือกหน่วยงาน/องค์กร ที่ต้องการสมัคร</label>
+                <div class="row m-auto">
+                    <div class="col-sm pl-0 pr-1">
+                        <select class="form-input w-100" name="province">
+                            <option value="">จังหวัด*</option>
+                        </select>
+                    </div>
+                    <div class="col-sm pr-0 pl-1">
+                        <select class="form-input w-100" name="foundation-list">
+                            <option value="">รายการมูลนิธิฯ*</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-12 p-0">
+                        <hr class="join-hr">
+                    </div>
+                    <div class="col-sm-12 p-0">
+                        <div class="row m-auto">
+                            <div class="col-sm p-0">
+                                <label class="label-container">นาย
+                                    <input type="radio" name="prefix" value="" checked="checked">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                            </div>
+                            <div class="col-sm p-0">
+                                <label class="label-container">นาง
+                                    <input type="radio" name="prefix" value="">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                            </div>
+                            <div class="col-sm p-0">
+                                <label class="label-container">นางสาว
+                                    <input type="radio" name="type" value="">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                            </div>
+                            <div class="col-sm-auto p-0">
+                                <label class="label-container">ไม่ประสงค์ระบุเพศ
+                                    <input type="radio" name="type" value="">
+                                    <span class="checkmark-o"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-5 pl-0 pr-1">
+                        <input type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input">
+                    </div>
+                    <div class="col-sm-7 pl-1 pr-0">
+                        <input type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input">
+                    </div>
+                    <div class="col-sm-12 p-0">
+                        <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input">
+                    </div>
+                    <div class="col-sm-4 pl-0 pr-1 pb-2">
+                        <select class="form-input w-100" name="district">
+                            <option value="">อำเภอ*</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6 pl-1 pr-0 pb-2">
+                        <select class="form-input w-100" name="province">
+                            <option value="">จังหวัด*</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-5 pl-0 pr-1">
+                        <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input">
+                    </div>
+                    <div class="col-sm-10 pl-0 pr-1">
+                        <input type="text" name="tel" placeholder="เบอร์ติดต่อ*" class="w-100 mb-2 form-input">
+                    </div>
+                    <div class="col-sm-10 pl-0 pr-1">
+                        <input type="text" name="email" placeholder="Email*" class="w-100 mb-2 form-input">
+                    </div>
+                </div>
+                <div class="mt-4 row m-auto">
+                    <div class="col-sm p-0 mt-2 d-flex">
+                        <!-- Js line 42 -->
+                        <button class="my-4 join-btn join-btn-modal text-white px-4 py-2" id="join-register">ลงทะเบียน</button>
+                        <!-- End -->
+                    </div>
+                    <div class="col-sm p-0 mt-2 d-flex">
+                        <button class="my-4 join-btn join-btn-modal text-white px-4 py-2" data-dismiss="modal">ยกเลิก</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-content join-modal-container p-relative mt-5 d-none" id="join-done">
+            <div class="d-flex h-100">
+                <img src="<?php echo base_url('assets/image/done.png');?>">
+            </div>
+            <span class="close modal-close p-absolute pointer" data-dismiss="modal">&times;</span>
+        </div>
+    </div>
+</div>
+<footer class="pb-5">
+    <div class="container pt-5">
+        <div class="row m-auto pt-5 pb-4">
+            <div class="col-sm p-0">
+                <p class="footer-header mb-4">OUR ABOUT</p>
+                <p class="footer-link mb-2">เราคือใคร</p>
+                <p class="footer-link mb-2">เราทำอะไร</p>
+            </div>
+            <div class="col-sm p-0">
+                <p class="footer-header mb-4">OUR SERVICER</p>
+                <p class="footer-link mb-2">Register</p>
+                <p class="footer-link mb-2">Ower Login</p>
+                <p class="footer-link mb-2">Find Location</p>
+            </div>
+            <div class="col-sm p-0">
+                <p class="footer-header mb-4">ADDRESS</p>
+                <p class="footer-link mb-2">อาคารศูนย์เรียนรู้สุขภาวะ เลขที่ 99/8 ซอยงามดูพลี แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพฯ 10120</p>
+                <p class="footer-link mb-2">โทรศัพท์ 02-343-1500 / โทรสาร 02-343-1551</p>
+            </div>
+        </div>
+        <p class="footer-header">CONTACT US</p>
+        <div class="d-flex mb-3">
+            <img src="<?php echo base_url('assets/image/footer/facebook.png');?>">
+            <img src="<?php echo base_url('assets/image/footer/ocbp.png');?>" class="px-2">
+            <img src="<?php echo base_url('assets/image/footer/accot.png');?>" class="px-2">
+            <img src="<?php echo base_url('assets/image/footer/safethaibus.png')?>" class="px-2">
+            <img src="assets/image/footer/inside.png" class="px-2">
+            <img src="assets/image/footer/seacc.png">
+        </div>
+        <div class="d-flex">
+            <img src="assets/image/footer/thaihealth.png">
+            <img src="assets/image/footer/chaladsue.png" class="px-2">
+            <img src="assets/image/footer/consumer.png" class="px-2">
+            <img src="assets/image/footer/ex-letter.png" class="px-2">
+            <img src="assets/image/footer/kidney_friend_club.png" class="px-2">
+            <img src="assets/image/footer/supermarket.png">
+        </div>
+    </div>
+    <hr>
+    <div class="container pt-4 pb-5">
+        <img src="assets/image/logo.png" class="copyright-img">
+        <span class="copyright-text px-3">Copyright ©Consumers International 2019 Website Privacy Policy</span>
+    </div>
+</footer>
+<script>
+    function myMap() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    }
+
+    function myMap_2() {
+        var mapProp= {
+            center:new google.maps.LatLng(51.508742,-0.120850),
+            zoom:5,
+        };
+        var map = new google.maps.Map(document.getElementById("googleMap-2"),mapProp);
+    }
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap_2"></script>
+</body>
+</html>
