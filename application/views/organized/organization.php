@@ -4,14 +4,48 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title></title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <title>สภาองค์กรผู้บริโภค</title>
+    <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>" >
+    <link href="<?php echo base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="<?php echo base_url('assets/css/stylesheet.css'); ?>" rel="stylesheet" media="screen" />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+
+
+
+
+    <script src="<?php echo base_url('assets/js/vue.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/axios.js'); ?>"></script>
+
+    <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
+
+
+<!--    <script src="https://unpkg.com/vue-select@3.0.0"></script>-->
+<!--    <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">-->
+<!--    <script src="--><?php //echo base_url('assets/js/vue-orzgroup.js'); ?><!--"></script>-->
+
+
+
+
 </head>
 <body>
 <header>
@@ -129,9 +163,9 @@
                 <div class="d-none" id="login-form">
                     <div class="form-container p-4 p-absolute">
                         <div class="d-flex w-100 pb-4">
-                            <img src="<?php echo base_url('assets/image/google+.png');?>">
-                            <img src="<?php echo base_url('assets/image/facebook.png');?>" class="px-2">
-                            <img src="<?php echo base_url('assets/image/twitter.png');?>">
+<!--                            <img src="--><?php //echo base_url('assets/image/google+.png');?><!--">-->
+<!--                            <img src="--><?php //echo base_url('assets/image/facebook.png');?><!--" class="px-2">-->
+<!--                            <img src="--><?php //echo base_url('assets/image/twitter.png');?><!--">-->
                         </div>
                         <input type="text" name="email" placeholder="อีเมล" class="w-100 mb-3 form-input">
                         <input type="password" name="password" placeholder="ป้อนรหัสผ่าน" class="w-100 mb-4 form-input">
@@ -150,58 +184,64 @@
                 <div class="" id="register-form">
                     <div id="step-1">
                         <div class="form-container p-4 p-absolute">
-                            <div class="d-flex w-100 pb-4">
-                                <img src="<?php echo base_url('assets/image/google+.png');?>">
-                                <img src="<?php echo base_url('assets/image/facebook.png');?>" class="px-2">
-                                <img src="<?php echo base_url('assets/image/twitter.png');?>">
-                            </div>
                             <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input">
                             <input type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input">
+                            <label for="exampleFormControlSelect1">{{orz_group_label}}</label>
+                            <div class="d-flex w-100 pb-4">
+                                <select class="form-control" id="orzgroupSelect" v-model="orz_info.group">
+                                    <option value="" selected="selected" hidden="hidden">Choose here</option>
+                                    <option v-for="item in orz_group" :value="item.aid">{{item.title_th}}</option>
+                                </select>
+
+
+                            </div>
+
+
                             <div class="d-flex w-100">
                                 <label class="label-container">นิติบุคคล
-                                    <input type="radio" name="type" value="" checked="checked">
+                                    <input type="radio" name="type" value="1" checked="checked" v-model="orz_info.category">
                                     <span class="checkmark-o"></span>
                                 </label>
                                 <label class="label-container">บุคคลธรรมดา
-                                    <input type="radio" name="type" value="">
+                                    <input type="radio" name="type" value="2" v-model="orz_info.category">
                                     <span class="checkmark-o"></span>
                                 </label>
                                 <label class="label-container">อื่นๆ
-                                    <input type="radio" name="type" value="">
+                                    <input type="radio" name="type" value="3" v-model="orz_info.category">
                                     <span class="checkmark-o"></span>
                                 </label>
                             </div>
-                            <input type="text" name="foundation" placeholder="มูลนิธิ*" class="w-100 mb-2 form-input">
-                            <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input">
+                            <input type="text" name="foundation" placeholder="มูลนิธิ*" class="w-100 mb-2 form-input" v-model="orz_info.title">
+                            <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input" v-model="orz_info.address">
                             <div class="row m-auto pb-2">
                                 <div class="col-sm-5 p-0">
-                                    <select class="form-input w-100" name="district">
+                                    <select class="form-input w-100" name="district" v-model="orz_info.district">
                                         <option value="">อำเภอ*</option>
                                     </select>
                                 </div>
                                 <div class="col-sm-7 pl-2 pr-0">
-                                    <select class="form-input w-100" name="province">
+                                    <select class="form-input w-100" name="province" v-model="orz_info.province">
                                         <option value="">จังหวัด*</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="row m-auto pb-2">
                                 <div class="col-sm-6 p-0">
-                                    <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-3 form-input">
+                                    <input @keyup="onSave()" type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-3 form-input" v-model="orz_info.zipcode">
                                 </div>
                             </div>
                             <div id="googleMap" style="width:100%;height:200px;"></div>
                             <label class="pt-2">ชื่อผู้ติดต่อ</label>
                             <div class="row m-auto pb-2">
                                 <div class="col-sm-5 p-0">
-                                    <input type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input">
+                                    <input type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="orz_info.contact_name">
                                 </div>
                                 <div class="col-sm-7 pl-2 pr-0">
-                                    <input type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input">
+                                    <input type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="orz_info.contact_lastname">
                                 </div>
                             </div>
-                            <input type="text" name="tel" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*">
-                            <input type="text" name="register-email" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*">
+                            <input type="text" name="tel" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*" v-model="orz_info.tel">
+                            <input type="text" name="register-email" class="w-100 mb-2 form-input" placeholder="เบอร์มือถือ*" v-model="orz_info.mobile_no">
                             <div class="d-flex w-100 mt-4 pb-4">
                                 <!-- Js line 16 -->
                                 <button class="form-btn text-white py-2 px-4" id="register-step-2">หน้าต่อไป</button>
@@ -735,7 +775,7 @@
 <script>
     function myMap() {
         var mapProp= {
-            center:new google.maps.LatLng(51.508742,-0.120850),
+            center:new google.maps.LatLng(13.763681,100.539663),
             zoom:5,
         };
         var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
@@ -743,14 +783,17 @@
 
     function myMap_2() {
         var mapProp= {
-            center:new google.maps.LatLng(51.508742,-0.120850),
+            center:new google.maps.LatLng(13.763681,100.539663),
             zoom:5,
         };
         var map = new google.maps.Map(document.getElementById("googleMap-2"),mapProp);
     }
 </script>
+<script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/vue-organization.js'); ?>"></script>
 
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY&callback=myMap_2"></script>
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap&libraries=places"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>
 </body>
 </html>

@@ -34,6 +34,12 @@ class MY_Controller extends CI_Controller
     public $_emailUser;
     public $_emailPassword;
 
+    /***  Orz Thailand **/
+    public $organized_model;
+    public $_orz_group_model;
+
+    public $auth_model;
+
 
     function __construct()
     {
@@ -66,6 +72,12 @@ class MY_Controller extends CI_Controller
         $this->_payment_description = "Donate Consumer thai.org";
         $this->_params = "";
         $this->_amount = '000000000000';
+
+
+        /** Orz***/
+        $this->organized_model = "organized_model";
+        $this->_orz_group_model = "orz_group_model";
+        $this->auth_model = "auth_model";
 
 
     }

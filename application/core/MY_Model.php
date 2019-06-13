@@ -16,6 +16,15 @@ class MY_Model extends CI_Model
     public $tbl_donation_invoice;
     public $tbl_apm_agent_code;
 
+    //*** tcc.indyconsumers.org
+    public $tbl_organization;
+    public $tbl_orz_group;
+    public $tbl_provinces;
+    public $tbl_subdistricts;
+    public $tbl_districts;
+    public $tbl_zone;
+
+
 
 
 
@@ -32,6 +41,13 @@ class MY_Model extends CI_Model
         $this->tbl_payment_channel = "payment_channel";
         $this->tbl_donation_invoice = "donation_invoice";
         $this->tbl_apm_agent_code = "apm_agent_code";
+
+        /****** Orz *****/
+        $this->tbl_orz_group = "orz_group";
+        $this->tbl_organization = "organization";
+        $this->tbl_provinces = "provinces";
+        $this->tbl_districts = "districts";
+        $this->tbl_subdistricts = "subdistricts";
 
     }
 

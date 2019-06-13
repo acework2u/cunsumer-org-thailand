@@ -121,23 +121,56 @@ class Auth_model extends MY_Model
     public function create()
     {
         $hash = $this->hash($this->_password);
-        $data = array(
-//            'name' => $this->_userName,
-            'first_name' => $this->_firstName,
-            'last_name' => $this->_lastName,
-            'email' => $this->_email,
-            'user_name' => $this->_userName,
-            'company_name' => $this->_companyName,
-            'password' => $hash,
-            'user_role_id' => $this->_user_role_id,
-            'cus_group_id' => $this->_cus_group_id,
-            'verification_code' => $this->_verificationCode,
-            'created_date' => $this->_timeStamp,
-            'modified_date' => $this->_timeStamp,
-            'status' => $this->_status
-        );
+//        $data = array(
+////            'name' => $this->_userName,
+//            'first_name' => $this->_firstName,
+//            'last_name' => $this->_lastName,
+//            'email' => $this->_email,
+//            'user_name' => $this->_userName,
+//            'company_name' => $this->_companyName,
+//            'password' => $hash,
+//            'user_role_id' => $this->_user_role_id,
+//            'cus_group_id' => $this->_cus_group_id,
+//            'verification_code' => $this->_verificationCode,
+//            'created_date' => $this->_timeStamp,
+//            'modified_date' => $this->_timeStamp,
+//            'status' => $this->_status
+//        );
+
+        if(!is_blank($this->_firstName)){
+            $data['first_name'] = $this->_firstName;
+        }
+        if(!is_blank($this->_lastName)){
+            $data['last_name'] = $this->_lastName;
+        }
+        if(!is_blank($this->_email)){
+            $data['email'] = $this->_email;
+        }
+        if(!is_blank($this->_companyName)){
+            $data['company_name'] = $this->_companyName;
+        }
+        if(!is_blank($hash)){
+            $data['password'] = $hash;
+        }
+        if(!is_blank($this->_user_role_id)){
+            $data['user_role_id'] = $this->_user_role_id;
+        }
+        if(!is_blank($this->_cus_group_id)){
+            $data['cus_group_id'] = $this->_cus_group_id;
+        }
+        if(!is_blank($this->_verificationCode)){
+            $data['verification_code'] = $this->_verificationCode;
+        }
+        if(!is_blank($this->_status)){
+            $data['status'] = $this->_status;
+        }
+        if(!is_blank($this->_timeStamp)){
+            $data['created_date'] = $this->_timeStamp;
+            $data['modified_date'] = $this->_timeStamp;
+        }
+
         $this->db->insert($this->tbl_users, $data);
-        if (!empty($this->db->insert_id()) && $this->db->insert_id() > 0) {
+        if (!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0) {
             return TRUE;
         } else {
             return FALSE;

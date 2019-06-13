@@ -107,7 +107,7 @@ header {
 /* ------------------------------- Topic ------------------------------- */
 
 .topic {
-	background: url(image/topic.png) center top;
+	background: url(../image/topic.png) center top;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -132,7 +132,7 @@ header {
 /* ------------------------------- Connection ------------------------------- */
 
 .connection {
-	background: url(assets/image/connection.png) center top;
+	background: url(../image/connection.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -179,7 +179,7 @@ header {
 /* ------------------------------- register ------------------------------- */
 
 .register {
-	background: url(image/register.png) center top;
+	background: url(../image/register.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -489,7 +489,7 @@ input:focus {
 /* ------------------------------- Member -------------------------------*/
 
 .member {
-	background: url(image/member.png) center top;
+	background: url(../image/member.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -680,7 +680,7 @@ input:focus {
 /* ------------------------------- Volunteer -------------------------------*/
 
 .volunteer {
-	background: url(image/volunteer-bg.png) center top;
+	background: url(../image/volunteer-bg.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;

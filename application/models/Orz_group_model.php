@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH'))
     exit('No direct script access allowed');
-class Orz_group extends MY_Model{
+class Orz_group_model extends MY_Model{
 
 
 
@@ -16,10 +16,13 @@ class Orz_group extends MY_Model{
         $result = array();
 
         $query = $this->db->where('status',1)->get($this->tbl_orz_group);
-        if ($query->num_rows() == 1) {
+        if ($query->num_rows() > 0) {
             $result = $query->result();
-
         }
+
+
+
+        return $result;
 
 
 

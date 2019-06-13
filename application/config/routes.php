@@ -94,9 +94,12 @@ $route['api-v01/user/register'] = "auth/actionUserCreate";
 /**API***/
 $route['api-v01/banklist'] = "api/jsonBankList";
 $route['api-v01/payment-status-code'] = "api/jsonPaymentStatusCode";
+$route['api/v1/orz-group'] = "organized/getOrzGroupList";
+$route['api/v1/orz-register'] = "organized/organization_register";
 
 
-/**** Font ***/
+
+/**** Front ***/
 $route['result'] = "frontend/result/index";
 $route['demo-donate'] = "donate/demoDonate";
 $route['donation/2c2p-payment'] = "donate/paymentBy2c2p";

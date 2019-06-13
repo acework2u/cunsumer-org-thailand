@@ -690,7 +690,18 @@ class Test extends MY_Controller
 
 
 
-    public function paymentBy2c2p(){
+    public function orzgroup(){
+
+
+        $this->load->model($this->_orz_group_model,'orzg');
+
+
+        $rs = array();
+        $rs = $this->orzg->orz_group_list();
+
+
+        print_r($rs);
+
 
     }
 
