@@ -84,6 +84,8 @@ $route['profile'] = 'auth/index';
 $route['userlist'] = 'auth/userList';
 $route['user-list'] = 'auth/users_list';
 
+
+
 /**** User ****/
 $route['api-v01/user/user-list'] = "auth/get_user_list";
 $route['api-v01/user/group-list'] = "auth/get_group_list";
@@ -96,6 +98,9 @@ $route['api-v01/banklist'] = "api/jsonBankList";
 $route['api-v01/payment-status-code'] = "api/jsonPaymentStatusCode";
 $route['api/v1/orz-group'] = "organized/getOrzGroupList";
 $route['api/v1/orz-register'] = "organized/organization_register";
+
+/**** API Auth ****/
+$route['api/v1/check-register'] = 'auth/check_duplicate_user';
 
 
 

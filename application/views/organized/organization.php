@@ -167,7 +167,7 @@
 <!--                            <img src="--><?php //echo base_url('assets/image/facebook.png');?><!--" class="px-2">-->
 <!--                            <img src="--><?php //echo base_url('assets/image/twitter.png');?><!--">-->
                         </div>
-                        <input type="text" name="email" placeholder="อีเมล" class="w-100 mb-3 form-input">
+                        <input type="text" name="email" placeholder="อีเมล" class="w-100 mb-3 form-input" >
                         <input type="password" name="password" placeholder="ป้อนรหัสผ่าน" class="w-100 mb-4 form-input">
                         <div class="d-flex w-100">
                             <label class="label-container">จดจำรหัส
@@ -184,7 +184,12 @@
                 <div class="" id="register-form">
                     <div id="step-1">
                         <div class="form-container p-4 p-absolute">
-                            <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input">
+                            <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input" @keyup="checkUserEmail" v-model="orz_info.email">
+                            <div v-if="alError===true" :class="classObject" role="alert">
+                                ** {{msgSuccess}}
+                            </div>
+
+
                             <input type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input">
                             <label for="exampleFormControlSelect1">{{orz_group_label}}</label>
                             <div class="d-flex w-100 pb-4">
@@ -227,7 +232,7 @@
                             </div>
                             <div class="row m-auto pb-2">
                                 <div class="col-sm-6 p-0">
-                                    <input @keyup="onSave()" type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-3 form-input" v-model="orz_info.zipcode">
+                                    <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-3 form-input" v-model="orz_info.zipcode">
                                 </div>
                             </div>
                             <div id="googleMap" style="width:100%;height:200px;"></div>

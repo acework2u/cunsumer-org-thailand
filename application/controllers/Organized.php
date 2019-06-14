@@ -47,6 +47,7 @@ class Organized extends MY_Controller
     }
 
     public function organization_register(){
+
         $data = $this->security->xss_clean($_POST);
         $this->form_validation->set_rules('cus_email', 'Email', 'trim|required|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
         $this->form_validation->set_rules('cus_password', 'Password', 'trim|required|min_length[5]|max_length[12]');
@@ -57,17 +58,25 @@ class Organized extends MY_Controller
 
             $this->load->model('Auth_model', 'user');
 
-            $cus_email = $this->get_post('cus_email');
-            $cus_password = $this->post('cus_password');
+            $cus_email = $this->input->get_post('cus_email');
+            $cus_password = $this->input->get_post('cus_password');
 
             $this->user->setEmail($cus_email);
             $this->user->setPassword($cus_password);
 
-            $chk = $this->user->create();
+            $chk = $this->user->check_user($cus_email);
             /***** Register Orz ***/
-            if($chk){
+            $this->load->model($this->organized_model,'orz');
 
-            }
+
+
+
+
+
+
+
+
+
 
 
             //** Load Model **/

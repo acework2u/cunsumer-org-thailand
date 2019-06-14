@@ -11,7 +11,7 @@ class Auth extends MY_Controller
         //load model
         $this->load->model('Auth_model', 'auth');
         $this->load->model('Mail', 'mail');
-        $this->load->library('form_validation');
+//        $this->load->library('form_validation');
     }
 
     // user profile
@@ -148,7 +148,7 @@ class Auth extends MY_Controller
     {
         if ($this->session->userdata('ci_session_key_generate') == FALSE) {
 
-            if (!empty($this->input->get('usid'))) {
+            if (!is_blank($this->input->get('usid'))) {
                 $verificationCode = urldecode(base64_decode($this->input->get('usid')));
                 $this->auth->setVerificationCode($verificationCode);
                 $this->auth->activate();
@@ -723,4 +723,46 @@ class Auth extends MY_Controller
         redirect('signin');
     }
 
-}
+
+    public function check_duplicate_user(){
+        $data = $this->security->xss_clean($_POST);
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
+
+        $message = array();
+        $email = $this->input->post('email');
+
+        if ($this->form_validation->run() == TRUE) {
+
+
+            $this->load->model($this->auth_model, 'auth');
+            $chk = $this->auth->check_user($email);
+            if($chk){
+                $error = true;
+                $msg = "Duplicate email";
+                $message = array(
+                    'stats' => false,
+                    'error' => "Duplicate email",
+                    'message' => "อีเมล $email ซ้ำในระบบ"
+                );
+            }else{
+                $message = array(
+                    'stats' => true,
+                    'error' => "you can use this email",
+                    'message' => "คุณสามารถใช้อีเมลนี้ได้"
+                );
+            }
+
+        }else{
+            $message = array(
+                'stats' => $this->form_validation->run(),
+                'error' => $this->form_validation->error_array(),
+                'message' => validation_errors(),
+                'input_data'=>$_POST
+            );
+        }
+
+        echo json_encode($message);
+
+    }
+
+} // End of Class

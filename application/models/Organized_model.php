@@ -105,7 +105,6 @@ class Organized_model extends MY_Model{
 
         $this->db->insert($this->tbl_organization,$data);
         if(!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0){
-
             $this->setOrzId($this->db->insert_id());
             return true;
         }else{

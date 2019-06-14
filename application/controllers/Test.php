@@ -706,6 +706,25 @@ class Test extends MY_Controller
     }
 
 
+    public function test_user(){
+
+
+        $email = "anon_de@saijo-denki.co.th";
+        $this->load->model($this->auth_model, 'auth');
+
+
+        $chk = $this->auth->check_user($email);
+
+
+        if($chk){
+            echo "true";
+        }else{
+            echo "false";
+        }
+
+    }
+
+
 
 
 

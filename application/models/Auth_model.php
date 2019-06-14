@@ -448,14 +448,13 @@ class Auth_model extends MY_Model
 
     public function check_user($email = "")
     {
+        if(!is_blank($email)){
+            $query =  $this->db->where('email',$email)->get($this->tbl_users);
+            if($query->num_rows() > 0){
 
-        if (!is_blank($email)) {
-            $query = $this->db->where(array('email' => $email))->get($this->tbl_users);
-            if ($query->num_rows() != 0) {
                 return true;
             }
         }
-
         return false;
     }
 

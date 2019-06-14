@@ -6,6 +6,10 @@ window.onload = function () {
             return {
                 zipcode:"",
                 orz_group:[],
+                timer:0,
+                msgSuccess:"",
+                alsuccess:false,
+                alError:false,
                 // orz_selected:"",
                 orz_group_label:"ประเภทมูลนิธิ",
                 orz_info:{
@@ -27,13 +31,73 @@ window.onload = function () {
         },
         methods:{
             onSave(){
-                console.log("OK"+this.zipcode)
+
+            },
+            delay(callback, ms) {
+                var timer = 0;
+                return function() {
+                    var context = this, args = arguments;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        callback.apply(context, args);
+                    }, ms || 0);
+                };
+            },
+            checkUserEmail(){
+                let api = base_url+"/api/v1/check-register"
+
+                let dataInfo = {'email':this.orz_info.email,'password':this.orz_info.email}
+                var fromData = this.toFormData(dataInfo)
+                if (this.timer) {
+                    clearTimeout(this.timer);
+                    this.timer = null;
+                }
+                this.timer = setTimeout(() => {
+                    this.alError = false
+                    this.alsuccess = false
+                    axios.post(api,fromData).then((res)=>{
+                        console.log(res.data)
+                        this.alsuccess = res.data.status
+                        this.msgSuccess = res.data.message
+                        this.alError = false
+                        this.alsuccess = false
+                        if(res.data.status===true){
+                            this.alsuccess = false
+                            this.alError = false
+                        }else{
+                            this.alsuccess = false
+                            this.alError = true
+                        }
+
+
+                    })
+
+                    // console.log(fromData)
+                }, 3000);
+                this.alError = false
+                this.alsuccess = false
+
             },
             getOrzgroup(){
                 axios.get(base_url+'/api/v1/orz-group').then((res)=>{
                     console.log(res.data)
                     this.orz_group = res.data
                 })
+            },
+            toFormData: function (obj) {
+                var form_data = new FormData();
+                for (var key in obj) {
+                    form_data.append(key, obj[key]);
+                }
+                return form_data;
+            }
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.alsuccess && !this.alError,
+                    'alert text-danger': this.alError === 'true'
+                }
             }
         }
 
