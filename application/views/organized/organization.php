@@ -199,8 +199,6 @@
 
 
                             </div>
-
-
                             <div class="d-flex w-100">
                                 <label class="label-container">นิติบุคคล
                                     <input type="radio" name="type" value="1" checked="checked" v-model="orz_info.categories">
@@ -248,7 +246,7 @@
                             <input type="text" name="register-email" class="w-100 mb-2 form-input" placeholder="เบอร์มือถือ*" v-model="orz_info.mobile_no">
                             <div class="d-flex w-100 mt-4 pb-4">
                                 <!-- Js line 16 -->
-                                <button class="form-btn text-white py-2 px-4" id="register-step-2">หน้าต่อไป</button>
+                                <button class="form-btn text-white py-2 px-4" id="register-step-3">หน้าต่อไป</button>
                                 <!-- End -->
                             </div>
                         </div>
@@ -314,21 +312,32 @@
                             </div>
                             <div class="d-flex w-100 mt-4">
                                 <label class="label-container label-condition">ยืนยอมเงื่อนไข
-                                    <input type="checkbox" name="remember" value="remember">
+                                    <input @click="clickRuleAccept" type="checkbox" name="remember" value="remember">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="d-flex w-100 mt-2 pb-4">
-                                <button class="form-btn text-white py-2 px-4" data-toggle="modal" data-target="#register-modal">หน้าต่อไป</button>
+                                <button id="accept-rule" class="form-btn text-white py-2 px-4 d-none" data-toggle="modal" data-target="#register-modal">หน้าต่อไป</button>
+<!--                                <button v-if="comAcceptRule" id="accept-rule" class="form-btn text-white py-2 px-4">ยืนยันลงทะเบียน</button>-->
+                                <button   class="save-btn form-btn text-white py-2 px-4" data-dismiss="modal" @click="onSave">ยืนยันลงทะเบียน</button>
+<!--                                <button class="save-btn text-white mx-2" data-dismiss="modal" @click="onSave">บันทึก</button>-->
+
                             </div>
                         </div>
                         <div class="register-container-shadow-back p-absolute"></div>
                     </div>
                     <div id="step-4" class="d-none">
                         <div class="form-container p-4 p-absolute step-4">
-                            <div class="h-100 d-flex">
+                            <div class="h-10 d-flex">
                                 <img src="<?php echo base_url('assets/image/done.png');?>">
+
                             </div>
+                            <div class="h-40 d-flex">
+                                <span class="mt-3">เมื่อลงทะเบียนแล้วกรุณาเข้าระบบ เพื่อทำการเพิ่มข้อมูลเพื่อนุมัติต่อไป</span>
+
+                            </div>
+
+
                         </div>
                         <div class="step-4-shadow-back p-absolute"></div>
                     </div>

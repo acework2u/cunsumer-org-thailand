@@ -10,6 +10,7 @@ window.onload = function () {
                 msgSuccess:"",
                 alsuccess:false,
                 alError:false,
+                checkRule:false,
                 // orz_selected:"",
                 orz_group_label:"ประเภทมูลนิธิ",
                 orz_info:{
@@ -99,6 +100,12 @@ window.onload = function () {
                     form_data.append(key, obj[key]);
                 }
                 return form_data;
+            },
+            clickRuleAccept(){
+
+              this.checkRule = !this.checkRule
+
+                console.log(this.checkRule)
             }
         },
         computed: {
@@ -107,14 +114,12 @@ window.onload = function () {
                     active: this.alsuccess && !this.alError,
                     'alert text-danger': this.alError === 'true'
                 }
+            },
+            comAcceptRule(){
+                return this.checkRule;
             }
+
         }
-
-
-
-
-
-
     });
 
     var userlogin = new Vue({
@@ -198,6 +203,10 @@ window.onload = function () {
             $('#step-2').addClass('d-none');
             $('#step-3').removeClass('d-none');
         });
+        $('#accept-rule').click(function () {
+            $('#step-3').addClass('d-none');
+            $('#step-1').addClass('d-none');
+        });
 
         $('.edit-btn').click(function(){
             $('#step-1').removeClass('d-none');
@@ -206,6 +215,7 @@ window.onload = function () {
 
         $('.save-btn').click(function(){
             $('#step-3').addClass('d-none');
+            $('#step-1').addClass('d-none');
             $('#step-4').removeClass('d-none');
             $('html, body').animate({
                 scrollTop: $("#register").offset().top
