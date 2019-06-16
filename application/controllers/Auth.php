@@ -726,10 +726,10 @@ class Auth extends MY_Controller
 
     public function check_duplicate_user(){
         $data = $this->security->xss_clean($_POST);
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
+        $this->form_validation->set_rules('cus_email', 'Email', 'trim|required|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
 
         $message = array();
-        $email = $this->input->post('email');
+        $email = $this->input->post('cus_email');
 
         if ($this->form_validation->run() == TRUE) {
 

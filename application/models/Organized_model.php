@@ -6,6 +6,7 @@ class Organized_model extends MY_Model{
     private $_title;
     private $_address;
     private $_contact_name;
+    private $_contact_lastname;
     private $_email;
     private $_user_id;
     private $_website;
@@ -30,6 +31,9 @@ class Organized_model extends MY_Model{
     }
     public function setContactName($contact_name){
         $this->_contact_name = $contact_name;
+    }
+    public function setContactLastName($contact_lastname){
+        $this->_contact_lastname = $contact_lastname;
     }
     public function setEmail($email){
         $this->_email = $email;
@@ -74,6 +78,9 @@ class Organized_model extends MY_Model{
         }
         if(!is_blank($this->_contact_name)){
             $data['contact_name'] = $this->_contact_name;
+        }
+        if(!is_blank($this->_contact_lastname)){
+            $data['contact_lastname'] = $this->_contact_lastname;
         }
         if(!is_blank($this->_email)){
             $data['email'] = $this->_email;

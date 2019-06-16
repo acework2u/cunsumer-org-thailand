@@ -101,6 +101,7 @@ $route['api/v1/orz-register'] = "organized/organization_register";
 
 /**** API Auth ****/
 $route['api/v1/check-register'] = 'auth/check_duplicate_user';
+$route['api/v1/user/logon'] = "auth/jsonLogin";
 
 
 

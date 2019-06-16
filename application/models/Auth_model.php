@@ -445,7 +445,6 @@ class Auth_model extends MY_Model
         }
     }
 
-
     public function check_user($email = "")
     {
         if(!is_blank($email)){

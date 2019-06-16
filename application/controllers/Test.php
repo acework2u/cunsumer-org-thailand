@@ -625,7 +625,8 @@ class Test extends MY_Controller
     }
 
 
-    public function userInfo(){
+    public function userInfo()
+    {
         echo "<pre>";
         print_r($_SESSION);
         echo "</pre>";
@@ -634,22 +635,23 @@ class Test extends MY_Controller
 //        print_r($this->session->userdata('userSession'));
 
         $userSession = getUsersSession();
-        print_r( $userSession);
+        print_r($userSession);
 
-        echo  getUserFirstName();
-        echo  getUserLastName();
+        echo getUserFirstName();
+        echo getUserLastName();
     }
 
 
-    public function toptendonor(){
+    public function toptendonor()
+    {
 
-        $this->load->model($this->donation_model,'donation');
+        $this->load->model($this->donation_model, 'donation');
         $result = array();
         $result = $this->donation->topDonor();
 
         $rows = array();
-       if(is_array($result) && !is_blank($result)){
-           foreach ($result as $row){
+        if (is_array($result) && !is_blank($result)) {
+            foreach ($result as $row) {
 //               $rows[] = array(
 //                   'aid'=>get_array_value($row,'aid',''),
 //                   'full_name'=>get_array_value($row,'first_name',''),
@@ -657,43 +659,42 @@ class Test extends MY_Controller
 //                   'total_amount'=>get_array_value($row,'TotalAmount','0')
 //               );
 
-               $rows[] = $row;
-           }
-       }
+                $rows[] = $row;
+            }
+        }
 
-       echo json_encode($rows);
+        echo json_encode($rows);
 
 
     }
 
 
-
-    public function testTime(){
+    public function testTime()
+    {
         $time = "010219175015";
 
 
         $newTime = datetime2display($time);
 
-        echo "Time = ".$time." New Time=".$newTime;
-
-
+        echo "Time = " . $time . " New Time=" . $newTime;
 
 
     }
 
-    public function multilang(){
+    public function multilang()
+    {
 
         $this->data = array();
 
-        $this->load->view('frontend/test_view',$this->data);
+        $this->load->view('frontend/test_view', $this->data);
     }
 
 
+    public function orzgroup()
+    {
 
-    public function orzgroup(){
 
-
-        $this->load->model($this->_orz_group_model,'orzg');
+        $this->load->model($this->_orz_group_model, 'orzg');
 
 
         $rs = array();
@@ -706,34 +707,18 @@ class Test extends MY_Controller
     }
 
 
-    public function test_user(){
+    public function test_user()
+    {
 
 
         $email = "anon_de@saijo-denki.co.th";
         $this->load->model($this->auth_model, 'auth');
 
 
-        $chk = $this->auth->check_user($email);
-
-
-        if($chk){
-            echo "true";
-        }else{
-            echo "false";
-        }
+        echo getUserAid();
+        var_dump(getUsersSession());
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 
 } //end of Class

@@ -13,10 +13,11 @@ window.onload = function () {
                 // orz_selected:"",
                 orz_group_label:"ประเภทมูลนิธิ",
                 orz_info:{
-                    email:"",
-                    password:"",
+                    cus_email:"",
+                    cus_password:"",
                     title:"",
-                    group:""
+                    group:"",
+                    categories:""
 
                 }
             }
@@ -31,6 +32,15 @@ window.onload = function () {
         },
         methods:{
             onSave(){
+                let api = base_url+"/api/v1/orz-register"
+                let dataInfo = this.orz_info
+                var fromData = this.toFormData(dataInfo)
+
+                console.log(dataInfo);
+
+                axios.post(api,fromData).then((res)=>{
+                    console.log(res.data)
+                })
 
             },
             delay(callback, ms) {
@@ -45,8 +55,7 @@ window.onload = function () {
             },
             checkUserEmail(){
                 let api = base_url+"/api/v1/check-register"
-
-                let dataInfo = {'email':this.orz_info.email,'password':this.orz_info.email}
+                let dataInfo = {'cus_email':this.orz_info.cus_email,'cus_password':this.orz_info.cus_password}
                 var fromData = this.toFormData(dataInfo)
                 if (this.timer) {
                     clearTimeout(this.timer);
@@ -105,6 +114,63 @@ window.onload = function () {
 
 
 
+
+    });
+
+    var userlogin = new Vue({
+        el:"#userlogin",
+        data(){
+            return{
+                errors:false,
+                textMessage:"",
+                isLogin:false,
+                orz_login:{
+                    user_name:"",
+                    password:""
+                }
+            }
+        },
+        methods:{
+            toFormData: function (obj) {
+                var form_data = new FormData();
+                for (var key in obj) {
+                    form_data.append(key, obj[key]);
+                }
+                return form_data;
+            },
+            userLogin(){
+                let api = base_url+"/api/v1/user/logon"
+
+                if(this.orz_login.user_name===""){
+                    $('#user_name').focus();
+                }
+                let dataInfo = this.orz_login
+                var fromData = this.toFormData(dataInfo)
+
+                axios.post(api,fromData).then((res)=>{
+                        console.log(res.data)
+                    if(res.data.error){
+                        this.errors = res.data.error
+
+                    }
+                    this.isLogin = res.data.isLogin
+                    this.textMessage = res.data.msg
+                })
+            }
+
+
+        },
+        computed: {
+            classObject: function () {
+                return {
+                    active: this.alsuccess && !this.alError,
+                    'alert text-danger': this.alError === 'true'
+                }
+            },
+            msgLoginStatus(){
+                return this.textMessage;
+            }
+        }
 
     });
 

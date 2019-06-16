@@ -161,22 +161,23 @@
                     </div>
                 </div>
                 <div class="d-none" id="login-form">
-                    <div class="form-container p-4 p-absolute">
+                    <div class="form-container p-4 p-absolute" id="userlogin">
                         <div class="d-flex w-100 pb-4">
-<!--                            <img src="--><?php //echo base_url('assets/image/google+.png');?><!--">-->
-<!--                            <img src="--><?php //echo base_url('assets/image/facebook.png');?><!--" class="px-2">-->
-<!--                            <img src="--><?php //echo base_url('assets/image/twitter.png');?><!--">-->
+                            <span v-if="msgLoginStatus !='' ">{{msgLoginStatus}}</span>
                         </div>
-                        <input type="text" name="email" placeholder="อีเมล" class="w-100 mb-3 form-input" >
-                        <input type="password" name="password" placeholder="ป้อนรหัสผ่าน" class="w-100 mb-4 form-input">
+                        <input v-if="!isLogin" id=user_name" type="text" name="user_name" placeholder="อีเมล" class="w-100 mb-3 form-input" v-model="orz_login.user_name">
+                        <input v-if="!isLogin" type="password" name="password" placeholder="ป้อนรหัสผ่าน" class="w-100 mb-4 form-input" v-model="orz_login.password">
                         <div class="d-flex w-100">
-                            <label class="label-container">จดจำรหัส
-                                <input type="checkbox" name="remember" value="remember">
-                                <span class="checkmark"></span>
+                            <label class="label-container" v-if="!isLogin">จดจำรหัส
+                                <input type="checkbox" name="remember" value="remember" v-if="!isLogin">
+                                <span class="checkmark" v-if="!isLogin"></span>
                             </label>
                         </div>
                         <div class="d-flex w-100 mt-4 pb-4">
-                            <button class="form-btn text-white py-2 px-4">เข้าสู่ระบบ</button>
+                            <button v-if="!isLogin" class="form-btn text-white py-2 px-4" @click="userLogin">เข้าสู่ระบบ</button>
+                            <a href="<?php echo base_url('admin');?>">
+                            <button v-if="isLogin" class="form-btn text-white py-2 px-4" @click="userLogin" >เข้าระบบจัดการข้อมูล</button>
+                            </a>
                         </div>
                     </div>
                     <div class="login-container-shadow p-absolute"></div>
@@ -184,13 +185,11 @@
                 <div class="" id="register-form">
                     <div id="step-1">
                         <div class="form-container p-4 p-absolute">
-                            <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input" @keyup="checkUserEmail" v-model="orz_info.email">
+                            <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input" @keyup="checkUserEmail" v-model="orz_info.cus_email">
                             <div v-if="alError===true" :class="classObject" role="alert">
                                 ** {{msgSuccess}}
                             </div>
-
-
-                            <input type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input">
+                            <input type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input" v-model="orz_info.cus_password">
                             <label for="exampleFormControlSelect1">{{orz_group_label}}</label>
                             <div class="d-flex w-100 pb-4">
                                 <select class="form-control" id="orzgroupSelect" v-model="orz_info.group">
@@ -204,15 +203,15 @@
 
                             <div class="d-flex w-100">
                                 <label class="label-container">นิติบุคคล
-                                    <input type="radio" name="type" value="1" checked="checked" v-model="orz_info.category">
+                                    <input type="radio" name="type" value="1" checked="checked" v-model="orz_info.categories">
                                     <span class="checkmark-o"></span>
                                 </label>
                                 <label class="label-container">บุคคลธรรมดา
-                                    <input type="radio" name="type" value="2" v-model="orz_info.category">
+                                    <input type="radio" name="type" value="2" v-model="orz_info.categories">
                                     <span class="checkmark-o"></span>
                                 </label>
                                 <label class="label-container">อื่นๆ
-                                    <input type="radio" name="type" value="3" v-model="orz_info.category">
+                                    <input type="radio" name="type" value="3" v-model="orz_info.categories">
                                     <span class="checkmark-o"></span>
                                 </label>
                             </div>
@@ -333,72 +332,75 @@
                         </div>
                         <div class="step-4-shadow-back p-absolute"></div>
                     </div>
+                    <div class="modal" id="register-modal">
+                        <div class="modal-dialog register-modal">
+                            <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
+                                <div class="d-flex">
+                                    <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
+                                </div>
+                                <div class="row m-auto">
+                                    <div class="col-sm">
+                                        <p class="mb-1">วัตถุประสงค์</p>
+                                        <ol class="modal-ol">
+                                            <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษา แก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                                            <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ์</li>
+                                            <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                                            <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                                        </ol>
+                                        <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
+                                        <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
+                                        <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
+                                        <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
+                                        <p class="mb-1">รายชื่อคณะกรรมการ</p>
+                                        <ol class="modal-ol pb-5">
+                                            <li>คุณหญิงประณีตศิลป์ วัชรพล (ประธานกรรมการ)</li>
+                                            <li>นางยิ่งลักษณ์ วัชรพล (รองประธานกรรมการและเหรัญญิก)</li>
+                                            <li>นายวิเชน โพชนุกูล (กรรมการและเลขาธิการ)</li>
+                                            <li>นายมานิจ สุขสมจิตร (กรรมการ)</li>
+                                            <li>นายเลิศ อัศเวศน์ (กรรมการ)</li>
+                                            <li>นายสมชาย กรุสวนสมบัติ (กรรมการ)</li>
+                                            <li>นายไพโรจน์ โล่ห์สุนทร (กรรมการ)</li>
+                                            <li>นายสราวุธ วัชรพล (กรรมการ)</li>
+                                            <li>นายสมปอง พรทวีวัฒน์ (กรรมการ)</li>
+                                            <li>นายธงชัย ณ นคร (กรรมการ)</li>
+                                            <li>นายดำฤทธิ์ วิริยะกุล (กรรมการ)</li>
+                                            <li>นายวัชร วัชรพล (กรรมการ)</li>
+                                            <li>นางฐิติวรรณ ไสวแสนยากร (กรรมการ)</li>
+                                            <li>นางสาวจิตสุภา วัชรพล (กรรมการ)</li>
+                                            <li>นางสาวสิริพร โคตระวีระ (กรรมการ)</li>
+                                        </ol>
+                                    </div>
+                                    <div class="col-sm">
+                                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                                        <ol class="modal-ol">
+                                            <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                                            <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
+                                            <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                                            <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                                        </ol>
+                                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                                        <ol class="modal-ol">
+                                            <li>กำพล วัชรพล</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                                <div class="modal-btn-container p-absolute">
+                                    <!-- Js line 26 - 34 -->
+                                    <button class="edit-btn text-white mx-2" data-dismiss="modal">แก้ไข</button>
+                                    <button class="save-btn text-white mx-2" data-dismiss="modal" @click="onSave">บันทึก</button>
+                                    <!-- End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-<div class="modal" id="register-modal">
-    <div class="modal-dialog register-modal">
-        <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
-            <div class="d-flex">
-                <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
-            </div>
-            <div class="row m-auto">
-                <div class="col-sm">
-                    <p class="mb-1">วัตถุประสงค์</p>
-                    <ol class="modal-ol">
-                        <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษา แก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                        <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ์</li>
-                        <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                        <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
-                    </ol>
-                    <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
-                    <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
-                    <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
-                    <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
-                    <p class="mb-1">รายชื่อคณะกรรมการ</p>
-                    <ol class="modal-ol pb-5">
-                        <li>คุณหญิงประณีตศิลป์ วัชรพล (ประธานกรรมการ)</li>
-                        <li>นางยิ่งลักษณ์ วัชรพล (รองประธานกรรมการและเหรัญญิก)</li>
-                        <li>นายวิเชน โพชนุกูล (กรรมการและเลขาธิการ)</li>
-                        <li>นายมานิจ สุขสมจิตร (กรรมการ)</li>
-                        <li>นายเลิศ อัศเวศน์ (กรรมการ)</li>
-                        <li>นายสมชาย กรุสวนสมบัติ (กรรมการ)</li>
-                        <li>นายไพโรจน์ โล่ห์สุนทร (กรรมการ)</li>
-                        <li>นายสราวุธ วัชรพล (กรรมการ)</li>
-                        <li>นายสมปอง พรทวีวัฒน์ (กรรมการ)</li>
-                        <li>นายธงชัย ณ นคร (กรรมการ)</li>
-                        <li>นายดำฤทธิ์ วิริยะกุล (กรรมการ)</li>
-                        <li>นายวัชร วัชรพล (กรรมการ)</li>
-                        <li>นางฐิติวรรณ ไสวแสนยากร (กรรมการ)</li>
-                        <li>นางสาวจิตสุภา วัชรพล (กรรมการ)</li>
-                        <li>นางสาวสิริพร โคตระวีระ (กรรมการ)</li>
-                    </ol>
-                </div>
-                <div class="col-sm">
-                    <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                    <ol class="modal-ol">
-                        <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                        <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
-                        <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                        <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
-                    </ol>
-                    <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                    <ol class="modal-ol">
-                        <li>กำพล วัชรพล</li>
-                    </ol>
-                </div>
-            </div>
-            <div class="modal-btn-container p-absolute">
-                <!-- Js line 26 - 34 -->
-                <button class="edit-btn text-white mx-2" data-dismiss="modal">แก้ไข</button>
-                <button class="save-btn text-white mx-2" data-dismiss="modal">บันทึก</button>
-                <!-- End -->
-            </div>
-        </div>
-    </div>
-</div>
+
 <div id="member" class="member p-relative">
     <div class="container">
         <div class="member-header p-absolute text-right">

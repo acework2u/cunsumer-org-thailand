@@ -52,6 +52,20 @@ class Organized extends MY_Controller
         $this->form_validation->set_rules('cus_email', 'Email', 'trim|required|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
         $this->form_validation->set_rules('cus_password', 'Password', 'trim|required|min_length[5]|max_length[12]');
 
+        /*** Orz Information ****/
+        $orz_email = $this->input->post('cus_email');
+        $orz_password = $this->input->post('cus_password');
+        $orz_group = $this->input->post('group');
+        $orz_categories = $this->input->post('categories');
+        $orz_title = $this->input->post('title');
+        $orz_address = $this->input->post('address');
+        $orz_district = $this->input->post('district');
+        $orz_province = $this->input->post('province');
+        $orz_zipcode = $this->input->post('zipcode');
+        $orz_contact_name = $this->input->post('contact_name');
+        $orz_contact_lastname = $this->input->post('contact_lastname');
+        $orz_tel = $this->input->post('tel');
+        $orz_mobile_no = $this->input->post('mobile_no');
 
         $message = array();
         if ($this->form_validation->run() == TRUE) {
@@ -65,22 +79,41 @@ class Organized extends MY_Controller
             $this->user->setPassword($cus_password);
 
             $chk = $this->user->check_user($cus_email);
+            if($chk){
+                $message = array(
+                    'stats' => true,
+                    'error' => "",
+                    'message' =>"Email $cus_email มีในระบบแล้ว"
+                );
+            }else{
+
+            }
+
             /***** Register Orz ***/
             $this->load->model($this->organized_model,'orz');
 
+            $this->orz->setTitle($orz_title);
+            $this->orz->setOrzGroupId($orz_group);
+            $this->orz->setOrzType($orz_categories);
+            $this->orz->setAddress($orz_address);
+            $this->orz->setContactName($orz_contact_name);
+            $this->orz->setContactName($orz_contact_name);
+            $orz_new = $this->orz->create();
+            if($orz_new){
+                $message = array(
+                    'stats' => true,
+                    'error' => false,
+                    'message' => "Register Success"
+                );
+            }else{
+                $message = array(
+                    'stats' => false,
+                    'error' => true,
+                    'message' => "could not register"
+                );
 
+            }
 
-
-
-
-
-
-
-
-
-
-            //** Load Model **/
-            $this->load->model($this->organized_model,'orz');
 
 
         }else{
