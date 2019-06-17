@@ -43,7 +43,7 @@
                 </ul>
             </li>
 
-            <li class="treeview">
+            <li class="treeview hidden">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
                     <span>Reports</span>

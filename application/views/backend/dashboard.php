@@ -15,7 +15,7 @@
         <!-- Main content -->
         <section class="content" id="lastdonate">
             <!-- Small boxes (Stat box) -->
-            <div class="row">
+            <div class="row hidden">
                 <div class="col-lg-3 col-xs-6">
                     <!-- small box -->
                     <div class="small-box bg-aqua">
@@ -106,9 +106,11 @@
                     <!-- TABLE: LATEST ORDERS -->
                     <div class="box box-info">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Latest Donates</h3>
+                            <h3 class="box-title">Organization Information</h3>
+
 
                             <div class="box-tools pull-right">
+                                <span class="text-yellow"> Status :{{orzInformation.status_title}} </span>
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                                 </button>
                                 <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
@@ -117,42 +119,135 @@
                         <!-- /.box-header -->
                         <div class="box-body">
                             <div class="table-responsive">
-                                <table class="table no-margin">
-                                    <thead>
-                                    <tr>
-                                        <th>Transection No.</th>
-                                        <th>Invoice No.</th>
-                                        <th>Donor</th>
-                                        <th>Status</th>
-                                        <th>Amount</th>
-                                        <th>Time</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    <tr v-for="item ,index in filterDonationList">
-                                        <td><a >{{item.transection_no}}</a></td>
-                                        <td><a >{{item.inv_number}}</a></td>
-                                        <td>{{item.first_name}}</td>
-                                        <td>
-                                            <span v-if="item.status==='Successful'" class="label label-success">{{item.status}}</span>
-                                            <span v-else-if="item.status==='Pending'" class="label label-warning">{{item.status}}</span>
-                                            <span v-else class="label label-danger">{{item.status}}</span>
-                                        </td>
-                                        <td>
-                                            <div class="sparkbar" data-color="#00a65a" data-height="20">{{item.amount | numeral('0,0')}}</div>
-                                        </td>
-                                        <td>{{item.created_date}}</td>
-                                    </tr>
-
-                                    </tbody>
-                                </table>
                             </div>
+                            <form class="hidden">
+                                <div class="form-group">
+                                    <label for="organizedTitle1">Organization Name</label>
+                                    <input type="text" class="form-control" id="organizedTitle1" aria-describedby="organizedHelp" placeholder="ชื่อมูลนิธิ">
+                                    <small id="organizedHelp" class="form-text text-muted"></small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Password</label>
+                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            <form class="form-horizontal">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="orzLogo" class="col-sm-2 control-label">โลโก้</label>
+                                        <div class="col-sm-5">
+                                            <input type="file" class="form-control" id="orzLogo" placeholder="">
+                                            <input type="hidden" name="orz_aid" :value="orzInformation.aid" >
+                                        </div>
+                                        <div class="col-sm-5"><img ></div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="orzTitle1" class="col-sm-2 control-label">ชื่อมูลนิธิ</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="orzTitle1" placeholder="" v-model="orzInformation.title">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="orzmileStone" class="col-sm-2 control-label">วัตถุประสงค์</label>
+                                        <div class="col-sm-10">
+<!--                                            <textarea :value.prop="orzInformation.objective" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
+                                            <ckeditor :editor="editor" v-model="orzInformation.objective" :config="editorConfig"></ckeditor>
+
+
+                                        </div>
+                                    </div>
+                                    <!-- select -->
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label">กลุ่มมูลนิธิ</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control" v-model="orzInformation.orz_group_id">
+                                                <option v-for="item in orz_group" :value="item.aid">{{item.title_th}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
+                                        <div class="col-sm-10">
+                                            <textarea :value.prop="orzInformation.address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mainContact1" class="col-sm-2 control-label">ผู้ประสานงานหลัก</label>
+                                        <div class="col-sm-5">
+                                            <input v-model="orzInformation.contact_name" type="text" class="form-control" id="mainContact1" placeholder="Name">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <input v-model="orzInformation.lastname" type="text" class="form-control" id="mainLastContact1" placeholder="Lastname">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailContact1" class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input v-model="orzInformation.email" type="email" class="form-control" id="emailContact1" placeholder="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="websiteContact1" class="col-sm-2 control-label">Website</label>
+                                        <div class="col-sm-10">
+                                            <input v-model="orzInformation.website" type="text" class="form-control" id="websiteContact1" placeholder="http://www.youwebsite.com">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telContact1" class="col-sm-2 control-label">เบอร์ติดต่อองค์กร</label>
+                                        <div class="col-sm-10">
+                                            <input v-model="orzInformation.orz_tel" type="text" class="form-control" id="telContact1" placeholder="02 123 456">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telContact1" class="col-sm-2 control-label">รายชื่อคณะกรรมการ</label>
+                                        <div class="col-sm-10">
+                                            <textarea :value.prop ="orzInformation.board_of_directors" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="orzmileStone" class="col-sm-2 control-label">ผลงานย้อนหลังในรอบ 10 ปี</label>
+                                        <div class="col-sm-10">
+                                            <textarea :value.prop ="orzInformation.portfolio" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group hidden">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox"> Remember me
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="submit" class="btn btn-default hidden">Cancel</button>
+                                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                                </div>
+                                <!-- /.box-footer -->
+                            </form>
+
+
+
+
+
                             <!-- /.table-responsive -->
                         </div>
                         <!-- /.box-body -->
                         <div class="box-footer clearfix">
                             <a href="javascript:void(0)" class="hidden btn btn-sm btn-info btn-flat pull-left">Place New Order</a>
-                            <a href="<?php echo site_url('admin/reports')?>" class="btn btn-sm btn-default btn-flat pull-right">View All Orders</a>
+                            <a href="<?php echo site_url('admin/reports')?>" class="btn btn-sm btn-default btn-flat pull-right hidden">View All Orders</a>
                         </div>
                         <!-- /.box-footer -->
                     </div>
@@ -167,7 +262,7 @@
                     <!-- DONOR LIST -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
-                            <h3 class="box-title">Top 10 Donated Success</h3>
+                            <h3 class="box-title">อาสาสมัคร</h3>
 
                             <div class="box-tools pull-right">
                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -413,5 +508,10 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+<script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+<script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script>
 <script src="<?php echo base_url('assets/js/backend/main.js')?>"></script>
+
+<!--<script src="../node_modules/@tinymce/tinymce-vue/lib/browser/tinymce-vue.min.js"></script>-->
+
 

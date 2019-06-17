@@ -53,6 +53,27 @@ class Dashboard extends MY_Controller{
     }
 
 
+    public function orzInformationByUser(){
+        if($this->is_login()){
+            $this->load->model($this->organized_model,'orz');
+            $result = array();
+            $orz_info = $this->orz->orz_information();
+
+            if(is_array($orz_info)){
+                foreach ($orz_info as $row){
+
+                    $result = $row;
+
+                }
+            }
+
+
+            echo json_encode($result);
+
+        }
+    }
+
+
 
 
 

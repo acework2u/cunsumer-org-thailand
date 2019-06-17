@@ -1,4 +1,7 @@
 var baseUrl = window.location.origin;
+Vue.use(CKEditor)
+
+
 Vue.filter('formatBaht', (value) => {
     if (value) {
 
@@ -10,22 +13,35 @@ Vue.filter('formatBaht', (value) => {
 
 var lastdonate = new Vue({
     el: "#lastdonate",
+
     data() {
         return {
             title: "Last Donate",
             donationInfo: [],
             donorTopInfo:[],
-            donorInfo:{}
+            donorInfo:{},
+            orzInformation:{},
+            orz_group:[],
+            editor: ClassicEditor,
+            editorData: '<p>Content of the editor.</p>',
+            editorConfig: {
+                // The configuration of the editor.
+            }
+
         }
     },
     created() {
         this.getDonationlist()
         this.getTopDonate()
+        this.getOrzInfo()
+        this.getOrzgroup();
     },
     mounted() {
         this.$nextTick(() => {
             this.getDonationlist()
             this.getTopDonate()
+            this.getOrzInfo()
+            this.getOrzgroup();
         })
     },
     computed: {
@@ -100,6 +116,18 @@ var lastdonate = new Vue({
             }).catch()
 
 
+        },
+        getOrzInfo(){
+            let baseApi = baseUrl + "/api/v1/orz/backend/orz-information";
+            axios.get(baseApi).then((res)=>{
+                this.orzInformation = res.data
+            })
+        },
+        getOrzgroup(){
+            axios.get(baseUrl+'/api/v1/orz-group').then((res)=>{
+                console.log(res.data)
+                this.orz_group = res.data
+            })
         }
     }
 

@@ -117,3 +117,10 @@ $route['api-v01/confirm-data'] = "donate/confirmData2c2p";
 $route['api-v01/donate-top10'] = "backend/dashboard/topdaonate";
 $route['api-v01/payment-confirm'] = "frontend/thankyou/apiConfirmPayment";
 
+
+
+/**** Back End ***/
+#voluntee
+$route['api/v1/orz/volunteer'] = "";
+$route['api/v1/orz/backend/orz-information'] = "backend/dashboard/orzInformationByUser";
+

@@ -8,6 +8,7 @@ class Organized_model extends MY_Model{
     private $_contact_name;
     private $_contact_lastname;
     private $_email;
+    private $_tel;
     private $_user_id;
     private $_website;
     private $_latitude;
@@ -65,6 +66,9 @@ class Organized_model extends MY_Model{
     public function setOrzType($orz_type_id){
         $this->_orz_type = $orz_type_id;
     }
+    public function setTel($tel){
+        $this->_tel = $tel;
+    }
 
 
 
@@ -109,6 +113,9 @@ class Organized_model extends MY_Model{
         if(!is_blank($this->_orz_type)){
             $data['orz_type_id'] = $this->_orz_type;
         }
+        if(!is_blank($this->_tel)){
+            $data['orz_tel'] = $this->_tel;
+        }
 
         $this->db->insert($this->tbl_organization,$data);
         if(!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0){
@@ -120,6 +127,28 @@ class Organized_model extends MY_Model{
 
 
 
+    }
+    public function orz_information(){
+
+        $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status');
+        $this->db->join($this->tbl_orz_status,'organization.`status` = orz_status.aid','left');
+        $this->db->where('user_id',getUserAid());
+        $query = $this->db->get($this->tbl_organization);
+
+//        $query = $this->db->where('user_id',getUserAid())->get($this->tbl_organization);
+
+        $result = array();
+        if($query->num_rows() > 0){
+
+            foreach ($query->result_array() as $row){
+                $result[] = $row;
+            }
+
+
+        }
+
+
+        return $result;
     }
 
 

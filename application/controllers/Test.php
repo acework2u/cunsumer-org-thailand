@@ -718,6 +718,16 @@ class Test extends MY_Controller
         echo getUserAid();
         var_dump(getUsersSession());
 
+        $this->load->model($this->organized_model,'orz');
+
+        $roz = $this->orz->orz_information();
+
+
+        echo $this->db->last_query();
+
+        var_dump($roz);
+
+
     }
 
 
