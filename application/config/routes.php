@@ -98,6 +98,7 @@ $route['api-v01/banklist'] = "api/jsonBankList";
 $route['api-v01/payment-status-code'] = "api/jsonPaymentStatusCode";
 $route['api/v1/orz-group'] = "organized/getOrzGroupList";
 $route['api/v1/orz-register'] = "organized/organization_register";
+$route['api/v1/orz-update'] = "organized/organization_update";
 
 /**** API Auth ****/
 $route['api/v1/check-register'] = 'auth/check_duplicate_user';
@@ -123,4 +124,7 @@ $route['api-v01/payment-confirm'] = "frontend/thankyou/apiConfirmPayment";
 #voluntee
 $route['api/v1/orz/volunteer'] = "";
 $route['api/v1/orz/backend/orz-information'] = "backend/dashboard/orzInformationByUser";
+
+
+$route['uploadfile'] = "backend/dashboard/upload_file";
 
