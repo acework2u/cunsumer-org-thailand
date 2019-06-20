@@ -39,9 +39,9 @@
     <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
 
 
-<!--    <script src="https://unpkg.com/vue-select@3.0.0"></script>-->
-<!--    <link rel="stylesheet" href="https://unpkg.com/vue-select@3.0.0/dist/vue-select.css">-->
-<!--    <script src="--><?php //echo base_url('assets/js/vue-orzgroup.js'); ?><!--"></script>-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
+    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
 
 
 
@@ -184,20 +184,19 @@
                 </div>
                 <div class="" id="register-form">
                     <div id="step-1">
-                        <div class="form-container p-4 p-absolute">
-                            <input type="text" name="account-email" placeholder="Email" class="w-100 mb-2 form-input" @keyup="checkUserEmail" v-model="orz_info.cus_email">
+                        <div class="form-container p-4 p-absolute" id="demo1">
+
+                            <input autocomplete="off"  type="text" id="cus-email" name="account-email" placeholder="Email" class="w-100 mb-2 form-input form-control" @keyup="checkUserEmail" v-model="orz_info.cus_email">
                             <div v-if="alError===true" :class="classObject" role="alert">
                                 ** {{msgSuccess}}
                             </div>
-                            <input type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input" v-model="orz_info.cus_password">
+                            <input autocomplete="off" type="password" name="account-password" placeholder="Password*" class="w-100 mb-2 form-input" v-model="orz_info.cus_password">
                             <label for="exampleFormControlSelect1">{{orz_group_label}}</label>
                             <div class="d-flex w-100 pb-4">
                                 <select class="form-control" id="orzgroupSelect" v-model="orz_info.group">
                                     <option value="" selected="selected" hidden="hidden">Choose here</option>
                                     <option v-for="item in orz_group" :value="item.aid">{{item.title_th}}</option>
                                 </select>
-
-
                             </div>
                             <div class="d-flex w-100">
                                 <label class="label-container">นิติบุคคล
@@ -214,41 +213,54 @@
                                 </label>
                             </div>
                             <input type="text" name="foundation" placeholder="มูลนิธิ*" class="w-100 mb-2 form-input" v-model="orz_info.title">
-                            <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input" v-model="orz_info.address">
+
+                            <label class="pt-2">ชื่อผู้ติดต่อ</label>
                             <div class="row m-auto pb-2">
                                 <div class="col-sm-5 p-0">
-                                    <select class="form-input w-100" name="district" v-model="orz_info.district">
-                                        <option value="">อำเภอ*</option>
-                                    </select>
+                                    <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="orz_info.contact_name">
                                 </div>
                                 <div class="col-sm-7 pl-2 pr-0">
-                                    <select class="form-input w-100" name="province" v-model="orz_info.province">
-                                        <option value="">จังหวัด*</option>
-                                    </select>
+                                    <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="orz_info.contact_lastname">
+                                </div>
+                            </div>
+                            <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="tel" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*" v-model="orz_info.tel">
+                            <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="register-email" class="w-100 mb-2 form-input" placeholder="เบอร์มือถือ*" v-model="orz_info.mobile_no">
+
+
+
+                            <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input" v-model="orz_info.address">
+                            <div class="row m-auto pb-2">
+                                <div class="col-sm-6 p-0">
+                                    <label class="control-label">ตำบล / แขวง *</label>
+                                    <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="district" id="district-1" v-model="orz_info.district" name="district" class="uk-input  form-input w-100" type="text">
+
+                                </div>
+                                <div class="col-sm-6 pl-2 pr-0">
+                                    <label class="control-label">อำเภอ *</label>
+                                    <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="amphoe" v-model="orz_info.amphoe" name="amphoe" class="uk-input  form-input w-100" type="text" id="amphoe-1">
+
                                 </div>
                             </div>
                             <div class="row m-auto pb-2">
                                 <div class="col-sm-6 p-0">
-                                    <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-3 form-input" v-model="orz_info.zipcode">
+                                    <label class="control-label">จังหวัด *</label>
+                                    <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }"  ref="province" id="province-1" v-model="orz_info.province" name="province" class="uk-input  form-input w-100" type="text">
+                                </div>
+                                <div class="col-sm-6 pl-2 pr-0">
+                                    <label class="control-label">รหัสไปรษณีย์ *</label>
+                                    <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="zipcode" id="zipcode-1"  name="zipcode" class="uk-input w-100 form-input" type="text" v-model="orz_info.zipcode">
                                 </div>
                             </div>
                             <div id="googleMap" style="width:100%;height:200px;"></div>
-                            <label class="pt-2">ชื่อผู้ติดต่อ</label>
-                            <div class="row m-auto pb-2">
-                                <div class="col-sm-5 p-0">
-                                    <input type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="orz_info.contact_name">
-                                </div>
-                                <div class="col-sm-7 pl-2 pr-0">
-                                    <input type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="orz_info.contact_lastname">
-                                </div>
-                            </div>
-                            <input type="text" name="tel" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*" v-model="orz_info.tel">
-                            <input type="text" name="register-email" class="w-100 mb-2 form-input" placeholder="เบอร์มือถือ*" v-model="orz_info.mobile_no">
+
+
                             <div class="d-flex w-100 mt-4 pb-4">
                                 <!-- Js line 16 -->
                                 <button class="form-btn text-white py-2 px-4" id="register-step-3">หน้าต่อไป</button>
                                 <!-- End -->
                             </div>
+
+
                         </div>
                         <div class="register-container-shadow p-absolute"></div>
                     </div>
@@ -808,6 +820,14 @@
 <script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/vue-organization.js'); ?>"></script>
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+<!-- dependencies for zip mode -->
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/zip.js/zip.js')?>"></script>
+<!-- / dependencies for zip mode -->
+
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
 
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap&libraries=places"></script>
 <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>

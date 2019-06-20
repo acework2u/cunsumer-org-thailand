@@ -37,6 +37,10 @@ class Auth_model extends MY_Model
         $this->_userID = $userID;
     }
 
+    public function getUserId(){
+        return $this->_userID;
+    }
+
     public function setUserName($userName)
     {
         $this->_userName = $userName;
@@ -171,6 +175,9 @@ class Auth_model extends MY_Model
 
         $this->db->insert($this->tbl_users, $data);
         if (!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0) {
+
+            $this->setUserID($this->db->insert_id());
+
             return TRUE;
         } else {
             return FALSE;

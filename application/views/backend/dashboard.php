@@ -136,15 +136,26 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </form>
-                            <form class="form-horizontal">
+
+                            <form class="form-horizontal"  autocomplete="off">
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="orzLogo" class="col-sm-2 control-label">โลโก้</label>
+                                        <div class="col-sm-5"><img v-if="orzInformation.logo && orzInformation.logo.length > 0" style="max-width: 75px;max-height: 75px;" :src="orzLogo" ></div>
                                         <div class="col-sm-5">
-                                            <input type="file" class="form-control" id="orzLogo" placeholder="">
+                                            <input type="file" id="file" ref="file" accept="image/*"
+                                                   v-on:change="handleFileUpload()"/>
+                                            <img v-bind:src="imagePreview" v-show="showPreview"/>
+                                            <br>
+                                            <progress max="100" :value.prop="uploadPercentage"></progress>
+                                            <br>
+                                            <button class="btn btn-success" v-on:click="submitFile()">Upload</button>
+
+
+<!--                                            <input type="file" class="form-control" id="orzLogo" placeholder="">-->
                                             <input type="hidden" name="orz_aid" :value="orzInformation.aid" >
                                         </div>
-                                        <div class="col-sm-5"><img ></div>
+
                                     </div>
 
                                     <div class="form-group">
@@ -166,7 +177,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-2 control-label">กลุ่มมูลนิธิ</label>
                                         <div class="col-sm-10">
-                                            <select class="form-control" v-model="orzInformation.orz_group_id">
+                                            <select class="form-control" @change="onChange($event)" v-model="orzInformation.orz_group_id">
                                                 <option v-for="item in orz_group" :value="item.aid">{{item.title_th}}</option>
                                             </select>
                                         </div>
@@ -175,8 +186,27 @@
                                     <div class="form-group">
                                         <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
                                         <div class="col-sm-10">
-                                            <textarea :value.prop="orzInformation.address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                            <textarea v-model="orzInformation.address" :value.prop="orzInformation.address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                         </div>
+                                    </div>
+                                    <div id="demo1">
+                                    <div class="form-group">
+                                        <label for="districtLabel" class="col-sm-2 control-label">ตำบล / แขวง</label>
+                                        <div class="col-sm-4"><input ref="district" v-model="orzInformation.district" name="district" class="uk-input form-control" type="text"> </div>
+                                        <label for="amphoe" class="col-sm-2 control-label">อำเภอ</label>
+                                        <div class="col-sm-4"><input ref="amphoe" v-model="orzInformation.amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe"> </div>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="province" class="col-sm-2 control-label">จังหวัด</label>
+                                        <div class="col-sm-4"><input ref="province" v-model="orzInformation.province" name="province" class="uk-input form-control" type="text"> </div>
+                                        <label for="zipcode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control hidden" value="">
+                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" v-model="orzInformation.stage_code">
+
+                                        </div>
+                                    </div>
                                     </div>
 
                                     <div class="form-group">
@@ -185,7 +215,7 @@
                                             <input v-model="orzInformation.contact_name" type="text" class="form-control" id="mainContact1" placeholder="Name">
                                         </div>
                                         <div class="col-sm-5">
-                                            <input v-model="orzInformation.lastname" type="text" class="form-control" id="mainLastContact1" placeholder="Lastname">
+                                            <input v-model="orzInformation.contact_lastname" type="text" class="form-control" id="mainLastContact1" placeholder="Lastname">
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -209,13 +239,17 @@
                                     <div class="form-group">
                                         <label for="telContact1" class="col-sm-2 control-label">รายชื่อคณะกรรมการ</label>
                                         <div class="col-sm-10">
-                                            <textarea :value.prop ="orzInformation.board_of_directors" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+<!--                                            <textarea :value ="orzInformation.board_of_directors" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
+                                            <ckeditor :editor="editor" v-model="orzInformation.board_of_directors" :config="editorConfig"></ckeditor>
+
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="orzmileStone" class="col-sm-2 control-label">ผลงานย้อนหลังในรอบ 10 ปี</label>
                                         <div class="col-sm-10">
-                                            <textarea :value.prop ="orzInformation.portfolio" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+<!--                                            <textarea :value.prop ="orzInformation.portfolio" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
+                                            <ckeditor :editor="editor" v-model="orzInformation.portfolio" :config="editorConfig"></ckeditor>
+
                                         </div>
                                     </div>
 
@@ -233,7 +267,7 @@
                                 <!-- /.box-body -->
                                 <div class="box-footer">
                                     <button type="submit" class="btn btn-default hidden">Cancel</button>
-                                    <button type="submit" class="btn btn-info pull-right">Save</button>
+                                    <button @click="saveOrzInfo" type="button" class="btn btn-info pull-right">Save</button>
                                 </div>
                                 <!-- /.box-footer -->
                             </form>
@@ -276,7 +310,7 @@
                                 <li v-for="items,index in filterDonorTop" class="item">
                                     <div class="">
                                         <a href="#" @click="donorClicked(items)" data-toggle="modal" data-target="#myDonor" class="product-title">{{items.full_name}}
-                                            <span class="label label-success pull-right">{{items.total_amount | formatBaht}}</span></a>
+                                            <span class="label label-success pull-right"></span></a>
 
                                     </div>
                                 </li>
@@ -512,6 +546,10 @@
 <script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script>
 <script src="<?php echo base_url('assets/js/backend/main.js')?>"></script>
 
-<!--<script src="../node_modules/@tinymce/tinymce-vue/lib/browser/tinymce-vue.min.js"></script>-->
+
+
+
+
+
 
 

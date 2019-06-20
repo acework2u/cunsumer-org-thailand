@@ -237,10 +237,59 @@
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/js/adminlte.min.js')?>"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?php echo base_url('assets/js/pages/dashboard.js')?>"></script>
+<!--<script src="--><?php //echo base_url('assets/js/pages/dashboard.js')?><!--"></script>-->
 <!-- AdminLTE for demo purposes -->
 <!--<script src="--><?php //echo base_url('assets/js/demo.js')?><!--"></script>-->
 
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+<!-- dependencies for zip mode -->
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/zip.js/zip.js')?>"></script>
+<!-- / dependencies for zip mode -->
+
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
+
+<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
+<script type="text/javascript">
+    var base_url = window.location.origin;
+    $.Thailand({
+        database: './jquery.Thailand.js/database/db.json',
+
+        $district: $('#demo1 [name="district"]'),
+        $amphoe: $('#demo1 [name="amphoe"]'),
+        $province: $('#demo1 [name="province"]'),
+        $zipcode: $('#demo1 [name="zipcode"]'),
+
+        onDataFill: function(data){
+            console.info('Data Filled', data);
+
+            // $('#demo1 [name="zipcode"]').val(data.zipcode)
+        },
+
+        onLoad: function(){
+            console.info('Autocomplete is ready!');
+            $('#loader, .demo').toggle();
+        }
+    });
+
+    // watch on change
+    //
+    // $('#demo1 [name="district"]').change(function(){
+    //     console.log('ตำบล', this.value);
+    // });
+    // $('#demo1 [name="amphoe"]').change(function(){
+    //     console.log('อำเภอ', this.value);
+    // });
+    // $('#demo1 [name="province"]').change(function(){
+    //     console.log('จังหวัด', this.value);
+    // });
+    // $('#demo1 [name="zipcode"]').change(function(){
+    //     console.log('รหัสไปรษณีย์', this.value);
+    //     $('#orz_zipcode').val(this.value);
+    // });
+
+
+</script>
 
 <!--Data binding-->
 <script src="<?php echo base_url('assets/js/numeral.min.js');?>"></script>

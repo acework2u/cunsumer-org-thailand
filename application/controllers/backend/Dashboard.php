@@ -73,6 +73,78 @@ class Dashboard extends MY_Controller{
         }
     }
 
+    public function upload_file()
+    {
+
+        if (!is_dir('uploads/'.getUserAid())) {
+            $dir_upload =  mkdir('./uploads/' . getUserAid(), 0777, TRUE);
+
+        }
+
+
+        $orz_id = "";
+        $orz_id = $this->input->post('aid');
+
+        $img_dir = 'uploads/'.getUserAid();
+        $config['upload_path'] = 'uploads/'.getUserAid();
+
+//        $config['upload_path'] = 'uploads';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '1024';
+        $config['overwrite'] = TRUE;
+//        $config['max_width'] = '1024';
+//        $config['max_height'] = '574';
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('file')) {
+
+//            $data = array('upload_data' => $this->upload->data(), 'error' => $this->upload->display_errors());
+//            $this->load->view('test', $data);
+
+            $error = array('error' => $this->upload->display_errors());
+
+            $res['error'] = true;
+            $res['message'] = "Upload fail";
+
+            echo json_encode($error);
+
+
+        } else {
+
+            $uploadedImage = $this->upload->data();
+//            $this->resizeImage($uploadedImage['file_name']);
+//            $this->resize_image($uploadedImage);
+            $this->resizeImage($uploadedImage);
+
+
+
+            $res['message'] = "Upload Success";
+            $res['upload_data'] = $this->upload->data();
+            $res['file_name'] = $this->upload->data('file_name');
+
+
+            $this->load->model($this->organized_model,'orz');
+
+            $img_full = $img_dir."/".$this->upload->data('file_name');
+
+
+            $this->orz->setLogo($img_full);
+            $this->orz->setOrzId($orz_id);
+
+            $this->orz->orz_logo();
+
+
+            echo json_encode($res);
+
+        }
+
+
+
+
+    }
+
 
 
 

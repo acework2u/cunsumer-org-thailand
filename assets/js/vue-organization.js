@@ -34,13 +34,29 @@ window.onload = function () {
         methods:{
             onSave(){
                 let api = base_url+"/api/v1/orz-register"
-                let dataInfo = this.orz_info
-                var fromData = this.toFormData(dataInfo)
 
-                console.log(dataInfo);
+                this.$nextTick(() => { // ES6 arrow function
+                    // this.$refs.input_name.focus()
 
-                axios.post(api,fromData).then((res)=>{
-                    console.log(res.data)
+                    let zipcode = this.$refs.zipcode.value
+                    let district = this.$refs.district.value
+                    let amphoe = this.$refs.amphoe.value
+                    let province = this.$refs.province.value
+
+                    this.orz_info.district = district
+                    this.orz_info.amphoe = amphoe
+                    this.orz_info.province = province
+                    this.orz_info.stage_code = zipcode
+
+
+                    let dataInfo = this.orz_info
+                    var fromData = this.toFormData(dataInfo)
+
+                    console.log(dataInfo);
+
+                    axios.post(api,fromData).then((res)=>{
+                        console.log(res.data)
+                    })
                 })
 
             },
@@ -180,6 +196,7 @@ window.onload = function () {
     });
 
     $(document).ready(function(){
+
         $("#login-tap").click(function(){
             $('.register-tap > span').removeClass('active');
             $('span',this).addClass('active');
@@ -263,6 +280,43 @@ window.onload = function () {
                 scrollTop: $("#register").offset().top
             }, 1000)
         });
+
+        $.Thailand({
+            database: './jquery.Thailand.js/database/db.json',
+
+            $district: $('#demo1 [name="district"]'),
+            $amphoe: $('#demo1 [name="amphoe"]'),
+            $province: $('#demo1 [name="province"]'),
+            $zipcode: $('#demo1 [name="zipcode"]'),
+
+            onDataFill: function(data){
+                console.info('Data Filled', data);
+                $('#demo1 [name="district"]').val(data.district);
+                $('#demo1 [name="amphoe"]').val(data.amphoe);
+                $('#demo1 [name="province"]').val(data.province);
+                $('#demo1 [name="zipcode"]').val(data.zipcode);
+            },
+
+            onLoad: function(){
+                console.info('Autocomplete is ready!');
+                $('#loader, .demo').toggle();
+            }
+        });
+        // watch on change
+        $('#demo1 [name="district"]').change(function(){
+            // console.log('ตำบล', this.value);
+        });
+        $('#demo1 [name="amphoe"]').change(function(){
+            // console.log('อำเภอ', this.value);
+        });
+        $('#demo1 [name="province"]').change(function(){
+            // console.log('จังหวัด', this.value);
+        });
+        $('#demo1 [name="zipcode"]').change(function(){
+            // console.log('รหัสไปรษณีย์', this.value);
+
+        });
+
     });
 }
 

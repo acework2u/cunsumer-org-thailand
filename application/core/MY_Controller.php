@@ -165,8 +165,8 @@ class MY_Controller extends CI_Controller
 
     public function resizeImage($filename)
     {
-        $source_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/' . $filename;
-        $target_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/thumbnail/';
+        $source_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.getUserAid()."/" . $filename;
+        $target_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.getUserAid().'/thumbnail/';
         $config_manip = array(
             'image_library' => 'gd2',
             'source_image' => $source_path,
@@ -174,8 +174,8 @@ class MY_Controller extends CI_Controller
             'maintain_ratio' => TRUE,
             'create_thumb' => TRUE,
             'thumb_marker' => '',
-            'width' => 1100,
-            'height' => 617
+            'width' => 60,
+            'height' => 60
         );
 
 
@@ -189,10 +189,75 @@ class MY_Controller extends CI_Controller
         $this->image_lib->clear();
     }
 
+    public function resize_image($image_data){
+        $this->load->library('image_lib');
+        $w = $image_data['image_width']; // original image's width
+        $h = $image_data['image_height']; // original images's height
+        $filename = $image_data['file_name'];
+
+        $n_w = MAX_WIDTH; // destination image's width
+        $n_h = MAX_HEIGHT; // destination image's height
+
+        $source_ratio = $w / $h;
+        $new_ratio = $n_w / $n_h;
+
+        $source_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.getUserAid() . $filename;
+        $target_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.getUserAid().'/thumbnail/';
+
+        if($source_ratio != $new_ratio){
+
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = $source_path;
+            $config['maintain_ratio'] = FALSE;
+            if($new_ratio > $source_ratio || (($new_ratio == 1) && ($source_ratio < 1))){
+                $config['width'] = $w;
+                $config['height'] = round($w/$new_ratio);
+                $config['y_axis'] = round(($h - $config['height'])/2);
+                $config['x_axis'] = 0;
+
+            } else {
+
+                $config['width'] = round($h * $new_ratio);
+                $config['height'] = $h;
+                $size_config['x_axis'] = round(($w - $config['width'])/2);
+                $size_config['y_axis'] = 0;
+
+            }
+
+            $this->image_lib->initialize($config);
+            // $this->image_lib->crop();
+            $this->image_lib->clear();
+        }
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = $source_path;
+        $config['new_image'] = $target_path;
+        $config['maintain_ratio'] = TRUE;
+        //$config['width'] = $n_w;
+        //$config['height'] = $n_h;
+        $config['width'] = $w;
+        $config['height'] = $h;
+        $this->image_lib->initialize($config);
+
+        if (!$this->image_lib->resize()){
+
+            echo $this->image_lib->display_errors();
+
+        } else {
+
+//            echo $w+' '_$h;
+
+        }
+    }
+
     public function do_upload_file()
     {
 
-        $config['upload_path'] = 'uploads';
+        if (!is_dir('uploads/'.getUserAid())) {
+            $dir_upload =  mkdir('./uploads/' . getUserAid(), 0777, TRUE);
+
+        }
+
+        $config['upload_path'] = 'uploads/'.getUserAid();
         $config['allowed_types'] = 'gif|jpg|png';
         $config['max_size'] = '1024';
         $config['overwrite'] = TRUE;

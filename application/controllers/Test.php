@@ -730,5 +730,60 @@ class Test extends MY_Controller
 
     }
 
+    public function test_directory(){
+//        $date = str_replace( ':', '', $date);
+
+
+
+        if (!is_dir('uploads/'.getUserAid())) {
+           $dir_upload =  mkdir('./uploads/' . getUserAid(), 0777, TRUE);
+
+        }
+
+
+        echo $dir_upload;
+    }
+
+
+    public function test_update_orz(){
+
+
+        $orz_district = "คลองข่อย";
+        $orz_amphoe = "ปากเกร็ด";
+        $orz_province = "ปากเกร็ด";
+        $orz_id = 1;
+
+        /***** Register Orz ***/
+        $this->load->model($this->organized_model,'orz');
+
+        $this->orz->setOrzId($orz_id);
+        $this->orz->setDistrict($orz_district);
+        $this->orz->setAmphoe($orz_amphoe);
+        $this->orz->setProvince($orz_province);
+        $orz_new = $this->orz->update();
+
+
+        if($orz_new){
+            $message = array(
+                'stats' => true,
+                'error' => false,
+                'message' => "Update Success"
+            );
+        }else{
+            $message = array(
+                'stats' => false,
+                'error' => true,
+                'message' => "could not Update"
+            );
+
+        }
+
+        echo json_encode($message);
+
+    }
+
+
+
+
 
 } //end of Class

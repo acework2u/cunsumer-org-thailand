@@ -36,8 +36,8 @@
 <body class="hold-transition login-page">
 <div class="login-box" id="app">
     <div class="login-logo">
-        <a><b>Admin</b> DONATE</a>
-    </div>
+        <a><b>Admin</b> THAILAND CONSUMER COUNCIL</a>
+  </div>
     <!-- /.login-logo -->
     <div class="login-box-body">
         <p class="login-box-msg">Sign in to start your session</p>
@@ -59,35 +59,38 @@
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
 
-
-
-            <div class="row">
-                <div class="col-xs-8">
+            <div class="form-group">
+                <div class="col-xs-8 ">
                     <div class="checkbox icheck">
-                        <label>
+                        <label class="control-label">
                             <input type="checkbox"> Remember Me
                         </label>
                     </div>
                 </div>
-
-
-
-
-
-                <!-- /.col -->
                 <div class="col-xs-4">
                     <button @click="userLogin" type="button" class="btn btn-primary btn-block btn-flat">Sign In</button>
 
                 </div>
-                <!-- /.col -->
             </div>
+            <div class="form-group">
+                <div class="col-xs-8 ">
+<!--                    <a href="">I forgot my password</a><br>-->
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+<!--                <button @click="changMode" type="button" class="btn btn-success btn-block btn-flat">Chang Mode</button>-->
+            </div>
+
+
+
         </form>
 
 
         <!-- /.social-auth-links -->
 
-        <a href="#">I forgot my password</a><br>
-        <p><a class="btn btn-success" @click="changMode">Chang Mode</a></p>
+
+
 
 
     </div>
