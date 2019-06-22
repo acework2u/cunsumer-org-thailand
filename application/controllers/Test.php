@@ -783,6 +783,22 @@ class Test extends MY_Controller
     }
 
 
+    public function last_orz(){
+        $this->load->model($this->organized_model,'orz');
+
+        $resual = $this->orz->organization_last();
+
+        if(is_array($resual)){
+            echo "array";
+        }
+
+//        echo json_encode($resual);
+
+
+
+    }
+
+
 
 
 

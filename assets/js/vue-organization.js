@@ -137,7 +137,6 @@ window.onload = function () {
 
         }
     });
-
     var userlogin = new Vue({
         el:"#userlogin",
         data(){
@@ -194,6 +193,42 @@ window.onload = function () {
         }
 
     });
+
+    var orzlast = new Vue({
+        el:"#corporate-networ",
+        data(){
+            return {
+                orz_last_info:{}
+            }
+        },created: function () {
+
+            this.timer = setInterval(this.getOrzLast, 2000)
+
+        },
+        mounted() {
+            this.$nextTick(() => { // ES6 arrow function
+               this.getOrzLast();
+            })
+        },
+        methods:{
+            getOrzLast(){
+                let API = base_url+"/api/v1/orz-reg-last"
+
+                axios.get(API).then((res)=>{
+                    this.orz_last_info = res.data
+
+                    // console.info(this.orz_last_info)
+                })
+            }
+
+        },
+        computed: {
+
+        }
+    });
+
+
+    /***** JQUERY *****/
 
     $(document).ready(function(){
 
@@ -281,41 +316,40 @@ window.onload = function () {
             }, 1000)
         });
 
-        $.Thailand({
-            database: './jquery.Thailand.js/database/db.json',
+    });
+    $.Thailand({
+        database: './jquery.Thailand.js/database/db.json',
 
-            $district: $('#demo1 [name="district"]'),
-            $amphoe: $('#demo1 [name="amphoe"]'),
-            $province: $('#demo1 [name="province"]'),
-            $zipcode: $('#demo1 [name="zipcode"]'),
+        $district: $('#demo1 [name="district"]'),
+        $amphoe: $('#demo1 [name="amphoe"]'),
+        $province: $('#demo1 [name="province"]'),
+        $zipcode: $('#demo1 [name="zipcode"]'),
 
-            onDataFill: function(data){
-                console.info('Data Filled', data);
-                $('#demo1 [name="district"]').val(data.district);
-                $('#demo1 [name="amphoe"]').val(data.amphoe);
-                $('#demo1 [name="province"]').val(data.province);
-                $('#demo1 [name="zipcode"]').val(data.zipcode);
-            },
+        onDataFill: function(data){
+            console.info('Data Filled', data);
+            // $('#demo1 [name="district"]').val(data.district);
+            // $('#demo1 [name="amphoe"]').val(data.amphoe);
+            // $('#demo1 [name="province"]').val(data.province);
+            // $('#demo1 [name="zipcode"]').val(data.zipcode);
+        },
 
-            onLoad: function(){
-                console.info('Autocomplete is ready!');
-                $('#loader, .demo').toggle();
-            }
-        });
-        // watch on change
-        $('#demo1 [name="district"]').change(function(){
-            // console.log('ตำบล', this.value);
-        });
-        $('#demo1 [name="amphoe"]').change(function(){
-            // console.log('อำเภอ', this.value);
-        });
-        $('#demo1 [name="province"]').change(function(){
-            // console.log('จังหวัด', this.value);
-        });
-        $('#demo1 [name="zipcode"]').change(function(){
-            // console.log('รหัสไปรษณีย์', this.value);
-
-        });
+        onLoad: function(){
+            console.info('Autocomplete is ready!');
+            $('#loader, .demo').toggle();
+        }
+    });
+    // watch on change
+    $('#demo1 [name="district"]').change(function(){
+        // console.log('ตำบล', this.value);
+    });
+    $('#demo1 [name="amphoe"]').change(function(){
+        // console.log('อำเภอ', this.value);
+    });
+    $('#demo1 [name="province"]').change(function(){
+        // console.log('จังหวัด', this.value);
+    });
+    $('#demo1 [name="zipcode"]').change(function(){
+        // console.log('รหัสไปรษณีย์', this.value);
 
     });
 }

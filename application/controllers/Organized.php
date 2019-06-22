@@ -278,5 +278,16 @@ class Organized extends MY_Controller
 
     }
 
+    public function getOrganizationLast(){
+
+        $this->load->model($this->organized_model,'orz');
+        $result = "";
+        $orz_last = $this->orz->organization_last();
+        if(!is_blank($orz_last)){
+            $result = $orz_last;
+        }
+        echo json_encode($result);
+    }
+
 
 }

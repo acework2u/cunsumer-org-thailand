@@ -99,6 +99,9 @@ $route['api-v01/payment-status-code'] = "api/jsonPaymentStatusCode";
 $route['api/v1/orz-group'] = "organized/getOrzGroupList";
 $route['api/v1/orz-register'] = "organized/organization_register";
 $route['api/v1/orz-update'] = "organized/organization_update";
+$route['api/v1/orz-reg-last'] = "organized/getOrganizationLast";
+
+
 
 /**** API Auth ****/
 $route['api/v1/check-register'] = 'auth/check_duplicate_user';

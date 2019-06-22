@@ -374,5 +374,11 @@ class Organized_model extends MY_Model
         return $result;
     }
 
+    public function organization_last(){
+        $last = $this->db->where('status',4)->order_by('aid',"desc")->limit(1)->get($this->tbl_organization)->row();
+
+        return $last;
+    }
+
 
 } // end of class

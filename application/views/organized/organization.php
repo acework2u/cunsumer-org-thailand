@@ -134,8 +134,56 @@
     <div class="container text-center p-relative">
         <h1 class="corporate-networ-header pt-4 pb-2">องค์กรที่ลงทะเบียนล่าสุด</h1>
         <img src="<?php echo base_url('assets/image/foundation.png');?>" class="pb-4">
-        <span class="p-absolute corporate-networ-more">เพิ่มเติม <i class="fa fa-caret-right"></i></span>
+        <span class="p-absolute corporate-networ-more"  data-toggle="modal" data-target="#orz-last-modal" >เพิ่มเติม <i class="fa fa-caret-right"></i></span>
     </div>
+
+
+    <div class="modal" id="orz-last-modal">
+        <div class="modal-dialog register-modal">
+            <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
+                <div class="d-flex">
+                    <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
+                    <h1>{{orz_last_info.title}}</h1>
+                </div>
+                <div class="row m-auto">
+                    <div class="col-sm">
+                        <p class="mb-1">วัตถุประสงค์</p>
+                        <ol class="modal-ol" v-html="orz_last_info.objective">
+
+                        </ol>
+                        <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
+                        <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
+                        <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
+                        <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
+                        <p class="mb-1">รายชื่อคณะกรรมการ</p>
+                        <ol class="modal-ol pb-5" v-html="orz_last_info.board_of_directors">
+
+                        </ol>
+                    </div>
+                    <div class="col-sm">
+                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                        <ol class="modal-ol">
+                            <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
+                            <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
+                            <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
+                            <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                        </ol>
+                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                        <ol class="modal-ol">
+                            <li>กำพล วัชรพล</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="modal-btn-container p-absolute">
+                    <!-- Js line 26 - 34 -->
+
+                    <!-- End -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 </div>
 <div id="register" class="register p-relative">
     <div class="container">
