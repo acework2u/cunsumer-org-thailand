@@ -141,7 +141,7 @@
                                 <div class="box-body">
                                     <div class="form-group">
                                         <label for="orzLogo" class="col-sm-2 control-label">โลโก้</label>
-                                        <div class="col-sm-5"><img v-if="orzInformation.logo && orzInformation.logo.length > 0" style="max-width: 75px;max-height: 75px;" :src="orzLogo" ></div>
+                                        <div class="col-sm-5"><img v-if="orzInformation.logo && orzInformation.logo.length > 0" style="max-width: 250px;max-height: 110px;" :src="orzLogo" ></div>
                                         <div class="col-sm-5">
                                             <input type="file" id="file" ref="file" accept="image/*"
                                                    v-on:change="handleFileUpload()"/>
@@ -183,31 +183,6 @@
                                         </div>
                                     </div>
 
-                                    <div class="form-group">
-                                        <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
-                                        <div class="col-sm-10">
-                                            <textarea v-model="orzInformation.address" :value.prop="orzInformation.address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                                        </div>
-                                    </div>
-                                    <div id="demo1">
-                                    <div class="form-group">
-                                        <label for="districtLabel" class="col-sm-2 control-label">ตำบล / แขวง</label>
-                                        <div class="col-sm-4"><input ref="district" v-model="orzInformation.district" name="district" class="uk-input form-control" type="text"> </div>
-                                        <label for="amphoe" class="col-sm-2 control-label">อำเภอ</label>
-                                        <div class="col-sm-4"><input ref="amphoe" v-model="orzInformation.amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe"> </div>
-
-                                    </div>
-                                    <div class="form-group">
-                                        <label for="province" class="col-sm-2 control-label">จังหวัด</label>
-                                        <div class="col-sm-4"><input ref="province" v-model="orzInformation.province" name="province" class="uk-input form-control" type="text"> </div>
-                                        <label for="zipcode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
-                                        <div class="col-sm-4">
-                                            <input class="form-control hidden" value="">
-                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" v-model="orzInformation.stage_code">
-
-                                        </div>
-                                    </div>
-                                    </div>
 
                                     <div class="form-group">
                                         <label for="mainContact1" class="col-sm-2 control-label">ผู้ประสานงานหลัก</label>
@@ -291,8 +266,6 @@
                 <!-- /.Left col -->
                 <!-- right col (We are only adding the ID to make the widgets sortable)-->
                 <section class="col-lg-5 connectedSortable">
-
-
                     <!-- DONOR LIST -->
                     <div class="box box-primary">
                         <div class="box-header with-border">
@@ -325,7 +298,67 @@
                     </div>
 
                     <!-- /.box -->
+                    <div class="box box-primary">
+                        <div class="box-header with-border">
+                            <h3 class="box-title">Address & Location</h3>
+
+                            <div class="box-tools pull-right">
+                                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                                </button>
+                                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+
+                            <form class="form-horizontal"  autocomplete="off" id="demo1">
+                            <div class="form-group">
+                                <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
+                                <div class="col-sm-10">
+                                    <textarea v-model="orzInformation.address" :value.prop="orzInformation.address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
+                                </div>
+                            </div>
+                            <div >
+                                <div class="form-group">
+                                    <label for="districtLabel" class="col-sm-2 control-label">ตำบล / แขวง</label>
+                                    <div class="col-sm-4"><input ref="district" :value="orzInformation.district" name="district" class="uk-input form-control" type="text"> </div>
+                                    <label for="amphoe" class="col-sm-2 control-label">อำเภอ</label>
+                                    <div class="col-sm-4"><input ref="amphoe" :value="orzInformation.amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe"> </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="province" class="col-sm-2 control-label">จังหวัด</label>
+                                    <div class="col-sm-4"><input ref="province" :value="orzInformation.province" name="province" class="uk-input form-control" type="text"> </div>
+                                    <label for="zipcode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
+                                    <div class="col-sm-4">
+                                        <input class="form-control hidden" value="">
+                                        <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orzInformation.stage_code">
+
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+
+
+
+
+
+                        </div>
+                        <!-- /.box-body -->
+                        <div class="box-footer text-center">
+                            <!--                            <a href="javascript:void(0)" class="uppercase">View All Products</a>-->
+                        </div>
+                        <!-- /.box-footer -->
+                    </div>
+
+
+
+
+
+
             </div>
+
+
                     <!-- /.box -->
             <div id="myDonor" class="modal fade" role="dialog">
                 <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
