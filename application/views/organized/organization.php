@@ -142,8 +142,11 @@
         <div class="modal-dialog register-modal">
             <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
                 <div class="d-flex">
-                    <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
-                    <h1>{{orz_last_info.title}}</h1>
+<!--                    <img src="--><?php //echo base_url('assets/image/register-modal.png');?><!--" class="w-auto py-2">-->
+<!--                    <h1>{{orz_last_info.title}}</h1>-->
+                    <div class="" style="width: 534px;height: 125px; background-color: #0b3e6f">
+                        <div class="left"><img :src="orz_last_info.logo"></div><div class="right text-white"><h3>{{orz_last_info.title}}</h3><p>{{orz_last_info.address}}</p></div>
+                    </div>
                 </div>
                 <div class="row m-auto">
                     <div class="col-sm">
@@ -151,27 +154,20 @@
                         <ol class="modal-ol" v-html="orz_last_info.objective">
 
                         </ol>
-                        <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
-                        <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
-                        <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
-                        <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
+                        <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">{{orz_last_info.contact_name}} {{orz_last_info.contact_lastname}}</span></p>
+                        <p class="mb-1">E-mail : <span class="modal-span">{{orz_last_info.email}}</span></p>
+                        <p class="mb-1">Website : <span class="modal-span">{{orz_last_info.website}}/</span></p>
+                        <p>เบอร์ติดต่อองค์กร : <span class="modal-span">{{orz_last_info.orz_tel}}</span></p>
                         <p class="mb-1">รายชื่อคณะกรรมการ</p>
                         <ol class="modal-ol pb-5" v-html="orz_last_info.board_of_directors">
-
                         </ol>
                     </div>
                     <div class="col-sm">
                         <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                        <ol class="modal-ol">
-                            <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                            <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
-                            <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                            <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
+                        <ol class="modal-ol" v-html="orz_last_info.portfolio">
+
                         </ol>
-                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                        <ol class="modal-ol">
-                            <li>กำพล วัชรพล</li>
-                        </ol>
+
                     </div>
                 </div>
                 <div class="modal-btn-container p-absolute">
