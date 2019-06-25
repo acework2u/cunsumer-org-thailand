@@ -28,17 +28,6 @@
     <meta name="theme-color" content="#ffffff">
 
 
-
-
-
-    <script src="<?php echo base_url('assets/js/vue.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/axios.js'); ?>"></script>
-
-    <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
-    <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
-    <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
-
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
     <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
@@ -133,7 +122,7 @@
 <div id="corporate-networ" class="bg-yellow">
     <div class="container text-center p-relative">
         <h1 class="corporate-networ-header pt-4 pb-2">องค์กรที่ลงทะเบียนล่าสุด</h1>
-        <img src="<?php echo base_url('assets/image/foundation.png');?>" class="pb-4">
+        <img :src="orz_last_info.logo" style="max-height: 134px" class="pb-4">
         <span class="p-absolute corporate-networ-more"  data-toggle="modal" data-target="#orz-last-modal" >เพิ่มเติม <i class="fa fa-caret-right"></i></span>
     </div>
 
@@ -141,12 +130,16 @@
     <div class="modal" id="orz-last-modal">
         <div class="modal-dialog register-modal">
             <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
-                <div class="d-flex">
+                <div class="d-flex flex-row bd-highlight mb-3">
 <!--                    <img src="--><?php //echo base_url('assets/image/register-modal.png');?><!--" class="w-auto py-2">-->
 <!--                    <h1>{{orz_last_info.title}}</h1>-->
+                    <div class="p-2 bd-highlight "><img  :src="orz_last_info.logo" style="max-height: 134px"></div>
+                    <div class="p-2 bd-highlight">{{orz_last_info.title}}</h3><p style="font-size: small">{{orz_last_info.address}} ตำบล/แขวง {{orz_last_info.district}} อำเภอ {{orz_last_info.amphoe}} จังหวัด {{orz_last_info.province}} {{orz_last_info.stage_code}}</p></div>
+                    <!--
                     <div class="" style="width: 534px;height: 125px; background-color: #0b3e6f">
-                        <div class="left"><img :src="orz_last_info.logo"></div><div class="right text-white"><h3>{{orz_last_info.title}}</h3><p>{{orz_last_info.address}}</p></div>
+                        <div class="left"></div><div class="right text-white"><h3></div>
                     </div>
+                    -->
                 </div>
                 <div class="row m-auto">
                     <div class="col-sm">
@@ -861,6 +854,13 @@
         var map = new google.maps.Map(document.getElementById("googleMap-2"),mapProp);
     }
 </script>
+<script src="<?php echo base_url('assets/js/vue.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/axios.js'); ?>"></script>
+
+<script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
+<script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
+<script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
+
 <script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/vue-organization.js'); ?>"></script>
 

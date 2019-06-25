@@ -56,7 +56,7 @@
 
                 </ul>
             </li>
-            <li class="treeview">
+            <li class="treeview hidden">
                 <a href="#">
                     <i class="fa fa-laptop"></i>
                     <span>Address & Location</span>
