@@ -23,6 +23,10 @@
     <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
     <link rel="manifest" href="/manifest.json">
+
+    <link href="<?php echo base_url('assets/js/swiper/css/swiper.css')?>" rel="stylesheet" media="screen" />
+    <script type="text/javascript" src="<?php echo base_url('assets/js/swiper/js/swiper.jquery.js')?>"></script>
+
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
     <meta name="theme-color" content="#ffffff">
@@ -78,7 +82,7 @@
                     <i class="fa fa-navicon px-3"></i>
                 </div>
                 <div class="col-4 p-0 d-flex">
-                    <img src="image/logo.png" class="header-img">
+                    <img src="<?php echo base_url('assets/image/logo.png');?>" class="header-img">
                 </div>
                 <div class="col-4 p-0 nav-right">
                     <div class="lang-container text-right pointer px-3">
@@ -304,7 +308,7 @@
                                         <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="district" id="district-1" v-model="orz_info.district" name="district" class="uk-input  form-input w-100" type="text">
 
                                     </div>
-                                    <div class="col-sm-6 pl-2 pr-0">
+                                    <div class="col-sm-6 pl-2 pr-0 pl-0-sm">
                                         <label class="control-label">อำเภอ *</label>
                                         <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="amphoe" v-model="orz_info.amphoe" name="amphoe" class="uk-input  form-input w-100" type="text" id="amphoe-1">
 
@@ -315,7 +319,7 @@
                                         <label class="control-label">จังหวัด *</label>
                                         <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }"  ref="province" id="province-1" v-model="orz_info.province" name="province" class="uk-input  form-input w-100" type="text">
                                     </div>
-                                    <div class="col-sm-6 pl-2 pr-0">
+                                    <div class="col-sm-6 pl-2 pr-0 pl-0-sm">
                                         <label class="control-label">รหัสไปรษณีย์ *</label>
                                         <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="zipcode" id="zipcode-1"  name="zipcode" class="uk-input w-100 form-input" type="text" v-model="orz_info.zipcode">
                                     </div>
@@ -672,7 +676,7 @@
                                         <div class="px-2">
                                             <p class="mb-2"><b>มูลนิธิสร้างรอยยิ้ม <br> Operation Smile Thailand</b></p>
                                             <p class="mb-0 mt-0">12/2 Soi Methinivete, Sukhumvit Soi 24, Klongton, แขวง คลองเตย เขต คลองเตย กรุงเทพมหานคร 10110</p>
-                                            <button class="location-btn d-block p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                                            <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -686,7 +690,7 @@
                                         <div class="px-2">
                                             <p class="mb-2"><b>มูลนิธิรามาธิบดี</b></p>
                                             <p class="mb-0 mt-0">270 อาคาร จอดรถมูลนิธิรามาธิบดี ถนน พระราม6 แขวง ทุ่งพญาไท เขต ราชเทวี กรุงเทพมหานคร 10400</p>
-                                            <button class="location-btn d-block p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                                            <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -700,7 +704,7 @@
                                         <div class="px-2">
                                             <p class="mb-2"><b>มูลนิธิส่งเสริมอาชีพคนตาบอด</b></p>
                                             <p class="mb-0 mt-0">2218/86 ถนนจันทน์เก่า ช่องนนทรี ยานนาวา กรุงเทพฯ 10120</p>
-                                            <button class="location-btn d-block p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                                            <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -714,7 +718,7 @@
                                         <div class="px-2">
                                             <p class="mb-2"><b>มูลนิธิการศึกษาเพื่อพัฒนาทักษะชีวิต</b></p>
                                             <p class="mb-0 mt-0">65 ถนน นราธิวาสราชนครินทร์ ซอย18 กท กรุงเทพมหานคร 10120</p>
-                                            <button class="location-btn d-block p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                                            <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -728,7 +732,7 @@
                                         <div class="px-2">
                                             <p class="mb-2"><b>มูลนิธิทิสโก้ เพื่อการกุศล</b></p>
                                             <p class="mb-0 mt-0">อาคาร Tisco Tower ชั้น 5 ถนน สาทรเหนือ  แขวง สีลม เขต บางรัก กร</p>
-                                            <button class="location-btn d-block p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                                            <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -742,7 +746,7 @@
                                         <div class="px-2">
                                             <p class="mb-2"><b>มูลนิธิกระจกเงา</b></p>
                                             <p class="mb-0 mt-0">191 ซอย วิภาวดีรังสิต 62 แยก 4-7 แขวง ตลาดบางเขน เขต หลักสี่ กรุงเทพมหานคร 10210</p>
-                                            <button class="location-btn d-block p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
+                                            <button class="location-btn p-absolute text-white">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -923,7 +927,7 @@
             </div>
             <div class="modal-content join-modal-container p-relative mt-5 d-none" id="join-done">
                 <div class="d-flex h-100">
-                    <img src="image/done.png">
+                    <img src="<?php echo base_url('assets/image/done.png');?>">
                 </div>
                 <span class="close modal-close p-absolute pointer" data-dismiss="modal">&times;</span>
             </div>
