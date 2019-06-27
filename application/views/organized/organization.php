@@ -125,7 +125,7 @@
         <div class="container container-lg">
             <div class="row m-auto pt-2">
                 <div class="col-sm mt-5 mb-4-sm">
-                    <div class="connection-container w-100 text-center p-relative my-5-sm">
+                    <div class="connection-container w-100 text-center p-relative">
                         <img src="<?php echo base_url('assets/image/network.jpg');?>" class="p-absolute">
                         <div class="d-flex p-relative connection-container-text p-absolute w-100">
                             <p>เครือข่ายองค์กรผู้บริโภค</p>
@@ -133,7 +133,7 @@
                     </div>
                 </div>
                 <div class="col-sm mt-5 mb-4-sm">
-                    <div class="connection-container w-100 text-center p-relative my-5-sm">
+                    <div class="connection-container w-100 text-center p-relative">
                         <img src="<?php echo base_url('assets/image/training.jpg'); ?>" class="p-absolute">
                         <div class="d-flex p-relative connection-container-text p-absolute w-100">
                             <p>ภาคีเครือข่าย<br>(กพย., คคส., และอื่นๆ)</p>
@@ -141,7 +141,7 @@
                     </div>
                 </div>
                 <div class="col-sm mt-5 mb-4-sm">
-                    <div class="connection-container w-100 text-center p-relative my-5-sm">
+                    <div class="connection-container w-100 text-center p-relative">
                         <img src="<?php echo base_url('assets/image/meeting.jpg');?>" class="p-absolute">
                         <div class="d-flex connection-container-text p-absolute w-100">
                             <p>นักวิชาการ และ ผู้เชี่ยวชาญ <br>ด้านต่างๆ</p>
@@ -1029,6 +1029,15 @@
             };
             var map = new google.maps.Map(document.getElementById("googleMap-2"),mapProp);
         }
+    </script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+            /*autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },*/
+            loop: true
+        });
     </script>
 <script src="<?php echo base_url('assets/js/vue.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/axios.js'); ?>"></script>

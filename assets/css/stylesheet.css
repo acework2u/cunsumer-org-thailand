@@ -518,6 +518,7 @@
 	height: 175px;
 	background: #FFCC33;
 	vertical-align: text-bottom;
+	margin: 3rem auto;
 }
 
 .connection-container-text {
@@ -543,6 +544,7 @@
 
 	.connection-container {
 		height: 125px;
+		margin: auto;
 	}
 
 	.connection-container img {
@@ -893,7 +895,7 @@ input:focus {
 
 @media (min-width: 768px) {
 	.register {
-		height: 1150px;
+		height: 1250px;
 	}
 
 	.form-header {
