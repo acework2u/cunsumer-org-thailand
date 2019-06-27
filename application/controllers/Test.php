@@ -798,6 +798,17 @@ class Test extends MY_Controller
 
     }
 
+    public function test_provinces(){
+        $this->load->model($this->province_model,'province');
+
+        $result = $this->province->provinces_list();
+
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+
+    }
+
 
 
 

@@ -15,6 +15,7 @@ class MY_Controller extends CI_Controller
     public $invoice_model;
     public $bank_model;
     public $payment_model;
+    public $province_model;
 
 
     /*** 2c2p *****/
@@ -59,6 +60,7 @@ class MY_Controller extends CI_Controller
         $this->invoice_model = "invoice_model";
         $this->bank_model = "bank_model";
         $this->payment_model = "payment_model";
+        $this->province_model = "provinces_model";
 
 
         /**** 2C2P ***/
