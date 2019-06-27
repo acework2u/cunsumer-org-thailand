@@ -100,6 +100,8 @@ $route['api/v1/orz-group'] = "organized/getOrzGroupList";
 $route['api/v1/orz-register'] = "organized/organization_register";
 $route['api/v1/orz-update'] = "organized/organization_update";
 $route['api/v1/orz-reg-last'] = "organized/getOrganizationLast";
+$route['api/v1/province-list'] = "api/provinceList";
+
 
 
 
