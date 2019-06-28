@@ -23,6 +23,7 @@ class MY_Model extends CI_Model
     public $tbl_subdistricts;
     public $tbl_districts;
     public $tbl_zone;
+    public $tbl_zone_province_mn;
     public $tbl_orz_status;
 
 
@@ -50,6 +51,8 @@ class MY_Model extends CI_Model
         $this->tbl_districts = "districts";
         $this->tbl_subdistricts = "subdistricts";
         $this->tbl_orz_status = "orz_status";
+        $this->tbl_zone = "zone";
+        $this->tbl_zone_province_mn = "zone_province_mn";
 
     }
 

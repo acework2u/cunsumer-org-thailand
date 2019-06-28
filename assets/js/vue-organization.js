@@ -227,6 +227,43 @@ window.onload = function () {
         }
     });
 
+    var search = new Vue({
+        el:"#search",
+        data(){
+            return{
+                zones:"",
+                zone:0,
+                provinces:"",
+                province:0
+            }
+        },methods:{
+            getZone(){
+                let ZoneAPI = base_url+"/api/v1/zone-list"
+                axios.get(ZoneAPI).then((res)=>{
+                    this.zones = res.data
+
+                    this.province =0
+                    this.provinces = ""
+                })
+
+            },
+            getProvinces(){
+                let Provincy = base_url+"/api/v1/province-in-zone";
+                axios.get(Provincy+"?zone_code="+this.zone).then((res)=>{
+                    this.provinces = res.data
+                    this.province =0
+                    //
+                    // this.province =0
+                    // this.provinces = ""
+                })
+
+            }
+        },
+        created:function () {
+            this.getZone()
+        }
+    });
+
 
     /***** JQUERY *****/
 
