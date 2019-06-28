@@ -569,7 +569,7 @@
                     </select>
                 </div>
                 <div class="col-sm my-4-sm">
-                    <button class="search-btn py-1"><i class="fa fa-search" aria-hidden="true"></i> ค้นหา</button>
+                    <button @click="serachOrz()" class="search-btn py-1"><i class="fa fa-search" aria-hidden="true" ></i> ค้นหา</button>
                 </div>
             </div>
         </div>

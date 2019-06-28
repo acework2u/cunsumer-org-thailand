@@ -257,6 +257,9 @@ window.onload = function () {
                     // this.provinces = ""
                 })
 
+            },
+            serachOrz(){
+                console.log("zone code:"+this.zone+"province_code ="+this.province);
             }
         },
         created:function () {
