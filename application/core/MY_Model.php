@@ -25,6 +25,7 @@ class MY_Model extends CI_Model
     public $tbl_zone;
     public $tbl_zone_province_mn;
     public $tbl_orz_status;
+    public $tbl_orz_in_province;
 
 
 
@@ -53,6 +54,7 @@ class MY_Model extends CI_Model
         $this->tbl_orz_status = "orz_status";
         $this->tbl_zone = "zone";
         $this->tbl_zone_province_mn = "zone_province_mn";
+        $this->tbl_orz_in_province = "orz_in_province";
 
     }
 
@@ -111,6 +113,9 @@ class MY_Model extends CI_Model
 
 
     }
+
+
+
 
 
 

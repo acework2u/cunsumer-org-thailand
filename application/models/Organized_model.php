@@ -29,6 +29,7 @@ class Organized_model extends MY_Model
     private $_orz_province;
     private $_orz_amphoe;
     private $_orz_zipcode;
+    private $_orz_province_code;
 
     public function __construct()
     {
@@ -54,7 +55,9 @@ class Organized_model extends MY_Model
     {
         $this->_contact_lastname = $contact_lastname;
     }
-    public function setContactTel($mobile_numer){
+
+    public function setContactTel($mobile_numer)
+    {
         $this->_contact_mobile = $mobile_numer;
 
     }
@@ -152,6 +155,10 @@ class Organized_model extends MY_Model
     public function setProvince($province)
     {
         $this->_orz_province = $province;
+    }
+
+    public function setProvinceCode($province_code){
+        $this->_orz_province_code = $province_code;
     }
 
 
@@ -329,8 +336,8 @@ class Organized_model extends MY_Model
         if (!is_blank($this->_orz_logo)) {
             $data['logo'] = $this->_orz_logo;
 
-            if(!is_blank($this->_orz_id)){
-                $this->db->where('aid',$this->_orz_id);
+            if (!is_blank($this->_orz_id)) {
+                $this->db->where('aid', $this->_orz_id);
                 $this->db->update($this->tbl_organization, $data);
 
                 if ($this->db->affected_rows()) {
@@ -338,10 +345,9 @@ class Organized_model extends MY_Model
                 } else {
                     return false;
                 }
-            }else{
+            } else {
                 return false;
             }
-
 
 
         } else {
@@ -374,10 +380,53 @@ class Organized_model extends MY_Model
         return $result;
     }
 
-    public function organization_last(){
-        $last = $this->db->where('status',4)->order_by('aid',"desc")->limit(1)->get($this->tbl_organization)->row();
+    public function organization_last()
+    {
+        $last = $this->db->where('status', 4)->order_by('aid', "desc")->limit(1)->get($this->tbl_organization)->row();
 
         return $last;
+    }
+
+    public function orz_in_province()
+    {
+
+        if(!is_blank($this->_orz_id)){
+
+            $data = array();
+
+            $this->db->where('orz_aid', $this->_orz_id);
+            $q = $this->db->get($this->tbl_orz_in_province);
+            $this->db->reset_query();
+
+            if ($q->num_rows() > 0) {
+                #Update
+                $data['province_code']=$this->_orz_province_code;
+
+                $this->db->where('orz_aid', $this->_orz_id);
+                $this->db->update($this->tbl_orz_in_province, $data);
+                $aff_num = $this->db->affected_rows();
+                if ($aff_num > 0) {
+                    return true;
+                }
+            } else {
+                #New
+                $data['orz_aid'] = $this->_orz_id;
+                $data['province_code'] = $this->_orz_province_code;
+
+                $this->db->insert($this->tbl_orz_in_province, $data);
+                $aff_num = $this->db->affected_rows();
+                if ($aff_num > 0) {
+                    return $this->db->insert_id();
+                }
+
+            }
+
+
+        }
+
+
+
+
     }
 
 

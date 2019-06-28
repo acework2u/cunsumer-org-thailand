@@ -7,11 +7,16 @@ class Provinces_model extends MY_Model
 
     private $_zone_code;
     private $_provence_code;
+    private $_zip_code;
 
 
     public function setZoneCode($zone_code)
     {
         $this->_zone_code = $zone_code;
+    }
+
+    public function setZipCode($zip_code){
+        $this->_zip_code = $zip_code;
     }
 
 
@@ -70,6 +75,27 @@ class Provinces_model extends MY_Model
         }
 
         return $result;
+    }
+
+    public function get_province_code(){
+        $this->db->select('provinces.*');
+        $this->db->join($this->tbl_districts,'provinces.id = districts.province_id','lef');
+        $this->db->join($this->tbl_subdistricts,'subdistricts.district_id = districts.id','left');
+        $this->db->where('subdistricts.zip_code',$this->_zip_code);
+        $this->db->limit(1);
+        $query = $this->db->get($this->tbl_provinces);
+
+        $provice_code = "";
+
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row){
+                $provice_code = $row->code;
+            }
+        }
+
+        return $provice_code;
+
+
     }
 
 }// End Of Class

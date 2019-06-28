@@ -251,6 +251,9 @@ var lastdonate = new Vue({
                 var fromData = this.toFormData(dataInfo)
 
 
+                console.log(dataInfo);
+
+
                 axios.post(ApiUrl, fromData).then((res) => {
                     console.log(res.data)
                 })

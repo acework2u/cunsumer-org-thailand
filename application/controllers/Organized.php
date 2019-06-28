@@ -139,6 +139,16 @@ class Organized extends MY_Controller
                             'error' => false,
                             'message' => "Register Success"
                         );
+
+                        /*** Update Orz in Province **/
+                        $province_code ="";
+                        $this->load->model($this->province_model, 'province');
+                        $this->province->setZipCode($orz_zipcode);
+                        $province_code = $this->province->get_province_code();
+                        $this->orz->setProvinceCode($province_code);
+                        $this->orz->orz_in_province();
+
+
                     } else {
                         $message = array(
                             'stats' => false,
@@ -214,7 +224,7 @@ class Organized extends MY_Controller
         $orz_website = $this->input->post('website');
         $orz_logo = $this->input->post('logo');
         $orz_status = $this->input->post('aid_status');
-        $orz_stage_code = $this->input->post('stage_code');
+        $orz_stage_code = $this->input->post('zipcode');
         $orz_user_id = $this->input->post('user_id');
 
         $message = array();
@@ -254,6 +264,16 @@ class Organized extends MY_Controller
                     'error' => false,
                     'message' => "Update Success"
                 );
+
+                /*** Update Orz in Province **/
+                $province_code ="";
+                $this->load->model($this->province_model, 'province');
+                $this->province->setZipCode($orz_stage_code);
+                $province_code = $this->province->get_province_code();
+                $this->orz->setOrzId($orz_id);
+                $this->orz->setProvinceCode($province_code);
+                $this->orz->orz_in_province();
+
             } else {
                 $message = array(
                     'stats' => false,
