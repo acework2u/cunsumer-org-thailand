@@ -281,7 +281,7 @@ window.onload = function () {
         el: "#join-modal",
         data() {
             return {
-                valuntee_info: {},
+                valunteer_info: {organization:0,province:0},
                 provinces: "",
                 province: 0,
                 organizations: "",
@@ -298,8 +298,6 @@ window.onload = function () {
                     this.organization = 0
                     this.organizations = ""
 
-
-
                 })
 
             },
@@ -312,8 +310,24 @@ window.onload = function () {
                     axios.get(orzApi + "?province_code=" + province_code).then((res) => {
                         this.organizations = res.data
                         this.organization = 0
+                        if(res.data.length <= 0 ){
+                            console.log(this.$refs)
+                            this.$refs.no_orz.innerText = "**ไม่มีรายการมูลนิธิฯ**"
+                        }else{
+                            this.$refs.no_orz.innerText = "**เลือกรายการมูลนิธิฯ**"
+                    }
+
+
                     })
                 })
+            },
+            valunteerRegister(){
+
+                this.valunteer_info.province = this.province
+                this.valunteer_info.organization = this.organization
+
+
+                console.log(this.valunteer_info)
             }
 
         }, created: function () {
@@ -376,8 +390,21 @@ window.onload = function () {
         });
 
         $('#join-register').click(function () {
-            $('#join-form').addClass('d-none');
-            $('#join-done').removeClass('d-none');
+            // $('#join-form').addClass('d-none');
+            // $('#join-done').removeClass('d-none');
+            // if($('#join-modal [name="valunteer_name"]').length <=0){
+            //     $('#join-modal [name="valunteer_name"]').focus()
+            // }
+            let v_name = $('#valunteer_name').val()
+            let v_lastname = $('#valunteer_lastname').val()
+            if(v_name==="" || v_name.length <= 0){
+                $('#valunteer_name').focus()
+            }
+            if(v_lastname==="" || v_lastname.length <= 0){
+                $('#valunteer_lastname').focus()
+            }
+
+
         });
 
         $('.more-btn').click(function () {
@@ -419,6 +446,10 @@ window.onload = function () {
         $amphoe: $('#demo1 [name="amphoe"]'),
         $province: $('#demo1 [name="province"]'),
         $zipcode: $('#demo1 [name="zipcode"]'),
+        $district: $('#join-modal [name="district"]'),
+        $amphoe: $('#join-modal [name="amphoe"]'),
+        $province: $('#join-modal [name="province"]'),
+        $zipcode: $('#join-modal [name="zipcode"]'),
 
         onDataFill: function (data) {
             console.info('Data Filled', data);

@@ -800,7 +800,7 @@
                         </div>
                         <div class="col pr-0 pl-1">
                             <select class="form-input w-100" name="foundation-list" v-model="organization" >
-                                <option value="0">รายการมูลนิธิฯ*</option>
+                                <option value="0" ref="no_orz">รายการมูลนิธิฯ*</option>
                                 <option v-for="data in organizations" :value="data.aid">{{data.title}}</option>
                             </select>
                         </div>
@@ -811,63 +811,71 @@
                             <div class="row m-auto">
                                 <div class="col p-0">
                                     <label class="label-container">นาย
-                                        <input type="radio" name="prefix" value="" checked="checked">
+                                        <input type="radio" name="prefix" value="1" checked="checked">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                                 <div class="col p-0">
                                     <label class="label-container">นาง
-                                        <input type="radio" name="prefix" value="">
+                                        <input type="radio" name="prefix" value="2">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                                 <div class="col p-0">
                                     <label class="label-container">นางสาว
-                                        <input type="radio" name="type" value="">
+                                        <input type="radio" name="prefix" value="3">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                                 <div class="col-auto p-0">
                                     <label class="label-container">ไม่ประสงค์ระบุเพศ
-                                        <input type="radio" name="type" value="">
+                                        <input type="radio" name="prefix" value="4">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-5 pl-0 pr-1">
-                            <input type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input">
+                            <input type="text" name="valunteer_name" id="valunteer_name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="valunteer_info.name">
                         </div>
                         <div class="col-7 pl-1 pr-0">
-                            <input type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input">
+                            <input type="text" name="valunteer_lastname" id="valunteer_lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="valunteer_info.lastname">
                         </div>
+                        <div class="col-10 pl-0 pr-1">
+                            <input type="text" name="tel" placeholder="เบอร์ติดต่อ*" id="valunteer_tel" class="w-100 mb-2 form-input">
+                        </div>
+                        <div class="col-10 pl-0 pr-1">
+                            <input type="text" name="email" placeholder="Email*" id="valunteer_email" class="w-100 mb-2 form-input">
+                        </div>
+
                         <div class="col-12 p-0">
-                            <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input">
+                            <input type="text" name="valunteer_address" placeholder="ที่อยู่*" id="valunteer_address" class="w-100 mb-2 form-input" v-model="valunteer_info.address">
                         </div>
-                        <div class="col-4 pl-0 pr-1 pb-2">
-                            <select class="form-input w-100" name="district">
-                                <option value="">อำเภอ*</option>
-                            </select>
+                        <div class="col-5 pl-0 pr-1 pb-2">
+                            <input type="text" name="district" id="valunteer_district" v-model="valunteer_info.district" class="w-100 mb-2 form-control form-input" placeholder="ตำบล/แขวง">
+<!--                            <select class="form-input w-100" name="district" v-model="valunteer_info.district">-->
+<!--                                <option value="">อำเภอ*</option>-->
+<!--                            </select>-->
                         </div>
-                        <div class="col-6 pl-1 pr-0 pb-2">
-                            <select class="form-input w-100" name="province">
-                                <option value="">จังหวัด*</option>
-                            </select>
+                        <div class="col-5 pl-1 pr-0 pb-2">
+                            <input type="text" name="amphoe" id="valunteer_amphoe" placeholder="อำเภอ" class="w-100 mb-2 form-input" v-model="valunteer_info.amphoe" readonly>
+<!--                            <input type="text" name="amphoe" v-model="valunteer_info.amphoe" class="w-100 mb-2 form-control form-input" placeholder="อำเภอ" readonly>-->
+<!--                            <select class="form-input w-100" name="province" v-model="valunteer_info.amphoe">-->
+<!--                                <option value="">จังหวัด*</option>-->
+<!--                            </select>-->
                         </div>
                         <div class="col-5 pl-0 pr-1">
-                            <input type="text" name="zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input">
+                            <input type="text" name="province" id="valunteer_province" placeholder="จังหวัด" class="w-100 mb-2 form-input" v-model="valunteer_info.province" readonly>
                         </div>
-                        <div class="col-10 pl-0 pr-1">
-                            <input type="text" name="tel" placeholder="เบอร์ติดต่อ*" class="w-100 mb-2 form-input">
+                        <div class="col-5 pl-0 pr-1">
+                            <input type="text" name="zipcode" id="valunteer_zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input" v-model="valunteer_info.zipcode" readonly>
                         </div>
-                        <div class="col-10 pl-0 pr-1">
-                            <input type="text" name="email" placeholder="Email*" class="w-100 mb-2 form-input">
-                        </div>
+
                     </div>
                     <div class="mt-4 row m-auto">
                         <div class="col p-0 mt-2 d-flex">
                             <!-- Js line 42 -->
-                            <button class="my-4 join-btn join-btn-modal text-white px-4 py-2" id="join-register">ลงทะเบียน</button>
+                            <button class="my-4 join-btn join-btn-modal text-white px-4 py-2" id="join-register" @click="valunteerRegister">ลงทะเบียน</button>
                             <!-- End -->
                         </div>
                         <div class="col p-0 mt-2 d-flex">
