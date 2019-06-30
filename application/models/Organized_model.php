@@ -435,6 +435,7 @@ class Organized_model extends MY_Model
             $this->db->select('*');
             $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_in_province.orz_aid', 'left');
             $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
+            $this->db->where('organization.status','4');
             $query = $this->db->get($this->tbl_organization);
 
             if ($query->num_rows() > 0) {

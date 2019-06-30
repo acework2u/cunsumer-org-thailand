@@ -68,4 +68,13 @@ class Api extends MY_Controller
         echo json_encode($result);
     }
 
+    public function provinces(){
+        $this->load->model($this->province_model, 'province');
+        $result = array();
+        $result = $this->province->provinces();
+
+        echo json_encode($result);
+
+    }
+
 } // End of Class

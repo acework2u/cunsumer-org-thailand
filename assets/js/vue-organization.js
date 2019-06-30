@@ -2,27 +2,27 @@ var base_url = window.location.origin;
 window.onload = function () {
     var orz = new Vue({
         el: '#register-form',
-        data(){
+        data() {
             return {
-                zipcode:"",
-                orz_group:[],
-                timer:0,
-                msgSuccess:"",
-                alsuccess:false,
-                alError:false,
-                checkRule:false,
+                zipcode: "",
+                orz_group: [],
+                timer: 0,
+                msgSuccess: "",
+                alsuccess: false,
+                alError: false,
+                checkRule: false,
                 // orz_selected:"",
-                orz_group_label:"ประเภทมูลนิธิ",
-                orz_info:{
-                    cus_email:"",
-                    cus_password:"",
-                    title:"",
-                    group:"",
-                    categories:""
+                orz_group_label: "ประเภทมูลนิธิ",
+                orz_info: {
+                    cus_email: "",
+                    cus_password: "",
+                    title: "",
+                    group: "",
+                    categories: ""
 
                 }
             }
-        },created: function () {
+        }, created: function () {
             // this.timer = setInterval(this.getOrzgroup, 2000)
             this.getOrzgroup();
         },
@@ -31,9 +31,9 @@ window.onload = function () {
                 // this.$refs.input_name.focus()
             })
         },
-        methods:{
-            onSave(){
-                let api = base_url+"/api/v1/orz-register"
+        methods: {
+            onSave() {
+                let api = base_url + "/api/v1/orz-register"
 
                 this.$nextTick(() => { // ES6 arrow function
                     // this.$refs.input_name.focus()
@@ -55,7 +55,7 @@ window.onload = function () {
 
                     console.log(dataInfo);
 
-                    axios.post(api,fromData).then((res)=>{
+                    axios.post(api, fromData).then((res) => {
                         console.log(res.data)
                     })
                 })
@@ -63,7 +63,7 @@ window.onload = function () {
             },
             delay(callback, ms) {
                 var timer = 0;
-                return function() {
+                return function () {
                     var context = this, args = arguments;
                     clearTimeout(timer);
                     timer = setTimeout(function () {
@@ -71,9 +71,9 @@ window.onload = function () {
                     }, ms || 0);
                 };
             },
-            checkUserEmail(){
-                let api = base_url+"/api/v1/check-register"
-                let dataInfo = {'cus_email':this.orz_info.cus_email,'cus_password':this.orz_info.cus_password}
+            checkUserEmail() {
+                let api = base_url + "/api/v1/check-register"
+                let dataInfo = {'cus_email': this.orz_info.cus_email, 'cus_password': this.orz_info.cus_password}
                 var fromData = this.toFormData(dataInfo)
                 if (this.timer) {
                     clearTimeout(this.timer);
@@ -82,16 +82,16 @@ window.onload = function () {
                 this.timer = setTimeout(() => {
                     this.alError = false
                     this.alsuccess = false
-                    axios.post(api,fromData).then((res)=>{
+                    axios.post(api, fromData).then((res) => {
                         console.log(res.data)
                         this.alsuccess = res.data.status
                         this.msgSuccess = res.data.message
                         this.alError = false
                         this.alsuccess = false
-                        if(res.data.status===true){
+                        if (res.data.status === true) {
                             this.alsuccess = false
                             this.alError = false
-                        }else{
+                        } else {
                             this.alsuccess = false
                             this.alError = true
                         }
@@ -105,8 +105,8 @@ window.onload = function () {
                 this.alsuccess = false
 
             },
-            getOrzgroup(){
-                axios.get(base_url+'/api/v1/orz-group').then((res)=>{
+            getOrzgroup() {
+                axios.get(base_url + '/api/v1/orz-group').then((res) => {
                     console.log(res.data)
                     this.orz_group = res.data
                 })
@@ -118,9 +118,9 @@ window.onload = function () {
                 }
                 return form_data;
             },
-            clickRuleAccept(){
+            clickRuleAccept() {
 
-              this.checkRule = !this.checkRule
+                this.checkRule = !this.checkRule
 
                 console.log(this.checkRule)
             }
@@ -132,26 +132,26 @@ window.onload = function () {
                     'alert text-danger': this.alError === 'true'
                 }
             },
-            comAcceptRule(){
+            comAcceptRule() {
                 return this.checkRule;
             }
 
         }
     });
     var userlogin = new Vue({
-        el:"#userlogin",
-        data(){
-            return{
-                errors:false,
-                textMessage:"",
-                isLogin:false,
-                orz_login:{
-                    user_name:"",
-                    password:""
+        el: "#userlogin",
+        data() {
+            return {
+                errors: false,
+                textMessage: "",
+                isLogin: false,
+                orz_login: {
+                    user_name: "",
+                    password: ""
                 }
             }
         },
-        methods:{
+        methods: {
             toFormData: function (obj) {
                 var form_data = new FormData();
                 for (var key in obj) {
@@ -159,18 +159,18 @@ window.onload = function () {
                 }
                 return form_data;
             },
-            userLogin(){
-                let api = base_url+"/api/v1/user/logon"
+            userLogin() {
+                let api = base_url + "/api/v1/user/logon"
 
-                if(this.orz_login.user_name===""){
+                if (this.orz_login.user_name === "") {
                     $('#user_name').focus();
                 }
                 let dataInfo = this.orz_login
                 var fromData = this.toFormData(dataInfo)
 
-                axios.post(api,fromData).then((res)=>{
-                        console.log(res.data)
-                    if(res.data.error){
+                axios.post(api, fromData).then((res) => {
+                    console.log(res.data)
+                    if (res.data.error) {
                         this.errors = res.data.error
 
                     }
@@ -188,34 +188,33 @@ window.onload = function () {
                     'alert text-danger': this.alError === 'true'
                 }
             },
-            msgLoginStatus(){
+            msgLoginStatus() {
                 return this.textMessage;
             }
         }
 
     });
-
     var orzlast = new Vue({
-        el:"#corporate-networ",
-        data(){
+        el: "#corporate-networ",
+        data() {
             return {
-                orz_last_info:{}
+                orz_last_info: {}
             }
-        },created: function () {
+        }, created: function () {
 
             this.timer = setInterval(this.getOrzLast, 2000)
 
         },
         mounted() {
             this.$nextTick(() => { // ES6 arrow function
-               this.getOrzLast();
+                this.getOrzLast();
             })
         },
-        methods:{
-            getOrzLast(){
-                let API = base_url+"/api/v1/orz-reg-last"
+        methods: {
+            getOrzLast() {
+                let API = base_url + "/api/v1/orz-reg-last"
 
-                axios.get(API).then((res)=>{
+                axios.get(API).then((res) => {
                     this.orz_last_info = res.data
 
                     // console.info(this.orz_last_info)
@@ -223,90 +222,131 @@ window.onload = function () {
             }
 
         },
-        computed: {
-
-        }
+        computed: {}
     });
-
     var search = new Vue({
-        el:"#search",
-        data(){
-            return{
-                zones:"",
-                zone:0,
-                provinces:"",
-                province:0,
-                orz_list:[]
+        el: "#search",
+        data() {
+            return {
+                zones: "",
+                zone: 0,
+                provinces: "",
+                province: 0,
+                orz_list: []
             }
-        },methods:{
-            getZone(){
-                let ZoneAPI = base_url+"/api/v1/zone-list"
-                axios.get(ZoneAPI).then((res)=>{
+        }, methods: {
+            getZone() {
+                let ZoneAPI = base_url + "/api/v1/zone-list"
+                axios.get(ZoneAPI).then((res) => {
                     this.zones = res.data
 
-                    this.province =0
+                    this.province = 0
                     this.provinces = ""
                 })
 
             },
-            getProvinces(){
-                let Provincy = base_url+"/api/v1/province-in-zone";
-                axios.get(Provincy+"?zone_code="+this.zone).then((res)=>{
+            getProvinces() {
+                let Provincy = base_url + "/api/v1/province-in-zone";
+                axios.get(Provincy + "?zone_code=" + this.zone).then((res) => {
                     this.provinces = res.data
-                    this.province =0
+                    this.province = 0
                     //
                     // this.province =0
                     // this.provinces = ""
                 })
 
             },
-            searchOrz(){
-                let orzApi = base_url+"/api/v1/orz-search";
+            searchOrz() {
+                let orzApi = base_url + "/api/v1/orz-search";
                 let province_code = this.province
                 let zone_code = this.zone
 
-                console.log("zone code:"+this.zone+"province_code ="+this.province);
-                axios.get(orzApi+"?province_code="+province_code).then((res)=>{
+                console.log("zone code:" + this.zone + "province_code =" + this.province);
+                axios.get(orzApi + "?province_code=" + province_code).then((res) => {
                     this.orz_list = res.data
                 })
 
             }
         },
-        created:function () {
+        created: function () {
             this.getZone()
         },
-        computed:{
-            filterOrzList(){
+        computed: {
+            filterOrzList() {
                 return this.orz_list;
             }
         }
+    });
+    var valunteer = new Vue({
+        el: "#join-modal",
+        data() {
+            return {
+                valuntee_info: {},
+                provinces: "",
+                province: 0,
+                organizations: "",
+                organization: 0
+            }
+        },
+        methods: {
+            getProvinces() {
+                let Province = base_url + "/api/v1/provinces";
+                this.province = 0
+                axios.get(Province).then((res) => {
+                    this.provinces = res.data
+
+                    this.organization = 0
+                    this.organizations = ""
+
+
+
+                })
+
+            },
+            getOrganizations(){
+                let orzApi = base_url + "/api/v1/orz-search";
+                let province_code = this.province
+                console.log("province code:"+this.province)
+
+                this.$nextTick(() => { // ES6 arrow function
+                    axios.get(orzApi + "?province_code=" + province_code).then((res) => {
+                        this.organizations = res.data
+                        this.organization = 0
+                    })
+                })
+            }
+
+        }, created: function () {
+            this.getProvinces()
+        }
+
     });
 
 
     /***** JQUERY *****/
 
-    $(document).ready(function(){
+    $(document).ready(function () {
 
-        $("#login-tap").click(function(){
+        $("#login-tap").click(function () {
             $('.register-tap > span').removeClass('active');
-            $('span',this).addClass('active');
+            $('span', this).addClass('active');
             $('#login-form').removeClass('d-none');
             $('#register-form').addClass('d-none');
         });
 
-        $("#register-tap").click(function(){
+        $("#register-tap").click(function () {
             $('.register-tap > span').removeClass('active');
-            $('span',this).addClass('active');
+            $('span', this).addClass('active');
             $('#login-form').addClass('d-none');
             $('#register-form').removeClass('d-none');
         });
 
-        $('#register-step-2').click(function(){
+        $('#register-step-2').click(function () {
             $('#step-1').addClass('d-none');
             $('#step-2').removeClass('d-none');
         });
 
-        $('#register-step-3').click(function(){
+        $('#register-step-3').click(function () {
             $('#step-2').addClass('d-none');
             $('#step-3').removeClass('d-none');
         });
@@ -315,12 +355,12 @@ window.onload = function () {
             $('#step-1').addClass('d-none');
         });
 
-        $('.edit-btn').click(function(){
+        $('.edit-btn').click(function () {
             $('#step-1').removeClass('d-none');
             $('#step-3').addClass('d-none');
         });
 
-        $('.save-btn').click(function(){
+        $('.save-btn').click(function () {
             $('#step-3').addClass('d-none');
             $('#step-1').addClass('d-none');
             $('#step-4').removeClass('d-none');
@@ -329,43 +369,43 @@ window.onload = function () {
             }, 1000);
         });
 
-        $('.location-container').hover(function(){
-            $('.location-btn',this).show();
-        }, function(){
-            $('.location-btn',this).hide();
+        $('.location-container').hover(function () {
+            $('.location-btn', this).show();
+        }, function () {
+            $('.location-btn', this).hide();
         });
 
-        $('#join-register').click(function() {
+        $('#join-register').click(function () {
             $('#join-form').addClass('d-none');
             $('#join-done').removeClass('d-none');
         });
 
-        $('.more-btn').click(function() {
+        $('.more-btn').click(function () {
             $('#all').addClass('d-none');
             $('#chart').removeClass('d-none');
         });
 
-        $('.lang').click(function() {
+        $('.lang').click(function () {
             $('.lang').removeClass('active');
             $(this).addClass('active');
         });
 
-        $('.nav-tap').click(function() {
+        $('.nav-tap').click(function () {
             $('.nav-tap > span').removeClass('active');
-            $('span',this).addClass('active');
+            $('span', this).addClass('active');
         });
 
-        $('#home').click(function() {
+        $('#home').click(function () {
             $(window).scrollTop(0);
         });
 
-        $('#about').click(function (){
+        $('#about').click(function () {
             $('html, body').animate({
                 scrollTop: $("#topic").offset().top
             }, 1000)
         });
 
-        $('#reg').click(function (){
+        $('#reg').click(function () {
             $('html, body').animate({
                 scrollTop: $("#register").offset().top
             }, 1000)
@@ -380,7 +420,7 @@ window.onload = function () {
         $province: $('#demo1 [name="province"]'),
         $zipcode: $('#demo1 [name="zipcode"]'),
 
-        onDataFill: function(data){
+        onDataFill: function (data) {
             console.info('Data Filled', data);
             // $('#demo1 [name="district"]').val(data.district);
             // $('#demo1 [name="amphoe"]').val(data.amphoe);
@@ -388,22 +428,22 @@ window.onload = function () {
             // $('#demo1 [name="zipcode"]').val(data.zipcode);
         },
 
-        onLoad: function(){
+        onLoad: function () {
             console.info('Autocomplete is ready!');
             $('#loader, .demo').toggle();
         }
     });
     // watch on change
-    $('#demo1 [name="district"]').change(function(){
+    $('#demo1 [name="district"]').change(function () {
         // console.log('ตำบล', this.value);
     });
-    $('#demo1 [name="amphoe"]').change(function(){
+    $('#demo1 [name="amphoe"]').change(function () {
         // console.log('อำเภอ', this.value);
     });
-    $('#demo1 [name="province"]').change(function(){
+    $('#demo1 [name="province"]').change(function () {
         // console.log('จังหวัด', this.value);
     });
-    $('#demo1 [name="zipcode"]').change(function(){
+    $('#demo1 [name="zipcode"]').change(function () {
         // console.log('รหัสไปรษณีย์', this.value);
 
     });

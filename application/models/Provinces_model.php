@@ -63,6 +63,20 @@ class Provinces_model extends MY_Model
         return $result;
     }
 
+    public function provinces()
+    {
+        $this->db->select('provinces.*, zone_code');
+        $this->db->join($this->tbl_zone_province_mn,'provinces.`code` = zone_province_mn.provincy_code','left');
+        $query = $this->db->get($this->tbl_provinces);
+        $result = array();
+        if($query->num_rows() > 0){
+            foreach ($query->result_array() as $row){
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
+
     public function zone_list()
     {
         $query = $this->db->get($this->tbl_zone);

@@ -594,15 +594,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="location-container" v-for="item , index in filterOrzList">
+
+                    <div class="location-container " v-for="item , index in filterOrzList">
                         <div class="row m-auto h-100">
                             <div class="col-4 p-0 h-100">
-                                <img src="<?php echo base_url('assets/image/location/img-2.png');?>" class="w-100 h-100">
+                                <img :src="item.logo" class="w-100 h-100" style="max-width: 80%;float: left">
                             </div>
                             <div class="col-8 pl-2 pr-0 text-left d-flex">
                                 <div class="px-2">
-                                    <p class="mb-2 w-50"><b>มูลนิธิรามาธิบดี</b></p>
-                                    <p class="mb-0 mt-0">270 อาคาร จอดรถมูลนิธิรามาธิบดี ถนน พระราม6 แขวง ทุ่งพญาไท เขต ราชเทวี กรุงเทพมหานคร 10400</p>
+                                    <p class="mb-2 w-50"><b>{{item.title}}</b></p>
+                                    <p class="mb-0 mt-0">{{item.address}} {{item.district}} {{item.amphoe}} {{item.province}} {{item.stage_code}}</p>
                                     <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                 </div>
                             </div>
@@ -791,13 +792,16 @@
                     <label>เลือกหน่วยงาน/องค์กร ที่ต้องการสมัคร</label>
                     <div class="row m-auto">
                         <div class="col pl-0 pr-1">
-                            <select class="form-input w-100" name="province">
-                                <option value="">จังหวัด*</option>
+                            <select class="form-input w-100" name="valunteer_province" v-model="province" @change="getOrganizations()">
+                                <option value="0">จังหวัด*</option>
+                                <option v-for="data in provinces" :value="data.code">{{data.name_in_thai}}</option>
+
                             </select>
                         </div>
                         <div class="col pr-0 pl-1">
-                            <select class="form-input w-100" name="foundation-list">
-                                <option value="">รายการมูลนิธิฯ*</option>
+                            <select class="form-input w-100" name="foundation-list" v-model="organization" >
+                                <option value="0">รายการมูลนิธิฯ*</option>
+                                <option v-for="data in organizations" :value="data.aid">{{data.title}}</option>
                             </select>
                         </div>
                         <div class="col-12 p-0">

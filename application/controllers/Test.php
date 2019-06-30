@@ -718,7 +718,7 @@ class Test extends MY_Controller
         echo getUserAid();
         var_dump(getUsersSession());
 
-        $this->load->model($this->organized_model,'orz');
+        $this->load->model($this->organized_model, 'orz');
 
         $roz = $this->orz->orz_information();
 
@@ -730,13 +730,13 @@ class Test extends MY_Controller
 
     }
 
-    public function test_directory(){
+    public function test_directory()
+    {
 //        $date = str_replace( ':', '', $date);
 
 
-
-        if (!is_dir('uploads/'.getUserAid())) {
-           $dir_upload =  mkdir('./uploads/' . getUserAid(), 0777, TRUE);
+        if (!is_dir('uploads/' . getUserAid())) {
+            $dir_upload = mkdir('./uploads/' . getUserAid(), 0777, TRUE);
 
         }
 
@@ -745,7 +745,8 @@ class Test extends MY_Controller
     }
 
 
-    public function test_update_orz(){
+    public function test_update_orz()
+    {
 
 
         $orz_district = "คลองข่อย";
@@ -754,7 +755,7 @@ class Test extends MY_Controller
         $orz_id = 1;
 
         /***** Register Orz ***/
-        $this->load->model($this->organized_model,'orz');
+        $this->load->model($this->organized_model, 'orz');
 
         $this->orz->setOrzId($orz_id);
         $this->orz->setDistrict($orz_district);
@@ -763,13 +764,13 @@ class Test extends MY_Controller
         $orz_new = $this->orz->update();
 
 
-        if($orz_new){
+        if ($orz_new) {
             $message = array(
                 'stats' => true,
                 'error' => false,
                 'message' => "Update Success"
             );
-        }else{
+        } else {
             $message = array(
                 'stats' => false,
                 'error' => true,
@@ -783,23 +784,24 @@ class Test extends MY_Controller
     }
 
 
-    public function last_orz(){
-        $this->load->model($this->organized_model,'orz');
+    public function last_orz()
+    {
+        $this->load->model($this->organized_model, 'orz');
 
         $resual = $this->orz->organization_last();
 
-        if(is_array($resual)){
+        if (is_array($resual)) {
             echo "array";
         }
 
 //        echo json_encode($resual);
 
 
-
     }
 
-    public function test_provinces(){
-        $this->load->model($this->province_model,'province');
+    public function test_provinces()
+    {
+        $this->load->model($this->province_model, 'province');
 
         $result = $this->province->provinces_list();
 
@@ -809,7 +811,49 @@ class Test extends MY_Controller
 
     }
 
+    public function zone_list()
+    {
+        $this->load->model($this->province_model, 'province');
 
+        $result = $this->province->zone_list();
+
+        echo "<pre>";
+        print_r($result);
+        echo "</pre>";
+
+    }
+
+    public function provice_code()
+    {
+        $this->load->model($this->province_model, 'province');
+            $zip_code = 45160;
+            $this->province->setZipCode($zip_code);
+        $result = $this->province->get_province_code();
+        echo $result;
+    }
+
+
+    public function orz_in_province(){
+        $this->load->model($this->organized_model, 'orz');
+        $orz_stage_code =11120;
+        $orz_id = 1;
+        $province_code ="";
+        $this->load->model($this->province_model, 'province');
+        $this->province->setZipCode($orz_stage_code);
+
+
+
+        $province_code = $this->province->get_province_code();
+
+        $this->db->reset_query();
+        $this->orz->setOrzId($orz_id);
+        $chk = $this->orz->setProvinceCode($province_code);
+        $this->orz->orz_in_province();
+
+
+        echo $this->db->last_query();
+
+    }
 
 
 

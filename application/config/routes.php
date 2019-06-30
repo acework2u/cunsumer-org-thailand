@@ -104,6 +104,7 @@ $route['api/v1/orz-reg-last'] = "organized/getOrganizationLast";
 $route['api/v1/province-list'] = "api/provinceList";
 $route['api/v1/zone-list'] = "api/zone_list";
 $route['api/v1/province-in-zone'] = "api/province_in_zone";
+$route['api/v1/provinces'] = "api/provinces";
 
 
 
