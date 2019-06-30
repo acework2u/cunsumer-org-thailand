@@ -157,7 +157,8 @@ class Organized_model extends MY_Model
         $this->_orz_province = $province;
     }
 
-    public function setProvinceCode($province_code){
+    public function setProvinceCode($province_code)
+    {
         $this->_orz_province_code = $province_code;
     }
 
@@ -390,7 +391,7 @@ class Organized_model extends MY_Model
     public function orz_in_province()
     {
 
-        if(!is_blank($this->_orz_id)){
+        if (!is_blank($this->_orz_id)) {
 
             $data = array();
 
@@ -400,7 +401,7 @@ class Organized_model extends MY_Model
 
             if ($q->num_rows() > 0) {
                 #Update
-                $data['province_code']=$this->_orz_province_code;
+                $data['province_code'] = $this->_orz_province_code;
 
                 $this->db->where('orz_aid', $this->_orz_id);
                 $this->db->update($this->tbl_orz_in_province, $data);
@@ -425,8 +426,25 @@ class Organized_model extends MY_Model
         }
 
 
+    }
 
+    public function orz_for_search()
+    {
+        $result = array();
+        if (!is_blank($this->_orz_province_code)) {
+            $this->db->select('*');
+            $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_in_province.orz_aid', 'left');
+            $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
+            $query = $this->db->get($this->tbl_organization);
 
+            if ($query->num_rows() > 0) {
+                foreach ($query->result_array() as $row) {
+                    $result[] = $row;
+                }
+            }
+        }
+
+        return $result;
     }
 
 

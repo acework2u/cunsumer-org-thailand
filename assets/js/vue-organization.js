@@ -47,6 +47,7 @@ window.onload = function () {
                     this.orz_info.amphoe = amphoe
                     this.orz_info.province = province
                     this.orz_info.stage_code = zipcode
+                    this.orz_info.zip_code = zipcode
 
 
                     let dataInfo = this.orz_info
@@ -234,7 +235,8 @@ window.onload = function () {
                 zones:"",
                 zone:0,
                 provinces:"",
-                province:0
+                province:0,
+                orz_list:[]
             }
         },methods:{
             getZone(){
@@ -258,12 +260,25 @@ window.onload = function () {
                 })
 
             },
-            serachOrz(){
+            searchOrz(){
+                let orzApi = base_url+"/api/v1/orz-search";
+                let province_code = this.province
+                let zone_code = this.zone
+
                 console.log("zone code:"+this.zone+"province_code ="+this.province);
+                axios.get(orzApi+"?province_code="+province_code).then((res)=>{
+                    this.orz_list = res.data
+                })
+
             }
         },
         created:function () {
             this.getZone()
+        },
+        computed:{
+            filterOrzList(){
+                return this.orz_list;
+            }
         }
     });
 

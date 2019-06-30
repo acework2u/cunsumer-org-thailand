@@ -569,7 +569,7 @@
                     </select>
                 </div>
                 <div class="col-sm my-4-sm">
-                    <button @click="serachOrz()" class="search-btn py-1"><i class="fa fa-search" aria-hidden="true" ></i> ค้นหา</button>
+                    <button @click="searchOrz()" class="search-btn py-1"><i class="fa fa-search" aria-hidden="true" ></i> ค้นหา</button>
                 </div>
             </div>
         </div>
@@ -580,7 +580,7 @@
             <div class="col-xl-4 col-lg-5 p-0">
                 <div class="location-lg d-none d-lg-block">
                     <!-- Js line 36 -->
-                    <div class="location-container p-relative">
+                    <div class="location-container p-relative d-none">
                         <div class="row m-auto h-100">
                             <div class="col-4 p-0 h-100">
                                 <img src="<?php echo base_url('assets/image/location/img-1.png');?>" class="w-100 h-100">
@@ -594,7 +594,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="location-container">
+                    <div class="location-container" v-for="item , index in filterOrzList">
                         <div class="row m-auto h-100">
                             <div class="col-4 p-0 h-100">
                                 <img src="<?php echo base_url('assets/image/location/img-2.png');?>" class="w-100 h-100">
@@ -608,62 +608,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="location-container">
-                        <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
-                                <img src="<?php echo base_url('assets/image/location/img-3.png');?>" class="w-100 h-100">
-                            </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex">
-                                <div class="px-2">
-                                    <p class="mb-2 w-50"><b>มูลนิธิส่งเสริมอาชีพคนตาบอด</b></p>
-                                    <p class="mb-0 mt-0">2218/86 ถนนจันทน์เก่า ช่องนนทรี ยานนาวา กรุงเทพฯ 10120</p>
-                                    <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="location-container">
-                        <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
-                                <img src="<?php echo base_url('assets/image/location/img-4.png');?>" class="w-100 h-100">
-                            </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex">
-                                <div class="px-2">
-                                    <p class="mb-2 w-50"><b>มูลนิธิการศึกษาเพื่อพัฒนาทักษะชีวิต</b></p>
-                                    <p class="mb-0 mt-0">65 ถนน นราธิวาสราชนครินทร์ ซอย18 กท กรุงเทพมหานคร 10120</p>
-                                    <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="location-container">
-                        <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
-                                <img src="<?php echo base_url('assets/image/location/img-5.png');?>" class="w-100 h-100">
-                            </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex">
-                                <div class="px-2">
-                                    <p class="mb-2 w-50"><b>มูลนิธิทิสโก้ เพื่อการกุศล</b></p>
-                                    <p class="mb-0 mt-0">อาคาร Tisco Tower ชั้น 5 ถนน สาทรเหนือ  แขวง สีลม เขต บางรัก กร</p>
-                                    <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="location-container">
-                        <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
-                                <img src="<?php echo base_url('assets/image/location/img-6.png');?>" class="w-100 h-100">
-                            </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex">
-                                <div class="px-2">
-                                    <p class="mb-2 w-50"><b>มูลนิธิกระจกเงา</b></p>
-                                    <p class="mb-0 mt-0">191 ซอย วิภาวดีรังสิต 62 แยก 4-7 แขวง ตลาดบางเขน เขต หลักสี่ กรุงเทพมหานคร 10210</p>
-                                    <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+
                     <!-- End -->
                 </div>
                 <div class="location-sm d-block d-lg-none">

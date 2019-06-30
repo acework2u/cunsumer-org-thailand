@@ -309,5 +309,23 @@ class Organized extends MY_Controller
         echo json_encode($result);
     }
 
+    public function searchOrganization(){
+        $province_code = "";
+        $province_code = $this->input->get_post('province_code');
+
+        $this->load->model($this->organized_model,'orz');
+
+        $orz_info = array();
+        if(!is_blank($province_code)){
+            $this->orz->setProvinceCode($province_code);
+            $orz_info = $this->orz->orz_for_search();
+
+
+        }
+
+        echo json_encode($orz_info);
+
+    }
+
 
 }
