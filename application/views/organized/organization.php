@@ -567,7 +567,7 @@
                     </select>
                 </div>
                 <div class="col-sm my-4-sm">
-                    <select class="py-1 search-select text-white" name="sr_provinces" v-model="province">
+                    <select class="py-1 search-select text-white" name="sr_provinces" v-model="province" @change="geolocate()">
                         <option value="0">เลือกจังหวัด</option>
                         <option v-for="data in provinces" :value="data.code">{{data.name_in_thai}}</option>
                     </select>

@@ -827,9 +827,16 @@ class Test extends MY_Controller
     {
         $this->load->model($this->province_model, 'province');
             $zip_code = 45160;
-            $this->province->setZipCode($zip_code);
-        $result = $this->province->get_province_code();
-        echo $result;
+            $province =12;
+//            $this->province->setZipCode($zip_code);
+//            $result = $this->province->get_province_code();
+                $this->province->setProvinceCode($province);
+            $result = $this->province->provinces_by_code();
+
+            echo json_encode($result);
+
+
+//        print_r() ;
     }
 
 

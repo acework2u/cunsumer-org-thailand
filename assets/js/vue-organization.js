@@ -243,8 +243,8 @@ window.onload = function () {
                 orz_list: [],
                 ggmap:{},
                 startLocation: {
-                    lat: 13.763681,
-                    lng: 100.539663
+                    lat: 13.7563,
+                    lng: 100.5018
                 },
                 coordinates: {
                     0: {
@@ -298,7 +298,7 @@ window.onload = function () {
 
                 console.log("zone code:" + this.zone + "province_code =" + this.province);
                 axios.get(orzApi + "?province_code=" + province_code).then((res) => {
-                    this.orz_list = res.data
+                    this.orz_list = res.data.orz_info
                     // console.log(this.orz_list)
                 })
 
@@ -321,12 +321,20 @@ window.onload = function () {
                     this.infoOpened = true;
                     this.infoCurrentKey = key;
                 }
+            },
+            geolocate(){
+                this.startLocation.lat = 13.598
+                this.startLocation.lng = 100.564
             }
 
         },
         created: function () {
             this.getZone()
         },
+        mounted() {
+            this.geolocate()
+        },
+
         computed: {
             filterOrzList() {
                 return this.orz_list;

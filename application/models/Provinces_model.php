@@ -18,6 +18,9 @@ class Provinces_model extends MY_Model
     public function setZipCode($zip_code){
         $this->_zip_code = $zip_code;
     }
+    public function setProvinceCode($provice_code){
+        $this->_provence_code = $provice_code;
+    }
 
 
     public function __construct()
@@ -57,7 +60,7 @@ class Provinces_model extends MY_Model
         $result = array();
         if($query->num_rows() > 0){
             foreach ($query->result_array() as $row){
-                $result[] = $row;
+                $result = $row;
             }
         }
         return $result;
@@ -68,6 +71,23 @@ class Provinces_model extends MY_Model
         $this->db->select('provinces.*, zone_code');
         $this->db->join($this->tbl_zone_province_mn,'provinces.`code` = zone_province_mn.provincy_code','left');
         $query = $this->db->get($this->tbl_provinces);
+
+        $result = array();
+        if($query->num_rows() > 0){
+            foreach ($query->result_array() as $row){
+                $result[] = $row;
+            }
+        }
+        return $result;
+    }
+
+    public function provinces_by_code()
+    {
+        $this->db->select('provinces.*, zone_code');
+        $this->db->join($this->tbl_zone_province_mn,'provinces.`code` = zone_province_mn.provincy_code','left');
+        $this->db->where('provinces.code',$this->_provence_code);
+        $query = $this->db->get($this->tbl_provinces);
+
         $result = array();
         if($query->num_rows() > 0){
             foreach ($query->result_array() as $row){
