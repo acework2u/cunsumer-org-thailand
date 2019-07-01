@@ -1,5 +1,13 @@
 var base_url = window.location.origin;
 window.onload = function () {
+    Vue.use(VueGoogleMaps, {
+        load: {
+            key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8',
+            libraries: "places"
+        },
+    });
+
+
     var orz = new Vue({
         el: '#register-form',
         data() {
@@ -232,7 +240,34 @@ window.onload = function () {
                 zone: 0,
                 provinces: "",
                 province: 0,
-                orz_list: []
+                orz_list: [],
+                ggmap:{},
+                startLocation: {
+                    lat: 13.763681,
+                    lng: 100.539663
+                },
+                coordinates: {
+                    0: {
+                        full_name: 'มูลนิธิเพื่อผู้บริโภค',
+                        lat: '13.76',
+                        lng: '100.53'
+                    },
+                    1: {
+                        full_name: 'Demo',
+                        lat: '10.32',
+                        lng: '123.89'
+                    }
+                },
+                infoPosition: null,
+                infoContent: null,
+                infoOpened: false,
+                infoCurrentKey: null,
+                infoOptions: {
+                    pixelOffset: {
+                        width: 0,
+                        height: -35
+                    }
+                }
             }
         }, methods: {
             getZone() {
@@ -270,7 +305,24 @@ window.onload = function () {
                 // console.log(orzApi)
 
 
+            },
+            getPosition: function(marker) {
+                return {
+                    lat: parseFloat(marker.lat),
+                    lng: parseFloat(marker.lng)
+                }
+            },
+            toggleInfo: function(marker, key) {
+                this.infoPosition = this.getPosition(marker);
+                this.infoContent = marker.full_name;
+                if (this.infoCurrentKey == key) {
+                    this.infoOpened = !this.infoOpened;
+                } else {
+                    this.infoOpened = true;
+                    this.infoCurrentKey = key;
+                }
             }
+
         },
         created: function () {
             this.getZone()

@@ -579,7 +579,18 @@
         </div>
         <div class="row m-auto">
             <div class="col-xl-8 col-lg-7 p-0">
-                <div id="googleMap-2" class="w-100 h-100"></div>
+                <div id="googleMap-22" class="w-100 h-100">
+                    <gmap-map ref="mymap" :center="startLocation" :zoom="14" style="width: 100%; height: 600px">
+
+                        <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false">
+                            {{infoContent}}
+                        </gmap-info-window>
+
+                        <gmap-marker v-for="(item, key) in coordinates" :key="key" :position="getPosition(item)" :clickable="true" @click="toggleInfo(item, key)" />
+
+                    </gmap-map>
+
+                </div>
             </div>
             <div class="col-xl-4 col-lg-5 p-0">
                 <div class="location-lg d-none d-lg-block">
@@ -1002,8 +1013,10 @@
             loop: true
         });
     </script>
+
 <script src="<?php echo base_url('assets/js/vue.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/axios.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/vue-google-maps.js'); ?>"></script>
 
 <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
@@ -1019,7 +1032,8 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>
+<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>-->
+<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&libraries=places"></script>-->
 
 </body>
 </html>
