@@ -264,7 +264,11 @@ window.onload = function () {
                 console.log("zone code:" + this.zone + "province_code =" + this.province);
                 axios.get(orzApi + "?province_code=" + province_code).then((res) => {
                     this.orz_list = res.data
+                    // console.log(this.orz_list)
                 })
+
+                // console.log(orzApi)
+
 
             }
         },

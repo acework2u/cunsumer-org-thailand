@@ -323,6 +323,8 @@ class Organized extends MY_Controller
 
         }
 
+
+//        echo $this->db->last_query();
         echo json_encode($orz_info);
 
     }
