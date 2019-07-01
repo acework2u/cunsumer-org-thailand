@@ -586,10 +586,10 @@
                     <!-- Js line 36 -->
                     <div class="location-container p-relative d-none">
                         <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
+                            <div class="col-4 p-0 h-100 bg-white">
                                 <img src="<?php echo base_url('assets/image/location/img-1.png');?>" class="w-100 h-100">
                             </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex">
+                            <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                 <div class="px-2">
                                     <p class="mb-2 w-50"><b>มูลนิธิสร้างรอยยิ้ม <br> Operation Smile Thailand</b></p>
                                     <p class="mb-0 mt-0">12/2 Soi Methinivete, Sukhumvit Soi 24, Klongton, แขวง คลองเตย เขต คลองเตย กรุงเทพมหานคร 10110</p>
@@ -601,10 +601,10 @@
 
                     <div class="location-container " v-for="item , index in filterOrzList">
                         <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
+                            <div class="col-4 p-0 h-100 bg-white">
                                 <img :src="item.logo" class="w-100 h-100" style="max-width: 80%;float: left">
                             </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex">
+                            <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                 <div class="px-2">
                                     <p class="mb-2 w-50"><b>{{item.title}}</b></p>
                                     <p class="mb-0 mt-0">{{item.address}} {{item.district}} {{item.amphoe}} {{item.province}} {{item.stage_code}}</p>
@@ -621,10 +621,10 @@
                         <div class="swiper-wrapper">
                             <div class="swiper-slide location-container p-relative">
                                 <div class="row m-auto h-100">
-                                    <div class="col-4 p-0 h-100">
+                                    <div class="col-4 p-0 h-100 bg-white">
                                         <img src="<?php echo base_url('assets/image/location/img-1.png');?>" class="w-100 h-100">
                                     </div>
-                                    <div class="col-8 pl-2 pr-0 text-left d-flex">
+                                    <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2">
                                             <p class="mb-2 w-50"><b>มูลนิธิสร้างรอยยิ้ม <br> Operation Smile Thailand</b></p>
                                             <p class="mb-0 mt-0">12/2 Soi Methinivete, Sukhumvit Soi 24, Klongton, แขวง คลองเตย เขต คลองเตย กรุงเทพมหานคร 10110</p>
@@ -635,10 +635,10 @@
                             </div>
                             <div class="swiper-slide location-container">
                                 <div class="row m-auto h-100">
-                                    <div class="col-4 p-0 h-100">
+                                    <div class="col-4 p-0 h-100 bg-white">
                                         <img src="<?php echo base_url('assets/image/location/img-2.png');?>" class="w-100 h-100">
                                     </div>
-                                    <div class="col-8 pl-2 pr-0 text-left d-flex">
+                                    <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2">
                                             <p class="mb-2 w-50"><b>มูลนิธิรามาธิบดี</b></p>
                                             <p class="mb-0 mt-0">270 อาคาร จอดรถมูลนิธิรามาธิบดี ถนน พระราม6 แขวง ทุ่งพญาไท เขต ราชเทวี กรุงเทพมหานคร 10400</p>
@@ -649,10 +649,10 @@
                             </div>
                             <div class="swiper-slide location-container">
                                 <div class="row m-auto h-100">
-                                    <div class="col-4 p-0 h-100">
+                                    <div class="col-4 p-0 h-100 bg-white">
                                         <img src="<?php echo base_url('assets/image/location/img-3.png');?>" class="w-100 h-100">
                                     </div>
-                                    <div class="col-8 pl-2 pr-0 text-left d-flex">
+                                    <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2">
                                             <p class="mb-2 w-50"><b>มูลนิธิส่งเสริมอาชีพคนตาบอด</b></p>
                                             <p class="mb-0 mt-0">2218/86 ถนนจันทน์เก่า ช่องนนทรี ยานนาวา กรุงเทพฯ 10120</p>
@@ -663,10 +663,10 @@
                             </div>
                             <div class="swiper-slide location-container">
                                 <div class="row m-auto h-100">
-                                    <div class="col-4 p-0 h-100">
+                                    <div class="col-4 p-0 h-100 bg-white">
                                         <img src="<?php echo base_url('assets/image/location/img-4.png');?>" class="w-100 h-100">
                                     </div>
-                                    <div class="col-8 pl-2 pr-0 text-left d-flex">
+                                    <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2">
                                             <p class="mb-2 w-50"><b>มูลนิธิการศึกษาเพื่อพัฒนาทักษะชีวิต</b></p>
                                             <p class="mb-0 mt-0">65 ถนน นราธิวาสราชนครินทร์ ซอย18 กท กรุงเทพมหานคร 10120</p>
@@ -677,10 +677,10 @@
                             </div>
                             <div class="swiper-slide location-container">
                                 <div class="row m-auto h-100">
-                                    <div class="col-4 p-0 h-100">
+                                    <div class="col-4 p-0 h-100 bg-white">
                                         <img src="<?php echo base_url('assets/image/location/img-5.png');?>" class="w-100 h-100">
                                     </div>
-                                    <div class="col-8 pl-2 pr-0 text-left d-flex">
+                                    <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2">
                                             <p class="mb-2 w-50"><b>มูลนิธิทิสโก้ เพื่อการกุศล</b></p>
                                             <p class="mb-0 mt-0">อาคาร Tisco Tower ชั้น 5 ถนน สาทรเหนือ  แขวง สีลม เขต บางรัก กร</p>
@@ -691,10 +691,10 @@
                             </div>
                             <div class="swiper-slide location-container">
                                 <div class="row m-auto h-100">
-                                    <div class="col-4 p-0 h-100">
+                                    <div class="col-4 p-0 h-100 bg-white">
                                         <img src="<?php echo base_url('assets/image/location/img-6.png');?>" class="w-100 h-100">
                                     </div>
-                                    <div class="col-8 pl-2 pr-0 text-left d-flex">
+                                    <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2">
                                             <p class="mb-2 w-50"><b>มูลนิธิกระจกเงา</b></p>
                                             <p class="mb-0 mt-0">191 ซอย วิภาวดีรังสิต 62 แยก 4-7 แขวง ตลาดบางเขน เขต หลักสี่ กรุงเทพมหานคร 10210</p>

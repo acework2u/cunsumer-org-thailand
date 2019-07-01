@@ -1167,7 +1167,7 @@ input:focus {
 	background: #EEEEEE;
 }
 
-.location-container:hover {
+.location-container-bg:hover {
 	color: #FFFFFF;
 	background: #003366;
 }
