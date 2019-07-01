@@ -582,7 +582,7 @@
                     <!-- Js line 36 -->
                     <div class="location-container p-relative d-none">
                         <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100">
+                            <div class="col-4 p-0 h-100 bg-white">
                                 <img src="<?php echo base_url('assets/image/location/img-1.png');?>" class="w-100 h-100">
                             </div>
                             <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
