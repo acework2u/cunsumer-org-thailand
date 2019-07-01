@@ -154,7 +154,11 @@
     <div id="corporate-networ" class="bg-yellow">
         <div class="container text-center p-relative">
             <h1 class="corporate-networ-header pt-4 pb-2">องค์กรที่ลงทะเบียนล่าสุด</h1>
-            <img src="<?php echo base_url('assets/image/foundation.png');?>" class="pb-4">
+
+            <div class="d-flex flex-row">
+                <div class="p-2"><img  :src="orz_last_info.logo" class="pb-4" style="max-height: 120px;"></div>
+                <div class="p-2"><h3 class="corporate-networ-h3">{{orz_last_info.title}}</h3></div>
+            </div>
             <span class="p-absolute corporate-networ-more" data-toggle="modal" data-target="#orz-last-modal" >เพิ่มเติม <i class="fa fa-caret-right"></i></span>
         </div>
 
@@ -1015,8 +1019,7 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
-
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap&libraries=places"></script>
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>
+
 </body>
 </html>

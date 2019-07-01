@@ -331,7 +331,7 @@
 	.mx-auto-sm {
 		margin-left: auto !important;
 	}
-	
+
 }
 
 /* ------------------------------- Font -------------------------------*/
@@ -465,7 +465,7 @@
 
 /* ------------------------------- Topic ------------------------------- */
 
-.topic { 
+.topic {
 	background: url(image/topic.png) center top;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
@@ -505,8 +505,8 @@
 
 /* ------------------------------- Connection ------------------------------- */
 
-.connection { 
-	background: url(image/connection.png) center top; 
+.connection {
+	background: url(image/connection.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -566,6 +566,11 @@
 	font-size: 32px;
 	color: #003366;
 }
+.corporate-networ-h3 {
+	font-family: Kanit-Regular;
+	font-size: 28px;
+	color: #003366;
+}
 
 .corporate-networ-more {
 	bottom: 5px;
@@ -584,7 +589,7 @@
 /* ------------------------------- register ------------------------------- */
 
 .register {
-	background: url(image/register.png) center top; 
+	background: url(image/register.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -721,7 +726,7 @@ input:focus {
 	width: 18px;
 	border-radius: 50%;
 	background-color: #FFFFFF;
-	border: 3px solid #003366; 
+	border: 3px solid #003366;
 }
 
 .label-container:hover input ~ .checkmark {
@@ -906,7 +911,7 @@ input:focus {
 		font-size: 24px;
 	}
 
-	..form-header p {
+	.form-header p {
 		font-size: 18px;
 	}
 
@@ -974,7 +979,7 @@ input:focus {
 	height: 1000px;
 }
 
-.member-header { 
+.member-header {
 	background: url(image/member.png) center top;
 	background-repeat: no-repeat;
 	-webkit-background-size: cover;
@@ -1232,7 +1237,7 @@ input:focus {
 /* ------------------------------- Volunteer -------------------------------*/
 
 .volunteer {
-	background: url(image/volunteer-bg.png) center top; 
+	background: url(image/volunteer-bg.png) center top;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
