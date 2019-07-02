@@ -60,7 +60,7 @@ class Provinces_model extends MY_Model
         $result = array();
         if($query->num_rows() > 0){
             foreach ($query->result_array() as $row){
-                $result = $row;
+                $result[] = $row;
             }
         }
         return $result;
