@@ -134,6 +134,7 @@ $route['api-v01/payment-confirm'] = "frontend/thankyou/apiConfirmPayment";
 #voluntee
 $route['api/v1/orz/volunteer'] = "";
 $route['api/v1/orz/backend/orz-information'] = "backend/dashboard/orzInformationByUser";
+$route['api/v1/orz/backend/orz-all'] = "api/admin_orz_all";
 
 
 $route['uploadfile'] = "backend/dashboard/upload_file";

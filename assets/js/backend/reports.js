@@ -16,6 +16,14 @@ Vue.filter('formatBaht', (value) => {
         return string
     }
 });
+Vue.filter('ThaiDate', (value) => {
+    if (value) {
+
+        let string = moment(value).format('DD-MM-YYYY H:mm:ss')
+
+        return string
+    }
+});
 
 var appreport = new Vue({
     el: "#appreport",

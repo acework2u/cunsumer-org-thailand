@@ -8,7 +8,43 @@ Vue.filter('formatBaht', (value) => {
         return string
     }
 });
+Vue.filter('ThaiDate', (value) => {
+    if (value) {
 
+        let string = moment(value).format('DD/MM/YYYY H:mm:ss')
+
+        return string
+    }
+});
+Vue.filter('orzStatus', (value) => {
+    if (value) {
+            let string = ""
+        switch (value) {
+            case "1":
+                string = "รอตรวจสอบ"
+                break;
+            case "2":
+                string = "ดำเนินการตรวจสอบ"
+                break;
+            case "3":
+                string = "ไม่อนุมัตื"
+                break;
+            case "4":
+                string = "อนุมัติ"
+                break;
+            case "5":
+                string = "ยกเลิกหรือเลิกดำเนินงาน"
+                break;
+            default:
+                string: "รอตรวจสอบ"
+                break;
+        }
+
+        return string
+
+
+    }
+});
 var lastdonate = new Vue({
     el: "#lastdonate",
 
@@ -29,7 +65,9 @@ var lastdonate = new Vue({
             uploadPercentage: 0,
             showPreview: false,
             imagePreview: '',
-            orz_logo: false
+            orz_logo: false,
+            orz_all: [],
+            orz_total:0
 
         }
     },
@@ -37,7 +75,8 @@ var lastdonate = new Vue({
         this.getDonationlist()
         this.getTopDonate()
         this.getOrzInfo()
-        this.getOrzgroup();
+        this.getOrzgroup()
+        this.getOrganizationList()
     },
     mounted() {
         this.$nextTick(() => {
@@ -45,9 +84,28 @@ var lastdonate = new Vue({
             this.getTopDonate()
             this.getOrzInfo()
             this.getOrzgroup();
+            this.getOrganizationList()
         })
     },
     computed: {
+        filterOrzTotal(){
+            return this.orz_total = this.orz_all.length
+        },
+        filterOrzVerified(){
+            let orz_v = this.orz_all.filter((orz)=>{
+                    return orz.status ==="4"
+            })
+            return orz_v.length
+        },
+        filerOrzWaite(){
+            let orz_w = this.orz_all.filter((orz)=>{
+                return orz.status ==="1"
+            })
+            return orz_w.length
+        },
+        filterOrganizationList() {
+            return this.orz_all
+        },
         filterDonationList() {
             return this.donationInfo
         },
@@ -113,6 +171,13 @@ var lastdonate = new Vue({
 
     },
     methods: {
+        getOrganizationList() {
+            let orzApi = baseUrl + ("/api/v1/orz/backend/orz-all");
+            axios.get(orzApi).then((res) => {
+                this.orz_all = res.data
+            }).catch((err) => {
+            })
+        },
         getDonationlist() {
             let baseApi = baseUrl + "/api-01/report/donation-list";
 
@@ -284,8 +349,3 @@ var lastdonate = new Vue({
 
 });
 
-// window.$ = require('jquery');
-// $('#demo1 [name="zipcode"]').change(function(){
-//     console.log('รหัสไปรษณีย์', this.value);
-//     zipCodeval.inputVal = this.value;
-// });

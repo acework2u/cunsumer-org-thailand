@@ -77,4 +77,17 @@ class Api extends MY_Controller
 
     }
 
+    public function admin_orz_all(){
+        $this->load->model($this->organized_model,'orz');
+        $orz_info = array();
+        if($this->is_login() && getUserRoleId()==1){
+            $orz_info = $this->orz->orz_all();
+        }
+
+        echo json_encode($orz_info);
+
+    }
+
+
+
 } // End of Class

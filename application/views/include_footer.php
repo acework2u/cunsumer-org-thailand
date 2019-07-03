@@ -202,7 +202,7 @@
 <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-
+<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js')?>"></script>
 <!-- jQuery UI 1.11.4 -->
@@ -236,6 +236,7 @@
 <script src="<?php echo base_url('assets/bower_components/fastclick/lib/fastclick.js')?>"></script>
 <!-- AdminLTE App -->
 <script src="<?php echo base_url('assets/js/adminlte.min.js')?>"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <!--<script src="--><?php //echo base_url('assets/js/pages/dashboard.js')?><!--"></script>-->
 <!-- AdminLTE for demo purposes -->
@@ -253,7 +254,7 @@
 <script type="text/javascript">
     var base_url = window.location.origin;
     $.Thailand({
-        database: './jquery.Thailand.js/database/db.json',
+        database: '../jquery.Thailand.js/database/db.json',
 
         $district: $('#demo1 [name="district"]'),
         $amphoe: $('#demo1 [name="amphoe"]'),

@@ -31,7 +31,9 @@
 
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">-->
 <!--   <link rel="stylesheet" href="--><?php //echo base_url('assets/css/uikit.css')?><!--">-->
-    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('jquery.Thailand.js/dist/jquery.Thailand.min.css')?>">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.css" />
 
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -45,6 +47,7 @@
 
 
     <script src="<?php echo base_url('assets/js/vue.js');?>"></script>
+    <script src="//unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.min.js"></script>
     <script src="<?php echo base_url('assets/js/vue-select.js');?>"></script>
     <script src="<?php echo base_url('assets/js/axios.js');?>"></script>
 

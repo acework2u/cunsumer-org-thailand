@@ -357,6 +357,19 @@ class Organized_model extends MY_Model
 
     }
 
+    public function orz_all(){
+        $query = $this->db->order_by('aid','desc')->get($this->tbl_organization);
+        $result=array();
+        if($query->num_rows() > 0){
+                foreach ($query->result_array() as $row){
+                    $result[] = $row;
+                }
+
+        }
+        return $result;
+
+    }
+
     public function orz_information()
     {
 
