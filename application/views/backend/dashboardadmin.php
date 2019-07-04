@@ -65,8 +65,8 @@
                 <!-- small box -->
                 <div class="small-box bg-red">
                     <div class="inner">
-                        <h3 v-if="totalCancle !==0">{{totalCancle | formatBaht}}</h3>
-                        <h3 v-else>{{totalCancle}}</h3>
+                        <h3 v-if="filterOrzCancel !==0">{{filterOrzCancel}}</h3>
+                        <h3 v-else>{{filterOrzCancel}}</h3>
 
                         <p>Organization Cancel</p>
                     </div>
@@ -101,14 +101,16 @@
                                 <th>จังหวัด</th>
                                 <th>วันที่ลงทะเบียน</th>
                                 <th>สถานะ</th>
+                                <th>Action</th>
 <!--                                <th>Reason</th>-->
                             </tr>
-                            <tr v-for="item,index in filterOrganizationList">
-                                <td>{{item.aid}}</td>
-                                <td>{{item.title}}</td>
-                                <td>{{item.province}}</td>
-                                <td>{{item.created_date | ThaiDate}}</td>
-                                <td><span>{{item.status | orzStatus}}</span></td>
+                            <tr v-for="item,index in filterOrganizationList" style=" cursor: pointer;">
+                                <td @click="orzUserClick(item)" data-toggle="modal" data-target="#orz-select-modal">{{index+1}}</td>
+                                <td @click="orzUserClick(item)" data-toggle="modal" data-target="#orz-select-modal">{{item.title}}</td>
+                                <td @click="orzUserClick(item)" data-toggle="modal" data-target="#orz-select-modal">{{item.province}}</td>
+                                <td @click="orzUserClick(item)" data-toggle="modal" data-target="#orz-select-modal">{{item.created_date | ThaiDate}}</td>
+                                <td @click="orzUserClick(item)" data-toggle="modal" data-target="#orz-select-modal"><span>{{item.status | orzStatus}}</span></td>
+                                <td><button @click="approvedOrz(item)" class="btn-sm btn-success">อนุมัติ</button> <button @click="cancledOrz(item)" class="btn-sm btn-danger">ไม่อนุมัติ</button></td>
 <!--                                <td>Bacon ipsum dolor sit amet salami venison chicken flank fatback doner.</td>-->
                             </tr>
                         </table>
@@ -118,7 +120,48 @@
             <section class="col-lg-5 connectedSortable"></section>
         </div>
         <!-- End Main row -->
+        <div class="modal" id="orz-select-modal">
+            <div class="modal-dialog register-modal">
+                <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
+                    <div class="d-flex flex-row bd-highlight mb-3">
+                        <div class="p-2 bd-highlight "><img  :src="filOrzLogo" style="max-height: 134px"></div>
+                        <div class="p-2 bd-highlight">{{orz_user_select.title}}</h3><p style="font-size: small">{{orz_user_select.address}} ตำบล/แขวง {{orz_user_select.district}} อำเภอ {{orz_user_select.amphoe}} จังหวัด {{orz_user_select.province}} {{orz_user_select.stage_code}}</p></div>
+                        <!--
+                        <div class="" style="width: 534px;height: 125px; background-color: #0b3e6f">
+                            <div class="left"></div><div class="right text-white"><h3></div>
+                        </div>
+                        -->
+                    </div>
+                    <div class="row m-auto">
+                        <div class="col-sm">
+                            <p class="mb-1">วัตถุประสงค์</p>
+                            <ol class="modal-ol" v-html="orz_user_select.objective">
 
+                            </ol>
+                            <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">{{orz_user_select.contact_name}} {{orz_user_select.contact_lastname}}</span></p>
+                            <p class="mb-1">E-mail : <span class="modal-span">{{orz_user_select.email}}</span></p>
+                            <p class="mb-1">Website : <span class="modal-span">{{orz_user_select.website}}/</span></p>
+                            <p>เบอร์ติดต่อองค์กร : <span class="modal-span">{{orz_user_select.orz_tel}}</span></p>
+                            <p class="mb-1">รายชื่อคณะกรรมการ</p>
+                            <ol class="modal-ol pb-5" v-html="orz_user_select.board_of_directors">
+                            </ol>
+                        </div>
+                        <div class="col-sm">
+                            <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                            <ol class="modal-ol" v-html="orz_user_select.portfolio">
+
+                            </ol>
+
+                        </div>
+                    </div>
+                    <div class="modal-btn-container p-absolute">
+                        <!-- Js line 26 - 34 -->
+
+                        <!-- End -->
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </section>
 

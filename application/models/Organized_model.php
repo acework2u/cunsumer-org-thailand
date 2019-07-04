@@ -30,10 +30,19 @@ class Organized_model extends MY_Model
     private $_orz_amphoe;
     private $_orz_zipcode;
     private $_orz_province_code;
+    private $_created_date;
+    private $_updated_date;
 
     public function __construct()
     {
         parent::__construct();
+    }
+
+    public function setCreatedDate($date){
+        $this->_created_date = $date;
+    }
+    public function setUpdatedDate($date){
+        $this->_updated_date = $date;
     }
 
     public function setTitle($title)
@@ -316,8 +325,15 @@ class Organized_model extends MY_Model
         if (!is_blank($this->_orz_province)) {
             $data['province'] = $this->_orz_province;
         }
+        if(!is_blank($this->_updated_date)){
+            $data['updated_date'] = $this->_updated_date;
+        }
+        if(getUserRoleId()==1){
 
-        $this->db->where('user_id', getUserAid());
+        }else{
+            $this->db->where('user_id', getUserAid());
+        }
+
         $this->db->where('aid', $this->_orz_id);
         $this->db->update($this->tbl_organization, $data);
 
@@ -444,10 +460,12 @@ class Organized_model extends MY_Model
     public function orz_for_search()
     {
         $result = array();
-        if (!is_blank($this->_orz_province_code)) {
+
             $this->db->select('*');
             $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_in_province.orz_aid', 'left');
-            $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
+            if(!is_blank($this->_orz_province_code) && $this->_orz_province_code != 0){
+                $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
+            }
             $this->db->where('organization.status','4');
             $query = $this->db->get($this->tbl_organization);
 
@@ -456,7 +474,7 @@ class Organized_model extends MY_Model
                     $result[] = $row;
                 }
             }
-        }
+
 
         return $result;
     }

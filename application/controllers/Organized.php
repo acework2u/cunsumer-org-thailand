@@ -318,10 +318,10 @@ class Organized extends MY_Controller
         $orz_info = array();
         if(!is_blank($province_code)){
             $this->orz->setProvinceCode($province_code);
-            $orz_info = $this->orz->orz_for_search();
         }
+        $orz_info = $this->orz->orz_for_search();
 
-        $this->load->model($this->province_model, 'province');
+         $this->load->model($this->province_model, 'province');
         $this->province->setProvinceCode($province_code);
         $province_info = $this->province->provinces_by_code();
 
@@ -331,7 +331,7 @@ class Organized extends MY_Controller
         );
 
 
-//        echo $this->db->last_query();
+
         echo json_encode($data);
 //        echo json_encode($orz_info);
 

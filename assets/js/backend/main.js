@@ -18,7 +18,7 @@ Vue.filter('ThaiDate', (value) => {
 });
 Vue.filter('orzStatus', (value) => {
     if (value) {
-            let string = ""
+        let string = ""
         switch (value) {
             case "1":
                 string = "รอตรวจสอบ"
@@ -67,7 +67,8 @@ var lastdonate = new Vue({
             imagePreview: '',
             orz_logo: false,
             orz_all: [],
-            orz_total:0
+            orz_total: 0,
+            orz_user_select:{}
 
         }
     },
@@ -88,20 +89,36 @@ var lastdonate = new Vue({
         })
     },
     computed: {
-        filterOrzTotal(){
+        filOrzLogo(){
+
+            let img_logo = "assets/image/no-logo-2.png"
+            if(!this.orz_user_select.logo){
+                img_logo = "assets/image/no-logo-2.png"
+            }else{
+                img_logo = this.orz_user_select.logo
+            }
+            return baseUrl+"/"+img_logo
+        },
+        filterOrzTotal() {
             return this.orz_total = this.orz_all.length
         },
-        filterOrzVerified(){
-            let orz_v = this.orz_all.filter((orz)=>{
-                    return orz.status ==="4"
+        filterOrzVerified() {
+            let orz_v = this.orz_all.filter((orz) => {
+                return orz.status === "4"
             })
             return orz_v.length
         },
-        filerOrzWaite(){
-            let orz_w = this.orz_all.filter((orz)=>{
-                return orz.status ==="1"
+        filerOrzWaite() {
+            let orz_w = this.orz_all.filter((orz) => {
+                return orz.status === "1"
             })
             return orz_w.length
+        },
+        filterOrzCancel() {
+            let orz_c = this.orz_all.filter((orz) => {
+                return orz.status === "5" || orz.status === "3"
+            })
+            return orz_c.length
         },
         filterOrganizationList() {
             return this.orz_all
@@ -171,6 +188,46 @@ var lastdonate = new Vue({
 
     },
     methods: {
+        orzUserClick(item){
+            this.orz_user_select = item
+        },
+        approvedOrz(item){
+          console.info(item)
+
+          let orz_id = item.aid
+          let orz_status = 4
+          let baseAPi = baseUrl+"/api/v1/orz/backend/orz-update-status?status="+orz_status+"&id="+orz_id
+            console.log(baseAPi)
+          axios.get(baseAPi).then((res)=>{
+              if(res.error){
+
+              }else{
+                  this.getOrganizationList();
+
+                  console.log(res.data)
+              }
+          })
+
+
+
+        },
+        cancledOrz(item){
+            console.info(item)
+
+            let orz_id = item.aid
+            let orz_status = 3
+            let baseAPi = baseUrl+"/api/v1/orz/backend/orz-update-status?status="+orz_status+"&id="+orz_id
+            console.log(baseAPi)
+            axios.get(baseAPi).then((res)=>{
+                if(res.error){
+
+                }else{
+                    this.getOrganizationList();
+
+                    console.log(res.data)
+                }
+            })
+        },
         getOrganizationList() {
             let orzApi = baseUrl + ("/api/v1/orz/backend/orz-all");
             axios.get(orzApi).then((res) => {

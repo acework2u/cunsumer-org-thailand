@@ -291,6 +291,12 @@ window.onload = function () {
                 })
 
             },
+            initSearchOrz(){
+                let orzApi = base_url + "/api/v1/orz-search";
+                axios.get(orzApi).then((res) => {
+                    this.orz_list = res.data.orz_info
+                })
+            },
             searchOrz() {
                 let orzApi = base_url + "/api/v1/orz-search";
                 let province_code = this.province
@@ -323,16 +329,19 @@ window.onload = function () {
                 }
             },
             geolocate(){
-                this.startLocation.lat = 13.598
-                this.startLocation.lng = 100.564
+                this.startLocation.lat = 13.7563
+                this.startLocation.lng = 100.5018
             }
 
         },
         created: function () {
             this.getZone()
+            this.initSearchOrz()
         },
         mounted() {
-            this.geolocate()
+            this.$nextTick(() => { // ES6 arrow function
+                this.geolocate()
+            })
         },
 
         computed: {

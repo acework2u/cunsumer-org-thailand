@@ -430,6 +430,7 @@
                             </div>
                             <div class="step-4-shadow-back p-absolute"></div>
                         </div>
+
                         <div class="modal" id="register-modal">
                             <div class="modal-dialog register-modal">
                                 <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
