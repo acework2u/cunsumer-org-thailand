@@ -111,7 +111,7 @@
                 “องค์การอิสระเพื่อการคุ้มครองผู้บริโภค” ถือกำเนิดและก่อร่างสร้างตัวขึ้นในรัฐธรรมนูญปี 2540 และระบุชัดเจนมากขึ้นในรัฐธรรมนูญปี 2550 และได้มีการจัดทำร่างกฎหมายเหลือเพียงการพิจารณาของสส. หลังจากขั้นตอนผ่านกรรมาธิการร่วม เกิดการยุบสภาและรัฐประหาร ต่อมาเมื่อมีรัฐธรรรมนูญปี 2560 มาตรา 46 ได้บัญญัติรับรองการคุ้มครองสิทธิผู้บริโภคไว้และกำหนดให้องค์กรผู้บริโภครวมตัวกันจัดตั้งองค์กรที่มีความเป็นอิสระเพื่อให้เกิดพลังในการคุ้มครองและพิทักษ์สิทธิของผู้บริโภค หลักเกณฑ์และวิธีการจัดตั้ง อำนาจในการเป็นตัวแทนผู้บริโภคให้มีการออกกฎหมาย โดยได้รับการสนับสนุนด้านการเงินจากรัฐ
                 โดยคณะรัฐมนตรีได้มอบหมายให้สำนักงานคณะกรรมการคุ้มครองผู้บริโภค หรือ สคบ. เป็นเจ้าภาพในการจัดทำร่างกฎหมายตามมาตรา46 ดังกล่าว มีการยกร่างกฎหมายและจัดเวทีรับฟังความคิดเห็นจากองค์กรผู้บริโภคในภูมิภาคต่างๆ และถูกส่งต่อไปพิจารณาในคณะกรรมการกฤษฎีกาคณะพิเศษ ถูกปรับแก้ไขหลักการกฎหมาย เป็นร่างกฎหมายการจัดตั้งสภาองค์กรของผู้บริโภค ส่งกลับให้คณะรัฐมนตรีเห็นชอบ และวันที่ 15 กุมภาพันธ์ 2562 สภานิติบัญญัติได้มีมติเห็นชอบผ่านร่างพระราชบัญญัติการจัดตั้งสภาองค์กรของผู้บริโภค ซึ่งทำให้องค์กรผู้บริโภคสามารถรวมตัวกันเพื่อจัดตั้งเป็นสภาองค์กรของผู้บริโภค เป็นนิติบุคคลที่มีวัตถุประสงค์คุ้มครองผู้บริโภคในทุกด้าน มีอำนาจเป็นตัวแทนของผู้บริโภค มีความเป็นอิสระจากหน่วยงานรัฐ และพรรคการเมือง โดยรัฐสนับสนุนด้านการเงิน
             </p>
-            <h1 class="topic-header pt-5 pt-4-sm pb-4 pb-2-sm text-center">บทบาท หน้าที่</h1>
+            <h1 class="topic-header pt-5 pt-4-sm pb-4 pb-2-sm text-center" id="what-we-do-content">บทบาท หน้าที่</h1>
             <p class="topic-paragraph px-3 px-4-sm pb-5">สภาองค์กรของผู้บริโภค มีอำนาจเป็นตัวแทนของผู้บริโภค และมีบทบาทสำคัญในการส่งเสริมการรวมตัวขององค์กรผู้บริโภคให้มีพลังในการคุ้มครองและพิทักษ์สิทธิของผู้บริโภคมากขึ้น จึงเห็นความสำคัญในการมี “ฐานข้อมูลองค์กรผู้บริโภค นักวิชาการและแกนนำคนทำงานคุ้มครองผู้บริโภคร่วมกัน” เพื่อให้เป็นแหล่งข้อมูลที่ทุกคนสามารถใช้ประโยชน์ในการประสานทำงานกับทั้งภาครัฐและเอกชนในการคุ้มครองผู้บริโภค และสภาองค์กรของผู้บริโภค ยังมีบทบาทสำคัญอีกหลายประการ ได้แก่ <br>
                 1. เป็นตัวแทนของผู้บริโภค ให้ความคุ้มครองและพิทักษ์สิทธิของผู้บริโภค รวมตลอดทั้งเสนอแนะนโยบายเกี่ยวกับการคุ้มครองผู้บริโภคต่อคณะรัฐมนตรีหรือหน่วยงานของรัฐและเอกชนที่เกี่ยวข้อง <br>
                 2. ส่งเสริม สนับสนุนและดำเนินการ ตรวจสอบ ติดตาม เฝ้าระวังสถานการณ์ปัญหาสินค้าและบริการ แจ้งหรือโฆษณาข่าวสารหรือเตือนภัยเกี่ยวกับสินค้าหรือบริการที่อาจกระทบต่อสิทธิของผู้บริโภค <br>
@@ -159,7 +159,7 @@
                 <div class="p-2"><img  :src="orz_last_info.logo" class="pb-4" style="max-height: 120px;"></div>
                 <div class="p-2"><h3 class="corporate-networ-h3">{{orz_last_info.title}}</h3></div>
             </div>
-            <span class="p-absolute corporate-networ-more" data-toggle="modal" data-target="#orz-last-modal" >เพิ่มเติม <i class="fa fa-caret-right"></i></span>
+            <span class="p-absolute corporate-networ-more pointer" data-toggle="modal" data-target="#orz-last-modal" >เพิ่มเติม <i class="fa fa-caret-right"></i></span>
         </div>
 
 
@@ -581,7 +581,7 @@
         <div class="row m-auto">
             <div class="col-xl-8 col-lg-7 p-0">
                 <div id="googleMap-22" class="w-100 h-100">
-                    <gmap-map ref="mymap" :center="startLocation" :zoom="14" style="width: 100%; height: 600px">
+                    <gmap-map ref="mymap" :center="startLocation" :zoom="startLocation.zoom" style="width: 100%; height: 600px">
 
                         <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false">
                             {{infoContent}}
@@ -613,11 +613,11 @@
 
                     <div class="location-container " v-for="item , index in filterOrzList">
                         <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100 bg-white">
+                            <div class="col-4 p-0 h-100 bg-white" @click="userClick(item)">
                                 <img :src="item.logo" class="w-100 h-100" style="max-width: 80%;float: left">
                             </div>
                             <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
-                                <div class="px-2">
+                                <div class="px-2" data-toggle="modal" data-target="#search-modal" @click="userOrzInfoClick(item)">
                                     <p class="mb-2 w-50"><b>{{item.title}}</b></p>
                                     <p class="mb-0 mt-0">{{item.address}} {{item.district}} {{item.amphoe}} {{item.province}} {{item.stage_code}}</p>
                                     <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
@@ -720,63 +720,50 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal" id="search-modal">
-        <div class="modal-dialog register-modal">
-            <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
-                <div class="d-flex">
-                    <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
-                </div>
-                <div class="row m-auto">
-                    <div class="col-sm">
-                        <p class="mb-1">วัตถุประสงค์</p>
-                        <ol class="modal-ol">
-                            <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษา แก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                            <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ์</li>
-                            <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                            <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
-                        </ol>
-                        <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
-                        <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
-                        <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
-                        <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
-                        <p class="mb-1">รายชื่อคณะกรรมการ</p>
-                        <ol class="modal-ol pb-5 pb-0-sm">
-                            <li>คุณหญิงประณีตศิลป์ วัชรพล (ประธานกรรมการ)</li>
-                            <li>นางยิ่งลักษณ์ วัชรพล (รองประธานกรรมการและเหรัญญิก)</li>
-                            <li>นายวิเชน โพชนุกูล (กรรมการและเลขาธิการ)</li>
-                            <li>นายมานิจ สุขสมจิตร (กรรมการ)</li>
-                            <li>นายเลิศ อัศเวศน์ (กรรมการ)</li>
-                            <li>นายสมชาย กรุสวนสมบัติ (กรรมการ)</li>
-                            <li>นายไพโรจน์ โล่ห์สุนทร (กรรมการ)</li>
-                            <li>นายสราวุธ วัชรพล (กรรมการ)</li>
-                            <li>นายสมปอง พรทวีวัฒน์ (กรรมการ)</li>
-                            <li>นายธงชัย ณ นคร (กรรมการ)</li>
-                            <li>นายดำฤทธิ์ วิริยะกุล (กรรมการ)</li>
-                            <li>นายวัชร วัชรพล (กรรมการ)</li>
-                            <li>นางฐิติวรรณ ไสวแสนยากร (กรรมการ)</li>
-                            <li>นางสาวจิตสุภา วัชรพล (กรรมการ)</li>
-                            <li>นางสาวสิริพร โคตระวีระ (กรรมการ)</li>
-                        </ol>
+
+        <div class="modal" id="search-modal">
+            <div class="modal-dialog register-modal">
+                <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
+                    <div class="d-flex">
+                        <img :src="orz_info.logo" class="w-auto py-2" style="max-height: 134px">
                     </div>
-                    <div class="col-sm">
-                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                        <ol class="modal-ol">
-                            <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                            <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
-                            <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                            <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
-                        </ol>
-                        <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                        <ol class="modal-ol">
-                            <li>กำพล วัชรพล</li>
-                        </ol>
+                    <div class="row m-auto text-left">
+                        <div class="col-sm">
+                            <p class="mb-1">วัตถุประสงค์</p>
+                            <ol class="modal-ol text-left" v-html="orz_info.objective">
+
+                            </ol>
+                            <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">{{orz_info.contact_name}} {{orz_info.lastname}}</span></p>
+                            <p class="mb-1">E-mail : <span class="modal-span">{{orz_info.email}}</span></p>
+                            <p class="mb-1">Website : <span class="modal-span">{{orz_info.website}}</span></p>
+                            <p>เบอร์ติดต่อองค์กร : <span class="modal-span">{{orz_info.orz_tel}}</span></p>
+                            <p class="mb-1">รายชื่อคณะกรรมการ</p>
+                            <ol class="modal-ol pb-5 pb-0-sm" v-html="orz_info.board_of_directors">
+
+                            </ol>
+                            <p class="mb-1">อาสาสมัคร</p>
+                            <ol class="modal-ol">
+                                <li></li>
+                            </ol>
+                        </div>
+                        <div class="col-sm">
+                            <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
+                            <ol class="modal-ol" v-html="orz_info.portfolio">
+
+                            </ol>
+
+                        </div>
                     </div>
+                    <span class="close modal-close p-absolute pointer" data-dismiss="modal">&times;</span>
                 </div>
-                <span class="close modal-close p-absolute pointer" data-dismiss="modal">&times;</span>
             </div>
         </div>
+
+
     </div>
+
+
+
     <div id="volunteer" class="volunteer p-relative">
         <div class="row m-0">
             <div class="col-xl-7 col-lg-6 d-none d-lg-block">
@@ -808,17 +795,19 @@
                     <label>เลือกหน่วยงาน/องค์กร ที่ต้องการสมัคร</label>
                     <div class="row m-auto">
                         <div class="col pl-0 pr-1">
-                            <select class="form-input w-100" name="valunteer_province" v-model="province" @change="getOrganizations()">
+                            <select class="form-control w-100 text-black-50" name="valunteer_province" v-model="province" @change="getOrganizations()">
                                 <option value="0">จังหวัด*</option>
                                 <option v-for="data in provinces" :value="data.code">{{data.name_in_thai}}</option>
 
                             </select>
                         </div>
                         <div class="col pr-0 pl-1">
-                            <select class="form-input w-100" name="foundation-list" v-model="organization" >
+                            <select class="form-control w-100 text-black-50" name="foundation-list" v-model="organization" @change="changeOrz()">
                                 <option value="0" ref="no_orz">รายการมูลนิธิฯ*</option>
-                                <option v-for="data in organizations" :value="data.aid">{{data.title}}</option>
+                                <option v-for="data,index in organizations" :value="data.aid">{{data.title}}</option>
                             </select>
+
+<!--                            <p>{{organizations}}</p>-->
                         </div>
                         <div class="col-12 p-0">
                             <hr class="join-hr">
@@ -827,71 +816,79 @@
                             <div class="row m-auto">
                                 <div class="col p-0">
                                     <label class="label-container">นาย
-                                        <input type="radio" name="prefix" value="1" checked="checked">
+                                        <input type="radio" name="prefix" value="1" checked="checked" v-model="volunteer_info.gender">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                                 <div class="col p-0">
                                     <label class="label-container">นาง
-                                        <input type="radio" name="prefix" value="2">
+                                        <input v-validate="'required'" type="radio" name="prefix" value="2" v-model="volunteer_info.gender">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                                 <div class="col p-0">
                                     <label class="label-container">นางสาว
-                                        <input type="radio" name="prefix" value="3">
+                                        <input v-validate="'required'" type="radio" name="prefix" value="3" v-model="volunteer_info.gender">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                                 <div class="col-auto p-0">
                                     <label class="label-container">ไม่ประสงค์ระบุเพศ
-                                        <input type="radio" name="prefix" value="4">
+                                        <input v-validate="'required'" type="radio" name="prefix" value="4" v-model="volunteer_info.gender">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
                             </div>
                         </div>
                         <div class="col-5 pl-0 pr-1">
-                            <input type="text" name="valunteer_name" id="valunteer_name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="valunteer_info.name">
+                            <input v-validate="'required'" type="text" name="valunteer_name" id="valunteer_name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="volunteer_info.name">
                         </div>
                         <div class="col-7 pl-1 pr-0">
-                            <input type="text" name="valunteer_lastname" id="valunteer_lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="valunteer_info.lastname">
+                            <input v-validate="'required'" type="text" name="valunteer_lastname" id="valunteer_lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="volunteer_info.lastname">
                         </div>
                         <div class="col-10 pl-0 pr-1">
-                            <input type="text" name="tel" placeholder="เบอร์ติดต่อ*" id="valunteer_tel" class="w-100 mb-2 form-input">
+                            <input v-validate="'required|max:10'" type="text" name="tel" placeholder="เบอร์ติดต่อ*" id="valunteer_tel" class="w-100 mb-2 form-input" v-model="volunteer_info.tel">
                         </div>
                         <div class="col-10 pl-0 pr-1">
-                            <input type="text" name="email" placeholder="Email*" id="valunteer_email" class="w-100 mb-2 form-input">
+                            <input v-validate="'required|email'" type="text" name="email" placeholder="Email*" id="valunteer_email" class="w-100 mb-2 form-input" v-model="volunteer_info.email">
+
                         </div>
 
                         <div class="col-12 p-0">
-                            <input type="text" name="valunteer_address" placeholder="ที่อยู่*" id="valunteer_address" class="w-100 mb-2 form-input" v-model="valunteer_info.address">
+                            <input type="text" name="valunteer_address" placeholder="ที่อยู่*" id="valunteer_address" class="w-100 mb-2 form-input" v-model="volunteer_info.address">
                         </div>
                         <div class="col-5 pl-0 pr-1 pb-2">
-                            <input type="text" name="district" id="valunteer_district" v-model="valunteer_info.district" class="w-100 mb-2 form-control form-input" placeholder="ตำบล/แขวง">
-<!--                            <select class="form-input w-100" name="district" v-model="valunteer_info.district">-->
-<!--                                <option value="">อำเภอ*</option>-->
-<!--                            </select>-->
+                            <input v-validate="'required'" type="text" name="district" id="valunteer_district" class="w-100 mb-2 form-control form-input"   placeholder="ตำบล/แขวง">
+
                         </div>
                         <div class="col-5 pl-1 pr-0 pb-2">
-                            <input type="text" name="amphoe" id="valunteer_amphoe" placeholder="อำเภอ" class="w-100 mb-2 form-input" v-model="valunteer_info.amphoe" readonly>
-<!--                            <input type="text" name="amphoe" v-model="valunteer_info.amphoe" class="w-100 mb-2 form-control form-input" placeholder="อำเภอ" readonly>-->
-<!--                            <select class="form-input w-100" name="province" v-model="valunteer_info.amphoe">-->
-<!--                                <option value="">จังหวัด*</option>-->
-<!--                            </select>-->
-                        </div>
-                        <div class="col-5 pl-0 pr-1">
-                            <input type="text" name="province" id="valunteer_province" placeholder="จังหวัด" class="w-100 mb-2 form-input" v-model="valunteer_info.province" readonly>
-                        </div>
-                        <div class="col-5 pl-0 pr-1">
-                            <input type="text" name="zipcode" id="valunteer_zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input" v-model="valunteer_info.zipcode" readonly>
-                        </div>
+                            <input type="text" name="amphoe" ref="valunteer_amphoe" placeholder="อำเภอ" class="w-100 mb-2 form-input" >
 
+                        </div>
+                        <div class="col-5 pl-0 pr-1">
+                            <input type="text" name="province" ref="valunteer_province" placeholder="จังหวัด" class="w-100 mb-2 form-input" >
+                        </div>
+                        <div class="col-5 pl-0 pr-1">
+                            <input type="text" name="zipcode" ref="valunteer_zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input" >
+                        </div>
+                        <input type="hidden" ref="volun_district" name="volun-district">
+                        <input type="hidden" ref="volun_amphoe" name="volun-amphoe" >
+                        <input type="hidden" ref="volun_province" name="volun-province">
+                        <input type="hidden" ref="volun_zipcode" name="volun-zipcode">
                     </div>
+
+                    <div class="col-12 p-0">
+                        <li v-for="error in errors.all()">{{ error }}</li>
+                        <h3 v-if="is_loading">{{res_message}}</h3>
+                    </div>
+
+
+
+
                     <div class="mt-4 row m-auto">
                         <div class="col p-0 mt-2 d-flex">
                             <!-- Js line 42 -->
-                            <button class="my-4 join-btn join-btn-modal text-white px-4 py-2" id="join-register" @click="valunteerRegister">ลงทะเบียน</button>
+                            <button class="my-4 join-btn join-btn-modal text-white px-4 py-2" id="join-register-volunteer" @click="valunteerRegister">ลงทะเบียน</button>
                             <!-- End -->
                         </div>
                         <div class="col p-0 mt-2 d-flex">
@@ -913,14 +910,14 @@
             <div class="row m-auto pt-5 pt-4-sm pb-4">
                 <div class="col p-0">
                     <p class="footer-header mb-4 mb-2-sm">OUR ABOUT</p>
-                    <p class="footer-link mb-2">เราคือใคร</p>
-                    <p class="footer-link mb-2">เราทำอะไร</p>
+                    <p class="footer-link mb-2 pointer" id="about-footer">เราคือใคร</p>
+                    <p class="footer-link mb-2 pointer" id="what-we-do-footer">เราทำอะไร</p>
                 </div>
                 <div class="col p-0">
                     <p class="footer-header mb-4 mb-2-sm">OUR SERVICER</p>
-                    <p class="footer-link mb-2">Register</p>
-                    <p class="footer-link mb-2">Ower Login</p>
-                    <p class="footer-link mb-2">Find Location</p>
+                    <p class="footer-link mb-2 pointer" id="register-footer">Register</p>
+                    <p class="footer-link mb-2 pointer" id="login-footer">Ower Login</p>
+                    <p class="footer-link mb-2 pointer" id="find-location-footer">Find Location</p>
                 </div>
                 <div class="col-auto col-sm p-0">
                     <p class="footer-header mb-4 mb-2-sm">ADDRESS</p>
@@ -1016,8 +1013,11 @@
     </script>
 
 <script src="<?php echo base_url('assets/js/vue.js'); ?>"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>-->
+
 <script src="<?php echo base_url('assets/js/axios.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/vue-google-maps.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/vee-validate.js'); ?>"></script>
 
 <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>

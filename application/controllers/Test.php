@@ -863,5 +863,16 @@ class Test extends MY_Controller
     }
 
 
+    public function volunteer_join_orz(){
+        $this->load->model($this->volunteer_model,'volunteer');
+        $orz_id = 1;
+        $this->volunteer->setOrzId($orz_id);
+        $result = $this->volunteer->volunteer_join_orz();
+
+        print_r($result);
+
+    }
+
+
 
 } //end of Class

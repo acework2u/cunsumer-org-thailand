@@ -244,6 +244,9 @@
                                 </div>
                                 <!-- /.box-body -->
                                 <div class="box-footer">
+                                    <div class=" pull-left col-sm-offset-6">
+                                        <span v-if="savingStatus" style="color: green; font-size: large">{{textSuccess}}</span>
+                                    </div>
                                     <button type="submit" class="btn btn-default hidden">Cancel</button>
                                     <button @click="saveOrzInfo" type="button" class="btn btn-info pull-right">Save</button>
                                 </div>
@@ -282,10 +285,10 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-                            <ul class="products-list product-list-in-box">
-                                <li v-for="items,index in filterDonorTop" class="item">
+                            <ul v-if="volunteers.length >0" class="products-list product-list-in-box">
+                                <li  v-for="items,index in filterVolunteers" class="item">
                                     <div class="">
-                                        <a href="#" @click="donorClicked(items)" data-toggle="modal" data-target="#myDonor" class="product-title">{{items.full_name}}
+                                        <a href="#" @click="volunteerClickInfo(items)" data-toggle="modal" data-target="#myDonor" class="product-title">{{items.name}} {{items.lastname}}
                                             <span class="label label-success pull-right"></span></a>
 
                                     </div>
@@ -371,45 +374,44 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">Donor Information</h4>
-
+                                <h4 class="modal-title">ข้อมูลอาสาสมัคร</h4>
                             </div>
                             <div class="modal-body">
                                 <form class="form-horizontal">
+                                   <div class="box-header">
+                                       <div class="box-tools pull-right"><span>สถานะ : </span><span>{{volunteer.volunteer_jpoin_status}}</span></div>
+                                   </div>
                                     <div class="box-body">
-
                                         <div class="form-group">
-                                            <label for="donorName" class="col-sm-2 control-label">Full Name</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="donorName"
-                                                       :value="donorInfo.first_name">
+                                            <label for="donorName" class="col-sm-3 control-label">ชื่อ - นามสกุล</label>
+                                            <div class="col-sm-9">
+                                                <span class="form-control"> {{volunteer.name}} {{volunteer.lastname}} </span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="donor_tax" class="col-sm-2 control-label">TaxID.</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="donor_tax"
-                                                       :value="donorInfo.tax_code">
+                                            <label for="donor_email" class="col-sm-3 control-label">Email</label>
+                                            <div class="col-sm-9">
+                                                <span class="form-control"> {{volunteer.email}}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="donor_email" class="col-sm-2 control-label">Email</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="donor_email"
-                                                       :value="donorInfo.email">
+                                            <label for="donor_email" class="col-sm-3 control-label">เบอร์โทร</label>
+                                            <div class="col-sm-9">
+                                                <span class="form-control"> {{volunteer.tel}}</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="donor_tel" class="col-sm-2 control-label">Tel.</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" readonly class="form-control" id="donor_tel"
-                                                       :value="donorInfo.tel">
+                                            <label for="donor_email" class="col-sm-3 control-label">ที่อยู่</label>
+                                            <div class="col-sm-9">
+                                                <span class="form-control"> {{volunteer.address}},{{volunteer.district}} {{volunteer.amphoe}} {{volunteer.province}} {{volunteer.zipcode}}.</span>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label for="donor_tel" class="col-sm-2 control-label">Address.</label>
-                                            <div class="col-sm-10">
-                                                <textarea v-text="donorInfo.address" class="form-control" style="width: 452px;height: 77px" readonly></textarea>
+                                            <label for="donor_email" class="col-sm-3 control-label">สถานะ</label>
+                                            <div class="col-sm-9">
+                                                <select class="form-control">
+                                                    <option></option>
+                                                </select>
                                             </div>
                                         </div>
 

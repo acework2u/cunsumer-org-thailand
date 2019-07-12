@@ -8,8 +8,6 @@ class Dashboard extends MY_Controller{
     {
         parent::__construct();
     }
-
-
     public function index(){
 
         if ($this->is_login()) {
@@ -19,21 +17,15 @@ class Dashboard extends MY_Controller{
         }
 
     }
-
     public function dashboard(){
-
-
         $this->data['title'] = "donate Consumerthai.org Management";
-
         $this->load->view('tpl_dashboard',$this->data);
     }
-
     public function topdaonate(){
         if($this->is_login()){
             $this->load->model($this->donation_model,'donation');
             $result = array();
             $result = $this->donation->topDonor();
-
             $rows = array();
             if(is_array($result) && !is_blank($result)){
                 foreach ($result as $row){
@@ -51,14 +43,11 @@ class Dashboard extends MY_Controller{
 
         }
     }
-
-
     public function orzInformationByUser(){
         if($this->is_login()){
             $this->load->model($this->organized_model,'orz');
             $result = array();
             $orz_info = $this->orz->orz_information();
-
             if(is_array($orz_info)){
                 foreach ($orz_info as $row){
 
@@ -66,13 +55,23 @@ class Dashboard extends MY_Controller{
 
                 }
             }
-
-
             echo json_encode($result);
-
         }
     }
+    public function volunteer_in_join_list(){
+        $volunteer_list = array();
 
+        if($this->is_login()){
+
+            $this->load->model($this->volunteer_model,'volunteer');
+            $orz_id = 1;
+            $this->volunteer->setOrzId($orz_id);
+            $volunteer_list = $this->volunteer->volunteer_join_orz();
+
+        }
+
+        echo json_encode($volunteer_list);
+    }
     public function upload_file()
     {
 

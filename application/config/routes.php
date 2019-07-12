@@ -102,9 +102,11 @@ $route['api/v1/orz-update'] = "organized/organization_update";
 $route['api/v1/orz-search'] = "organized/searchOrganization";
 $route['api/v1/orz-reg-last'] = "organized/getOrganizationLast";
 $route['api/v1/province-list'] = "api/provinceList";
+$route['api/v1/get-geo-location'] = "api/getGeoloaction";
 $route['api/v1/zone-list'] = "api/zone_list";
 $route['api/v1/province-in-zone'] = "api/province_in_zone";
 $route['api/v1/provinces'] = "api/provinces";
+$route['api/v1/volunteer-register'] = "api/volunteer_register";
 
 
 
@@ -132,7 +134,7 @@ $route['api-v01/payment-confirm'] = "frontend/thankyou/apiConfirmPayment";
 
 /**** Back End ***/
 #voluntee
-$route['api/v1/orz/volunteer'] = "";
+$route['api/v1/orz/backend/volunteer'] = "backend/dashboard/volunteer_in_join_list";
 $route['api/v1/orz/backend/orz-information'] = "backend/dashboard/orzInformationByUser";
 $route['api/v1/orz/backend/orz-all'] = "api/admin_orz_all";
 $route['api/v1/orz/backend/orz-update-status'] = "api/admin_update_orz";

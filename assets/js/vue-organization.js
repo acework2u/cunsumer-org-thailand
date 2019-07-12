@@ -3,9 +3,11 @@ window.onload = function () {
     Vue.use(VueGoogleMaps, {
         load: {
             key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8',
-            libraries: "places"
+            libraries: "places",
+            region: 'TH',
         },
     });
+    Vue.use(VeeValidate); // good to go.
 
 
     var orz = new Vue({
@@ -241,23 +243,27 @@ window.onload = function () {
                 provinces: "",
                 province: 0,
                 orz_list: [],
+                orz_info:{},
                 ggmap:{},
+                center : {lat: 15.8700, lng: 100.9925},
                 startLocation: {
-                    lat: 13.7563,
-                    lng: 100.5018
+                    lat: '',
+                    lng: '',
+                    zoom:5
                 },
-                coordinates: {
-                    0: {
+                ggOptions:{
+                    zoom:5
+                },
+                coordinates: [{
                         full_name: 'มูลนิธิเพื่อผู้บริโภค',
-                        lat: '13.76',
-                        lng: '100.53'
-                    },
-                    1: {
+                        lat: '13.7636865',
+                        lng: '100.5374741'
+                    },{
                         full_name: 'Demo',
-                        lat: '10.32',
-                        lng: '123.89'
+                        lat: '13.7436865',
+                        lng: '100.4374741'
                     }
-                },
+                ],
                 infoPosition: null,
                 infoContent: null,
                 infoOpened: false,
@@ -303,11 +309,17 @@ window.onload = function () {
                 let zone_code = this.zone
 
                 console.log("zone code:" + this.zone + "province_code =" + this.province);
+
+                if(this.zone===0 || this.province===0){
+                    this.thailandLocation()
+                }else{
+                    this.curentPostion()
+                }
+
                 axios.get(orzApi + "?province_code=" + province_code).then((res) => {
                     this.orz_list = res.data.orz_info
                     // console.log(this.orz_list)
                 })
-
                 // console.log(orzApi)
 
 
@@ -321,6 +333,9 @@ window.onload = function () {
             toggleInfo: function(marker, key) {
                 this.infoPosition = this.getPosition(marker);
                 this.infoContent = marker.full_name;
+
+
+
                 if (this.infoCurrentKey == key) {
                     this.infoOpened = !this.infoOpened;
                 } else {
@@ -329,9 +344,78 @@ window.onload = function () {
                 }
             },
             geolocate(){
-                this.startLocation.lat = 13.7563
-                this.startLocation.lng = 100.5018
+
+                if(this.zone===0 || this.province===0){
+                    this.thailandLocation()
+                }
+
+
+
+
+                // console.log("zone code:" + this.zone + "province_code =" + this.province);
+                // this.startLocation.lat = 13.5980152 //13.7248936
+                // this.startLocation.lng = 100.5641048 //100.4930264
+                // this.ggOptions.zoom =11
+            },
+            async curentPostion(){
+
+                let api = base_url+"/api/v1/get-geo-location"
+                let provin_code = this.province
+
+                let promiseA = this.province
+                let promiseB = axios.get(api+"?province_code="+promiseA)
+
+                let resultA = await promiseA
+                let resultB = await promiseB
+                // console.log(resultA)
+                console.log(resultB.data.message)
+
+                if(resultB.data.error){
+
+                }else{
+                    this.updateCenter(resultB.data.message)
+                }
+
+
+
+
+
+            },
+            thailandLocation(){
+                this.startLocation.lat = Number(13.0110712) //13.7248936
+                this.startLocation.lng = Number(96.9949203) //100.4930264
+                this.startLocation.zoom =Number(6)
+            },
+            updateCenter(center) {
+                this.startLocation = {
+                    lat: Number(center.lat),
+                    lng: Number(center.lng),
+                    zoom:Number(center.zoom)
+                }
+            },
+            to(promise){
+                return promise.then((data)=>{
+                    return {
+                        error:null,
+                        result:data
+                    }
+                }).catch((err)=>{
+                    return {
+                        error:err
+                    }
+                })
+            },
+            userClick(item){
+                // console.info(item)
+                this.startLocation.lat = Number(item.latitude)
+                this.startLocation.lng = Number(item.longitude)
+                this.startLocation.zoom =14
+            },
+            userOrzInfoClick(item){
+                this.orz_info = item
+                console.log(this.orz_info)
             }
+
 
         },
         created: function () {
@@ -354,11 +438,13 @@ window.onload = function () {
         el: "#join-modal",
         data() {
             return {
-                valunteer_info: {organization:0,province:0},
+                volunteer_info: {organization:0,province:0},
                 provinces: "",
                 province: 0,
                 organizations: "",
-                organization: 0
+                organization: 0,
+                is_loading:false,
+                res_message:"Sending..."
             }
         },
         methods: {
@@ -381,9 +467,9 @@ window.onload = function () {
 
                 this.$nextTick(() => { // ES6 arrow function
                     axios.get(orzApi + "?province_code=" + province_code).then((res) => {
-                        this.organizations = res.data
+                        this.organizations = res.data.orz_info
                         this.organization = 0
-                        if(res.data.length <= 0 ){
+                        if(res.data.orz_info <= 0 ){
                             console.log(this.$refs)
                             this.$refs.no_orz.innerText = "**ไม่มีรายการมูลนิธิฯ**"
                         }else{
@@ -394,13 +480,68 @@ window.onload = function () {
                     })
                 })
             },
+            changeOrz(){
+                console.info(this.organization)
+            },
             valunteerRegister(){
-
-                this.valunteer_info.province = this.province
-                this.valunteer_info.organization = this.organization
+                let volunApi = base_url+"/api/v1/volunteer-register"
 
 
-                console.log(this.valunteer_info)
+                this.$nextTick(() => {
+                    this.volunteer_info.province = this.province
+                    this.volunteer_info.organization = this.organization
+                    this.volunteer_info.district2 = this.$refs.volun_district.value
+                    this.volunteer_info.amphoe2 = this.$refs.volun_amphoe.value
+                    this.volunteer_info.province2 = this.$refs.volun_province.value
+                    this.volunteer_info.zipcode2 = this.$refs.volun_zipcode.value
+                    let dataInfo = this.volunteer_info
+                    let fromData = this.toFormData(dataInfo)
+
+                    const dict = {
+                        custom: {
+                            valunteer_name: {
+                                required: 'Your name is empty'
+                            },
+                            valunteer_lastname: {
+                                required: () => 'Your lastname is empty'
+                            }
+                        }
+                    };
+
+                    this.$validator.localize('en', dict);
+
+
+                    this.$validator.validate().then(valid => {
+                        if (!valid) {
+                            // do stuff if not valid.
+                        }else{
+
+                            this.is_loading = true
+                            axios.post(volunApi,fromData).then((res)=>{
+                                this.res_message = "Thanks for your submission!"
+
+                                console.log(res.data)
+
+                            })
+
+                            setTimeout(()=>{
+                                this.is_loading = false
+                            },3000)
+                        }
+                    });
+
+
+
+
+                })
+
+            },
+            toFormData: function (obj) {
+                var form_data = new FormData();
+                for (var key in obj) {
+                    form_data.append(key, obj[key]);
+                }
+                return form_data;
             }
 
         }, created: function () {
@@ -504,12 +645,50 @@ window.onload = function () {
                 scrollTop: $("#topic").offset().top
             }, 1000)
         });
+        // $('.who-our-about').click(()=>{
+        //     $('html, body').animate({
+        //         scrollTop: $("#topic").offset().top
+        //     }, 1000)
+        // });
 
+        $('#about-footer').click(function () {
+            $('html, body').animate({
+                scrollTop: $("#topic").offset().top
+            }, 1000)
+        });
+
+        $('#register-footer').click(function () {
+            $('html, body').animate({
+                scrollTop: $("#register").offset().top
+            }, 1000)
+        });
         $('#reg').click(function () {
             $('html, body').animate({
                 scrollTop: $("#register").offset().top
             }, 1000)
         });
+        $("#login-footer").click(function () {
+            $('html, body').animate({
+                scrollTop: $("#login-tap").offset().top
+
+            }, 1000)
+            $('.register-tap > span').removeClass('active');
+            $('span', this).addClass('active');
+            $('#login-form').removeClass('d-none');
+            $('#register-form').addClass('d-none');
+        });
+
+        $('#find-location-footer').click(function () {
+            $('html, body').animate({
+                scrollTop: $("#search").offset().top
+            }, 1000)
+        });
+        $('#what-we-do-footer').click(function () {
+            $('html, body').animate({
+                scrollTop: $("#what-we-do-content").offset().top
+            }, 1000)
+        });
+
 
     });
     $.Thailand({
@@ -526,10 +705,10 @@ window.onload = function () {
 
         onDataFill: function (data) {
             console.info('Data Filled', data);
-            // $('#demo1 [name="district"]').val(data.district);
-            // $('#demo1 [name="amphoe"]').val(data.amphoe);
-            // $('#demo1 [name="province"]').val(data.province);
-            // $('#demo1 [name="zipcode"]').val(data.zipcode);
+            $('#join-modal [name="volun-district"]').val(data.district);
+            $('#join-modal [name="volun-amphoe"]').val(data.amphoe);
+            $('#join-modal [name="volun-province"]').val(data.province);
+            $('#join-modal [name="volun-zipcode"]').val(data.zipcode);
         },
 
         onLoad: function () {

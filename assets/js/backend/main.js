@@ -68,7 +68,11 @@ var lastdonate = new Vue({
             orz_logo: false,
             orz_all: [],
             orz_total: 0,
-            orz_user_select:{}
+            orz_user_select:{},
+            volunteers:[],
+            volunteer:{},
+            textSuccess:"Sending...",
+            savingStatus:false
 
         }
     },
@@ -78,6 +82,7 @@ var lastdonate = new Vue({
         this.getOrzInfo()
         this.getOrzgroup()
         this.getOrganizationList()
+        this.getVolunteers()
     },
     mounted() {
         this.$nextTick(() => {
@@ -86,9 +91,13 @@ var lastdonate = new Vue({
             this.getOrzInfo()
             this.getOrzgroup();
             this.getOrganizationList()
+            this.getVolunteers()
         })
     },
     computed: {
+        filterVolunteers(){
+          return this.volunteers
+        },
         filOrzLogo(){
 
             let img_logo = "assets/image/no-logo-2.png"
@@ -184,8 +193,6 @@ var lastdonate = new Vue({
                 return true;
             }
         }
-
-
     },
     methods: {
         orzUserClick(item){
@@ -203,17 +210,12 @@ var lastdonate = new Vue({
 
               }else{
                   this.getOrganizationList();
-
-                  console.log(res.data)
+                  // console.log(res.data)
               }
           })
-
-
-
         },
         cancledOrz(item){
-            console.info(item)
-
+            // console.info(item)
             let orz_id = item.aid
             let orz_status = 3
             let baseAPi = baseUrl+"/api/v1/orz/backend/orz-update-status?status="+orz_status+"&id="+orz_id
@@ -223,8 +225,7 @@ var lastdonate = new Vue({
 
                 }else{
                     this.getOrganizationList();
-
-                    console.log(res.data)
+                    // console.log(res.data)
                 }
             })
         },
@@ -251,6 +252,9 @@ var lastdonate = new Vue({
             })
 
         },
+        volunteerClickInfo(item){
+                this.volunteer = item
+        },
         donorClicked(item) {
             let baseApi = baseUrl + "/admin/reports/donor-info";
             let donor_aid = item.donor_id
@@ -271,6 +275,19 @@ var lastdonate = new Vue({
                 this.orzInformation = res.data
             })
         },
+        getVolunteers(){
+            setTimeout(()=>{
+                // console.log(this.orzInformation);
+                let orz_id = this.orzInformation.aid;
+                if(orz_id){
+                    let API = baseUrl+"/api/v1/orz/backend/volunteer?orz_id="+orz_id;
+                    axios.get(API).then((res)=>{
+                        this.volunteers = res.data
+                        // console.log(res.data)
+                    })
+                }
+            },2000)
+        },
         getOrzgroup() {
             axios.get(baseUrl + '/api/v1/orz-group').then((res) => {
                 console.log(res.data)
@@ -281,14 +298,11 @@ var lastdonate = new Vue({
             /*
               Set the local file variable to what the user has selected.
             */
-
             this.file = this.$refs.file.files[0];
-
             /*
               Initialize a File Reader object
             */
             let reader = new FileReader();
-
             /*
               Add an event listener to the reader that when the file
               has been loaded, we flag the show preview as true and set the
@@ -298,7 +312,6 @@ var lastdonate = new Vue({
                 this.showPreview = true;
                 this.imagePreview = reader.result;
             }.bind(this), false);
-
             /*
               Check to see if the file is not empty.
             */
@@ -323,17 +336,14 @@ var lastdonate = new Vue({
               Initialize the form data
             */
             let formData = new FormData();
-
             /*
               Add the form data we need to submit
             */
             formData.append('file', this.file);
             formData.append('aid', this.orzInformation.aid);
-
             /*
               Make the request to the POST /single-file URL
             */
-
             // // console.log(formData);
             axios.post(baseUrl + '/uploadfile',
                 formData,
@@ -344,13 +354,9 @@ var lastdonate = new Vue({
                     onUploadProgress: function (progressEvent) {
                         this.uploadPercentage = parseInt(Math.round((progressEvent.loaded * 100) / progressEvent.total));
                     }.bind(this)
-
                 }
             ).then(function (response) {
-
                 // console.log(response);
-
-
             })
                 .catch(function () {
                     // // console.log('FAILURE!!');
@@ -372,17 +378,19 @@ var lastdonate = new Vue({
                 let dataInfo = this.orzInformation
                 var fromData = this.toFormData(dataInfo)
 
-
-                console.log(dataInfo);
-
-
+                 this.savingStatus = true;
                 axios.post(ApiUrl, fromData).then((res) => {
-                    console.log(res.data)
-                })
+                        this.textSuccess = res.data.message
+                    setTimeout(()=>{
+                        this.savingStatus = false
+                        this.textSuccess = ""
+                    },3000)
+                    // console.info(res.data)
+                });
+
 
 
             })
-
 
             // console.log(this.orzInformation);
         },

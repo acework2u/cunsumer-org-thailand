@@ -27,6 +27,7 @@ class MY_Model extends CI_Model
     public $tbl_orz_status;
     public $tbl_orz_in_province;
     public $tbl_volunteer;
+    public $tbl_orz_volunteer_mn;
 
 
 
@@ -57,6 +58,7 @@ class MY_Model extends CI_Model
         $this->tbl_zone_province_mn = "zone_province_mn";
         $this->tbl_orz_in_province = "orz_in_province";
         $this->tbl_volunteer = "volunteer";
+        $this->tbl_orz_volunteer_mn = "orz_volunteer_mn";
 
     }
 

@@ -16,6 +16,7 @@ class MY_Controller extends CI_Controller
     public $bank_model;
     public $payment_model;
     public $province_model;
+    public $volunteer_model;
 
 
     /*** 2c2p *****/
@@ -80,6 +81,7 @@ class MY_Controller extends CI_Controller
         $this->organized_model = "organized_model";
         $this->_orz_group_model = "orz_group_model";
         $this->auth_model = "auth_model";
+        $this->volunteer_model = "volunteer_model";
 
 
     }

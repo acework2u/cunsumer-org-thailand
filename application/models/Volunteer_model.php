@@ -15,15 +15,29 @@ class Volunteer_model extends MY_Model
     private $_province;
     private $_zipcode;
     private $_status;
+    private $_create_date;
+    private $_update_date;
+
+    #Orz Volunteer
+    private $_orz_aid;
+    private $_orz_volun_aid;
 
     public function __construct()
     {
         parent::__construct();
     }
 
+
     public function setId($volunteer_id)
     {
         $this->_volunteerId = $volunteer_id;
+    }
+
+    public function setCreateDate($date){
+        $this->_create_date = $date;
+    }
+    public function setUpdateDate($date){
+        $this->_update_date = $date;
     }
 
     public function getId()
@@ -114,6 +128,12 @@ class Volunteer_model extends MY_Model
         if (!is_blank($this->_zipcode)) {
             $data['zipcode'] = $this->_zipcode;
         }
+        if (!is_blank($this->_create_date)) {
+            $data['created_date'] = $this->_create_date;
+        }
+        if (!is_blank($this->_update_date)) {
+            $data['updated_date'] = $this->_update_date;
+        }
 
 
         $this->db->insert($this->tbl_volunteer, $data);
@@ -127,7 +147,6 @@ class Volunteer_model extends MY_Model
 
 
     }
-
     public function update()
     {
 
@@ -177,7 +196,6 @@ class Volunteer_model extends MY_Model
         }
 
     }
-
     public function delete()
     {
         if (!is_blank($this->_volunteerId)) {
@@ -192,6 +210,98 @@ class Volunteer_model extends MY_Model
         return false;
 
     }
+    public function check_volunteer(){
+        $query = $this->db->where('email',$this->_email)->limit(1)->get($this->tbl_volunteer);
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row){
+                $this->setId($row->aid);
+            }
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    #orz Volunteer
+    public function setOrzId($orz_volun_id){
+        $this->_orz_aid = $orz_volun_id;
+    }
+
+    public function setOrzvolunId($orz_volun_id){
+        $this->_orz_volun_aid = $orz_volun_id;
+    }
+    public function getOrzvolunId(){
+        return $this->_orz_volun_aid;
+    }
+    public function check_orz_volunteer_mn(){
+        $this->db->where('orz_aid',$this->_orz_aid);
+        $this->db->where('volunteer_aid',$this->_volunteerId);
+        $this->db->limit(1);
+        $query = $this->db->get($this->tbl_orz_volunteer_mn);
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row){
+                $this->setOrzvolunId($row->aid);
+            }
+
+            return true;
+
+        }else{
+            return false;
+        }
+    }
+    public function orz_volunteer_create(){
+        $data = array();
+        if(!is_blank($this->_orz_aid)){
+            $data['orz_aid'] =$this->_orz_aid;
+        }
+        if(!is_blank($this->_volunteerId)){
+            $data['volunteer_aid'] = $this->_volunteerId;
+        }
+
+        if(!is_blank($data)){
+            $data['status'] = 1;
+            $data['created_date'] = date("Y-m-d H:i:s");
+            $data['updated_date'] = date("Y-m-d H:i:s");
+            $this->db->insert($this->tbl_orz_volunteer_mn,$data);
+            if (!is_blank($this->db->insert_id() && $this->db->insert_id() > 0)) {
+                $this->setOrzvolunId($this->db->insert_id());
+                return true;
+            }else{
+                return false;
+            }
+
+        }else{
+            return false;
+        }
+
+    }
+    public function volunteer_join_orz(){
+        $result =array();
+        if(!is_blank($this->_orz_aid)){
+            $this->db->select('volunteer.*,
+	orz_status.`status` AS volunteer_jpoin_status,
+	orz_volunteer_mn.`status` AS orz_join_status_id');
+            $this->db->join($this->tbl_orz_volunteer_mn,'orz_volunteer_mn.volunteer_aid = volunteer.aid','left');
+            $this->db->join($this->tbl_orz_status,'orz_volunteer_mn.`status` = orz_status.aid','left');
+            $this->db->join($this->tbl_organization,'orz_volunteer_mn.orz_aid = organization.aid','left');
+            if(getUserRoleId()!=1){
+                $this->db->where('organization.user_id',getUserAid());
+            }
+            $this->db->where('orz_volunteer_mn.orz_aid',$this->_orz_aid);
+            $query = $this->db->get($this->tbl_volunteer);
+
+            if($query->num_rows() >0 ){
+                foreach ($query->result_array() as $row){
+                    $result[] = $row;
+                }
+            }
+        }
+        return $result;
+    }
+
+
+
+
 
 
 } // end of class

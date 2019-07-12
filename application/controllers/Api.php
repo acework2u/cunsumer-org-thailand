@@ -136,6 +136,131 @@ class Api extends MY_Controller
 
     }
 
+    public function volunteer_register(){
+//    $data = $this->security->xss_clean($_POST);
+
+//    $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[cus_mstr.email]|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
+
+
+
+    $name = $this->input->post('name');
+    $lastname = $this->input->post('lastname');
+    $email = $this->input->post('email');
+    $address = $this->input->post('address');
+    $district = $this->input->post('district2');
+    $amphoe = $this->input->post('amphoe2');
+    $province = $this->input->post('province2');
+    $province_code = $this->input->post('province');
+    $zipcode = $this->input->post('zipcode2');
+    $tel_number = $this->input->post('tel');
+    $organization_id = $this->input->post('organization');
+
+    $status = 1;
+    $create_date = date("Y-m-d H:i:s");
+
+
+    $message = array();
+//    if ($this->form_validation->run() == TRUE) {
+        $this->load->model($this->volunteer_model,'volun');
+
+        $this->volun->setName($name);
+        $this->volun->setLastName($lastname);
+        $this->volun->setemail($email);
+        $this->volun->setAddress($address);
+        $this->volun->setTel($tel_number);
+        $this->volun->setStatus($status);
+        $this->volun->setDistrict($district);
+        $this->volun->setAmphoe($amphoe);
+        $this->volun->setProvince($province);
+        $this->volun->setZipcode($zipcode);
+        $this->volun->setCreateDate($create_date);
+        $this->volun->setUpdateDate($create_date);
+
+        if($this->volun->check_volunteer()){
+            $this->volun->update();
+
+        }else{
+            if($this->volun->create()){
+                $this->volun->setOrzId($organization_id);
+                $this->volun->orz_volunteer_create($organization_id);
+
+                $message = array(
+                    'stats' => true,
+                    'error' => false,
+                    'message' => "You are Register Success"
+                );
+            }
+        }
+
+
+
+
+
+
+
+//    }else{
+//        $message = array(
+//            'stats' => false,
+//            'error' => $this->form_validation->error_array(),
+//            'message' => validation_errors()
+//        );
+//    }
+
+    echo json_encode($message);
+
+
+}
+
+    public function getGeoloaction(){
+
+        $this->load->model($this->province_model,'province');
+        $province_code = "";
+        $message = array();
+        $geo_info = array();
+        if(!is_blank($this->input->get_post('province_code'))){
+            $province_code = $this->input->get_post('province_code');
+
+            $this->province->setProvinceCode($province_code);
+            $rs = $this->province->provinces_by_code();
+
+
+
+            if(is_array($rs)){
+                foreach ($rs as $row){
+                    $geo_info = array(
+                        'lat'=>$row['lat'],
+                        'lng'=>$row['lng'],
+                         'zoom'=>11
+                    );
+                }
+            }
+
+
+
+            $message = array(
+                'error'=>false,
+                'message'=>$geo_info,
+
+            );
+
+
+
+
+
+        }else{
+            $message = array(
+                'error'=>true,
+                'message'=>"no data"
+            );
+        }
+
+
+        echo json_encode($message);
+
+
+
+    }
+
 
 
 } // End of Class

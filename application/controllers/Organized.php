@@ -278,7 +278,7 @@ class Organized extends MY_Controller
                 $message = array(
                     'stats' => false,
                     'error' => true,
-                    'message' => "could not Update"
+                    'message' => "Could not update"
                 );
 
             }
