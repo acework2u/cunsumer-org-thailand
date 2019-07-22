@@ -873,6 +873,18 @@ class Test extends MY_Controller
 
     }
 
+    public function total_volunteer(){
+        $this->load->model($this->reports_model,'report');
+
+        $report = array();
+        $orz_info = $this->report->report_orz_list();
+
+
+        echo "<pre>";
+        print_r($orz_info);
+        echo "<pre>";
+    }
+
 
 
 } //end of Class

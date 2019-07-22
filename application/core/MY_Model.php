@@ -118,6 +118,27 @@ class MY_Model extends CI_Model
 
     }
 
+    /***** Orz ****/
+    public function volunteer_count($orz_id=0){
+
+        $num_all = 0;
+
+        $this->db->select('count( * ) AS volunteer_total,`status`');
+        $this->db->group_by('orz_aid ');
+        $this->db->having('status',1);
+        $this->db->having('orz_aid',$orz_id);
+        $query = $this->db->get($this->tbl_orz_volunteer_mn)->result();
+
+
+        foreach ($query as $row){
+                $num_all = $row->volunteer_total;
+        }
+
+
+        return $num_all;
+
+    }
+
 
 
 

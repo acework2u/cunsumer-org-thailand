@@ -39,7 +39,7 @@
                 </ul>
             </li>
 
-            <li class="treeview hidden">
+            <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
                     <span>Reports</span>
@@ -52,10 +52,10 @@
 
                 </ul>
             </li>
-            <li class="treeview hidden">
+            <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-laptop"></i>
-                    <span>Address & Location</span>
+                    <i class="fa fa-user"></i>
+                    <span>Users</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
@@ -65,9 +65,9 @@
 
                 </ul>
             </li>
-            <li class="hidden treeview">
+            <li class="treeview ">
                 <a href="#">
-                    <i class="fa fa-edit"></i> <span>Forms</span>
+                    <i class="fa fa-comment"></i> <span>Logs</span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>

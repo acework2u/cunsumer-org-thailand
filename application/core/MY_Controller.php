@@ -9,6 +9,7 @@ class MY_Controller extends CI_Controller
     public $language;
 
     public $report_model;
+    public $reports_model;
     public $donation_model;
     public $mail_model;
     public $donor_model;
@@ -56,6 +57,7 @@ class MY_Controller extends CI_Controller
         $this->view_page = "";
 
         $this->report_model = "report_model";
+        $this->reports_model = "reports_model";
         $this->donation_model = "donation_model";
         $this->donor_model = "donor_model";
         $this->invoice_model = "invoice_model";

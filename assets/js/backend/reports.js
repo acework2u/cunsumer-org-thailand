@@ -37,28 +37,28 @@ var appreport = new Vue({
             bankList: [],
             paymentCode: [],
             userClicked: {},
-            title: "Donation Report",
-            columns: ['inv_number', 'campaign_name', 'amount', 'transfer_date', 'status', 'first_name', 'transection_no', 'paymentchanel', 'pan', 'bankName', 'updated_date', 'action', 'action_email'],
+            title: "Organization Report",
+            columns: ['index', 'orz_name', 'orz_contact', 'orz_register_date', 'orz_status', 'approved_by', 'approved_date', 'orz_in_province', 'orz_in_zone', 'orz_volunteer', 'updated_date', 'action'],
             options: {
                 headings: {
-                    inv_number: 'Invoice No.',
-                    campaign_name: 'Campaign',
-                    amount: 'Amount',
-                    transfer_date: 'Transfer Date',
-                    note: 'Status',
-                    first_name: 'Donor',
-                    tranRef: 'Transaction No.',
-                    paymentchanel: 'Channel',
-                    pan: 'Card',
-                    bankName: 'Bank',
-                    updated_date: "Updated",
+                    index: 'Index',
+                    orz_name: 'Organization Name',
+                    orz_contact: 'Contact Name',
+                    orz_register_date: 'Register Date',
+                    orz_status: 'Status',
+                    approved_by: 'Approved',
+                    approved_date: 'Approved Date',
+                    orz_in_province: 'In Province',
+                    orz_in_zone: 'In Zone',
+                    orz_volunteer: 'Volunteer',
+                    updated_date: "Updated date",
                     action: "",
-                    action_email: "",
+
 
                 },
                 pagination: {chunk: 10},
-                sortable: ['inv_number', 'first_name', 'tranRef'],
-                filterable: ['inv_number', 'first_name', 'tranRef'],
+                sortable: ['index', 'orz_name'],
+                filterable: ['index', 'orz_name'],
                 perPage: 10,
                 perPageValues: [10, 25, 50, 100, 500, 1000],
 
@@ -183,7 +183,8 @@ var appreport = new Vue({
             start_date = moment(start_date).format('YYYY-MM-DD H:mm:ss')
             end_date = moment(end_date).format('YYYY-MM-DD H:mm:ss')
 
-            let apiUrls = baseUrl + "/admin/reports/exportxls?startDate=" + start_date + "&endDate=" + end_date
+            // let apiUrls = baseUrl + "/admin/reports/exportxls?startDate=" + start_date + "&endDate=" + end_date
+            let apiUrls = baseUrl + "/admin/reports/orz-exportxls?startDate=" + start_date + "&endDate=" + end_date
 
             return apiUrls
         },
@@ -194,20 +195,21 @@ var appreport = new Vue({
     },
     methods: {
         getDonationlist() {
-            let baseApi = baseUrl + "/api-01/report/donation-list";
+            // let baseApi = baseUrl + "/api-01/report/donation-list";
+            let baseApi = baseUrl + "/api-01/report/organization-list";
             let stDate = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
             let endDate = moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
 
             let baseApi2 = baseApi + "?startDate=" + stDate + "&endDate=" + endDate
 
             axios.get(baseApi + "?startDate=" + stDate + "&endDate=" + endDate).then((res) => {
-                this.donationInfo = res.data.donationlist
+                this.donationInfo = res.data.data
                 // console.log(res.data.last_query)
             }).catch((err) => {
                 // console.log(err)
             })
 
-            // console.log(this.donationInfo)
+            console.log(this.donationInfo)
             // console.log(baseApi2)
 
 

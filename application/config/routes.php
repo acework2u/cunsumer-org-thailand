@@ -66,8 +66,10 @@ $route['admin/reports'] = "backend/Reports/index";
 
 /**** Report **/
 $route['api-01/report/donation-list'] = "backend/Reports/jsonDonationList";
+$route['api-01/report/organization-list'] = "backend/Reports/jsonOrzList";
 $route['admin/reports/get-invoice/(:num)'] = "backend/Reports/genInvoice/$1";
 $route['admin/reports/exportxls'] = "backend/Reports/exportxls";
+$route['admin/reports/orz-exportxls'] = "backend/Reports/orzExportxls";
 $route['admin/reports/update-donation'] = "backend/Reports/updateDonationStatus";
 $route['admin/reports/send-invoice'] = "backend/Reports/sendEmailInvoiceToDonor";
 $route['admin/reports/donor-info'] = "backend/Reports/donorInfo";

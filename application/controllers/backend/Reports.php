@@ -15,7 +15,7 @@ class Reports extends MY_Controller
     public function index()
     {
 
-        $this->data['title'] = "Donation Report";
+        $this->data['title'] = "Organization Report";
 
         $this->load->view('tpl_report', $this->data);
 
@@ -62,41 +62,36 @@ class Reports extends MY_Controller
 
                 foreach ($donationList as $row) {
                     $rows = array(
-                        'aid'=> get_array_value($row,'aid',''),
-                        'transection_no'=> get_array_value($row,'transection_no',''),
-                        'inv_number'=> get_array_value($row,'inv_number',''),
-                        'amount'=> get_array_value($row,'amount',''),
-                        'doner_aid'=> get_array_value($row,'doner_aid',''),
-                        'donation_campaign_aid'=> get_array_value($row,'donation_campaign_aid',''),
-                        'payment_channel'=> get_array_value($row,'payment_channel',''),
-                        'payment_status'=> get_array_value($row,'payment_status',''),
-                        'bankName'=> get_array_value($row,'bankName',''),
-                        'pan'=> get_array_value($row,'pan',''),
-                        'note'=> get_array_value($row,'note',''),
-                        'tranRef'=> get_array_value($row,'tranRef',''),
-                        'processBy'=> get_array_value($row,'processBy',''),
-                        'issuerCountry'=> get_array_value($row,'issuerCountry',''),
-                        'transfer_date'=> datetime2display(get_array_value($row, 'transfer_date')),
-                        'created_date'=> get_array_value($row,'created_date',''),
-                        'updated_date'=> get_array_value($row,'updated_date',''),
-                        'invoice_id'=> get_array_value($row,'invoice_id',''),
-                        'email'=> get_array_value($row,'email',''),
-                        'first_name'=> get_array_value($row,'first_name'),
-                        'last_name'=> get_array_value($row,'last_name',''),
-                        'status'=> get_array_value($row,'status',''),
-                        'paymentchanel'=> get_array_value($row,'paymentchanel',''),
-                        'campaign_name'=> get_array_value($row,'campaign_name','')
+                        'aid' => get_array_value($row, 'aid', ''),
+                        'transection_no' => get_array_value($row, 'transection_no', ''),
+                        'inv_number' => get_array_value($row, 'inv_number', ''),
+                        'amount' => get_array_value($row, 'amount', ''),
+                        'doner_aid' => get_array_value($row, 'doner_aid', ''),
+                        'donation_campaign_aid' => get_array_value($row, 'donation_campaign_aid', ''),
+                        'payment_channel' => get_array_value($row, 'payment_channel', ''),
+                        'payment_status' => get_array_value($row, 'payment_status', ''),
+                        'bankName' => get_array_value($row, 'bankName', ''),
+                        'pan' => get_array_value($row, 'pan', ''),
+                        'note' => get_array_value($row, 'note', ''),
+                        'tranRef' => get_array_value($row, 'tranRef', ''),
+                        'processBy' => get_array_value($row, 'processBy', ''),
+                        'issuerCountry' => get_array_value($row, 'issuerCountry', ''),
+                        'transfer_date' => datetime2display(get_array_value($row, 'transfer_date')),
+                        'created_date' => get_array_value($row, 'created_date', ''),
+                        'updated_date' => get_array_value($row, 'updated_date', ''),
+                        'invoice_id' => get_array_value($row, 'invoice_id', ''),
+                        'email' => get_array_value($row, 'email', ''),
+                        'first_name' => get_array_value($row, 'first_name'),
+                        'last_name' => get_array_value($row, 'last_name', ''),
+                        'status' => get_array_value($row, 'status', ''),
+                        'paymentchanel' => get_array_value($row, 'paymentchanel', ''),
+                        'campaign_name' => get_array_value($row, 'campaign_name', '')
 
                     );
                     $reports_info[] = $rows;
 
                 }
             }
-
-
-
-
-
 
 
             $data = array();
@@ -162,6 +157,61 @@ class Reports extends MY_Controller
 
         }
     }
+    public function organizationList()
+    {
+        if ($this->is_login()) {
+
+            $startDate = date('Y-m-01 00:00:00');
+            $endDate = date('Y-m-t 12:59:59');
+            $limit = "";
+
+            if (!is_blank($this->input->get_post('startDate'))) {
+                $startDate = date('Y-m-d', strtotime($this->input->get_post('startDate')));
+            }
+            if (!is_blank($this->input->get_post('endDate'))) {
+                $endDate = date('Y-m-d', strtotime($this->input->get_post('endDate')));
+            }
+            if (!is_blank($this->input->get_post('limit'))) {
+                $limit = $this->input->get_post('limit');
+            }
+            $this->load->model($this->reports_model,'report');
+
+            $reports_info = array();
+
+            $this->report->setStartDate($startDate);
+            $this->report->setEndDate($endDate);
+            $this->report->setLimit($limit);
+
+            $orz_info = $this->report->report_orz_list();
+
+            $i =1;
+            foreach ($orz_info as $row){
+                $full_name = $row->contact_name."".$row->contact_lastname;
+                $reports_info[] = array(
+                    'index'=>$i,
+                    'orz_name'=>$row->title,
+                    'orz_contact'=>$full_name,
+                    'orz_register_date'=>$row->created_date,
+                    'orz_status'=>$row->orz_status_title,
+                    'approved_by'=>'',
+                    'approved_date'=>$row->updated_date,
+                    'orz_in_province_code'=>$row->province_code,
+                    'orz_in_province'=>$row->province,
+                    'orz_in_zone'=>$row->zone_title,
+                    'orz_in_zone_code'=>$row->zone_code,
+                    'orz_volunteer'=>$this->report->volunteer_count($row->aid),
+                    'updated_date'=>$row->updated_date,
+                    'action'=>''
+                );
+                $i = $i+1;
+            }
+
+
+
+            return $reports_info;
+
+        }
+    }
 
     public function exportxls($data = '')
     {
@@ -196,23 +246,23 @@ class Reports extends MY_Controller
         if (is_array($data)) {
             $sp->getActiveSheet()->fromArray($data, null, 'A5');
             $last_row = count($data) + 1;
-            $last_cal_row = count($data)+4;
+            $last_cal_row = count($data) + 4;
             $last_total = $last_row + 4;
 
             /***** Style ***/
 
             $sp->getActiveSheet()->getStyle('A4:F4')->getFont()->setBold(true);
             $sp->getActiveSheet()->getStyle('C1:C2')->getFont()->setBold(true);
-            $i =1;
+            $i = 1;
             foreach (range('A', 'F') as $columnID) {
                 $sp->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
                 $i++;
             }
-            $row_total = 5+$i;
+            $row_total = 5 + $i;
 
-            $sheet->setCellValue('D'.$last_total, 'รวมทั้งหมด');
-            $sheet->setCellValue('E'.$last_total,'=SUM(E5:E'.$last_cal_row.')');
-            $sp->getActiveSheet()->getStyle('D'.$last_total.':E'.$last_total)->getFont()->setBold(true);
+            $sheet->setCellValue('D' . $last_total, 'รวมทั้งหมด');
+            $sheet->setCellValue('E' . $last_total, '=SUM(E5:E' . $last_cal_row . ')');
+            $sp->getActiveSheet()->getStyle('D' . $last_total . ':E' . $last_total)->getFont()->setBold(true);
             $sp->getActiveSheet()->getStyle('E5:E' . $last_total)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
 
 
@@ -223,13 +273,87 @@ class Reports extends MY_Controller
 //            $sheet->setCellValue('E28','Rows = '.$last_cal_row);
 
 
+        }
+
+
+        $writer = new Xlsx($sp);
+        $filename = 'donation-report_' . date('Y-m-d');
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+
+
+    }
+    public function orzExportxls($data = '')
+    {
+
+
+        $report_date = "วันที่ " . date('Y-m-d');
+
+        $sp = new Spreadsheet();
+        $sheet = $sp->getActiveSheet();
+        /**** Header ***/
+        $sheet->setCellValue('C1', 'สภาองค์กรผู้บริโภค');
+        $sheet->setCellValue('C2', 'รายงาน สมาชิกสภาองค์กรผู้บริโภคแห่งประเทศไทย');
+//        $sheet->setCellValue('A3', $report_date);
+
+        /*** Column ***/
+        $sheet->setCellValue('A4', 'ลำดับที่');
+        $sheet->setCellValue('B4', 'วันที่');
+        $sheet->setCellValue('C4', 'ชือมูลนิธิหรือองค์กร');
+        $sheet->setCellValue('D4', 'วันที่ลงทะเบียน');
+        $sheet->setCellValue('E4', 'ผู้ติดต่อ');
+        $sheet->setCellValue('F4', 'ภายในจังหวัด');
+        $sheet->setCellValue('G4', 'ภายในภาค');
+        $sheet->setCellValue('H4', 'จำนวนอาสาสมัคร');
+        $sheet->setCellValue('I4', 'สถานะการรับรอง');
+        /**Content */
+
+
+        if (is_blank($data)) {
+            $data = $this->organizationList();
+        }
+
+//        $data = $this->getfiles();
+
+
+        if (is_array($data)) {
+            $sp->getActiveSheet()->fromArray($data, null, 'A5');
+            $last_row = count($data) + 1;
+            $last_cal_row = count($data) + 4;
+            $last_total = $last_row + 4;
+
+            /***** Style ***/
+
+            $sp->getActiveSheet()->getStyle('A4:I4')->getFont()->setBold(true);
+            $sp->getActiveSheet()->getStyle('C1:C2')->getFont()->setBold(true);
+            $i = 1;
+            foreach (range('A', 'F') as $columnID) {
+                $sp->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+                $i++;
+            }
+            $row_total = 5 + $i;
+
+//            $sheet->setCellValue('D' . $last_total, 'รวมทั้งหมด');
+//            $sheet->setCellValue('E' . $last_total, '=SUM(E5:E' . $last_cal_row . ')');
+//            $sp->getActiveSheet()->getStyle('D' . $last_total . ':E' . $last_total)->getFont()->setBold(true);
+//            $sp->getActiveSheet()->getStyle('E5:E' . $last_total)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
+
+
+//            $sheet->setCellValue('E23','E'.$last_row);
+//            $sheet->setCellValue('E24','E'.$last_total);
+//            $sheet->setCellValue('E25','E'.$i);
+//            $sheet->setCellValue('E26','E'.$row_total);
+//            $sheet->setCellValue('E28','Rows = '.$last_cal_row);
 
 
         }
 
 
         $writer = new Xlsx($sp);
-        $filename = 'donation-report_' . date('Y-m-d');
+        $filename = 'organization-report_' . date('Y-m-d');
 
         header('Content-Type: application/vnd.ms-excel');
         header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
@@ -572,29 +696,126 @@ class Reports extends MY_Controller
 
     }
 
-    public function donorInfo(){
-        if($this->is_login()){
-            $donor_id ="";
-            if(!is_blank($this->input->get_post('donor_aid'))){
+    public function donorInfo()
+    {
+        if ($this->is_login()) {
+            $donor_id = "";
+            if (!is_blank($this->input->get_post('donor_aid'))) {
                 $donor_id = $this->input->get_post('donor_aid');
             }
 
-            $this->load->model($this->donor_model,'donor');
+            $this->load->model($this->donor_model, 'donor');
 
             $this->donor->setDonorId($donor_id);
             $result = array();
 
-            if($this->donor->donor_info()){
+            if ($this->donor->donor_info()) {
                 $result = $this->donor->donor_info();
             }
 
 
-
-           echo json_encode($result);
-
+            echo json_encode($result);
 
 
         }
+    }
+
+
+    //**** Orz ******/
+    public function jsonOrzList()
+    {
+        $data = array();
+
+        if ($this->is_login()) {
+
+
+            $startDate = date('Y-m-01 00:00:00');
+            $endDate = date('Y-m-t 12:59:59');
+            $limit = "";
+
+            if (!is_blank($this->input->get_post('startDate'))) {
+                $startDate = date('Y-m-d', strtotime($this->input->get_post('startDate')));
+            }
+            if (!is_blank($this->input->get_post('endDate'))) {
+                $endDate = date('Y-m-d', strtotime($this->input->get_post('endDate')));
+            }
+            if (!is_blank($this->input->get_post('limit'))) {
+                $limit = $this->input->get_post('limit');
+            }
+
+
+
+            if (!is_blank(getUserRoleId()) && getUserRoleId() == 1) {
+                // Super Admin
+                $this->load->model($this->reports_model,'report');
+
+                $report = array();
+
+                $this->report->setStartDate($startDate);
+                $this->report->setEndDate($endDate);
+                $this->report->setLimit($limit);
+
+                $orz_info = $this->report->report_orz_list();
+
+                $i =1;
+                foreach ($orz_info as $row){
+                    $full_name = $row->contact_name."".$row->contact_lastname;
+                    $report[] = array(
+                        'index'=>$i,
+                        'orz_name'=>$row->title,
+                        'orz_contact'=>$full_name,
+                        'orz_register_date'=>$row->created_date,
+                        'orz_status'=>$row->orz_status_title,
+                        'approved_by'=>'',
+                        'approved_date'=>$row->updated_date,
+                        'orz_in_province_code'=>$row->province_code,
+                        'orz_in_province'=>$row->province,
+                        'orz_in_zone'=>$row->zone_title,
+                        'orz_in_zone_code'=>$row->zone_code,
+                        'orz_volunteer'=>$this->report->volunteer_count($row->aid),
+                        'updated_date'=>$row->updated_date,
+                        'action'=>''
+                    );
+                    $i = $i+1;
+                }
+
+//                echo "<pre>";
+//                print_r($report);
+//                echo "</pre>";
+//
+//                echo "Super = " . getUserRoleId();
+
+                $data  = array(
+                    'status'=>true,
+                    'data'=>$report
+                );
+
+
+            }
+            if (!is_blank(getUserRoleId()) && getUserRoleId() == 2) {
+                // Admin
+
+                echo "Rule = " . getUserRoleId();
+            }
+            if (!is_blank(getUserRoleId()) && getUserRoleId() == 3) {
+
+                echo "Rule = " . getUserRoleId();
+            }
+            if (!is_blank(getUserRoleId()) && getUserRoleId() == 4) {
+                echo "Rule = " . getUserRoleId();
+            }
+            if (!is_blank(getUserRoleId()) && getUserRoleId() == 5) {
+                echo "Rule = " . getUserRoleId();
+            }
+
+
+
+
+            echo json_encode($data);
+
+        }
+
+
     }
 
 
