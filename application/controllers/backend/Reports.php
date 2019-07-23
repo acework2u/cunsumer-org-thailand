@@ -187,21 +187,21 @@ class Reports extends MY_Controller
             $i =1;
             foreach ($orz_info as $row){
                 $full_name = $row->contact_name."".$row->contact_lastname;
+                $orz_address = $row->address." ".$row->district." ".$row->amphoe." ".$row->province." ".$row->stage_code;
                 $reports_info[] = array(
                     'index'=>$i,
                     'orz_name'=>$row->title,
-                    'orz_contact'=>$full_name,
+                    'orz_address'=>$orz_address,
                     'orz_register_date'=>$row->created_date,
-                    'orz_status'=>$row->orz_status_title,
-                    'approved_by'=>'',
-                    'approved_date'=>$row->updated_date,
-                    'orz_in_province_code'=>$row->province_code,
+                    'orz_contact'=>$full_name,
+                    'orz_contact_email'=>$row->email,
+                    'orz_contact_tel'=>$row->contact_tel,
                     'orz_in_province'=>$row->province,
                     'orz_in_zone'=>$row->zone_title,
-                    'orz_in_zone_code'=>$row->zone_code,
                     'orz_volunteer'=>$this->report->volunteer_count($row->aid),
-                    'updated_date'=>$row->updated_date,
-                    'action'=>''
+                    'orz_status'=>$row->orz_status_title,
+                    'orz_Updated'=>$row->updated_date,
+
                 );
                 $i = $i+1;
             }
@@ -301,14 +301,17 @@ class Reports extends MY_Controller
 
         /*** Column ***/
         $sheet->setCellValue('A4', 'ลำดับที่');
-        $sheet->setCellValue('B4', 'วันที่');
-        $sheet->setCellValue('C4', 'ชือมูลนิธิหรือองค์กร');
+        $sheet->setCellValue('B4', 'ชือมูลนิธิหรือองค์กร');
+        $sheet->setCellValue('C4', 'ที่อยู่');
         $sheet->setCellValue('D4', 'วันที่ลงทะเบียน');
         $sheet->setCellValue('E4', 'ผู้ติดต่อ');
-        $sheet->setCellValue('F4', 'ภายในจังหวัด');
-        $sheet->setCellValue('G4', 'ภายในภาค');
-        $sheet->setCellValue('H4', 'จำนวนอาสาสมัคร');
-        $sheet->setCellValue('I4', 'สถานะการรับรอง');
+        $sheet->setCellValue('F4', 'อีเมล');
+        $sheet->setCellValue('G4', 'เบอร์โทร');
+        $sheet->setCellValue('H4', 'ภายในจังหวัด');
+        $sheet->setCellValue('I4', 'ภายในภาค');
+        $sheet->setCellValue('J4', 'จำนวนอาสาสมัคร');
+        $sheet->setCellValue('K4', 'สถานะการรับรอง');
+        $sheet->setCellValue('L4', 'ข้อมูลอัพเดทล่าสุด');
         /**Content */
 
 
@@ -327,10 +330,10 @@ class Reports extends MY_Controller
 
             /***** Style ***/
 
-            $sp->getActiveSheet()->getStyle('A4:I4')->getFont()->setBold(true);
+            $sp->getActiveSheet()->getStyle('A4:K4')->getFont()->setBold(true);
             $sp->getActiveSheet()->getStyle('C1:C2')->getFont()->setBold(true);
             $i = 1;
-            foreach (range('A', 'F') as $columnID) {
+            foreach (range('A', 'L') as $columnID) {
                 $sp->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
                 $i++;
             }

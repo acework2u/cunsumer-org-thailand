@@ -7,7 +7,6 @@ class MY_Controller extends CI_Controller
 
     public $view_page;
     public $language;
-
     public $report_model;
     public $reports_model;
     public $donation_model;
@@ -18,8 +17,6 @@ class MY_Controller extends CI_Controller
     public $payment_model;
     public $province_model;
     public $volunteer_model;
-
-
     /*** 2c2p *****/
     public $_merchant_id;
     public $_secret_key;
@@ -40,8 +37,11 @@ class MY_Controller extends CI_Controller
     /***  Orz Thailand **/
     public $organized_model;
     public $_orz_group_model;
-
     public $auth_model;
+    public $logs_model;
+
+    /**** Menu **/
+    public $_my_rule;
 
 
     function __construct()
@@ -84,6 +84,10 @@ class MY_Controller extends CI_Controller
         $this->_orz_group_model = "orz_group_model";
         $this->auth_model = "auth_model";
         $this->volunteer_model = "volunteer_model";
+        $this->logs_model = "logs_model";
+
+        /**** My Permission ***/
+        $this->_my_rule = getUserRoleId();
 
 
     }

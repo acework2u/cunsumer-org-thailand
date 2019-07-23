@@ -28,6 +28,7 @@ class MY_Model extends CI_Model
     public $tbl_orz_in_province;
     public $tbl_volunteer;
     public $tbl_orz_volunteer_mn;
+    public $tbl_approved_logs;
 
 
 
@@ -59,6 +60,7 @@ class MY_Model extends CI_Model
         $this->tbl_orz_in_province = "orz_in_province";
         $this->tbl_volunteer = "volunteer";
         $this->tbl_orz_volunteer_mn = "orz_volunteer_mn";
+        $this->tbl_approved_logs = "approved_logs";
 
     }
 

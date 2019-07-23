@@ -316,15 +316,15 @@
                         </div>
                         <!-- /.box-header -->
                         <div class="box-body">
-
-                            <form class="form-horizontal"  autocomplete="off" id="demo1">
+                            <form class="form-horizontal"  autocomplete="off" >
                             <div class="form-group">
                                 <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
                                 <div class="col-sm-10">
                                     <textarea v-model="orzInformation.address" :value.prop="orzInformation.address" class="form-control" rows="3" placeholder="Enter ..."></textarea>
                                 </div>
                             </div>
-                            <div >
+
+                            <div id="demo1" >
                                 <div class="form-group">
                                     <label for="districtLabel" class="col-sm-2 control-label">ตำบล / แขวง</label>
                                     <div class="col-sm-4"><input ref="district" :value="orzInformation.district" name="district" class="uk-input form-control" type="text"> </div>
@@ -344,10 +344,14 @@
                                 </div>
                             </div>
                             </form>
+                            <div class="form-group">
+                                <h4>Google Place location</h4>
+                                <label for="province" class="col-sm-2 control-label">Latitude</label>
+                                <div class="col-sm-4"><input name="latitude" class="form-control" v-model="orzInformation.latitude"></div>
+                                <label for="province" class="col-sm-2 control-label">Longitude</label>
+                                <div class="col-sm-4"><input name="latitude" class="form-control" v-model="orzInformation.longitude"></div>
 
-
-
-
+                            </div>
 
                         </div>
                         <!-- /.box-body -->

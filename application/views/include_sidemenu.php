@@ -23,22 +23,7 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li class="treeview hidden">
-                <a href="#">
-                    <i class="fa fa-files-o"></i>
-                    <span>CMS</span>
-                    <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
-                </a>
-                <ul class="treeview-menu hidden">
-                    <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-                    <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-                    <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-                    <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-                </ul>
-            </li>
-
+            <?php if(getUserRoleId() == 1){ ?>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
@@ -48,10 +33,13 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/reports')?>"><i class="fa fa-circle-o"></i> Donation</a></li>
+                    <li><a href="<?php echo site_url('admin/reports')?>"><i class="fa fa-circle-o"></i> Organization</a></li>
 
                 </ul>
             </li>
+            <?php }?>
+
+            <?php if(getUserRoleId() == 1){ ?>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i>
@@ -61,10 +49,11 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/address-orz')?>"><i class="fa fa-circle-o"></i> set Location</a><i class="fa fa-circle-o"></i> Address</a></li>
-
+                    <li><a href="<?php echo site_url('admin/user-management')?>"><i class="fa fa-circle-o"></i>User Management</a></li>
                 </ul>
             </li>
+            <?php } ?>
+            <?php if(getUserRoleId() == 1){ ?>
             <li class="treeview ">
                 <a href="#">
                     <i class="fa fa-comment"></i> <span>Logs</span>
@@ -73,11 +62,11 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="pages/forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-                    <li><a href="pages/forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-                    <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i>User</a></li>
+
                 </ul>
             </li>
+            <?php } ?>
             <li class="hidden treeview">
                 <a href="#">
                     <i class="fa fa-table"></i> <span>Tables</span>

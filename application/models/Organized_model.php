@@ -76,6 +76,10 @@ class Organized_model extends MY_Model
         $this->_email = $email;
     }
 
+    public function setWebsite($website){
+        $this->_website = $website;
+    }
+
     public function setLatitude($latitude)
     {
         $this->_latitude = $latitude;

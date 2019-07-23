@@ -68,7 +68,8 @@ class Api extends MY_Controller
         echo json_encode($result);
     }
 
-    public function provinces(){
+    public function provinces()
+    {
         $this->load->model($this->province_model, 'province');
         $result = array();
         $result = $this->province->provinces();
@@ -77,19 +78,24 @@ class Api extends MY_Controller
 
     }
 
-    public function admin_orz_all(){
-        $this->load->model($this->organized_model,'orz');
+    public function admin_orz_all()
+    {
+        $this->load->model($this->organized_model, 'orz');
         $orz_info = array();
-        if($this->is_login() && getUserRoleId()==1){
+        if ($this->is_login() && getUserRoleId() == 1) {
             $orz_info = $this->orz->orz_all();
         }
         echo json_encode($orz_info);
 
     }
-    public function admin_update_orz(){
 
-        if($this->is_login() && getUserRoleId()==1){
-            $this->load->model($this->organized_model,'orz');
+    public function admin_update_orz()
+    {
+
+        if ($this->is_login() && getUserRoleId() == 1) {
+            $this->load->model($this->organized_model, 'orz');
+            $this->load->model($this->logs_model, 'logs');
+
 
             $status = "";
             $orz_id = "";
@@ -98,29 +104,42 @@ class Api extends MY_Controller
             $status = $this->input->get_post('status');
             $orz_id = $this->input->get_post('id');
 
-            if(!is_blank($status) && !is_blank($orz_id)){
+            $txt_log_action = "";
+            if ($status == 4) {
+                $txt_log_action = "อนุมัติ";
+            }
+            if ($status == 3) {
+                $txt_log_action = "ไม่อนุมัติ";
+            }
+
+
+            if (!is_blank($status) && !is_blank($orz_id)) {
                 $update_date = date('Y-m-d H:i:s');
                 $this->orz->setUpdatedDate($update_date);
                 $this->orz->setOrzId($orz_id);
                 $this->orz->setStatus($status);
                 $rs = $this->orz->update();
 
-                if($rs){
-                    $data =array(
-                        'error'=>false,
-                        'message'=>"Could no update",
+                if ($rs) {
+                    $data = array(
+                        'error' => false,
+                        'message' => "update Success",
                     );
-                }else{
-                    $data =array(
-                        'error'=>true,
-                        'message'=>"Could no update",
+
+                    $this->logs->approved_logs($orz_id, $txt_log_action);
+
+
+                } else {
+                    $data = array(
+                        'error' => true,
+                        'message' => "Could no update",
                     );
                 }
 
-            }else{
-                $data =array(
-                    'error'=>true,
-                    'message'=>"permission",
+            } else {
+                $data = array(
+                    'error' => true,
+                    'message' => "permission",
                 );
             }
 
@@ -130,38 +149,36 @@ class Api extends MY_Controller
             echo json_encode($data);
 
 
-
-
         }
 
     }
 
-    public function volunteer_register(){
+    public function volunteer_register()
+    {
 //    $data = $this->security->xss_clean($_POST);
 
 //    $this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[cus_mstr.email]|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
 
 
+        $name = $this->input->post('name');
+        $lastname = $this->input->post('lastname');
+        $email = $this->input->post('email');
+        $address = $this->input->post('address');
+        $district = $this->input->post('district2');
+        $amphoe = $this->input->post('amphoe2');
+        $province = $this->input->post('province2');
+        $province_code = $this->input->post('province');
+        $zipcode = $this->input->post('zipcode2');
+        $tel_number = $this->input->post('tel');
+        $organization_id = $this->input->post('organization');
 
-    $name = $this->input->post('name');
-    $lastname = $this->input->post('lastname');
-    $email = $this->input->post('email');
-    $address = $this->input->post('address');
-    $district = $this->input->post('district2');
-    $amphoe = $this->input->post('amphoe2');
-    $province = $this->input->post('province2');
-    $province_code = $this->input->post('province');
-    $zipcode = $this->input->post('zipcode2');
-    $tel_number = $this->input->post('tel');
-    $organization_id = $this->input->post('organization');
-
-    $status = 1;
-    $create_date = date("Y-m-d H:i:s");
+        $status = 1;
+        $create_date = date("Y-m-d H:i:s");
 
 
-    $message = array();
+        $message = array();
 //    if ($this->form_validation->run() == TRUE) {
-        $this->load->model($this->volunteer_model,'volun');
+        $this->load->model($this->volunteer_model, 'volun');
 
         $this->volun->setName($name);
         $this->volun->setLastName($lastname);
@@ -176,11 +193,11 @@ class Api extends MY_Controller
         $this->volun->setCreateDate($create_date);
         $this->volun->setUpdateDate($create_date);
 
-        if($this->volun->check_volunteer()){
+        if ($this->volun->check_volunteer()) {
             $this->volun->update();
 
-        }else{
-            if($this->volun->create()){
+        } else {
+            if ($this->volun->create()) {
                 $this->volun->setOrzId($organization_id);
                 $this->volun->orz_volunteer_create($organization_id);
 
@@ -193,11 +210,6 @@ class Api extends MY_Controller
         }
 
 
-
-
-
-
-
 //    }else{
 //        $message = array(
 //            'stats' => false,
@@ -206,51 +218,47 @@ class Api extends MY_Controller
 //        );
 //    }
 
-    echo json_encode($message);
+        echo json_encode($message);
 
 
-}
+    }
 
-    public function getGeoloaction(){
+    public function getGeoloaction()
+    {
 
-        $this->load->model($this->province_model,'province');
+        $this->load->model($this->province_model, 'province');
         $province_code = "";
         $message = array();
         $geo_info = array();
-        if(!is_blank($this->input->get_post('province_code'))){
+        if (!is_blank($this->input->get_post('province_code'))) {
             $province_code = $this->input->get_post('province_code');
 
             $this->province->setProvinceCode($province_code);
             $rs = $this->province->provinces_by_code();
 
 
-
-            if(is_array($rs)){
-                foreach ($rs as $row){
+            if (is_array($rs)) {
+                foreach ($rs as $row) {
                     $geo_info = array(
-                        'lat'=>$row['lat'],
-                        'lng'=>$row['lng'],
-                         'zoom'=>11
+                        'lat' => $row['lat'],
+                        'lng' => $row['lng'],
+                        'zoom' => 11
                     );
                 }
             }
 
 
-
             $message = array(
-                'error'=>false,
-                'message'=>$geo_info,
+                'error' => false,
+                'message' => $geo_info,
 
             );
 
 
-
-
-
-        }else{
+        } else {
             $message = array(
-                'error'=>true,
-                'message'=>"no data"
+                'error' => true,
+                'message' => "no data"
             );
         }
 
@@ -258,9 +266,36 @@ class Api extends MY_Controller
         echo json_encode($message);
 
 
-
     }
 
+
+    public function approved_logs()
+    {
+        if ($this->is_login() && getUserRoleId() == 1) {
+
+            $this->load->model($this->logs_model, 'logs');
+
+            $logs = $this->logs->get_approved_logs();
+
+            $logs_info = array();
+            if (!is_blank($logs)) {
+                $i = 1;
+                foreach ($logs as $row) {
+                    $logs_info[] = array(
+                        'index' => $i,
+                        'created_date' => $row->created_date,
+                        'orz_title' => $row->title,
+                        'first_name' => $row->first_name,
+                        'last_name' => $row->last_name,
+                        'updated_date' => $row->updated_date
+                    );
+
+                    $i++;
+                }
+            }
+            echo json_encode($logs_info);
+        }
+    }
 
 
 } // End of Class

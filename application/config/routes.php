@@ -109,6 +109,7 @@ $route['api/v1/zone-list'] = "api/zone_list";
 $route['api/v1/province-in-zone'] = "api/province_in_zone";
 $route['api/v1/provinces'] = "api/provinces";
 $route['api/v1/volunteer-register'] = "api/volunteer_register";
+$route['api/v1/approved-logs'] = "api/approved_logs";
 
 
 

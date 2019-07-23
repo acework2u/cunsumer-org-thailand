@@ -240,6 +240,7 @@ class Organized extends MY_Controller
             $this->orz->setOrzType($orz_orz_type_id);
             $this->orz->setAddress($orz_address);
             $this->orz->setBoardOfDirectors($orz_board_of_directore);
+            $this->orz->setWebsite($orz_website);
             $this->orz->setPortfolio($orz_portfolio);
             $this->orz->setObjecttive($orz_objective);
             $this->orz->setContactName($orz_contact_name);
