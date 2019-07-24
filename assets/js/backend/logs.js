@@ -7,26 +7,8 @@ var lastDay = new Date(y, m + 1, 0);
 
 Vue.use(VueTables.ClientTable);
 Vue.component('pagination', Pagination);
-
-Vue.filter('formatBaht', (value) => {
-    if (value) {
-
-        let string = numeral(value).format('0,0.00')
-
-        return string
-    }
-});
-Vue.filter('ThaiDate', (value) => {
-    if (value) {
-
-        let string = moment(value).format('DD-MM-YYYY H:mm:ss')
-
-        return string
-    }
-});
-
-var appreport = new Vue({
-    el: "#appreport",
+var approvedlog = new Vue({
+    el: "#approvedlog",
     data() {
         return {
             donationInfo: [],
@@ -37,22 +19,16 @@ var appreport = new Vue({
             bankList: [],
             paymentCode: [],
             userClicked: {},
-            title: "Organization Report",
-            columns: ['index', 'orz_name', 'orz_contact', 'orz_register_date', 'orz_status', 'approved_by', 'approved_date', 'orz_in_province', 'orz_in_zone', 'orz_volunteer', 'updated_date', 'action'],
+            title: "Approved Logs",
+            columns: ['index', 'orz_title', 'orz_action', 'full_name', 'updated_date'],
             options: {
                 headings: {
                     index: 'Index',
-                    orz_name: 'Organization Name',
-                    orz_contact: 'Contact Name',
-                    orz_register_date: 'Register Date',
-                    orz_status: 'Status',
-                    approved_by: 'Approved',
-                    approved_date: 'Approved Date',
-                    orz_in_province: 'In Province',
-                    orz_in_zone: 'In Zone',
-                    orz_volunteer: 'Volunteer',
-                    updated_date: "Updated date",
-                    action: "",
+                    orz_title: 'Organization Name',
+                    orz_action: 'In Action',
+                    full_name: 'Approved by',
+                    updated_date: 'Updated Date',
+
 
 
                 },
@@ -90,54 +66,18 @@ var appreport = new Vue({
         }
     }, created() {
         this.getDonationlist()
-        this.getBankList()
-        this.getPaymentCode()
+
     },
     mounted() {
         this.$nextTick(() => {
             this.getDonationlist()
-            this.getBankList()
-            this.getPaymentCode()
+
 
         })
     },
     computed: {
         filterDonationList() {
             return this.donationInfo
-        },
-        filDonateTotal() {
-            let total = 0
-            return this.donationInfo.reduce((total, value) => {
-                return total + Number(value.amount)
-            }, 0)
-        },
-        totalSuccess() {
-            let total = 0
-            return this.donationInfo.reduce((total, value) => {
-
-                if (value.payment_status == "00" || value.payment_status == "000") {
-                    total = total + Number(value.amount)
-                }
-                return total
-            }, 0)
-        },
-        totalPending() {
-            let total = 0
-            return this.donationInfo.reduce((total, value) => {
-                if (value.payment_status == "001") {
-                    total = total + Number(value.amount)
-                }
-                return total
-            }, 0)
-        },
-        totalCancle() {
-            let total = 0
-            return this.donationInfo.reduce((total, value) => {
-                if (value.payment_status !== "001" && value.payment_status !== "000" && value.payment_status !== "00") {
-                    total = total + Number(value.amount)
-                }
-                return total
-            }, 0)
         },
         fillterStartDated() {
             this.startDated = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
@@ -150,32 +90,6 @@ var appreport = new Vue({
             return moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
             // this.endTime = this.range[1]
         },
-        filterPyamentStatus() {
-            return this.paymentCode.filter((paycode) => {
-                if (this.userClicked.payment_channel === "01" || this.userClicked.payment_channel === "001") {
-                    if (paycode.use_type === "2") {
-                        return paycode
-                    }
-                } else {
-                    if (paycode.use_type === "1") {
-                        return paycode
-                    }
-
-                }
-
-
-            })
-        },
-        filterPaymentS() {
-            let payStatus = this.userClicked
-
-            if (payStatus.payment_status === "00" || payStatus.payment_status == "000") {
-                return true
-            } else {
-                return false;
-            }
-
-        },
         exportExcel() {
             let start_date = this.range[0]
             let end_date = this.range[1]
@@ -184,26 +98,23 @@ var appreport = new Vue({
             end_date = moment(end_date).format('YYYY-MM-DD H:mm:ss')
 
             // let apiUrls = baseUrl + "/admin/reports/exportxls?startDate=" + start_date + "&endDate=" + end_date
-            let apiUrls = baseUrl + "/admin/reports/orz-exportxls?startDate=" + start_date + "&endDate=" + end_date
+            let apiUrls = baseUrl + "/admin/reports/approved-logs-exportxls?startDate=" + start_date + "&endDate=" + end_date
 
             return apiUrls
-        },
-        fillDonorInfo(){
-            return this.donorInfo
         }
 
     },
     methods: {
         getDonationlist() {
             // let baseApi = baseUrl + "/api-01/report/donation-list";
-            let baseApi = baseUrl + "/api-01/report/organization-list";
+            let baseApi = baseUrl + "/api/v1/approved-logs";
             let stDate = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
             let endDate = moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
 
-            let baseApi2 = baseApi + "?startDate=" + stDate + "&endDate=" + endDate
+            let baseApi2 = baseApi + "?startDate=" + stDate + "&endDate=" + endDate+"&type="+"json"
 
-            axios.get(baseApi + "?startDate=" + stDate + "&endDate=" + endDate).then((res) => {
-                this.donationInfo = res.data.data
+            axios.get(baseApi + "?startDate=" + stDate + "&endDate=" + endDate+"&type=json").then((res) => {
+                this.donationInfo = res.data
                 // console.log(res.data.last_query)
             }).catch((err) => {
                 // console.log(err)
@@ -340,7 +251,7 @@ var appreport = new Vue({
             // console.log(donor_aid)
 
             axios.get(baseApi+"?donor_aid="+donor_aid).then((res)=>{
-                    this.donorInfo = res.data
+                this.donorInfo = res.data
 
                 // console.log(this.donorInfo)
             }).catch()
@@ -351,14 +262,3 @@ var appreport = new Vue({
 
     }
 });
-
-
-
-
-
-
-
-
-
-
-

@@ -73,6 +73,8 @@ $route['admin/reports/orz-exportxls'] = "backend/Reports/orzExportxls";
 $route['admin/reports/update-donation'] = "backend/Reports/updateDonationStatus";
 $route['admin/reports/send-invoice'] = "backend/Reports/sendEmailInvoiceToDonor";
 $route['admin/reports/donor-info'] = "backend/Reports/donorInfo";
+$route['admin/logs/approved-logs'] = "backend/Logs/index";
+$route['admin/reports/approved-logs-exportxls'] = "backend/Reports/approveLogsexportxls";
 
 
 

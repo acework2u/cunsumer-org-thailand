@@ -275,6 +275,26 @@ class Api extends MY_Controller
 
             $this->load->model($this->logs_model, 'logs');
 
+
+            $start_date = "";
+            $end_date = "";
+
+            $res_type = 'arrays';
+
+            if(!is_blank($this->input->get_post('type'))){
+                $res_type = $this->input->get_post('type');
+            }
+
+
+            if (!is_blank($this->input->get_post('startDate'))) {
+                $start_date = $this->input->get_post('startDate');
+            }
+            if (!is_blank($this->input->get_post('endDate'))) {
+                $end_date = $this->input->get_post('endDate');
+            }
+
+            $this->logs->setCreatedDate($start_date);
+            $this->logs->setUpdatedDate($end_date);
             $logs = $this->logs->get_approved_logs();
 
             $logs_info = array();
@@ -285,15 +305,21 @@ class Api extends MY_Controller
                         'index' => $i,
                         'created_date' => $row->created_date,
                         'orz_title' => $row->title,
-                        'first_name' => $row->first_name,
-                        'last_name' => $row->last_name,
+                        'full_name' => $row->first_name . " " . $row->last_name,
+                        'orz_action' => $row->action,
                         'updated_date' => $row->updated_date
                     );
 
                     $i++;
                 }
             }
-            echo json_encode($logs_info);
+
+            if($res_type=="json"){
+                echo json_encode($logs_info);
+            }else{
+               return $logs_info;
+            }
+
         }
     }
 

@@ -365,6 +365,119 @@ class Reports extends MY_Controller
 
 
     }
+    public function approveLogsexportxls($data = '')
+    {
+
+
+        $report_date = "วันที่ " . date('Y-m-d');
+
+        $sp = new Spreadsheet();
+        $sheet = $sp->getActiveSheet();
+        /**** Header ***/
+        $sheet->setCellValue('C1', 'องค์กรผู้บริโภคแห่งประเทศไทย');
+        $sheet->setCellValue('C2', 'รายงานบันทึกการอนุมัติ องค์กรเคลือข่าย');
+//        $sheet->setCellValue('A3', $report_date);
+
+        /*** Column ***/
+        $sheet->setCellValue('A4', 'ลำดับที่');
+        $sheet->setCellValue('B4', 'ชื่อมูลนิธิหรือองค์กร');
+        $sheet->setCellValue('C4', 'การอนุมัติ');
+        $sheet->setCellValue('D4', 'โดย');
+        $sheet->setCellValue('E4', 'วันที่อัพเดทล่าสุด');
+
+        /**Content */
+
+
+        if (is_blank($data)) {
+            $data = $this->approved_logs();
+        }
+
+//        $data = $this->getfiles();
+
+
+        if (is_array($data)) {
+            $sp->getActiveSheet()->fromArray($data, null, 'A5');
+            $last_row = count($data) + 1;
+            $last_cal_row = count($data) + 4;
+            $last_total = $last_row + 4;
+
+            /***** Style ***/
+
+            $sp->getActiveSheet()->getStyle('A4:E4')->getFont()->setBold(true);
+            $sp->getActiveSheet()->getStyle('C1:C2')->getFont()->setBold(true);
+            $i = 1;
+            foreach (range('A', 'E') as $columnID) {
+                $sp->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+                $i++;
+            }
+            $row_total = 5 + $i;
+
+//            $sheet->setCellValue('D' . $last_total, 'รวมทั้งหมด');
+//            $sheet->setCellValue('E' . $last_total, '=SUM(E5:E' . $last_cal_row . ')');
+//            $sp->getActiveSheet()->getStyle('D' . $last_total . ':E' . $last_total)->getFont()->setBold(true);
+//            $sp->getActiveSheet()->getStyle('E5:E' . $last_total)->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_NUMBER_COMMA_SEPARATED1);
+
+        }
+
+
+        $writer = new Xlsx($sp);
+        $filename = 'orz-approved-logs-report_' . date('Y-m-d');
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+
+
+    }
+    public function approved_logs()
+    {
+        if ($this->is_login() && getUserRoleId() == 1) {
+
+            $this->load->model($this->logs_model, 'logs');
+
+
+            $start_date = "";
+            $end_date = "";
+
+            $res_type = 'arrays';
+
+            if(!is_blank($this->input->get_post('type'))){
+                $res_type = $this->input->get_post('type');
+            }
+
+
+            if (!is_blank($this->input->get_post('startDate'))) {
+                $start_date = $this->input->get_post('startDate');
+            }
+            if (!is_blank($this->input->get_post('endDate'))) {
+                $end_date = $this->input->get_post('endDate');
+            }
+
+            $this->logs->setCreatedDate($start_date);
+            $this->logs->setUpdatedDate($end_date);
+            $logs = $this->logs->get_approved_logs();
+
+            $logs_info = array();
+            if (!is_blank($logs)) {
+                $i = 1;
+                foreach ($logs as $row) {
+                    $logs_info[] = array(
+                        'index' => $i,
+                        'orz_title' => $row->title,
+                        'orz_action' => $row->action,
+                        'full_name' => $row->first_name . " " . $row->last_name,
+                        'updated_date' => $row->updated_date
+                    );
+
+                    $i++;
+                }
+            }
+
+            return $logs_info;
+
+        }
+    }
 
     public function genInvoice($donateId = 0, $attFile = false)
     {

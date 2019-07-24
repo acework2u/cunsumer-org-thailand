@@ -5,6 +5,9 @@ if (!defined('BASEPATH'))
 class Logs_model extends MY_Model
 {
 
+    private $_created_date;
+    private $_updated_date;
+
 
     public function __construct()
     {
@@ -12,9 +15,15 @@ class Logs_model extends MY_Model
     }
 
 
+    public function setCreatedDate($create_date){
+        $this->_created_date = $create_date;
+    }
+    public function setUpdatedDate($update_date){
+        $this->_updated_date = $update_date;
+    }
+
     public function approved_logs($orz_id = "", $action = "")
     {
-
         $created_date = date('Y-m-d H:i:s');
         $updated_date = date('Y-m-d H:i:s');
 
@@ -64,7 +73,6 @@ class Logs_model extends MY_Model
 
     }
 
-
     public function get_approved_logs(){
 
         $this->db->select('approved_logs.*,
@@ -73,6 +81,15 @@ class Logs_model extends MY_Model
 	users.last_name');
         $this->db->join($this->tbl_organization,'approved_logs.orz_aid = organization.aid','left');
         $this->db->join($this->tbl_users,'approved_logs.user_aid = users.id','left');
+
+        if(!is_blank($this->_created_date)){
+            $this->db->where('approved_logs.updated_date >=',$this->_created_date);
+        }
+        if(!is_blank($this->_updated_date)){
+            $this->db->where('approved_logs.updated_date <=',$this->_updated_date);
+        }
+
+        $this->db->order_by('approved_logs.updated_date','desc');
         $query = $this->db->get($this->tbl_approved_logs);
 
         $result = array();

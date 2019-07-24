@@ -62,7 +62,7 @@
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="#"><i class="fa fa-circle-o"></i>User</a></li>
+                    <li><a href="<?php echo site_url('admin/logs/approved-logs')?>"><i class="fa fa-circle-o"></i>Approved Orz</a></li>
 
                 </ul>
             </li>

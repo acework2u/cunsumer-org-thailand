@@ -251,46 +251,53 @@
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
 
 <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
-<script type="text/javascript">
-    var base_url = window.location.origin;
-    $.Thailand({
-        database: '../jquery.Thailand.js/database/db.json',
 
-        $district: $('#demo1 [name="district"]'),
-        $amphoe: $('#demo1 [name="amphoe"]'),
-        $province: $('#demo1 [name="province"]'),
-        $zipcode: $('#demo1 [name="zipcode"]'),
+<?php
+if($this->uri->segment(3, 0) !=="approved-logs"){ ?>
+    <script type="text/javascript">
+        var base_url = window.location.origin;
+        $.Thailand({
+            database: '../jquery.Thailand.js/database/db.json',
 
-        onDataFill: function(data){
-            console.info('Data Filled', data);
+            $district: $('#demo1 [name="district"]'),
+            $amphoe: $('#demo1 [name="amphoe"]'),
+            $province: $('#demo1 [name="province"]'),
+            $zipcode: $('#demo1 [name="zipcode"]'),
 
-            // $('#demo1 [name="zipcode"]').val(data.zipcode)
-        },
+            onDataFill: function(data){
+                console.info('Data Filled', data);
 
-        onLoad: function(){
-            console.info('Autocomplete is ready!');
-            $('#loader, .demo').toggle();
-        }
-    });
+                // $('#demo1 [name="zipcode"]').val(data.zipcode)
+            },
 
-    // watch on change
-    //
-    // $('#demo1 [name="district"]').change(function(){
-    //     console.log('ตำบล', this.value);
-    // });
-    // $('#demo1 [name="amphoe"]').change(function(){
-    //     console.log('อำเภอ', this.value);
-    // });
-    // $('#demo1 [name="province"]').change(function(){
-    //     console.log('จังหวัด', this.value);
-    // });
-    // $('#demo1 [name="zipcode"]').change(function(){
-    //     console.log('รหัสไปรษณีย์', this.value);
-    //     $('#orz_zipcode').val(this.value);
-    // });
+            onLoad: function(){
+                console.info('Autocomplete is ready!');
+                $('#loader, .demo').toggle();
+            }
+        });
+
+        // watch on change
+        //
+        // $('#demo1 [name="district"]').change(function(){
+        //     console.log('ตำบล', this.value);
+        // });
+        // $('#demo1 [name="amphoe"]').change(function(){
+        //     console.log('อำเภอ', this.value);
+        // });
+        // $('#demo1 [name="province"]').change(function(){
+        //     console.log('จังหวัด', this.value);
+        // });
+        // $('#demo1 [name="zipcode"]').change(function(){
+        //     console.log('รหัสไปรษณีย์', this.value);
+        //     $('#orz_zipcode').val(this.value);
+        // });
 
 
-</script>
+    </script>
+
+<?php
+}
+?>
 
 <!--Data binding-->
 <script src="<?php echo base_url('assets/js/numeral.min.js');?>"></script>
