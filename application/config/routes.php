@@ -63,6 +63,7 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = "backend/Dashboard/index";
 $route['admin/dashboard'] = "backend/Dashboard/Dashboard";
 $route['admin/reports'] = "backend/Reports/index";
+$route['admin/user-management'] = "backend/Users/index";
 
 /**** Report **/
 $route['api-01/report/donation-list'] = "backend/Reports/jsonDonationList";
@@ -73,7 +74,7 @@ $route['admin/reports/orz-exportxls'] = "backend/Reports/orzExportxls";
 $route['admin/reports/update-donation'] = "backend/Reports/updateDonationStatus";
 $route['admin/reports/send-invoice'] = "backend/Reports/sendEmailInvoiceToDonor";
 $route['admin/reports/donor-info'] = "backend/Reports/donorInfo";
-$route['admin/logs/approved-logs'] = "backend/Logs/index";
+$route['admin/logs/approved-logs'] = "backend/Logs/dashboard";
 $route['admin/reports/approved-logs-exportxls'] = "backend/Reports/approveLogsexportxls";
 
 

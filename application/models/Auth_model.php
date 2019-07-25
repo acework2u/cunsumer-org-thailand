@@ -267,8 +267,8 @@ class Auth_model extends MY_Model
         $result = array();
         $rows = array();
         $this->db->reset_query();
-
-        $this->db->select('cus_mstr.id,cus_mstr.email,cus_mstr.`password`,cus_mstr.`name`,cus_mstr.lastname,cus_mstr.telephone,cus_mstr.user_role_id,user_role.`name` AS role_name,cus_group.`name` AS group_name,cus_mstr.cus_group_id,cus_mstr.`status` AS user_status');
+        /*
+        $this->db->select('*');
         $this->db->join($this->tbl_cus_group, 'cus_mstr.cus_group_id = cus_group.id', 'left');
         $this->db->join($this->tbl_user_role, 'cus_mstr.user_role_id = user_role.id ', 'left');
 
@@ -301,25 +301,44 @@ class Auth_model extends MY_Model
                 $this->db->where($db_where);
                 break;
         }
+        */
 
 
-        $query = $this->db->order_by('id', 'desc')->limit($limit, $start)->get($this->tbl_cus_mstr);
+        $this->db->select('users.*,user_role.`name` AS role_name,users_status.status_title AS status_title');
+        $this->db->join($this->tbl_user_role,'users.user_role_id = user_role.id','left');
+        $this->db->join($this->tbl_users_status,'users.`status` = users_status.aid','left');
+        $query = $this->db->get($this->tbl_users);
+
+//        $query = $this->db->order_by('id', 'desc')->limit($limit, $start)->get($this->tbl_users);
 
 
         if ($query->num_rows() > 0) {
+            $i = 1;
             foreach ($query->result_array() as $row) {
+
+                $c_Date = get_array_value($row, 'created_date', '');
+                $u_Date = get_array_value($row, 'modified_date', '');
+
                 $rows = array(
+                    'index'=>$i,
                     'id' => get_array_value($row, 'id', ''),
                     'email' => get_array_value($row, 'email', ''),
-                    'name' => get_array_value($row, 'name', ''),
-                    'last_name' => get_array_value($row, 'lastname', ''),
+                    'name' => get_array_value($row, 'first_name', ''),
+                    'last_name' => get_array_value($row, 'last_name', ''),
                     'user_role_id' => get_array_value($row, 'user_role_id', ''),
                     'role_name' => get_array_value($row, 'role_name', ''),
                     'customer_group_id' => get_array_value($row, 'cus_group_id'),
                     'group_name' => get_array_value($row, 'group_name', ''),
-                    'status' => get_array_value($row, 'user_status', '')
+                    'status_id' => get_array_value($row, 'status', ''),
+                    'status_title' => get_array_value($row, 'status_title', ''),
+                    'created_date' => date('m/d/Y H:i:s', (int)$c_Date),
+                    'updated_date' => date('m/d/Y H:i:s', (int)$u_Date),
+
                 );
+                $i++;
+
                 $result[] = $rows;
+
             }
         }
 

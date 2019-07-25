@@ -15,11 +15,17 @@ class Logs extends  MY_Controller {
 
     public function index()
     {
+        if ($this->is_login()) {
+            $this->dashboard();
+        } else {
+            redirect('signin');
+        }
 
+    }
+
+    public function dashboard(){
         $this->data['title'] = "Approved Logs";
-
         $this->load->view('tpl_logs', $this->data);
-
     }
 
 

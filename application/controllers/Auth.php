@@ -89,18 +89,21 @@ class Auth extends MY_Controller
 
 
             $userList = $this->user->user_list($limit, $start);
-//            $total = $this->user->user_count();
+
+
+
             $total = count($userList);
 
             $data = array();
             $data['userinfo'] = $userList;
             $data['total_list'] = $total;
 
-            echo json_encode($data);
+            echo json_encode($userList);
 
 
         }
     }
+
 
     function get_group_list()
     {
@@ -318,7 +321,7 @@ class Auth extends MY_Controller
 
         if (!$this->auth->check_user($email)) {
             $chk = $this->auth->create();
-        }else{
+        } else {
             $data['error'] = true;
             $data['message'] = "this email is registered please choose another one";
             echo json_encode($data);
@@ -724,7 +727,8 @@ class Auth extends MY_Controller
     }
 
 
-    public function check_duplicate_user(){
+    public function check_duplicate_user()
+    {
         $data = $this->security->xss_clean($_POST);
         $this->form_validation->set_rules('cus_email', 'Email', 'trim|required|min_length[5]|max_length[80]', array('required' => 'You must provide a %s.', 'is_unique' => 'This %s already exists.'));
 
@@ -736,7 +740,7 @@ class Auth extends MY_Controller
 
             $this->load->model($this->auth_model, 'auth');
             $chk = $this->auth->check_user($email);
-            if($chk){
+            if ($chk) {
                 $error = true;
                 $msg = "Duplicate email";
                 $message = array(
@@ -744,7 +748,7 @@ class Auth extends MY_Controller
                     'error' => "Duplicate email",
                     'message' => "อีเมล $email ซ้ำในระบบ"
                 );
-            }else{
+            } else {
                 $message = array(
                     'stats' => true,
                     'error' => "you can use this email",
@@ -752,12 +756,12 @@ class Auth extends MY_Controller
                 );
             }
 
-        }else{
+        } else {
             $message = array(
                 'stats' => $this->form_validation->run(),
                 'error' => $this->form_validation->error_array(),
                 'message' => validation_errors(),
-                'input_data'=>$_POST
+                'input_data' => $_POST
             );
         }
 

@@ -18,7 +18,7 @@ class Dashboard extends MY_Controller{
 
     }
     public function dashboard(){
-        $this->data['title'] = "donate Consumerthai.org Management";
+        $this->data['title'] = "Thailand Consumer Concil";
         $this->load->view('tpl_dashboard',$this->data);
     }
     public function topdaonate(){
