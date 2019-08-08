@@ -18,6 +18,10 @@ var appusers = new Vue({
             errorStatus:false,
             bankList: [],
             paymentCode: [],
+            userInfo:{group:4,user_status:1,user_access:10},
+            usersGroup:[],
+            userAccess:[],
+            user_status:[],
             userClicked: {},
             title: "Approved Logs",
             columns: ['index','id', 'name', 'last_name', 'status_title','role_name','created_date','updated_date'],
@@ -66,11 +70,16 @@ var appusers = new Vue({
         }
     }, created() {
         this.getDonationlist()
+        this.getUserRule()
+        this.userStatus()
 
     },
     mounted() {
         this.$nextTick(() => {
             this.getDonationlist()
+            this.getUserRule()
+            this.permissionGroup()
+            this.userStatus()
 
 
         })
@@ -78,6 +87,11 @@ var appusers = new Vue({
     computed: {
         filterDonationList() {
             return this.donationInfo
+        },
+        filterUserGroup(){
+            return this.usersGroup.filter((item)=>{
+                return item.id > 2 && item.id <5
+            })
         },
         fillterStartDated() {
             this.startDated = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
@@ -119,10 +133,26 @@ var appusers = new Vue({
             }).catch((err) => {
                 // console.log(err)
             })
+        },
+        permissionGroup(){
+            console.info(this.userInfo.group)
+            let user_group_id = this.userInfo.group
+            let api = baseUrl+"/api-v01/user/access-list"
+            this.userAccess = []
+            axios.get(api+"?group_id="+user_group_id).then((res)=>{
+                this.userAccess = res.data
+            })
 
-            console.log(this.donationInfo)
-            // console.log(baseApi2)
 
+        },
+        saveUserInfo(){
+            console.log(this.userInfo);
+        },
+        userStatus(){
+            let baseApi = baseUrl+"/api-v01/user/status-list"
+            axios.get(baseApi).then((res)=>{
+                    this.user_status = res.data
+            })
 
         },
         getBankList() {
@@ -139,10 +169,14 @@ var appusers = new Vue({
             }).catch((err) => {
             })
         },
+        getUserRule() {
+            let baseApi = baseUrl + "/api-v01/user/rule-list";
+            axios.get(baseApi).then((res) => {
+               this.usersGroup = res.data
+            }).catch((err) => {
+            })
+        },
         confirmDate: function () {
-            // console.log(this.startTime);
-            // console.log(this.endTime);
-
 
             let start_date = this.range[0]
             let end_date = this.range[1]
@@ -226,16 +260,7 @@ var appusers = new Vue({
             return moment(date).format('MMMM Do YYYY, h:mm:ss a');
         },
         date2server(date1) {
-            // let date2 =  moment(date1).utcOffset(7)
-            // return moment.utc(date2).format('YYYY.MM.DD H:mm:ss')
             return moment(date1).format('YYYY-MM-DD H:mm:ss')
-        },
-        covertDatetime() {
-            // if(!this.emptyTime){
-            //
-            // }
-
-            // console.log(this.emptyTime)
         },
         checkStatusInvoice(itemStatus) {
             if (itemStatus === "00" || itemStatus==="000" || itemStatus==="Successful") {

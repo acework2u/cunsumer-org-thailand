@@ -37,7 +37,8 @@ class Auth_model extends MY_Model
         $this->_userID = $userID;
     }
 
-    public function getUserId(){
+    public function getUserId()
+    {
         return $this->_userID;
     }
 
@@ -123,66 +124,53 @@ class Auth_model extends MY_Model
 
     //create new user
     public function create()
-    {
-        $hash = $this->hash($this->_password);
-//        $data = array(
-////            'name' => $this->_userName,
-//            'first_name' => $this->_firstName,
-//            'last_name' => $this->_lastName,
-//            'email' => $this->_email,
-//            'user_name' => $this->_userName,
-//            'company_name' => $this->_companyName,
-//            'password' => $hash,
-//            'user_role_id' => $this->_user_role_id,
-//            'cus_group_id' => $this->_cus_group_id,
-//            'verification_code' => $this->_verificationCode,
-//            'created_date' => $this->_timeStamp,
-//            'modified_date' => $this->_timeStamp,
-//            'status' => $this->_status
-//        );
+{
+    $hash = $this->hash($this->_password);
 
-        if(!is_blank($this->_firstName)){
-            $data['first_name'] = $this->_firstName;
-        }
-        if(!is_blank($this->_lastName)){
-            $data['last_name'] = $this->_lastName;
-        }
-        if(!is_blank($this->_email)){
-            $data['email'] = $this->_email;
-        }
-        if(!is_blank($this->_companyName)){
-            $data['company_name'] = $this->_companyName;
-        }
-        if(!is_blank($hash)){
-            $data['password'] = $hash;
-        }
-        if(!is_blank($this->_user_role_id)){
-            $data['user_role_id'] = $this->_user_role_id;
-        }
-        if(!is_blank($this->_cus_group_id)){
-            $data['cus_group_id'] = $this->_cus_group_id;
-        }
-        if(!is_blank($this->_verificationCode)){
-            $data['verification_code'] = $this->_verificationCode;
-        }
-        if(!is_blank($this->_status)){
-            $data['status'] = $this->_status;
-        }
-        if(!is_blank($this->_timeStamp)){
-            $data['created_date'] = $this->_timeStamp;
-            $data['modified_date'] = $this->_timeStamp;
-        }
+    $data = array();
 
-        $this->db->insert($this->tbl_users, $data);
-        if (!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0) {
-
-            $this->setUserID($this->db->insert_id());
-
-            return TRUE;
-        } else {
-            return FALSE;
-        }
+    if (!is_blank($this->_firstName)) {
+        $data['first_name'] = $this->_firstName;
     }
+    if (!is_blank($this->_lastName)) {
+        $data['last_name'] = $this->_lastName;
+    }
+    if (!is_blank($this->_email)) {
+        $data['email'] = $this->_email;
+    }
+    if (!is_blank($this->_companyName)) {
+        $data['company_name'] = $this->_companyName;
+    }
+    if (!is_blank($hash)) {
+        $data['password'] = $hash;
+    }
+    if (!is_blank($this->_user_role_id)) {
+        $data['user_role_id'] = $this->_user_role_id;
+    }
+    if (!is_blank($this->_cus_group_id)) {
+        $data['cus_group_id'] = $this->_cus_group_id;
+    }
+    if (!is_blank($this->_verificationCode)) {
+        $data['verification_code'] = $this->_verificationCode;
+    }
+    if (!is_blank($this->_status)) {
+        $data['status'] = $this->_status;
+    }
+    if (!is_blank($this->_timeStamp)) {
+        $data['created_date'] = $this->_timeStamp;
+        $data['modified_date'] = $this->_timeStamp;
+    }
+
+    $this->db->insert($this->tbl_users, $data);
+    if (!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0) {
+
+        $this->setUserID($this->db->insert_id());
+
+        return TRUE;
+    } else {
+        return FALSE;
+    }
+}
 
     //update user
     public function update()
@@ -262,6 +250,49 @@ class Auth_model extends MY_Model
 
     }
 
+
+    function user_rule()
+    {
+        $query = $this->db->where('status', 1)->get($this->tbl_user_role);
+        $result = array();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $result[] = array(
+                    'id' => $row->id,
+                    'name' => $row->name
+                );
+            }
+        }
+
+        return $result;
+    }
+
+
+    public function user_group(){
+        $result = array();
+        $query = $this->db->where('status',1)->get($this->tbl_user_group);
+        if($query->num_rows() > 0 ){
+            foreach ($query->result_array() as $row){
+                $result[] = $row;
+            }
+        }
+        return $result;
+
+    }
+
+    public function user_status(){
+        $query = $this->db->get($this->tbl_users_status);
+        $result = array();
+        if($query->num_rows() > 0 ){
+            foreach ($query->result_array() as $row){
+                $result[] = $row;
+            }
+        }
+
+        return $result;
+
+    }
+
     function user_list($limit = 20, $start = 0)
     {
         $result = array();
@@ -305,8 +336,8 @@ class Auth_model extends MY_Model
 
 
         $this->db->select('users.*,user_role.`name` AS role_name,users_status.status_title AS status_title');
-        $this->db->join($this->tbl_user_role,'users.user_role_id = user_role.id','left');
-        $this->db->join($this->tbl_users_status,'users.`status` = users_status.aid','left');
+        $this->db->join($this->tbl_user_role, 'users.user_role_id = user_role.id', 'left');
+        $this->db->join($this->tbl_users_status, 'users.`status` = users_status.aid', 'left');
         $query = $this->db->get($this->tbl_users);
 
 //        $query = $this->db->order_by('id', 'desc')->limit($limit, $start)->get($this->tbl_users);
@@ -320,7 +351,7 @@ class Auth_model extends MY_Model
                 $u_Date = get_array_value($row, 'modified_date', '');
 
                 $rows = array(
-                    'index'=>$i,
+                    'index' => $i,
                     'id' => get_array_value($row, 'id', ''),
                     'email' => get_array_value($row, 'email', ''),
                     'name' => get_array_value($row, 'first_name', ''),
@@ -473,9 +504,9 @@ class Auth_model extends MY_Model
 
     public function check_user($email = "")
     {
-        if(!is_blank($email)){
-            $query =  $this->db->where('email',$email)->get($this->tbl_users);
-            if($query->num_rows() > 0){
+        if (!is_blank($email)) {
+            $query = $this->db->where('email', $email)->get($this->tbl_users);
+            if ($query->num_rows() > 0) {
 
                 return true;
             }

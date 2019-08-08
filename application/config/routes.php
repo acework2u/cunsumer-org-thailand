@@ -94,9 +94,13 @@ $route['user-list'] = 'auth/users_list';
 /**** User ****/
 $route['api-v01/user/user-list'] = "auth/get_user_list";
 $route['api-v01/user/group-list'] = "auth/get_group_list";
+$route['api-v01/user/rule-list'] = "auth/get_rule_list";
+$route['api-v01/user/access-list'] = "api/user_access";
+$route['api-v01/user/status-list'] = "api/admin_user_status";
 $route['api-v01/user/ma'] = "auth/actionUser";
 $route['api-v01/user/logon'] = "auth/jsonLogin";
 $route['api-v01/user/register'] = "auth/actionUserCreate";
+$route['api-v01/user/admin-register'] = "auth/createAdmin";
 
 /**API***/
 $route['api-v01/banklist'] = "api/jsonBankList";

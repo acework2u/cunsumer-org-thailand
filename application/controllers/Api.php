@@ -323,5 +323,50 @@ class Api extends MY_Controller
         }
     }
 
+    public function user_access(){
+        $user_group_id = 3;
+        if(!is_blank($this->input->get_post('group_id'))){
+            $user_group_id = $this->input->get_post('group_id');
+        }
+        $data_info = array();
+        $this->load->model($this->province_model, 'province');
+        switch ($user_group_id){
+            case 3:
+                $result = $this->province->zone_list();
+
+                foreach ($result as $row){
+                    $data_info[] = array(
+                        'code'=>get_array_value($row,'code',''),
+                        'title'=>get_array_value($row,'title_th')
+                    );
+                }
+                break;
+            case 4:
+                $result =$this->province->provinces_list();
+                foreach ($result as $row){
+                    $data_info[] = array(
+                        'code'=>get_array_value($row,'code',''),
+                        'title'=>get_array_value($row,'name_in_thai')
+                    );
+                }
+
+                break;
+        }
+        echo json_encode($data_info);
+
+
+    }
+
+    public function admin_user_status(){
+        $this->load->model($this->auth_model,'user');
+        $user_status = array();
+        if($this->user->user_status()){
+            $user_status = $this->user->user_status();
+        }
+        echo json_encode($user_status);
+
+    }
+
+
 
 } // End of Class

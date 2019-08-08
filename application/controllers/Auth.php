@@ -117,6 +117,20 @@ class Auth extends MY_Controller
         }
     }
 
+
+    public function get_rule_list(){
+         $rule_info = array();
+
+            $this->load->model($this->auth_model,'auth');
+
+            $rule_info = $this->auth->user_rule();
+
+
+
+       echo json_encode($rule_info);
+
+    }
+
     // registration method
     public function register()
     {
@@ -260,6 +274,56 @@ class Auth extends MY_Controller
 
             }
         }
+    }
+
+
+    public function createAdmin(){
+
+
+        $data = $this->security->xss_clean($_POST);
+        $this->form_validation->set_rules('first_name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+        $message = array();
+        if ($this->form_validation->run() == TRUE) {
+
+            $timeStamp = time();
+            $first_name = $this->input->post('first_name');
+            $last_name = $this->input->post('last_name');
+            $email = $this->input->post('first_name');
+            $password = $this->input->post('password');
+            $user_group = $this->input->post('user_group');
+            $user_access = $this->input->post('user_access');
+            $user_status = $this->input->post('user_status');
+
+            $this->load->model($this->auth_model,'user');
+            $this->user->setFirstName($first_name);
+            $this->user->setlastName($last_name);
+            $this->user->setUserName($email);
+            $this->user->setPassword($password);
+            $this->user->setTimeStamp($timeStamp);
+
+
+            $chk = $this->user->createAdmin();
+
+
+
+
+        }else{
+
+            $message = array(
+                'stats' => false,
+                'error' => $this->form_validation->error_array(),
+                'message' => validation_errors()
+            );
+        }
+
+        echo json_encode($message);
+
+
+
+
     }
 
     public function actionUserCreate()

@@ -259,8 +259,6 @@
                                     <option value="400">400</option>
                                     <option value="500">500</option>
                                 </select>
-
-
                             </div>
 
                         </div>
@@ -295,8 +293,6 @@
 
                     </div>
                 </div>
-
-
                 <div id="myModal" class="modal fade" role="dialog">
                     <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
 
