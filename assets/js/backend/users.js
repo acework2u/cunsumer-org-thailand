@@ -24,7 +24,7 @@ var appusers = new Vue({
             user_status:[],
             userClicked: {},
             title: "Approved Logs",
-            columns: ['index','id', 'name', 'last_name', 'status_title','role_name','created_date','updated_date'],
+            columns: ['index','id', 'name', 'last_name', 'status_title','role_name','created_date','updated_date','action','delete'],
             options: {
                 headings: {
                     index: 'Index',
@@ -147,6 +147,17 @@ var appusers = new Vue({
         },
         saveUserInfo(){
             console.log(this.userInfo);
+            let adminApi = baseUrl+"/api-v01/user/admin-register"
+
+            let dataInfo = this.userInfo
+            var fromData = this.toFormData(dataInfo)
+            axios.post(adminApi,fromData).then((res)=>{
+                    console.log(res.data)
+            })
+
+
+
+
         },
         userStatus(){
             let baseApi = baseUrl+"/api-v01/user/status-list"
@@ -282,6 +293,31 @@ var appusers = new Vue({
             }).catch()
 
 
+        },
+        userDelete(){
+            console.log(this.userClicked);
+            let delUserAPI = baseUrl+"/api-v01/user/admin-delete";
+
+            axios.get(delUserAPI+"?uid="+this.userClicked.id).then((res)=>{
+                console.log(res.data)
+
+                if(res.data.error){
+
+                }else{
+                    this.getDonationlist();
+                }
+
+
+            })
+
+        },
+        clickUser(item){
+            this.userClicked = ""
+            this.userClicked = item
+        },
+        clickClearUser(){
+            this.userClicked = ""
+            console.log(this.userClicked);
         }
 
 

@@ -101,6 +101,7 @@ $route['api-v01/user/ma'] = "auth/actionUser";
 $route['api-v01/user/logon'] = "auth/jsonLogin";
 $route['api-v01/user/register'] = "auth/actionUserCreate";
 $route['api-v01/user/admin-register'] = "auth/createAdmin";
+$route['api-v01/user/admin-delete'] = "auth/delete";
 
 /**API***/
 $route['api-v01/banklist'] = "api/jsonBankList";

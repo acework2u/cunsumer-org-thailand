@@ -278,8 +278,6 @@ class Auth extends MY_Controller
 
 
     public function createAdmin(){
-
-
         $data = $this->security->xss_clean($_POST);
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -291,9 +289,9 @@ class Auth extends MY_Controller
             $timeStamp = time();
             $first_name = $this->input->post('first_name');
             $last_name = $this->input->post('last_name');
-            $email = $this->input->post('first_name');
+            $email = $this->input->post('email');
             $password = $this->input->post('password');
-            $user_group = $this->input->post('user_group');
+            $user_group = $this->input->post('group');
             $user_access = $this->input->post('user_access');
             $user_status = $this->input->post('user_status');
 
@@ -303,9 +301,26 @@ class Auth extends MY_Controller
             $this->user->setUserName($email);
             $this->user->setPassword($password);
             $this->user->setTimeStamp($timeStamp);
+            $this->user->setStatus($user_status);
+            $this->user->setEmail($email);
+            $this->user->setRole($user_group);
+            $this->user->setGroup($user_access);
 
 
-            $chk = $this->user->createAdmin();
+            $chk = $this->user->create();
+
+            if($chk){
+                $message = array(
+                    'stats' => true,
+                    'message' => "Create Success"
+                );
+            }else{
+                $message = array(
+                    'stats' => false,
+                    'error'=>"",
+                    'message' => "Could not create user"
+                );
+            }
 
 
 
@@ -830,6 +845,39 @@ class Auth extends MY_Controller
         }
 
         echo json_encode($message);
+
+    }
+
+
+    public function delete(){
+        if($this->is_login() && getUserRoleId()==1){
+            $this->load->model('Auth_model', 'user');
+
+            $userId = $this->input->get_post('uid');
+            $this->user->setUserID($userId);
+
+            $chk = $this->user->delete();
+
+            $data_info = array();
+
+            if($chk){
+                $data_info = array(
+                    'status'=>true,
+                    'error'=>false,
+                    'message'=>"Delete user successful"
+                );
+
+            }else{
+                $data_info = array(
+                    'status'=>false,
+                    'error'=>true,
+                    'message'=>"Could not delete user"
+                );
+            }
+
+          echo json_encode($data_info);
+
+        }
 
     }
 

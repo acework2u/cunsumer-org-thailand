@@ -21,7 +21,7 @@ class Users extends MY_Controller
 
     }
     public function dashboard(){
-        $this->data['title'] = "Thailand Consumer Concil";
+        $this->data['title'] = "Thailand Consumer Council";
         $this->load->view('tpl_users',$this->data);
     }
 
@@ -31,17 +31,10 @@ class Users extends MY_Controller
 
             $userList = array();
             $userList = $this->user->user_list();
-
-
            echo json_encode($userList);
-
-
         }
 
 
     }
-
-
-
 
 } // End of Class

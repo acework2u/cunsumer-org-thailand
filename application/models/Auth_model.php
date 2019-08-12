@@ -171,7 +171,6 @@ class Auth_model extends MY_Model
         return FALSE;
     }
 }
-
     //update user
     public function update()
     {
@@ -204,6 +203,19 @@ class Auth_model extends MY_Model
         } else {
             return FALSE;
         }
+    }
+    //Delete user
+    public function delete(){
+
+        if(!is_blank($this->_userID)){
+            $this->db->delete($this->tbl_users,array('id'=>$this->_userID));
+            if ($this->db->affected_rows() > 0) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     public function user_count()

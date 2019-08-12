@@ -9,7 +9,6 @@ window.onload = function () {
     });
     Vue.use(VeeValidate); // good to go.
 
-
     var orz = new Vue({
         el: '#register-form',
         data() {
@@ -93,7 +92,7 @@ window.onload = function () {
                     this.alError = false
                     this.alsuccess = false
                     axios.post(api, fromData).then((res) => {
-                        console.log(res.data)
+                        // console.log(res.data)
                         this.alsuccess = res.data.status
                         this.msgSuccess = res.data.message
                         this.alError = false

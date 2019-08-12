@@ -157,6 +157,10 @@
                                             </div>
                                         </div>
 
+                                        <div class="form-group">
+                                          
+                                        </div>
+
                                     </div>
 
                                 </form>
@@ -212,20 +216,150 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <v-client-table ref="table" :columns="columns" :data="filterDonationList" :options="options">
-                            <a data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"
+                            <a  data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"
                                slot-scope="props" target="_blank" :href="props.row.action"
                                class="glyphicon fa fa-edit"></a>
+                            <a  data-toggle="modal" @click="clickUser(props.row)" data-target="#userDeleteModal" slot="delete"
+                                slot-scope="props" target="_blank" :href="props.row.delete"
+                                class="glyphicon fa fa-trash"></a>
 
-                            <a class="btn" @click="donorClicked(props.row)" data-toggle="modal" data-target="#myDonor" slot="first_name" slot-scope="props">{{props.row.first_name}}</a>
-                            <span class="float-right" slot="amount"
-                                  slot-scope="props">{{props.row.amount | formatBaht}}</span>
-                            <a :href="invoice(props.row.aid)" target="_blank" class="" slot="inv_number"
-                               slot-scope="props">{{props.row.inv_number}}</a>
-                            <button data-toggle="modal" data-target="#send-invoice" v-if="checkStatusInvoice(props.row.status)" :ref="'email_inv_'+props.row.aid" @click="sendInvoiceEmail(props.row.aid)" class="btn" slot-scope="props" slot="action_email"> Send <i class="fa fa-envelope"> </i></button>
+
+
+
 
                         </v-client-table>
 
                     </div>
+
+                    <div id="myModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">New User</h4>
+                                        <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>
+                                        <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form class="form-horizontal">
+                                            <div class="box-body">
+                                                <div class="form-group">
+                                                    <label for="email" class="col-sm-2 control-label">Email</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" class="form-control" v-model="userInfo.email" >
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="donorName" class="col-sm-2 control-label">Password</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" class="form-control" v-model="userInfo.password" >
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="donorName" class="col-sm-2 control-label">Name</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" class="form-control" v-model="userInfo.first_name">
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="donorName" class="col-sm-2 control-label">Lastname</label>
+                                                    <div class="col-sm-5">
+                                                        <input type="text" class="form-control" v-model="userInfo.last_name">
+                                                    </div>
+                                                </div>
+
+
+                                                <div  class="radio">
+                                                    <label for="user-group" class="col-sm-2 control-label"><b>Group</b></label>
+                                                    <div class="col-sm-10">
+                                                        <label class="margin-r-5"  v-for="item,index in filterUserGroup"><input dirname="user-group" type="radio" name="s" :value="item.id" v-model="userInfo.group" @change="permissionGroup">{{item.name}}</label>
+
+                                                    </div>
+
+                                                </div>
+
+                                                <div  class="form-group">
+                                                    <label for="bank-name" class="col-sm-2 control-label">Access</label>
+                                                    <div class="col-sm-6">
+                                                        <select ref="user_access" class="form-control" v-model="userInfo.user_access" >
+                                                            <option v-for="item,index in userAccess" :value="item.code">{{item.title}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="trnsferRef" class="col-sm-2 control-label">Status</label>
+                                                    <div class="col-xs-5">
+                                                        <select class="form-control" v-model="userInfo.user_status">
+                                                            <option v-for="item,index in user_status" :value="item.aid">{{item.status_title}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    err
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-primary" @click="saveUserInfo()">Save</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- /.box -->
+                    </div>
+                    <div id="userDeleteModal" class="modal fade" role="dialog">
+                        <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title">Delete User</h4>
+                                        <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>
+                                        <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
+                                    </div>
+                                    <div class="modal-body">
+                                            <label>Do you want delete user name </label>
+                                        <p>{{userClicked.name}} {{userClicked.last_name}}</p>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal" @click="clickClearUser">Close</button>
+                                        <button type="button" class="btn btn-primary" @click="userDelete()">Delete</button>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <!-- /.box -->
+                    </div>
+
+
+
+
+
                     <!-- /.box-body -->
                     <div class="box-footer clearfix">
                         <ul class="hidden pagination pagination-sm no-margin pull-right">
