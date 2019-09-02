@@ -158,7 +158,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                          
+
                                         </div>
 
                                     </div>
@@ -239,9 +239,9 @@
                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                        <h4 class="modal-title">New User</h4>
-                                        <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>
-                                        <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
+                                        <h4 class="modal-title">Update User</h4>
+<!--                                        <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>-->
+<!--                                        <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>-->
                                     </div>
                                     <div class="modal-body">
                                         <form class="form-horizontal">
@@ -249,7 +249,7 @@
                                                 <div class="form-group">
                                                     <label for="email" class="col-sm-2 control-label">Email</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" v-model="userInfo.email" >
+                                                        <input type="text" class="form-control" v-model="userClicked.email" >
                                                     </div>
                                                 </div>
 
@@ -263,14 +263,14 @@
                                                 <div class="form-group">
                                                     <label for="donorName" class="col-sm-2 control-label">Name</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" v-model="userInfo.first_name">
+                                                        <input type="text" class="form-control" v-model="userClicked.name">
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
                                                     <label for="donorName" class="col-sm-2 control-label">Lastname</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" v-model="userInfo.last_name">
+                                                        <input type="text" class="form-control" v-model="userClicked.last_name">
                                                     </div>
                                                 </div>
 
@@ -278,7 +278,7 @@
                                                 <div  class="radio">
                                                     <label for="user-group" class="col-sm-2 control-label"><b>Group</b></label>
                                                     <div class="col-sm-10">
-                                                        <label class="margin-r-5"  v-for="item,index in filterUserGroup"><input dirname="user-group" type="radio" name="s" :value="item.id" v-model="userInfo.group" @change="permissionGroup">{{item.name}}</label>
+                                                        <label class="margin-r-5"  v-for="item,index in filterUserGroup"><input dirname="user-group" type="radio" name="s" :value="item.id" v-model="userClicked.user_role_id" @change="updateUserGroup">{{item.name}}</label>
 
                                                     </div>
 
@@ -287,7 +287,7 @@
                                                 <div  class="form-group">
                                                     <label for="bank-name" class="col-sm-2 control-label">Access</label>
                                                     <div class="col-sm-6">
-                                                        <select ref="user_access" class="form-control" v-model="userInfo.user_access" >
+                                                        <select ref="user_access" class="form-control" v-model="userClicked.customer_group_id" >
                                                             <option v-for="item,index in userAccess" :value="item.code">{{item.title}}</option>
                                                         </select>
                                                     </div>
@@ -296,14 +296,16 @@
                                                 <div class="form-group">
                                                     <label for="trnsferRef" class="col-sm-2 control-label">Status</label>
                                                     <div class="col-xs-5">
-                                                        <select class="form-control" v-model="userInfo.user_status">
+                                                        <select class="form-control" v-model="userClicked.status_id">
                                                             <option v-for="item,index in user_status" :value="item.aid">{{item.status_title}}</option>
                                                         </select>
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group">
-                                                    err
+<!--                                                    <div class=".col-md-6 .col-md-offset-3" v-if="errorStatus">{{this.successMsg}}</div>-->
+<!--                                                    <div class=".col-md-6 .col-md-offset-3" v-else><h4 class="font-weight-bold">{{this.successMsg}}</h4></div>-->
+                                                        <div class="" v-if="successMsg !=='' ">{{successMsg}}</div>
                                                 </div>
 
                                             </div>
@@ -314,7 +316,7 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary" @click="saveUserInfo()">Save</button>
+                                        <button type="button" class="btn btn-primary" @click="updateUserInfo()">Save</button>
                                     </div>
 
                                 </div>

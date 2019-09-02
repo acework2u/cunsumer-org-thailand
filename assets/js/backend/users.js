@@ -24,11 +24,10 @@ var appusers = new Vue({
             user_status:[],
             userClicked: {},
             title: "Approved Logs",
-            columns: ['index','id', 'name', 'last_name', 'status_title','role_name','created_date','updated_date','action','delete'],
+            columns: ['index', 'name', 'last_name', 'status_title','role_name','created_date','updated_date','action','delete'],
             options: {
                 headings: {
                     index: 'Index',
-                    id: 'code',
                     name: 'Name',
                     last_name: 'Last name',
                     role_name:"Group",
@@ -90,7 +89,8 @@ var appusers = new Vue({
         },
         filterUserGroup(){
             return this.usersGroup.filter((item)=>{
-                return item.id > 2 && item.id <5
+                // return item.id > 2 && item.id <5
+                return item.id
             })
         },
         fillterStartDated() {
@@ -145,6 +145,17 @@ var appusers = new Vue({
 
 
         },
+        updateUserGroup(){
+            console.info(this.userInfo.group)
+            let user_group_id = this.userClicked.user_role_id
+            let api = baseUrl+"/api-v01/user/access-list"
+            this.userAccess = []
+            axios.get(api+"?group_id="+user_group_id).then((res)=>{
+                this.userAccess = res.data
+            })
+
+
+        },
         saveUserInfo(){
             console.log(this.userInfo);
             let adminApi = baseUrl+"/api-v01/user/admin-register"
@@ -158,6 +169,35 @@ var appusers = new Vue({
 
 
 
+        },
+        updateUserInfo(){
+            let updateAdminApi = baseUrl+"/api-v01/user/admin-update"
+            let dataInfo = this.userClicked
+            var fromData = this.toFormData(dataInfo)
+
+            axios.post(updateAdminApi,fromData).then((res)=>{
+                // console.info(res.data)
+                this.successMsg = ""
+
+                if(res.data.error){
+                    this.errorStatus = res.data.error
+                    this.successMsg = res.data.message
+                }else{
+                    this.errorStatus = res.data.error
+                    this.successMsg = res.data.message
+                    this.getDonationlist()
+                }
+
+                setTimeout(()=>{
+                    this.successMsg = "";
+                },5000)
+
+
+
+            })
+
+
+            console.info(this.userClicked)
         },
         userStatus(){
             let baseApi = baseUrl+"/api-v01/user/status-list"
@@ -254,8 +294,9 @@ var appusers = new Vue({
 
         },
         donationEdit(itemClick) {
+            this.userClicked = ""
             this.userClicked = itemClick
-            // console.log(this.userClicked)
+            console.log(this.userClicked)
         },
         toFormData: function (obj) {
             var form_data = new FormData();
@@ -314,6 +355,7 @@ var appusers = new Vue({
         clickUser(item){
             this.userClicked = ""
             this.userClicked = item
+            console.log(this.userClicked);
         },
         clickClearUser(){
             this.userClicked = ""

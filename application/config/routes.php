@@ -61,7 +61,7 @@ $route['translate_uri_dashes'] = FALSE;
 
 /*** Backend Dashboard ***/
 $route['admin'] = "backend/Dashboard/index";
-$route['admin/dashboard'] = "backend/Dashboard/Dashboard";
+$route['admin/dashboard'] = "backend/Dashboard/index";
 $route['admin/reports'] = "backend/Reports/index";
 $route['admin/user-management'] = "backend/Users/index";
 
@@ -101,6 +101,7 @@ $route['api-v01/user/ma'] = "auth/actionUser";
 $route['api-v01/user/logon'] = "auth/jsonLogin";
 $route['api-v01/user/register'] = "auth/actionUserCreate";
 $route['api-v01/user/admin-register'] = "auth/createAdmin";
+$route['api-v01/user/admin-update'] = "auth/updateAdmin";
 $route['api-v01/user/admin-delete'] = "auth/delete";
 
 /**API***/

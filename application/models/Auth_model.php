@@ -22,6 +22,8 @@ class Auth_model extends MY_Model
     private $_token;
     private $_user_role_id;
     private $_cus_group_id;
+    private $_create_date;
+    private $_update_date;
 
 
     public function __construct()
@@ -122,6 +124,13 @@ class Auth_model extends MY_Model
         $this->_companyName = $companyName;
     }
 
+    public function setCreateDate($date){
+        $this->_create_date = $date;
+    }
+    public function setUpdateDate($date){
+        $this->_update_date = $date;
+    }
+
     //create new user
     public function create()
 {
@@ -174,35 +183,51 @@ class Auth_model extends MY_Model
     //update user
     public function update()
     {
-
-
         $data = array();
         if (!is_blank($this->_password)) {
             $hash = $this->hash($this->_password);
             $data['password'] = $hash;
         }
-        $data['name'] = $this->_firstName;
-        $data['lastname'] = $this->_lastName;
-        $data['user_role_id'] = $this->_user_role_id;
-        $data['cus_group_id'] = $this->_customer_group_id;
-        $data['updated_at'] = $this->_timeStamp;
-        /*
-                $data = array(
-                    'first_name' => $this->_firstName,
-                    'last_name' => $this->_lastName,
-                    'contact_no' => $this->_contactNo,
-                    'user_role_id' => $this->_user_role_id,
-                    'customer_group_id' => $this->_customer_group_id,
-                    'update_at' => $this->_timeStamp,
-                );
-        */
-        $this->db->where('id', $this->_userID);
-        $msg = $this->db->update($this->tbl_users, $data);
+        if(!is_blank($this->_firstName)){
+            $data['first_name'] = $this->_firstName;
+        }
+        if(!is_blank($this->_lastName)){
+            $data['last_name'] = $this->_lastName;
+        }
+        if(!is_blank($this->_userName)){
+            $data['user_name'] = $this->_userName;
+        }
+        if(!is_blank($this->_email)){
+            $data['email'] = $this->_email;
+        }
+        if(!is_blank($this->_contactNo)){
+            $data['contact_no'] = $this->_contactNo;
+        }
+        if(!is_blank($this->_user_role_id)){
+            $data['user_role_id'] = $this->_user_role_id;
+        }
+        if(!is_blank($this->_cus_group_id)){
+            $data['cus_group_id'] = $this->_cus_group_id;
+        }
+        if(!is_blank($this->_status)){
+            $data['status'] = $this->_status;
+        }
+        if(!is_blank($this->_update_date)){
+            $data['modified_date'] = $this->_update_date;
+        }
+
+        $msg = 0;
+        if(!is_blank($this->_userID)){
+            $this->db->where('id', $this->_userID);
+            $msg = $this->db->update($this->tbl_users, $data);
+        }
+
         if ($msg == 1) {
             return TRUE;
         } else {
             return FALSE;
         }
+
     }
     //Delete user
     public function delete(){
@@ -389,7 +414,6 @@ class Auth_model extends MY_Model
 
     }
 
-
     // login method and password verify
     function login()
     {
@@ -417,8 +441,6 @@ class Auth_model extends MY_Model
 
 
     } //end of function login
-
-
     //change password
     public function changePassword()
     {

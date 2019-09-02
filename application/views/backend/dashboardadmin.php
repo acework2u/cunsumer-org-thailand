@@ -80,7 +80,7 @@
 
         <!-- Main row -->
         <div class="row">
-            <section class="col-lg-7 connectedSortable">
+            <section class="col-lg-12 connectedSortable">
                 <div class="box box-info">
                     <div class="box-header"><h3 class="box-title">Organization List</h3>
                         <div class="box-tools">

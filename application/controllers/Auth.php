@@ -91,7 +91,6 @@ class Auth extends MY_Controller
             $userList = $this->user->user_list($limit, $start);
 
 
-
             $total = count($userList);
 
             $data = array();
@@ -118,16 +117,16 @@ class Auth extends MY_Controller
     }
 
 
-    public function get_rule_list(){
-         $rule_info = array();
+    public function get_rule_list()
+    {
+        $rule_info = array();
 
-            $this->load->model($this->auth_model,'auth');
+        $this->load->model($this->auth_model, 'auth');
 
-            $rule_info = $this->auth->user_rule();
+        $rule_info = $this->auth->user_rule();
 
 
-
-       echo json_encode($rule_info);
+        echo json_encode($rule_info);
 
     }
 
@@ -277,7 +276,8 @@ class Auth extends MY_Controller
     }
 
 
-    public function createAdmin(){
+    public function createAdmin()
+    {
         $data = $this->security->xss_clean($_POST);
         $this->form_validation->set_rules('first_name', 'First Name', 'required');
         $this->form_validation->set_rules('last_name', 'Last Name', 'required');
@@ -295,7 +295,7 @@ class Auth extends MY_Controller
             $user_access = $this->input->post('user_access');
             $user_status = $this->input->post('user_status');
 
-            $this->load->model($this->auth_model,'user');
+            $this->load->model($this->auth_model, 'user');
             $this->user->setFirstName($first_name);
             $this->user->setlastName($last_name);
             $this->user->setUserName($email);
@@ -309,23 +309,21 @@ class Auth extends MY_Controller
 
             $chk = $this->user->create();
 
-            if($chk){
+            if ($chk) {
                 $message = array(
                     'stats' => true,
                     'message' => "Create Success"
                 );
-            }else{
+            } else {
                 $message = array(
                     'stats' => false,
-                    'error'=>"",
+                    'error' => "",
                     'message' => "Could not create user"
                 );
             }
 
 
-
-
-        }else{
+        } else {
 
             $message = array(
                 'stats' => false,
@@ -337,6 +335,72 @@ class Auth extends MY_Controller
         echo json_encode($message);
 
 
+    }
+
+    public function updateAdmin()
+    {
+
+        $data = $this->security->xss_clean($_POST);
+        $this->form_validation->set_rules('name', 'First Name', 'required');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+
+        if (!is_blank($this->input->post('password'))) {
+            $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+        }
+
+        $message = array();
+        $this->load->model('Auth_model', 'user');
+
+        if ($this->form_validation->run() == TRUE) {
+            $id = $this->input->post('id');
+            $email = $this->input->post('email');
+            $name = $this->input->post('name');
+            $last_name = $this->input->post('last_name');
+            $password = $this->input->post('password');
+            $user_rule = $this->input->post('user_role_id');
+            $user_group = $this->input->post('customer_group_id');
+            $status = $this->input->post('status_id');
+            $update_date = time();
+
+
+            $this->user->setUserID($id);
+            $this->user->setUserName($email);
+            $this->user->setFirstname($name);
+            $this->user->setLastName($last_name);
+            $this->user->setEmail($email);
+            $this->user->setPassword($password);
+            $this->user->setRole($user_rule);
+            $this->user->setGroup($user_group);
+            $this->user->setStatus($status);
+            $this->user->setUpdateDate($update_date);
+
+            $chk = $this->user->update();
+
+
+            if ($chk === true) {
+                $message = array(
+                    'status' => true,
+                    'error' => false,
+                    'message' => "Update Successfully"
+                );
+            } else {
+                $message = array(
+                    'status' => false,
+                    'error' => true,
+                    'message' => "Could not update successful"
+                );
+            }
+
+        } else {
+            $message = array(
+                'status' => false,
+                'error' => true,
+                'message' => validation_errors()
+            );
+        }
+
+        echo json_encode($message);
 
 
     }
@@ -849,8 +913,9 @@ class Auth extends MY_Controller
     }
 
 
-    public function delete(){
-        if($this->is_login() && getUserRoleId()==1){
+    public function delete()
+    {
+        if ($this->is_login() && getUserRoleId() == 1) {
             $this->load->model('Auth_model', 'user');
 
             $userId = $this->input->get_post('uid');
@@ -860,22 +925,22 @@ class Auth extends MY_Controller
 
             $data_info = array();
 
-            if($chk){
+            if ($chk) {
                 $data_info = array(
-                    'status'=>true,
-                    'error'=>false,
-                    'message'=>"Delete user successful"
+                    'status' => true,
+                    'error' => false,
+                    'message' => "Delete user successful"
                 );
 
-            }else{
+            } else {
                 $data_info = array(
-                    'status'=>false,
-                    'error'=>true,
-                    'message'=>"Could not delete user"
+                    'status' => false,
+                    'error' => true,
+                    'message' => "Could not delete user"
                 );
             }
 
-          echo json_encode($data_info);
+            echo json_encode($data_info);
 
         }
 
