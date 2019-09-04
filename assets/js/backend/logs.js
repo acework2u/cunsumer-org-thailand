@@ -4,7 +4,6 @@ var date = new Date(), y = date.getFullYear(), m = date.getMonth();
 var firstDay = new Date(y, m, 1);
 var lastDay = new Date(y, m + 1, 0);
 
-
 Vue.use(VueTables.ClientTable);
 Vue.component('pagination', Pagination);
 var approvedlog = new Vue({

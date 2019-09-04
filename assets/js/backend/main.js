@@ -1,5 +1,12 @@
 var baseUrl = window.location.origin;
+
+var date = new Date(), y = date.getFullYear(), m = date.getMonth();
+var firstDay = new Date(y, m, 1);
+var lastDay = new Date(y, m + 1, 0);
+
 Vue.use(CKEditor)
+Vue.use(VueTables.ClientTable);
+Vue.component('pagination', Pagination);
 Vue.filter('formatBaht', (value) => {
     if (value) {
 
@@ -45,9 +52,9 @@ Vue.filter('orzStatus', (value) => {
 
     }
 });
+
 var lastdonate = new Vue({
     el: "#lastdonate",
-
     data() {
         return {
             title: "Last Donate",
@@ -72,17 +79,73 @@ var lastdonate = new Vue({
             volunteers:[],
             volunteer:{},
             textSuccess:"Sending...",
-            savingStatus:false
+            savingStatus:false,
+            time: new Date(),
+            startTime: firstDay,
+            endTime: lastDay,
+            range: [firstDay, lastDay],
+            startDated: "",
+            endDated: "",
+            emptyTime: '',
+            tranferDateTime: '',
+            emptyRange: [],
+            currentTime: null,
+            local: {
+                dow: 0, // Sunday is the first day of the week
+                hourTip: 'Select Hour', // tip of select hour
+                minuteTip: 'Select Minute', // tip of select minute
+                secondTip: 'Select Second', // tip of select second
+                yearSuffix: '', // suffix of head year
+                monthsHead: 'January_February_March_April_May_June_July_August_September_October_November_December'.split('_'), // months of head
+                months: 'Jan_Feb_Mar_Apr_May_Jun_Jul_Aug_Sep_Oct_Nov_Dec'.split('_'), // months of panel
+                weeks: 'Su_Mo_Tu_We_Th_Fr_Sa'.split('_'),// weeks,
+                cancelTip: 'cancel',
+                submitTip: 'confirm'
+            },
+
+            columns: ['created_date', 'title', 'contact_name', 'email', 'contact_tel', 'province','status','updated_date', 'action','action_1','action_2','action_3','action_4'],
+            options: {
+                headings: {
+                    created_date: 'Register Date',
+                    title: 'Organization Name',
+                    contact_name: 'Contact Name',
+                    orz_register_date: 'Register Date',
+                    orz_status: 'Status',
+                    approved_by: 'Approved',
+                    approved_date: 'Approved Date',
+                    orz_in_province: 'In Province',
+                    orz_in_zone: 'In Zone',
+                    orz_volunteer: 'Volunteer',
+                    updated_date: "Updated date",
+                    action: "",
+                    action_1: "",
+                    action_2: "",
+                    action_3: "",
+                    action_4: "",
+
+
+                },
+                pagination: {chunk: 10},
+                sortable: ['index', 'orz_name'],
+                filterable: ['index', 'orz_name'],
+                perPage: 10,
+                perPageValues: [10, 25, 50, 100, 500, 1000],
+
+            },
+
+
+
 
         }
     },
     created() {
-        this.getDonationlist()
-        this.getTopDonate()
-        this.getOrzInfo()
-        this.getOrzgroup()
-        this.getOrganizationList()
-        this.getVolunteers()
+        // this.getDonationlist()
+        // this.getTopDonate()
+        // this.getOrzInfo()
+        // this.getOrzgroup()
+        // this.getOrganizationList()
+        // this.getVolunteers()
+        // this.getOrzlist()
     },
     mounted() {
         this.$nextTick(() => {
@@ -92,6 +155,7 @@ var lastdonate = new Vue({
             this.getOrzgroup();
             this.getOrganizationList()
             this.getVolunteers()
+            this.getOrzlist()
         })
     },
     computed: {
@@ -192,14 +256,41 @@ var lastdonate = new Vue({
             } else {
                 return true;
             }
+        },
+        fillterStartDated() {
+            this.startDated = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
+            return moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
+            // this.endTime = this.range[1]
+        },
+        fillterEndDated() {
+
+            this.endDated = moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
+            return moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
+            // this.endTime = this.range[1]
+        },
+        exportExcel() {
+            let start_date = this.range[0]
+            let end_date = this.range[1]
+
+            start_date = moment(start_date).format('YYYY-MM-DD H:mm:ss')
+            end_date = moment(end_date).format('YYYY-MM-DD H:mm:ss')
+
+            // let apiUrls = baseUrl + "/admin/reports/exportxls?startDate=" + start_date + "&endDate=" + end_date
+            let apiUrls = baseUrl + "/admin/reports/approved-logs-exportxls?startDate=" + start_date + "&endDate=" + end_date
+
+            return apiUrls
         }
+
+
+
     },
     methods: {
         orzUserClick(item){
             this.orz_user_select = item
+            console.log(item)
         },
         approvedOrz(item){
-          console.info(item)
+          // console.info(item)
 
           let orz_id = item.aid
           let orz_status = 4
@@ -233,6 +324,7 @@ var lastdonate = new Vue({
             let orzApi = baseUrl + ("/api/v1/orz/backend/orz-all");
             axios.get(orzApi).then((res) => {
                 this.orz_all = res.data
+                console.info(this.orz_all)
             }).catch((err) => {
             })
         },
@@ -408,6 +500,26 @@ var lastdonate = new Vue({
         zipOnChange(event) {
             // console.log(event.target.value)
             this.orzInformation.stage_code = event.target.value
+        },
+        getOrzlist() {
+            // let baseApi = baseUrl + "/api-01/report/donation-list";
+            let baseApi = baseUrl + "/api-01/report/organization-list";
+            let stDate = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
+            let endDate = moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
+
+            let baseApi2 = baseApi + "?startDate=" + stDate + "&endDate=" + endDate
+
+            axios.get(baseApi + "?startDate=" + stDate + "&endDate=" + endDate).then((res) => {
+                // this.donationInfo = res.data.data
+                // console.log(res.data.data)
+            }).catch((err) => {
+                // console.log(err)
+            })
+
+            // console.log(this.donationInfo)
+            // console.log(baseApi2)
+
+
         }
 
     }
