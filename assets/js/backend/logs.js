@@ -27,9 +27,6 @@ var approvedlog = new Vue({
                     orz_action: 'In Action',
                     full_name: 'Approved by',
                     updated_date: 'Updated Date',
-
-
-
                 },
                 pagination: {chunk: 10},
                 sortable: ['index', 'orz_name'],
