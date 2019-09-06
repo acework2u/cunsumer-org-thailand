@@ -115,27 +115,49 @@
                     </div>
 
                     <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
-                        <div class="modal-dialog" role="document">
+                        <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    <h4 class="modal-title" id="exampleModalLabel">New message</h4>
+                                    <h4 class="modal-title" id="exampleModalLabel">Update : Organization Information</h4>
                                 </div>
                                 <div class="modal-body">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="control-label">Recipient:</label>
-                                            <input type="text" class="form-control" id="recipient-name">
+
+
+                                    <div class="form-group">
+                                            <label for="recipient-name" class="control-label">ชื่อ องค์กร /มูลนิธิ:</label>
+                                            <input type="text" class="form-control" id="recipient-name" v-model="orz_user_select.title">
+                                    </div>
+
+                                    <legend>Address Details</legend>
+                                    <div class="form-group" id="demo1">
+                                        <label class="col-sm-1 control-label" for="textinput">ที่อยู่</label>
+                                        <div class="col-sm-11">
+                                            <input type="text" placeholder="Address Line 1" class="form-control" v-model="orz_user_select.address">
                                         </div>
-                                        <div class="form-group">
-                                            <label for="message-text" class="control-label">Message:</label>
-                                            <textarea class="form-control" id="message-text"></textarea>
+                                        <label class="col-sm-1 control-label" for="textinput">ตำบล</label>
+                                        <div class="col-sm-11">
+                                            <input ref="district" :value="orz_user_select.district" name="district" class="uk-input form-control" type="text">
                                         </div>
-                                    </form>
+                                        <label class="col-sm-1 control-label" for="textinput">อำเภอ</label>
+                                        <div class="col-sm-11">
+                                            <input ref="amphoe" :value="orz_user_select.amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe">
+                                        </div>
+                                        <label class="col-sm-1 control-label" for="textinput">จังหวด</label>
+                                        <div class="col-sm-11">
+                                            <input ref="province" :value="orz_user_select.province" name="province" class="uk-input form-control" type="text">
+                                        </div>
+                                        <label class="col-sm-1 control-label" for="textinput">รหัสไปรษณีย์</label>
+                                        <div class="col-sm-11">
+                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orz_user_select.stage_code">
+                                        </div>
+                                    </div>
+
+
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Send message</button>
+                                    <button type="button" class="btn btn-primary">Update</button>
                                 </div>
                             </div>
                         </div>
