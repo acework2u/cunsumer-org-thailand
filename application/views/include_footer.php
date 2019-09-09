@@ -202,7 +202,7 @@
 <div class="control-sidebar-bg"></div>
 </div>
 <!-- ./wrapper -->
-<script src="https://cdn.jsdelivr.net/npm/vuetify/dist/vuetify.js"></script>
+<script src="<?php echo base_url('assets/js/vuetify.js')?>"></script>
 <!-- jQuery 3 -->
 <script src="<?php echo base_url('assets/bower_components/jquery/dist/jquery.min.js')?>"></script>
 <!-- jQuery UI 1.11.4 -->

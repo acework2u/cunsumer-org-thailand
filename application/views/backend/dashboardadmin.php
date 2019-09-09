@@ -122,12 +122,94 @@
                                     <h4 class="modal-title" id="exampleModalLabel">Update : Organization Information</h4>
                                 </div>
                                 <div class="modal-body">
+                                    <div class="row">
+                                    <div class="form-group">
+                                        <label for="orzLogo" class="col-sm-2 control-label">โลโก้</label>
+                                        <div class="col-sm-5"><img v-if="orzInformation.logo && orzInformation.logo.length > 0" style="max-width: 250px;max-height: 110px;" :src="orzLogo" ></div>
+                                        <div class="col-sm-5">
+                                            <input type="file" id="file" ref="file" accept="image/*"
+                                                   v-on:change="handleFileUpload()"/>
+                                            <img style="max-width: 50%" v-bind:src="imagePreview" v-show="showPreview"/>
+                                            <br>
+                                            <progress max="100" :value.prop="uploadPercentage"></progress>
+                                            <br>
+                                            <button class="btn btn-success" v-on:click="submitFile()">Upload</button>
 
 
+                                            <!--                                            <input type="file" class="form-control" id="orzLogo" placeholder="">-->
+                                            <input type="hidden" name="orz_aid" :value="orzInformation.aid" >
+                                        </div>
+
+                                    </div>
+                                    </div>
                                     <div class="form-group">
                                             <label for="recipient-name" class="control-label">ชื่อ องค์กร /มูลนิธิ:</label>
                                             <input type="text" class="form-control" id="recipient-name" v-model="orz_user_select.title">
                                     </div>
+                                    <div class="form-group">
+                                        <label class="control-label">กลุ่มมูลนิธิ</label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control" @change="onChange($event)" v-model="orzInformation.orz_group_id">
+                                                <option v-for="item in orz_group" :value="item.aid">{{item.title_th}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="orzmileStone" class="control-label">วัตถุประสงค์</label>
+                                        <div class="col-sm-12">
+                                            <!--                                            <textarea :value.prop="orzInformation.objective" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
+                                            <ckeditor :editor="editor" v-model="orzInformation.objective" :config="editorConfig"></ckeditor>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telContact1" class="control-label">รายชื่อคณะกรรมการ</label>
+                                        <div class="col-sm-12">
+                                            <!--                                            <textarea :value ="orzInformation.board_of_directors" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
+                                            <ckeditor :editor="editor" v-model="orzInformation.board_of_directors" :config="editorConfig"></ckeditor>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="orzmileStone" class="control-label">ผลงานย้อนหลังในรอบ 10 ปี</label>
+                                        <div class="col-sm-12">
+                                            <!--                                            <textarea :value.prop ="orzInformation.portfolio" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
+                                            <ckeditor :editor="editor" v-model="orzInformation.portfolio" :config="editorConfig"></ckeditor>
+
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="mainContact1" class="col-sm-2 control-label">ผู้ประสานงานหลัก</label>
+                                        <div class="col-sm-5">
+                                            <input v-model="orzInformation.contact_name" type="text" class="form-control" id="mainContact1" placeholder="Name">
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <input v-model="orzInformation.contact_lastname" type="text" class="form-control" id="mainLastContact1" placeholder="Lastname">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="emailContact1" class="col-sm-2 control-label">Email</label>
+                                        <div class="col-sm-10">
+                                            <input v-model="orzInformation.email" type="email" class="form-control" id="emailContact1" placeholder="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="websiteContact1" class="col-sm-2 control-label">Website</label>
+                                        <div class="col-sm-10">
+                                            <input v-model="orzInformation.website" type="text" class="form-control" id="websiteContact1" placeholder="http://www.youwebsite.com">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="telContact1" class="col-sm-2 control-label">เบอร์ติดต่อองค์กร</label>
+                                        <div class="col-sm-10">
+                                            <input v-model="orzInformation.orz_tel" type="text" class="form-control" id="telContact1" placeholder="02 123 456">
+                                        </div>
+                                    </div>
+
+
 
                                     <legend>Address Details</legend>
                                     <div class="form-group" id="demo1">
@@ -149,15 +231,18 @@
                                         </div>
                                         <label class="col-sm-1 control-label" for="textinput">รหัสไปรษณีย์</label>
                                         <div class="col-sm-11">
-                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orz_user_select.stage_code">
+                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orz_user_select.stage_code" readonly>
                                         </div>
                                     </div>
+
+
+
 
 
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Update</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveOrzInfobyAdmin">Update</button>
                                 </div>
                             </div>
                         </div>

@@ -75,11 +75,11 @@ var lastdonate = new Vue({
             orz_logo: false,
             orz_all: [],
             orz_total: 0,
-            orz_user_select:{},
-            volunteers:[],
-            volunteer:{},
-            textSuccess:"Sending...",
-            savingStatus:false,
+            orz_user_select: {},
+            volunteers: [],
+            volunteer: {},
+            textSuccess: "Sending...",
+            savingStatus: false,
             time: new Date(),
             startTime: firstDay,
             endTime: lastDay,
@@ -103,7 +103,7 @@ var lastdonate = new Vue({
                 submitTip: 'confirm'
             },
 
-            columns: ['created_date', 'title', 'contact_name', 'email', 'contact_tel', 'province','status','updated_date', 'action','action_1','action_2','action_3','action_4'],
+            columns: ['created_date', 'title', 'contact_name', 'email', 'contact_tel', 'province', 'status', 'updated_date', 'action', 'action_1', 'action_2', 'action_3', 'action_4'],
             options: {
                 headings: {
                     created_date: 'Register Date',
@@ -126,14 +126,12 @@ var lastdonate = new Vue({
 
                 },
                 pagination: {chunk: 10},
-                sortable: ['index', 'orz_name'],
-                filterable: ['index', 'orz_name'],
+                sortable: ['created_date', 'title','province','status'],
+                filterable: ['created_date', 'title','province','status'],
                 perPage: 10,
                 perPageValues: [10, 25, 50, 100, 500, 1000],
 
             },
-
-
 
 
         }
@@ -159,18 +157,18 @@ var lastdonate = new Vue({
         })
     },
     computed: {
-        filterVolunteers(){
-          return this.volunteers
+        filterVolunteers() {
+            return this.volunteers
         },
-        filOrzLogo(){
+        filOrzLogo() {
 
             let img_logo = "assets/image/no-logo-2.png"
-            if(!this.orz_user_select.logo){
+            if (!this.orz_user_select.logo) {
                 img_logo = "assets/image/no-logo-2.png"
-            }else{
+            } else {
                 img_logo = this.orz_user_select.logo
             }
-            return baseUrl+"/"+img_logo
+            return baseUrl + "/" + img_logo
         },
         filterOrzTotal() {
             return this.orz_total = this.orz_all.length
@@ -282,39 +280,39 @@ var lastdonate = new Vue({
         }
 
 
-
     },
     methods: {
-        orzUserClick(item){
+        orzUserClick(item) {
             this.orz_user_select = item
+            this.orzInformation = item
             console.log(item)
         },
-        approvedOrz(item){
-          // console.info(item)
+        approvedOrz(item) {
+            // console.info(item)
 
-          let orz_id = item.aid
-          let orz_status = 4
-          let baseAPi = baseUrl+"/api/v1/orz/backend/orz-update-status?status="+orz_status+"&id="+orz_id
+            let orz_id = item.aid
+            let orz_status = 4
+            let baseAPi = baseUrl + "/api/v1/orz/backend/orz-update-status?status=" + orz_status + "&id=" + orz_id
             console.log(baseAPi)
-          axios.get(baseAPi).then((res)=>{
-              if(res.error){
+            axios.get(baseAPi).then((res) => {
+                if (res.error) {
 
-              }else{
-                  this.getOrganizationList();
-                  // console.log(res.data)
-              }
-          })
+                } else {
+                    this.getOrganizationList();
+                    // console.log(res.data)
+                }
+            })
         },
-        cancledOrz(item){
+        cancledOrz(item) {
             // console.info(item)
             let orz_id = item.aid
             let orz_status = 3
-            let baseAPi = baseUrl+"/api/v1/orz/backend/orz-update-status?status="+orz_status+"&id="+orz_id
+            let baseAPi = baseUrl + "/api/v1/orz/backend/orz-update-status?status=" + orz_status + "&id=" + orz_id
             console.log(baseAPi)
-            axios.get(baseAPi).then((res)=>{
-                if(res.error){
+            axios.get(baseAPi).then((res) => {
+                if (res.error) {
 
-                }else{
+                } else {
                     this.getOrganizationList();
                     // console.log(res.data)
                 }
@@ -344,8 +342,8 @@ var lastdonate = new Vue({
             })
 
         },
-        volunteerClickInfo(item){
-                this.volunteer = item
+        volunteerClickInfo(item) {
+            this.volunteer = item
         },
         donorClicked(item) {
             let baseApi = baseUrl + "/admin/reports/donor-info";
@@ -367,18 +365,18 @@ var lastdonate = new Vue({
                 this.orzInformation = res.data
             })
         },
-        getVolunteers(){
-            setTimeout(()=>{
+        getVolunteers() {
+            setTimeout(() => {
                 // console.log(this.orzInformation);
                 let orz_id = this.orzInformation.aid;
-                if(orz_id){
-                    let API = baseUrl+"/api/v1/orz/backend/volunteer?orz_id="+orz_id;
-                    axios.get(API).then((res)=>{
+                if (orz_id) {
+                    let API = baseUrl + "/api/v1/orz/backend/volunteer?orz_id=" + orz_id;
+                    axios.get(API).then((res) => {
                         this.volunteers = res.data
                         // console.log(res.data)
                     })
                 }
-            },2000)
+            }, 2000)
         },
         getOrzgroup() {
             axios.get(baseUrl + '/api/v1/orz-group').then((res) => {
@@ -470,16 +468,47 @@ var lastdonate = new Vue({
                 let dataInfo = this.orzInformation
                 var fromData = this.toFormData(dataInfo)
 
-                 this.savingStatus = true;
+                this.savingStatus = true;
                 axios.post(ApiUrl, fromData).then((res) => {
-                        this.textSuccess = res.data.message
-                    setTimeout(()=>{
+                    this.textSuccess = res.data.message
+                    setTimeout(() => {
                         this.savingStatus = false
                         this.textSuccess = ""
-                    },3000)
+                    }, 3000)
                     // console.info(res.data)
                 });
 
+
+            })
+
+            // console.log(this.orzInformation);
+        },
+        saveOrzInfobyAdmin() {
+            let ApiUrl = baseUrl + "/api/v1/orz-update"
+            this.$nextTick(() => {
+                let zipcode = this.$refs.zipcode.value
+                let district = this.$refs.district.value
+                let amphoe = this.$refs.amphoe.value
+                let province = this.$refs.province.value
+
+                this.orzInformation.district = district
+                this.orzInformation.amphoe = amphoe
+                this.orzInformation.province = province
+                this.orzInformation.zipcode = zipcode
+
+                let dataInfo = this.orzInformation
+                var fromData = this.toFormData(dataInfo)
+
+                this.savingStatus = true;
+                axios.post(ApiUrl, fromData).then((res) => {
+                    this.textSuccess = res.data.message
+                    setTimeout(() => {
+                        this.savingStatus = false
+                        this.textSuccess = ""
+                    }, 3000)
+                    // console.info(res.data)
+                });
+                this.getOrganizationList()
 
 
             })
