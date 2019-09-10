@@ -257,10 +257,6 @@ window.onload = function () {
                         full_name: 'มูลนิธิเพื่อผู้บริโภค',
                         lat: '13.7636865',
                         lng: '100.5374741'
-                    },{
-                        full_name: 'Demo',
-                        lat: '13.7436865',
-                        lng: '100.4374741'
                     }
                 ],
                 infoPosition: null,
@@ -317,7 +313,9 @@ window.onload = function () {
 
                 axios.get(orzApi + "?province_code=" + province_code).then((res) => {
                     this.orz_list = res.data.orz_info
-                    // console.log(this.orz_list)
+                    // coordinates
+                    this.coordinates = res.data.coordinates
+                     console.log(this.orz_list)
                 })
                 // console.log(orzApi)
 

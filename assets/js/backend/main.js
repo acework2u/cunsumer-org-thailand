@@ -1,11 +1,21 @@
 var baseUrl = window.location.origin;
 
+
 var date = new Date(), y = date.getFullYear(), m = date.getMonth();
 var firstDay = new Date(y, m, 1);
 var lastDay = new Date(y, m + 1, 0);
 
 Vue.use(CKEditor)
 Vue.use(VueTables.ClientTable);
+
+Vue.use(VueGoogleMaps, {
+    load: {
+        key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8',
+        libraries: "places",
+        region: 'TH',
+    },
+});
+
 Vue.component('pagination', Pagination);
 Vue.filter('formatBaht', (value) => {
     if (value) {
@@ -170,6 +180,16 @@ var lastdonate = new Vue({
             }
             return baseUrl + "/" + img_logo
         },
+        filOrzLogoAdmin() {
+
+            let img_logo = "assets/image/no-logo-2.png"
+            if (!this.orzInformation.logo) {
+                img_logo = "assets/image/no-logo-2.png"
+            } else {
+                img_logo = this.orzInformation.logo
+            }
+            return baseUrl + "/" + img_logo
+        },
         filterOrzTotal() {
             return this.orz_total = this.orz_all.length
         },
@@ -282,6 +302,11 @@ var lastdonate = new Vue({
 
     },
     methods: {
+        userClickClear(){
+            this.orz_user_select = {}
+            this.orzInformation = {}
+            this.$refs.file.value = ''
+        },
         orzUserClick(item) {
             this.orz_user_select = item
             this.orzInformation = item
@@ -426,11 +451,13 @@ var lastdonate = new Vue({
               Initialize the form data
             */
             let formData = new FormData();
+            let full_img = "";
             /*
               Add the form data we need to submit
             */
             formData.append('file', this.file);
             formData.append('aid', this.orzInformation.aid);
+            // this.orzInformation.logo = this.file.name
             /*
               Make the request to the POST /single-file URL
             */
@@ -446,11 +473,19 @@ var lastdonate = new Vue({
                     }.bind(this)
                 }
             ).then(function (response) {
-                // console.log(response);
+                // console.log(response.data.full_img);
+                // console.info("Upload logo Successful")
+                full_img = response.data.full_img
+                lastdonate.orzInformation.logo =  full_img;
             })
                 .catch(function () {
-                    // // console.log('FAILURE!!');
+                    // console.log('FAILURE!!');
                 });
+
+            // this.orzInformation.logo =  full_img;
+
+
+
         },
         saveOrzInfo() {
             let ApiUrl = baseUrl + "/api/v1/orz-update"
@@ -509,6 +544,7 @@ var lastdonate = new Vue({
                     // console.info(res.data)
                 });
                 this.getOrganizationList()
+                this.userClickClear()
 
 
             })

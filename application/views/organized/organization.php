@@ -213,8 +213,8 @@
     <div id="register" class="register p-relative">
         <div class="container container-lg">
             <div class="form-header p-absolute text-right d-none d-sm-block">
-                <h1>ลงทะเบียนสมาชิกองค์การผู้บริโภค</h1>
-                <p class="text-white">ร่วมสานพลัง เพื่อพิทักษ์สิธิผู้บริโภค</p>
+                <h1>ลงทะเบียนสมาชิกองค์กรผู้บริโภค</h1>
+                <p class="text-white">ร่วมสานพลัง เพื่อพิทักษ์สิทธผู้บริโภค</p>
             </div>
             <div class="form-header text-center d-block d-sm-none">
                 <h1 class="mb-0 pt-4">ลงทะเบียนสมาชิกองค์การผู้บริโภค</h1>
@@ -558,7 +558,7 @@
         </div>
     </div>
     <div id="search" class="search text-center">
-        <h1 class="mt-5 mb-0">ค้นหาสภาองค์กรผู้บริโภคทั่วประเทศ</h1>
+        <h1 class="mt-5 mb-0">ค้นหาองค์กรผู้บริโภคทั่วประเทศ</h1>
         <div class="container container-lg py-5 py-4-sm">
             <div class="row m-auto">
                 <div class="col-sm my-4-sm">
@@ -1025,7 +1025,7 @@
     <script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/vue-organization.js'); ?>"></script>
 
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/js/uikit.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/uikit.min.js');?>"></script>
     <!-- dependencies for zip mode -->
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/zip.js/zip.js')?>"></script>
     <!-- / dependencies for zip mode -->

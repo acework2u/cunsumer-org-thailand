@@ -326,10 +326,30 @@ class Organized extends MY_Controller
         $this->province->setProvinceCode($province_code);
         $province_info = $this->province->provinces_by_code();
 
+
+        $orz_in_place = array();
+        if(!is_blank($orz_info)){
+            foreach ($orz_info as $row){
+                $rows = array(
+                    'full_name'=>get_array_value($row,'title'),
+                    'lat'=>get_array_value($row,'latitude','0.00'),
+                    'lng'=>get_array_value($row,'longitude','0.00'),
+                );
+
+                $orz_in_place[] = $rows;
+            }
+        }
+
+
+
+
         $data = array(
             'province_info'=>$province_info,
-            'orz_info'=>$orz_info
+            'orz_info'=>$orz_info,
+            'coordinates'=>$orz_in_place
         );
+
+
 
 
 

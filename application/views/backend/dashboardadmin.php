@@ -125,8 +125,9 @@
                                     <div class="row">
                                     <div class="form-group">
                                         <label for="orzLogo" class="col-sm-2 control-label">โลโก้</label>
-                                        <div class="col-sm-5"><img v-if="orzInformation.logo && orzInformation.logo.length > 0" style="max-width: 250px;max-height: 110px;" :src="orzLogo" ></div>
-                                        <div class="col-sm-5">
+                                        <div class="col-sm-5"><img :src="filOrzLogoAdmin" style="max-height: 134px;max-width: 80%" ></div>
+
+                                        <div class="col-sm-5 right">
                                             <input type="file" id="file" ref="file" accept="image/*"
                                                    v-on:change="handleFileUpload()"/>
                                             <img style="max-width: 50%" v-bind:src="imagePreview" v-show="showPreview"/>
@@ -177,7 +178,7 @@
                                         <div class="col-sm-12">
                                             <!--                                            <textarea :value.prop ="orzInformation.portfolio" class="form-control" rows="3" placeholder="Enter ..."></textarea>-->
                                             <ckeditor :editor="editor" v-model="orzInformation.portfolio" :config="editorConfig"></ckeditor>
-
+<!--                                            <vue-ckeditor type="classic" v-model="orzInformation.portfolio" :upload-adapter="UploadAdapter"></vue-ckeditor><br /><br />-->
                                         </div>
                                     </div>
 
@@ -211,8 +212,11 @@
 
 
 
-                                    <legend>Address Details</legend>
+
                                     <div class="form-group" id="demo1">
+                                        <legend>Address Details</legend>
+
+
                                         <label class="col-sm-1 control-label" for="textinput">ที่อยู่</label>
                                         <div class="col-sm-11">
                                             <input type="text" placeholder="Address Line 1" class="form-control" v-model="orz_user_select.address">
@@ -234,19 +238,40 @@
                                             <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orz_user_select.stage_code" readonly>
                                         </div>
                                     </div>
+                                   <div class="form-group">
+                                       <legend>Google Place location</legend>
+                                       <button class="btn btn-info" @click="updateCenter">New Marker</button>
+                                       <gmap-map ref="mymap" :center="startLocation" :zoom="startLocation.zoom" style="width: 100%; height: 600px">
 
+<!--                                           <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false">-->
+<!--                                               {{infoContent}}-->
+<!--                                           </gmap-info-window>-->
+
+<!--                                           <gmap-marker :position="getPosition(orzInformation)" :clickable="true" @click="toggleInfo(item, key)" />-->
+<!--                                           <gmap-marker :position="updateCenter">-->
+<!--                                           </gmap-marker>-->
+<!--                                           <gmap-marker :position="getPosition(orzInformation)" :clickable="true" />-->
+
+                                           <gmap-marker ref="myLocation" v-for="(item, key) in coordinates" :key="key" :position="getPosition(item)" :clickable="true" :draggable="true" @dragend="showLocation" @click="toggleInfo(item, key)" />
+
+
+                                       </gmap-map>
+
+                                   </div>
 
 
 
 
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal" @click="userClickClear">Close</button>
                                     <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveOrzInfobyAdmin">Update</button>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+
                     <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
                         <div class="modal-dialog modal-lg" role="document">
                             <div class="modal-content">
@@ -412,4 +437,7 @@
 </div>
 <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
 <script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script>
-<script src="<?php echo base_url('assets/js/backend/main.js') ?>"></script>
+<!--<script src="--><?php //echo base_url('assets/js/backend/main.js') ?><!--"></script>-->
+<script src="<?php echo base_url('assets/js/vue-google-maps.js'); ?>"></script>
+<script src="<?php echo base_url('assets/js/backend/admin-dashboard.js') ?>"></script>
+

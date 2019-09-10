@@ -134,11 +134,13 @@ class Dashboard extends MY_Controller{
 
             $this->orz->orz_logo();
 
+            $res['full_img'] = $img_full;
 
-            echo json_encode($res);
+
+
 
         }
-
+        echo json_encode($res);
 
 
 
