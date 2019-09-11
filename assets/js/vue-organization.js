@@ -38,6 +38,7 @@ window.onload = function () {
         mounted() {
             this.$nextTick(() => { // ES6 arrow function
                 // this.$refs.input_name.focus()
+
             })
         },
         methods: {
@@ -422,6 +423,7 @@ window.onload = function () {
         mounted() {
             this.$nextTick(() => { // ES6 arrow function
                 this.geolocate()
+                this.searchOrz()
             })
         },
 
