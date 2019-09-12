@@ -378,6 +378,9 @@ class Organized_model extends MY_Model
     }
 
     public function orz_all(){
+        $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status,orz_in_province.province_code');
+        $this->db->join($this->tbl_orz_status, 'organization.`status` = orz_status.aid', 'left');
+        $this->db->join($this->tbl_orz_in_province,'orz_in_province.orz_aid = organization.aid','left');
         $query = $this->db->order_by('aid','desc')->get($this->tbl_organization);
         $result=array();
         if($query->num_rows() > 0){

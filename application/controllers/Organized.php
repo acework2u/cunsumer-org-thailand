@@ -334,6 +334,7 @@ class Organized extends MY_Controller
                     'full_name'=>get_array_value($row,'title'),
                     'lat'=>get_array_value($row,'latitude','0.00'),
                     'lng'=>get_array_value($row,'longitude','0.00'),
+                     'full_desc'=>$row  ,
                 );
 
                 $orz_in_place[] = $rows;

@@ -254,12 +254,7 @@ window.onload = function () {
                 ggOptions:{
                     zoom:5
                 },
-                coordinates: [{
-                        full_name: 'มูลนิธิเพื่อผู้บริโภค',
-                        lat: '13.7636865',
-                        lng: '100.5374741'
-                    }
-                ],
+                coordinates: [],
                 infoPosition: null,
                 infoContent: null,
                 infoOpened: false,
@@ -330,7 +325,8 @@ window.onload = function () {
             },
             toggleInfo: function(marker, key) {
                 this.infoPosition = this.getPosition(marker);
-                this.infoContent = marker.full_name;
+                // this.infoContent = marker.full_name;
+                this.infoContent = this.getInfoWindowContent(marker.full_desc);
 
 
 
@@ -340,6 +336,14 @@ window.onload = function () {
                     this.infoOpened = true;
                     this.infoCurrentKey = key;
                 }
+            },getInfoWindowContent: function (marker) {
+                return (`<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${marker.title}</h5>
+    <p class="card-text">${marker.address} ${marker.stage_code}</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=${marker.latitude},${marker.longitude}" class="btn btn-primary">Go Directions</a>
+  </div>
+</div>`);
             },
             geolocate(){
 

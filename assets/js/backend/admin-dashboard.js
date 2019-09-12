@@ -178,6 +178,9 @@ window.onload = function () {
                 },
                 ggmap:{},
                 center : {lat: 15.8700, lng: 100.9925},
+                markers: [],
+                places: [],
+                currentPlace: null,
                 startLocation: {
                     lat: '',
                     lng: '',
@@ -186,12 +189,7 @@ window.onload = function () {
                 ggOptions:{
                     zoom:5
                 },
-                coordinates: [{
-                    full_name: 'มูลนิธิเพื่อผู้บริโภค',
-                    lat: '13.7636865',
-                    lng: '100.5374741'
-                }
-                ],
+                coordinates: [],
                 infoPosition: null,
                 infoContent: null,
                 infoOpened: false,
@@ -225,6 +223,16 @@ window.onload = function () {
                 this.getVolunteers()
                 this.getOrzlist()
                 this.thailandLocation()
+                this.geolocate()
+                this.getCoordinates();
+
+                /*
+                this.$refs.mymap.$mapPromise.then((map) => {
+                    map.panTo({lat: this.center.lat, lng: this.center.lng})
+                })
+                */
+
+
             })
         },
         computed: {
@@ -358,6 +366,9 @@ window.onload = function () {
                 let apiUrls = baseUrl + "/admin/reports/approved-logs-exportxls?startDate=" + start_date + "&endDate=" + end_date
 
                 return apiUrls
+            },
+            fillCoordinates(){
+                return this.coordinates
             }
 
 
@@ -372,6 +383,26 @@ window.onload = function () {
                 this.orz_user_select = item
                 this.orzInformation = item
                 console.log(item)
+
+
+                this.coordinates = [{
+                    lat: this.orzInformation.latitude,
+                    lng: this.orzInformation.longitude,
+                    full_name: this.orzInformation.title,
+                    full_desc: this.orzInformation
+                }]
+
+
+
+            },
+            getCoordinates(){
+                let item = this.orzInformation
+                this.coordinates=[]
+                coordinates = [{
+                    lat:this.orzInformation.latitude,
+                    lng:this.orzInformation.longitude,
+                    full_name:this.orzInformation
+                }]
             },
             approvedOrz(item) {
                 // console.info(item)
@@ -665,12 +696,21 @@ window.onload = function () {
                 //     lng: center.lng()
                 // }
 
-                // console.info(this.$refs.mymap)
+                this.startLocation = {
+                    lat: Number(center.lat),
+                    lng: Number(center.lng),
+                    zoom:Number(center.zoom)
+                }
+
+                console.info(this.$refs.mymap)
                 console.info(this.$refs.myLocation)
             },
             toggleInfo: function(marker, key) {
                 this.infoPosition = this.getPosition(marker);
-                this.infoContent = marker.full_name;
+                // this.infoContent = marker.full_name;
+                this.infoContent = this.getInfoWindowContent(marker.full_desc);
+                // this.infoContent = marker;
+
 
 
 
@@ -681,6 +721,16 @@ window.onload = function () {
                     this.infoCurrentKey = key;
                 }
             },
+            getInfoWindowContent: function (marker) {
+                return (`<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">${marker.title}</h5>
+    <p class="card-text">${marker.address} ${marker.stage_code}</p>
+    <a href="https://www.google.com/maps/search/?api=1&query=${marker.latitude},${marker.longitude}" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>`);
+            },
+
             showLocation: function(evt){
                 console.log(evt.latLng.toString());
 
@@ -699,40 +749,101 @@ window.onload = function () {
 
 
 
+            },
+            addMarker() {
+
+                let full_descript = this.getInfoWindowContent(this.orzInformation)
+                if (this.currentPlace) {
+                    const marker = {
+                        lat: this.startLocation.lat,
+                        lng: this.startLocation.lng
+                    };
+                    this.markers.push({ position: marker });
+                    this.places.push(this.currentPlace);
+                    this.center = marker;
+                    this.currentPlace = null;
+                }else{
+
+
+
+                    let ad_lat = this.$refs.mymap.center.lat
+                    let ad_lng = this.$refs.mymap.center.lng
+
+                    this.orzInformation.latitude = ad_lat
+                    this.orzInformation.longitude = ad_lng
+
+
+                    const marker = {
+                        // full_name:this.orzInformation.title,
+                        lat: this.orzInformation.latitude,
+                        lng: this.orzInformation.longitude,
+                        full_desc: this.orzInformation,
+                        full_name: this.orzInformation.title
+                    };
+                    // this.coordinates.push({ position: marker });
+                    this.coordinates.push(marker);
+                    this.places.push(this.currentPlace);
+                    this.center = marker;
+                    this.currentPlace = null;
+                }
+
+
+
+
+
+
+                console.info(this.coordinates)
+
+                // console.info("lat = "+this.currentPlace.geometry.location.lat()+"lng = "+this.currentPlace.geometry.location.lng())
+            },
+            clearMarker(){
+                this.coordinates = []
+            },
+            geolocate: function() {
+                // navigator.geolocation.getCurrentPosition(position => {
+                //     this.center = {
+                //         lat: position.coords.latitude,
+                //         lng: position.coords.longitude
+                //     };
+                // });
+                this.thailandLocation()
+                // if(this.zone===0 || this.province===0){
+                //     this.thailandLocation()
+                // }
+            },
+            updateRouteLatLng(){
+                console.info(this.$refs.mymap)
+                this.currentPlace.lat = this.$refs.mymap.center.lat
+                this.currentPlace.lng = this.$refs.mymap.center.lng
+
+            },
+            setPlace(place) {
+                this.currentPlace = place;
+                console.log(place)
+            },
+            async curentPostion(){
+
+                let api = baseUrl+"/api/v1/get-geo-location"
+                let provin_code = this.orzInformation.province_code
+
+                let promiseA = provin_code
+                let promiseB = axios.get(api+"?province_code="+promiseA)
+
+                let resultA = await promiseA
+                let resultB = await promiseB
+                // console.log(api+"?province_code="+promiseA)
+                // console.log(this.orzInformation)
+
+                if(resultB.data.error){
+
+                }else{
+                    this.updateCenter(resultB.data.message)
+                    // console.info(resultB.data.message)
+                }
             }
 
-        },
-        <!-- this is example of UploadAdapter implementation -->
-        /*
-        UploadAdapter(loader){
-            this.loader = loader
-
-            this.upload = () => {
-                const body = new FormData();
-                body.append('file', this.loader.file);
-
-                <!-- write your url for uploading and build your Request -->
-                return fetch('http://domain/upload', {
-                    body: body,
-                    method: 'POST'
-                })
-                    .then(response => response.json())
-                    .then(downloadUrl => {
-                        return {
-                            <!-- return your url for downloading -->
-                            default: downloadUrl
-                        }
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-            }
-
-            this.abort = () => {
-                console.log('Abort upload.')
-            }
         }
-        */
+
     });
 
 

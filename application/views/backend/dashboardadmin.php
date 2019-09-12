@@ -240,19 +240,22 @@
                                     </div>
                                    <div class="form-group">
                                        <legend>Google Place location</legend>
-                                       <button class="btn btn-info" @click="updateCenter">New Marker</button>
-                                       <gmap-map ref="mymap" :center="startLocation" :zoom="startLocation.zoom" style="width: 100%; height: 600px">
+                                       <label>
+                                           <button class="btn btn-success" @click="addMarker">Add</button>
+                                       </label>
 
-<!--                                           <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false">-->
-<!--                                               {{infoContent}}-->
-<!--                                           </gmap-info-window>-->
+                                       <button class="btn btn-info" @click="clearMarker">New Marker</button>
+                                       <button class="btn btn-info" @click="curentPostion">Update Place</button>
+                                       <gmap-map ref="mymap" :center="startLocation" :zoom="startLocation.zoom" :options='{disableDefaultUI: true, zoomControl: true, autobindAllEvents: true}' style="width: 100%; height: 600px">
 
-<!--                                           <gmap-marker :position="getPosition(orzInformation)" :clickable="true" @click="toggleInfo(item, key)" />-->
-<!--                                           <gmap-marker :position="updateCenter">-->
-<!--                                           </gmap-marker>-->
-<!--                                           <gmap-marker :position="getPosition(orzInformation)" :clickable="true" />-->
+                                           <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false" @center_changed="updateRouteLatLng">
 
-                                           <gmap-marker ref="myLocation" v-for="(item, key) in coordinates" :key="key" :position="getPosition(item)" :clickable="true" :draggable="true" @dragend="showLocation" @click="toggleInfo(item, key)" />
+
+                                               <div v-html="infoContent"></div>
+                                           </gmap-info-window>
+
+
+                                           <gmap-marker ref="myLocation" v-for="(item, key) in fillCoordinates" :key="key" :position="getPosition(item)" :clickable="true" :draggable="true" @dragend="showLocation" @click="toggleInfo(item, key)" />
 
 
                                        </gmap-map>

@@ -584,7 +584,7 @@
                     <gmap-map ref="mymap" :center="startLocation" :zoom="startLocation.zoom" style="width: 100%; height: 600px">
 
                         <gmap-info-window :options="infoOptions" :position="infoPosition" :opened="infoOpened" @closeclick="infoOpened=false">
-                            {{infoContent}}
+                            <div v-html="infoContent"></div>
                         </gmap-info-window>
 
                         <gmap-marker v-for="(item, key) in coordinates" :key="key" :position="getPosition(item)" :clickable="true" @click="toggleInfo(item, key)" />
