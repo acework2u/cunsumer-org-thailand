@@ -7,14 +7,16 @@ var lastDay = new Date(y, m + 1, 0);
 
 Vue.use(CKEditor)
 Vue.use(VueTables.ClientTable);
-
 Vue.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8',
-        libraries: "places",
+        key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
+        libraries: "places,geometry",
         region: 'TH',
+        language:'th'
     },
 });
+
+
 
 Vue.component('pagination', Pagination);
 Vue.filter('formatBaht', (value) => {
@@ -142,6 +144,13 @@ var lastdonate = new Vue({
                 perPageValues: [10, 25, 50, 100, 500, 1000],
 
             },
+            center : {lat: 15.8700, lng: 100.9925},
+            markers: [],
+            places: [],
+            zoom:6,
+            description:"",
+            latLng: {},
+            currentPlace: null,
 
 
         }
@@ -154,6 +163,7 @@ var lastdonate = new Vue({
         // this.getOrganizationList()
         // this.getVolunteers()
         // this.getOrzlist()
+        this.getCoordinates()
     },
     mounted() {
         this.$nextTick(() => {
@@ -164,6 +174,10 @@ var lastdonate = new Vue({
             this.getOrganizationList()
             this.getVolunteers()
             this.getOrzlist()
+
+            this.geolocate()
+            this.getCoordinates()
+            this.initMarker()
         })
     },
     computed: {
@@ -297,6 +311,12 @@ var lastdonate = new Vue({
             let apiUrls = baseUrl + "/admin/reports/approved-logs-exportxls?startDate=" + start_date + "&endDate=" + end_date
 
             return apiUrls
+        },
+        fillCoordinates(){
+            return this.coordinates
+        },
+        fillMarkers(){
+            return this.markers
         }
 
 
@@ -585,7 +605,99 @@ var lastdonate = new Vue({
             // console.log(baseApi2)
 
 
+        },
+        setPlace(place) {
+
+            this.currentPlace = place;
+            console.log(place)
+
+            if(place){
+                this.latLng = {
+                    lat: place.geometry.location.lat(),
+                    lng: place.geometry.location.lng(),
+                };
+            }
+
+
+        },
+        addMarker2(){
+            if (this.currentPlace) {
+                const marker = {
+                    lat: this.currentPlace.geometry.location.lat(),
+                    lng: this.currentPlace.geometry.location.lng()
+                };
+
+                this.orzInformation.latitude = this.currentPlace.geometry.location.lat()
+                this.orzInformation.longitude = this.currentPlace.geometry.location.lng()
+
+                this.markers.push({ position: marker });
+
+
+                this.places.push(this.currentPlace);
+                this.center = marker;
+                this.currentPlace = null;
+                this.zoom =5
+            }
+        },
+        showLocation: function(evt){
+            console.log(evt.latLng.toString());
+
+            let currenLatlng = evt.latLng.toString();
+            currenLatlng = currenLatlng.replace("(","");
+            currenLatlng = currenLatlng.replace(")","");
+            let markerLatlang = currenLatlng.split(',');
+            let marker_lat =   markerLatlang[0]
+            let marker_lng =   markerLatlang[1]
+            this.orzInformation.latitude = parseFloat(marker_lat)
+            this.orzInformation.latitude2 =  markerLatlang
+            this.orzInformation.longitude =  parseFloat(marker_lng)
+
+            console.log("lat = "+marker_lat+" Lng = "+marker_lng);
+            console.log(this.orzInformation)
+
+
+
+        },
+        geolocate: function() {
+            navigator.geolocation.getCurrentPosition(position => {
+                this.center = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+            });
+            // this.thailandLocation()
+
+        },
+        getCoordinates(){
+            this.coordinates = [{
+                lat: this.orzInformation.latitude,
+                lng: this.orzInformation.longitude,
+                full_name: this.orzInformation.title,
+                full_desc: this.orzInformation
+            }]
+        },
+        initMarker(){
+            // this.markers =[{
+            //     position:{
+            //         lat: this.orzInformation.latitude,
+            //         lng: this.orzInformation.longitude
+            //     }
+            // }]
+
+            console.log("Info")
+
+        },
+        clearMarker(){
+            this.coordinates = []
+            this.markers = []
+        },
+        getPosition: function(marker) {
+            return {
+                lat: parseFloat(marker.lat),
+                lng: parseFloat(marker.lng)
+            }
         }
+
 
     }
 

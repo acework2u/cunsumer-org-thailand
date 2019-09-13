@@ -351,6 +351,29 @@
                                 <label for="province" class="col-sm-2 control-label">Longitude</label>
                                 <div class="col-sm-4"><input name="latitude" class="form-control" v-model="orzInformation.longitude"></div>
 
+                                <gmap-autocomplete :value="description" placeholder="This is a placeholder text" class="form-control"
+                                                   @place_changed="setPlace" :select-first-on-enter="true" >
+                                </gmap-autocomplete>
+                                <button class="btn btn-success" @click="addMarker2">Add New Marker</button>
+                                <button class="btn btn-info" @click="clearMarker">Clear Marker</button>
+                            </div>
+                            <div>
+                                <gmap-map
+                                        :center="center"
+                                        :zoom="zoom"
+                                        style="width:100%;  height: 600px;"
+                                >
+                                    <gmap-marker
+                                            :key="index"
+                                            v-for="(m, index) in fillMarkers"
+                                            :position="m.position"
+                                            @click="center=m.position" :draggable="true" @dragend="showLocation"
+                                    ></gmap-marker>
+                                    <!--
+                                    <gmap-marker ref="myLocation" v-for="(item, key) in fillCoordinates" :key="key" :position="getPosition(item)" :clickable="true" :draggable="true" @dragend="showLocation" @click="toggleInfo(item, key)" />
+                                    -->
+
+                                </gmap-map>
                             </div>
 
                         </div>
@@ -586,6 +609,7 @@
     <!-- /.content-wrapper -->
 <script src="../node_modules/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
 <script src="../node_modules/@ckeditor/ckeditor5-vue/dist/ckeditor.js"></script>
+<script src="<?php echo base_url('assets/js/vue-google-maps.js'); ?>"></script>
 <script src="<?php echo base_url('assets/js/backend/main.js')?>"></script>
 
 

@@ -2,7 +2,7 @@ var base_url = window.location.origin;
 window.onload = function () {
     Vue.use(VueGoogleMaps, {
         load: {
-            key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8',
+            key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
             libraries: "places",
             region: 'TH',
         },
