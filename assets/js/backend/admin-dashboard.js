@@ -12,8 +12,9 @@ window.onload = function () {
     Vue.use(VueGoogleMaps, {
         load: {
             key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
-            libraries: "places",
+            libraries: "places,geometry",
             region: 'TH',
+            language:'th'
         },
     });
 
@@ -180,6 +181,9 @@ window.onload = function () {
                 center : {lat: 15.8700, lng: 100.9925},
                 markers: [],
                 places: [],
+                zoom:6,
+                description:"",
+                latLng: {},
                 currentPlace: null,
                 startLocation: {
                     lat: '',
@@ -231,6 +235,7 @@ window.onload = function () {
                     map.panTo({lat: this.center.lat, lng: this.center.lng})
                 })
                 */
+
 
 
             })
@@ -378,8 +383,16 @@ window.onload = function () {
                 this.orz_user_select = {}
                 this.orzInformation = {}
                 this.$refs.file.value = ''
+                this.markers=[]
+                this.coordinates=[]
+                this.latLng = ""
+
             },
             orzUserClick(item) {
+
+                this.userClickClear()
+
+
                 this.orz_user_select = item
                 this.orzInformation = item
                 console.log(item)
@@ -758,13 +771,15 @@ window.onload = function () {
                         lat: this.startLocation.lat,
                         lng: this.startLocation.lng
                     };
-                    this.markers.push({ position: marker });
+
+
+                    if(!Array.isArray(this.markers) || !this.markers.length ){
+                        this.markers.push({ position: marker });
+                    }
                     this.places.push(this.currentPlace);
                     this.center = marker;
                     this.currentPlace = null;
                 }else{
-
-
 
                     let ad_lat = this.$refs.mymap.center.lat
                     let ad_lng = this.$refs.mymap.center.lng
@@ -787,29 +802,42 @@ window.onload = function () {
                     this.currentPlace = null;
                 }
 
-
-
-
-
-
                 console.info(this.coordinates)
 
                 // console.info("lat = "+this.currentPlace.geometry.location.lat()+"lng = "+this.currentPlace.geometry.location.lng())
             },
+            addMarker2(){
+                if (this.currentPlace) {
+                    const marker = {
+                        lat: this.currentPlace.geometry.location.lat(),
+                        lng: this.currentPlace.geometry.location.lng()
+                    };
+
+                    this.orzInformation.latitude = this.currentPlace.geometry.location.lat()
+                    this.orzInformation.longitude = this.currentPlace.geometry.location.lng()
+
+                    this.markers.push({ position: marker });
+
+
+                    this.places.push(this.currentPlace);
+                    this.center = marker;
+                    this.currentPlace = null;
+                    this.zoom =5
+                }
+            },
             clearMarker(){
                 this.coordinates = []
+                this.markers = []
             },
             geolocate: function() {
-                // navigator.geolocation.getCurrentPosition(position => {
-                //     this.center = {
-                //         lat: position.coords.latitude,
-                //         lng: position.coords.longitude
-                //     };
-                // });
-                this.thailandLocation()
-                // if(this.zone===0 || this.province===0){
-                //     this.thailandLocation()
-                // }
+                navigator.geolocation.getCurrentPosition(position => {
+                    this.center = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                });
+                // this.thailandLocation()
+
             },
             updateRouteLatLng(){
                 console.info(this.$refs.mymap)
@@ -818,8 +846,27 @@ window.onload = function () {
 
             },
             setPlace(place) {
+
                 this.currentPlace = place;
                 console.log(place)
+
+               if(place){
+                   this.latLng = {
+                       lat: place.geometry.location.lat(),
+                       lng: place.geometry.location.lng(),
+                   };
+               }
+
+
+            },
+            setDescription(description) {
+                this.description = description;
+            },
+            updatePlace(what) {
+                this.place = {
+                    lat: what.geometry.location.lat(),
+                    lng: what.geometry.location.lng()
+                };
             },
             async curentPostion(){
 
