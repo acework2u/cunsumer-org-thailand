@@ -512,45 +512,54 @@
                     <p class="text-white">ร่วมสานพลัง เพื่อพิทักษ์สิธิผู้บริโภค</p>
                 </div>
             </div>
-            <div class="col-sm-7 pr-5 pr-0-sm pl-0">
+            <div class="col-sm-7 pr-5 pr-0-sm pl-0" id="orzInThailand">
                 <div class="row m-auto d-flex h-100">
                     <div class="col-sm p-0">
                         <div class="nationwide text-center" id="all">
-                            <h1 class="mb-0">70%</h1>
+                            <h1 class="mb-0">{{orz_info.orz_total}}</h1>
                             <p class="text-white">ทั่วประเทศ</p>
                             <!-- Js line 47 -->
                             <button class="more-btn px-3 py-1">ดูทั้งหมด <i class="fa fa-caret-right"></i></button>
                             <!-- End -->
                         </div>
-                        <div class="nationwide w-75 text-left m-auto d-none" id="chart">
-                            <p class="nationwide-label text-white mb-1">กรุงเทพฯและปริมณฑล <span class="float-right">70%</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage bangkok"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคกลาง <span class="float-right">70%</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage central"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคเหนือ <span class="float-right">70%</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage north"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันตก <span class="float-right">70%</span></p>
+                        <div class="nationwide w-75 text-left m-auto d-none" id="chart" v-for="item,key in orzInZone">
+                            <p class="nationwide-label text-white mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage west"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออก <span class="float-right">70%</span></p>
+
+                            <!--
+                            <p class="nationwide-label text-white mb-1">กรุงเทพฯและปริมณฑล <span class="float-right">{{orz_info.orz_bkk}}</span></p>
+                            <div class="w-100 chart-bg">
+                                <div class="percentage bangkok"></div>
+                            </div>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคกลาง <span class="float-right">{{orz_info.orz_m}}</span></p>
+                            <div class="w-100 chart-bg">
+                                <div class="percentage central"></div>
+                            </div>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคเหนือ <span class="float-right">{{orz_info.orz_n}}</span></p>
+                            <div class="w-100 chart-bg">
+                                <div class="percentage north"></div>
+                            </div>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันตก <span class="float-right">{{orz_info.orz_w}}</span></p>
+                            <div class="w-100 chart-bg">
+                                <div class="percentage west"></div>
+                            </div>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออก <span class="float-right">{{orz_info.orz_e}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage east"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออกเฉียงเหนือ <span class="float-right">70%</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออกเฉียงเหนือ <span class="float-right">{{orz_info.orz_sn}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage north-east"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคใต้ <span class="float-right">70%</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคใต้ <span class="float-right">{{orz_info.orz_s}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage southern"></div>
                             </div>
+                            -->
+
+
                         </div>
                     </div>
                 </div>

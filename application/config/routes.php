@@ -143,6 +143,9 @@ $route['api-v01/donate-top10'] = "backend/dashboard/topdaonate";
 $route['api-v01/payment-confirm'] = "frontend/thankyou/apiConfirmPayment";
 
 
+$route['api/v01/orz-total-register'] = "api/organization_count_all";
+
+
 
 /**** Back End ***/
 #voluntee

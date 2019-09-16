@@ -281,7 +281,7 @@ class Api extends MY_Controller
 
             $res_type = 'arrays';
 
-            if(!is_blank($this->input->get_post('type'))){
+            if (!is_blank($this->input->get_post('type'))) {
                 $res_type = $this->input->get_post('type');
             }
 
@@ -314,39 +314,40 @@ class Api extends MY_Controller
                 }
             }
 
-            if($res_type=="json"){
+            if ($res_type == "json") {
                 echo json_encode($logs_info);
-            }else{
-               return $logs_info;
+            } else {
+                return $logs_info;
             }
 
         }
     }
 
-    public function user_access(){
+    public function user_access()
+    {
         $user_group_id = 3;
-        if(!is_blank($this->input->get_post('group_id'))){
+        if (!is_blank($this->input->get_post('group_id'))) {
             $user_group_id = $this->input->get_post('group_id');
         }
         $data_info = array();
         $this->load->model($this->province_model, 'province');
-        switch ($user_group_id){
+        switch ($user_group_id) {
             case 3:
                 $result = $this->province->zone_list();
 
-                foreach ($result as $row){
+                foreach ($result as $row) {
                     $data_info[] = array(
-                        'code'=>get_array_value($row,'code',''),
-                        'title'=>get_array_value($row,'title_th')
+                        'code' => get_array_value($row, 'code', ''),
+                        'title' => get_array_value($row, 'title_th')
                     );
                 }
                 break;
             case 4:
-                $result =$this->province->provinces_list();
-                foreach ($result as $row){
+                $result = $this->province->provinces_list();
+                foreach ($result as $row) {
                     $data_info[] = array(
-                        'code'=>get_array_value($row,'code',''),
-                        'title'=>get_array_value($row,'name_in_thai')
+                        'code' => get_array_value($row, 'code', ''),
+                        'title' => get_array_value($row, 'name_in_thai')
                     );
                 }
 
@@ -357,15 +358,60 @@ class Api extends MY_Controller
 
     }
 
-    public function admin_user_status(){
-        $this->load->model($this->auth_model,'user');
+    public function admin_user_status()
+    {
+        $this->load->model($this->auth_model, 'user');
         $user_status = array();
-        if($this->user->user_status()){
+        if ($this->user->user_status()) {
             $user_status = $this->user->user_status();
         }
         echo json_encode($user_status);
 
     }
+
+    public function organization_count_all()
+    {
+        $this->load->model($this->organized_model, 'orz');
+
+        $total = $this->orz->orz_count_all();
+        $N = 1;
+        $W = 1;
+        $S = 1;
+        $E = 1;
+        $M = 1;
+        $EN = 1;
+        $BKK = 1;
+
+        $orz_in_zone = $this->orz->orz_count_zone();
+
+       if(!is_blank($orz_in_zone)){
+           foreach ($orz_in_zone as $row){
+
+           }
+
+       }
+
+
+        $orz_info = array();
+        $orz_info = array(
+            'orz_total' => number_format($total, 0, '', ','),
+            'orz_n' => number_format($N, 0, '', ','),
+            'orz_s' => number_format($S, 0, '', ','),
+            'orz_e' => number_format($E, 0, '', ','),
+            'orz_w' => number_format($W, 0, '', ','),
+            'orz_m' => number_format($M, 0, '', ','),
+            'orz_en' => number_format($EN, 0, '', ','),
+            'orz_bkk' => number_format($BKK, 0, '', ','),
+
+        );
+
+        $orz_info['orz_in_zone'] = $orz_in_zone;
+
+        echo json_encode($orz_info);
+
+
+    }
+
 
 
 

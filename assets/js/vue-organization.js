@@ -243,16 +243,16 @@ window.onload = function () {
                 provinces: "",
                 province: 0,
                 orz_list: [],
-                orz_info:{},
-                ggmap:{},
-                center : {lat: 15.8700, lng: 100.9925},
+                orz_info: {},
+                ggmap: {},
+                center: {lat: 15.8700, lng: 100.9925},
                 startLocation: {
                     lat: '',
                     lng: '',
-                    zoom:5
+                    zoom: 5
                 },
-                ggOptions:{
-                    zoom:5
+                ggOptions: {
+                    zoom: 5
                 },
                 coordinates: [],
                 infoPosition: null,
@@ -288,7 +288,7 @@ window.onload = function () {
                 })
 
             },
-            initSearchOrz(){
+            initSearchOrz() {
                 let orzApi = base_url + "/api/v1/orz-search";
                 axios.get(orzApi).then((res) => {
                     this.orz_list = res.data.orz_info
@@ -301,9 +301,9 @@ window.onload = function () {
 
                 console.log("zone code:" + this.zone + "province_code =" + this.province);
 
-                if(this.zone===0 || this.province===0){
+                if (this.zone === 0 || this.province === 0) {
                     this.thailandLocation()
-                }else{
+                } else {
                     this.curentPostion()
                 }
 
@@ -311,23 +311,22 @@ window.onload = function () {
                     this.orz_list = res.data.orz_info
                     // coordinates
                     this.coordinates = res.data.coordinates
-                     console.log(this.orz_list)
+                    console.log(this.orz_list)
                 })
                 // console.log(orzApi)
 
 
             },
-            getPosition: function(marker) {
+            getPosition: function (marker) {
                 return {
                     lat: parseFloat(marker.lat),
                     lng: parseFloat(marker.lng)
                 }
             },
-            toggleInfo: function(marker, key) {
+            toggleInfo: function (marker, key) {
                 this.infoPosition = this.getPosition(marker);
                 // this.infoContent = marker.full_name;
                 this.infoContent = this.getInfoWindowContent(marker.full_desc);
-
 
 
                 if (this.infoCurrentKey == key) {
@@ -336,7 +335,7 @@ window.onload = function () {
                     this.infoOpened = true;
                     this.infoCurrentKey = key;
                 }
-            },getInfoWindowContent: function (marker) {
+            }, getInfoWindowContent: function (marker) {
                 return (`<div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${marker.title}</h5>
@@ -345,13 +344,11 @@ window.onload = function () {
   </div>
 </div>`);
             },
-            geolocate(){
+            geolocate() {
 
-                if(this.zone===0 || this.province===0){
+                if (this.zone === 0 || this.province === 0) {
                     this.thailandLocation()
                 }
-
-
 
 
                 // console.log("zone code:" + this.zone + "province_code =" + this.province);
@@ -359,61 +356,58 @@ window.onload = function () {
                 // this.startLocation.lng = 100.5641048 //100.4930264
                 // this.ggOptions.zoom =11
             },
-            async curentPostion(){
+            async curentPostion() {
 
-                let api = base_url+"/api/v1/get-geo-location"
+                let api = base_url + "/api/v1/get-geo-location"
                 let provin_code = this.province
 
                 let promiseA = this.province
-                let promiseB = axios.get(api+"?province_code="+promiseA)
+                let promiseB = axios.get(api + "?province_code=" + promiseA)
 
                 let resultA = await promiseA
                 let resultB = await promiseB
                 // console.log(resultA)
                 console.log(resultB.data.message)
 
-                if(resultB.data.error){
+                if (resultB.data.error) {
 
-                }else{
+                } else {
                     this.updateCenter(resultB.data.message)
                 }
 
 
-
-
-
             },
-            thailandLocation(){
+            thailandLocation() {
                 this.startLocation.lat = Number(13.0110712) //13.7248936
                 this.startLocation.lng = Number(96.9949203) //100.4930264
-                this.startLocation.zoom =Number(6)
+                this.startLocation.zoom = Number(6)
             },
             updateCenter(center) {
                 this.startLocation = {
                     lat: Number(center.lat),
                     lng: Number(center.lng),
-                    zoom:Number(center.zoom)
+                    zoom: Number(center.zoom)
                 }
             },
-            to(promise){
-                return promise.then((data)=>{
+            to(promise) {
+                return promise.then((data) => {
                     return {
-                        error:null,
-                        result:data
+                        error: null,
+                        result: data
                     }
-                }).catch((err)=>{
+                }).catch((err) => {
                     return {
-                        error:err
+                        error: err
                     }
                 })
             },
-            userClick(item){
+            userClick(item) {
                 // console.info(item)
                 this.startLocation.lat = Number(item.latitude)
                 this.startLocation.lng = Number(item.longitude)
-                this.startLocation.zoom =14
+                this.startLocation.zoom = 14
             },
-            userOrzInfoClick(item){
+            userOrzInfoClick(item) {
                 this.orz_info = item
                 console.log(this.orz_info)
             }
@@ -441,13 +435,13 @@ window.onload = function () {
         el: "#join-modal",
         data() {
             return {
-                volunteer_info: {organization:0,province:0},
+                volunteer_info: {organization: 0, province: 0},
                 provinces: "",
                 province: 0,
                 organizations: "",
                 organization: 0,
-                is_loading:false,
-                res_message:"Sending..."
+                is_loading: false,
+                res_message: "Sending..."
             }
         },
         methods: {
@@ -463,31 +457,31 @@ window.onload = function () {
                 })
 
             },
-            getOrganizations(){
+            getOrganizations() {
                 let orzApi = base_url + "/api/v1/orz-search";
                 let province_code = this.province
-                console.log("province code:"+this.province)
+                console.log("province code:" + this.province)
 
                 this.$nextTick(() => { // ES6 arrow function
                     axios.get(orzApi + "?province_code=" + province_code).then((res) => {
                         this.organizations = res.data.orz_info
                         this.organization = 0
-                        if(res.data.orz_info <= 0 ){
+                        if (res.data.orz_info <= 0) {
                             console.log(this.$refs)
                             this.$refs.no_orz.innerText = "**ไม่มีรายการมูลนิธิฯ**"
-                        }else{
+                        } else {
                             this.$refs.no_orz.innerText = "**เลือกรายการมูลนิธิฯ**"
-                    }
+                        }
 
 
                     })
                 })
             },
-            changeOrz(){
+            changeOrz() {
                 console.info(this.organization)
             },
-            valunteerRegister(){
-                let volunApi = base_url+"/api/v1/volunteer-register"
+            valunteerRegister() {
+                let volunApi = base_url + "/api/v1/volunteer-register"
 
 
                 this.$nextTick(() => {
@@ -517,23 +511,21 @@ window.onload = function () {
                     this.$validator.validate().then(valid => {
                         if (!valid) {
                             // do stuff if not valid.
-                        }else{
+                        } else {
 
                             this.is_loading = true
-                            axios.post(volunApi,fromData).then((res)=>{
+                            axios.post(volunApi, fromData).then((res) => {
                                 this.res_message = "Thanks for your submission!"
 
                                 console.log(res.data)
 
                             })
 
-                            setTimeout(()=>{
+                            setTimeout(() => {
                                 this.is_loading = false
-                            },3000)
+                            }, 3000)
                         }
                     });
-
-
 
 
                 })
@@ -552,6 +544,47 @@ window.onload = function () {
         }
 
     });
+    var orzthailand = new Vue({
+        el: "#orzInThailand",
+        data() {
+            return {
+                orz_info:{},
+                txt_ok:"ok",
+                orz_in_zone:[]
+            }
+        },
+        mounted() {
+            this.$nextTick(() => { // ES6 arrow function
+                this.getOrzPercentInfo();
+            })
+        },
+        computed: {
+            computedWidth: function () {
+                return this.width;
+            },
+            orzInZone(){
+                return this.orz_in_zone
+            }
+        },
+        methods:{
+            getOrzPercentInfo(){
+                let API = base_url+"/api/v01/orz-total-register";
+
+                axios.get(API).then((res)=>{
+                    this.orz_info = res.data
+                    this.orz_in_zone = res.data.orz_in_zone
+                })
+
+                console.info(this.orz_info)
+
+            },
+            changeWidth: function (event) {
+
+                this.width='100%';
+            }
+        }
+    });
+
 
 
     /***** JQUERY *****/
@@ -614,10 +647,10 @@ window.onload = function () {
             // }
             let v_name = $('#valunteer_name').val()
             let v_lastname = $('#valunteer_lastname').val()
-            if(v_name==="" || v_name.length <= 0){
+            if (v_name === "" || v_name.length <= 0) {
                 $('#valunteer_name').focus()
             }
-            if(v_lastname==="" || v_lastname.length <= 0){
+            if (v_lastname === "" || v_lastname.length <= 0) {
                 $('#valunteer_lastname').focus()
             }
 

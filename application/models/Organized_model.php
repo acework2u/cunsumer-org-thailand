@@ -486,5 +486,49 @@ class Organized_model extends MY_Model
         return $result;
     }
 
+    public function orz_count_all(){
+        $this->db->select('COUNT(*) AS total');
+        $this->db->where('status',4);
+        $query = $this->db->get($this->tbl_organization);
+
+        $total = 0;
+        if($query->num_rows() >0){
+            foreach ($query->result() as $row){
+                $total = $row->total;
+            }
+        }
+        return $total;
+
+
+    }
+
+    public function orz_count_zone(){
+        $this->db->select('count( * ) AS total,
+	zone.title_th AS zone_title,
+	organization.`status` AS orzstatus,
+	zone_code ');
+        $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_aid','left');
+        $this->db->join($this->tbl_zone_province_mn,'orz_in_province.province_code = zone_province_mn.provincy_code','left');
+        $this->db->join($this->tbl_zone,'zone_province_mn.zone_code = zone.`code` ','left');
+        $this->db->where('organization.`status`',4);
+        $this->db->group_by('zone_code');
+        $query = $this->db->get($this->tbl_organization);
+
+        $result = array();
+        if($query->num_rows() > 0){
+            foreach ($query->result() as $row){
+                $row = array(
+                    'total'=>$row->total,
+                    'zone_title'=>$row->zone_title,
+                    'orz_status'=>$row->orzstatus,
+                    'zone_code'=>$row->zone_code
+                );
+                $result[] = $row;
+            }
+        }
+        return $result;
+
+    }
+
 
 } // end of class
