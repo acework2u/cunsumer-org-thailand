@@ -34,7 +34,7 @@
 
 <!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css"> -->
-    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
+    <link rel="stylesheet" href="<?php echo base_url('assets/jquery.thailand.js/dist/jquery.Thailand.min.css')?>">
 
 
 
@@ -1036,14 +1036,12 @@
 
     <script type="text/javascript" src="<?php echo base_url('assets/js/uikit.min.js');?>"></script>
     <!-- dependencies for zip mode -->
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/zip.js/zip.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dependencies/zip.js/zip.js')?>"></script>
     <!-- / dependencies for zip mode -->
 
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
-<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>-->
-<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&libraries=places"></script>-->
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dependencies/JQL.min.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dependencies/typeahead.bundle.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dist/jquery.Thailand.min.js')?>"></script>
 
 </body>
 </html>

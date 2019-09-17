@@ -244,20 +244,20 @@
 
 <script type="text/javascript" src="<?php echo base_url('assets/js/uikit.min.js');?>"></script>
 <!-- dependencies for zip mode -->
-<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/zip.js/zip.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.thailand.js/dependencies/zip.js/zip.js')?>"></script>
 <!-- / dependencies for zip mode -->
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.thailand.js/dependencies/JQL.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.thailand.js/dependencies/typeahead.bundle.js')?>"></script>
 
-<script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/jquery.thailand.js/dist/jquery.Thailand.min.js')?>"></script>
 
 <?php
 if($this->uri->segment(3, 0) !=="approved-logs"){ ?>
     <script type="text/javascript">
         var base_url = window.location.origin;
         $.Thailand({
-            database: '../jquery.Thailand.js/database/db.json',
+            database: '../jquery.thailand.js/database/db.json',
 
             $district: $('#demo1 [name="district"]'),
             $amphoe: $('#demo1 [name="amphoe"]'),

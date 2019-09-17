@@ -31,7 +31,7 @@
 
 <!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">-->
 <!--   <link rel="stylesheet" href="--><?php //echo base_url('assets/css/uikit.css')?><!--">-->
-    <link rel="stylesheet" href="<?php echo base_url('jquery.Thailand.js/dist/jquery.Thailand.min.css')?>">
+    <link rel="stylesheet" href="<?php echo base_url('assets/jquery.thailand.js/dist/jquery.Thailand.min.css')?>">
 
     <link href="<?php echo base_url('assets/css/vuetify.min.css')?>" rel="stylesheet">
     <link type="text/css" rel="stylesheet" href="<?php base_url('assets/css/bootstrap-vue.min.css')?>" />
