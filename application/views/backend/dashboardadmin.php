@@ -209,10 +209,6 @@
                                             <input v-model="orzInformation.orz_tel" type="text" class="form-control" id="telContact1" placeholder="02 123 456">
                                         </div>
                                     </div>
-
-
-
-
                                     <div class="form-group" id="demo1">
                                         <legend>Address Details</legend>
 
@@ -229,7 +225,7 @@
                                         <div class="col-sm-11">
                                             <input ref="amphoe" :value="orz_user_select.amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe">
                                         </div>
-                                        <label class="col-sm-1 control-label" for="textinput">จังหวด</label>
+                                        <label class="col-sm-1 control-label" for="textinput">จังหวัด</label>
                                         <div class="col-sm-11">
                                             <input ref="province" :value="orz_user_select.province" name="province" class="uk-input form-control" type="text">
                                         </div>
