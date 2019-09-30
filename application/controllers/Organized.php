@@ -75,6 +75,9 @@ class Organized extends MY_Controller
         $orz_longitude = $this->input->post('longitude');
         $orz_status = 1;
 
+        $create_date = date("Y-m-d H:i:s");
+
+
         $message = array();
         if ($this->form_validation->run() == TRUE) {
 
@@ -131,6 +134,8 @@ class Organized extends MY_Controller
                     $this->orz->setDistrict($orz_district);
                     $this->orz->setAmphoe($orz_amphoe);
                     $this->orz->setProvince($orz_province);
+                    $this->orz->setCreatedDate($create_date);
+                    $this->orz->setUpdatedDate($create_date);
 
                     $orz_new = $this->orz->create();
                     if ($orz_new) {
@@ -212,6 +217,7 @@ class Organized extends MY_Controller
         $orz_amphoe = "ปากเกร็ด";
         $orz_province = "ปากเกร็ด";
         */
+        $updated_date = date("Y-m-d H:i:s");
 
         $orz_zipcode = $this->input->post('zipcode');
         $orz_latitude = $this->input->post('latitude');
@@ -257,6 +263,7 @@ class Organized extends MY_Controller
             $this->orz->setDistrict($orz_district);
             $this->orz->setAmphoe($orz_amphoe);
             $this->orz->setProvince($orz_province);
+            $this->orz->setUpdatedDate($updated_date);
 
             $orz_new = $this->orz->update();
             if ($orz_new) {
@@ -298,6 +305,29 @@ class Organized extends MY_Controller
 
 
     }
+
+    public function organization_delete(){
+        if($this->is_login()){
+        $orz_id = "";
+        if(!is_blank($this->input->get_post('orz_id'))){
+            $orz_id = $this->input->get_post('orz_id');
+        }
+
+        $this->load->model($this->organized_model,'orz');
+
+        $this->orz->setOrzId($orz_id);
+        $del_orz = $this->orz->delete();
+
+
+        $data = array();
+        if($del_orz){
+
+        }
+
+
+        }
+
+    } // end of fun
 
     public function getOrganizationLast(){
 

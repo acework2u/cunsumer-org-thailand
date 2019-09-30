@@ -386,6 +386,12 @@ class Api extends MY_Controller
 
        if(!is_blank($orz_in_zone)){
            foreach ($orz_in_zone as $row){
+               $zone = $row['zone_code'];
+
+               switch ($zone){
+
+               }
+
 
            }
 

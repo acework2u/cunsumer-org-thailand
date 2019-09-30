@@ -247,6 +247,12 @@ class Organized_model extends MY_Model
         if (!is_blank($this->_orz_province)) {
             $data['province'] = $this->_orz_province;
         }
+        if (!is_blank($this->_created_date)) {
+            $data['created_date'] = $this->_created_date;
+        }
+        if (!is_blank($this->_updated_date)) {
+            $data['updated_date'] = $this->_updated_date;
+        }
 
         $this->db->insert($this->tbl_organization, $data);
         if (!is_blank($this->db->insert_id()) && $this->db->insert_id() > 0) {
@@ -346,6 +352,23 @@ class Organized_model extends MY_Model
         } else {
             return false;
         }
+
+
+    }
+
+    public function delete(){
+
+        if(!is_blank($this->_orz_id)){
+            $this->db->where('aid',$this->_orz_id);
+            $this->db->delete($this->tbl_organization);
+
+            if($this->db->affected_rows()){
+                return true;
+            }
+        }else{
+            return false;
+        }
+
 
 
     }

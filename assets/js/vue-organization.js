@@ -1,5 +1,5 @@
 var base_url = window.location.origin;
-window.onload = function () {
+
     Vue.use(VueGoogleMaps, {
         load: {
             key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
@@ -586,185 +586,183 @@ window.onload = function () {
     });
 
 
-
     /***** JQUERY *****/
+    window.onload = function () {
+        $(document).ready(function () {
 
-    $(document).ready(function () {
+            $("#login-tap").click(function () {
+                $('.register-tap > span').removeClass('active');
+                $('span', this).addClass('active');
+                $('#login-form').removeClass('d-none');
+                $('#register-form').addClass('d-none');
+            });
 
-        $("#login-tap").click(function () {
-            $('.register-tap > span').removeClass('active');
-            $('span', this).addClass('active');
-            $('#login-form').removeClass('d-none');
-            $('#register-form').addClass('d-none');
+            $("#register-tap").click(function () {
+                $('.register-tap > span').removeClass('active');
+                $('span', this).addClass('active');
+                $('#login-form').addClass('d-none');
+                $('#register-form').removeClass('d-none');
+            });
+
+            $('#register-step-2').click(function () {
+                $('#step-1').addClass('d-none');
+                $('#step-2').removeClass('d-none');
+            });
+
+            $('#register-step-3').click(function () {
+                $('#step-2').addClass('d-none');
+                $('#step-3').removeClass('d-none');
+            });
+            $('#accept-rule').click(function () {
+                $('#step-3').addClass('d-none');
+                $('#step-1').addClass('d-none');
+            });
+
+            $('.edit-btn').click(function () {
+                $('#step-1').removeClass('d-none');
+                $('#step-3').addClass('d-none');
+            });
+
+            $('.save-btn').click(function () {
+                $('#step-3').addClass('d-none');
+                $('#step-1').addClass('d-none');
+                $('#step-4').removeClass('d-none');
+                $('html, body').animate({
+                    scrollTop: $("#register").offset().top
+                }, 1000);
+            });
+
+            $('.location-container').hover(function () {
+                $('.location-btn', this).show();
+            }, function () {
+                $('.location-btn', this).hide();
+            });
+
+            $('#join-register').click(function () {
+                // $('#join-form').addClass('d-none');
+                // $('#join-done').removeClass('d-none');
+                // if($('#join-modal [name="valunteer_name"]').length <=0){
+                //     $('#join-modal [name="valunteer_name"]').focus()
+                // }
+                let v_name = $('#valunteer_name').val()
+                let v_lastname = $('#valunteer_lastname').val()
+                if (v_name === "" || v_name.length <= 0) {
+                    $('#valunteer_name').focus()
+                }
+                if (v_lastname === "" || v_lastname.length <= 0) {
+                    $('#valunteer_lastname').focus()
+                }
+
+
+            });
+
+            $('.more-btn').click(function () {
+                $('#all').addClass('d-none');
+                $('#chart').removeClass('d-none');
+            });
+
+            $('.lang').click(function () {
+                $('.lang').removeClass('active');
+                $(this).addClass('active');
+            });
+
+            $('.nav-tap').click(function () {
+                $('.nav-tap > span').removeClass('active');
+                $('span', this).addClass('active');
+            });
+
+            $('#home').click(function () {
+                $(window).scrollTop(0);
+            });
+
+            $('#about').click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#topic").offset().top
+                }, 1000)
+            });
+            // $('.who-our-about').click(()=>{
+            //     $('html, body').animate({
+            //         scrollTop: $("#topic").offset().top
+            //     }, 1000)
+            // });
+
+            $('#about-footer').click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#topic").offset().top
+                }, 1000)
+            });
+
+            $('#register-footer').click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#register").offset().top
+                }, 1000)
+            });
+            $('#reg').click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#register").offset().top
+                }, 1000)
+            });
+            $("#login-footer").click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#login-tap").offset().top
+
+                }, 1000)
+                $('.register-tap > span').removeClass('active');
+                $('span', this).addClass('active');
+                $('#login-form').removeClass('d-none');
+                $('#register-form').addClass('d-none');
+            });
+
+            $('#find-location-footer').click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#search").offset().top
+                }, 1000)
+            });
+            $('#what-we-do-footer').click(function () {
+                $('html, body').animate({
+                    scrollTop: $("#what-we-do-content").offset().top
+                }, 1000)
+            });
+
+
         });
+        $.Thailand({
+            database: '../assets/jquerythailand/database/db.json',
 
-        $("#register-tap").click(function () {
-            $('.register-tap > span').removeClass('active');
-            $('span', this).addClass('active');
-            $('#login-form').addClass('d-none');
-            $('#register-form').removeClass('d-none');
-        });
+            $district_1: $('#add-register-1 [name="district"]'),
+            $amphoe_1: $('#add-register-1 [name="amphoe"]'),
+            $province_1: $('#add-register-1[name="province"]'),
+            $zipcode_1: $('#add-register-1 [name="zipcode"]'),
 
-        $('#register-step-2').click(function () {
-            $('#step-1').addClass('d-none');
-            $('#step-2').removeClass('d-none');
-        });
+            $district: $('#join-modal [name="district"]'),
+            $amphoe: $('#join-modal [name="amphoe"]'),
+            $province: $('#join-modal [name="province"]'),
+            $zipcode: $('#join-modal [name="zipcode"]'),
 
-        $('#register-step-3').click(function () {
-            $('#step-2').addClass('d-none');
-            $('#step-3').removeClass('d-none');
-        });
-        $('#accept-rule').click(function () {
-            $('#step-3').addClass('d-none');
-            $('#step-1').addClass('d-none');
-        });
+            onDataFill: function (data) {
+                console.info('Data Filled', data);
 
-        $('.edit-btn').click(function () {
-            $('#step-1').removeClass('d-none');
-            $('#step-3').addClass('d-none');
-        });
 
-        $('.save-btn').click(function () {
-            $('#step-3').addClass('d-none');
-            $('#step-1').addClass('d-none');
-            $('#step-4').removeClass('d-none');
-            $('html, body').animate({
-                scrollTop: $("#register").offset().top
-            }, 1000);
-        });
+            },
 
-        $('.location-container').hover(function () {
-            $('.location-btn', this).show();
-        }, function () {
-            $('.location-btn', this).hide();
-        });
-
-        $('#join-register').click(function () {
-            // $('#join-form').addClass('d-none');
-            // $('#join-done').removeClass('d-none');
-            // if($('#join-modal [name="valunteer_name"]').length <=0){
-            //     $('#join-modal [name="valunteer_name"]').focus()
-            // }
-            let v_name = $('#valunteer_name').val()
-            let v_lastname = $('#valunteer_lastname').val()
-            if (v_name === "" || v_name.length <= 0) {
-                $('#valunteer_name').focus()
+            onLoad: function () {
+                console.info('Autocomplete is ready!');
+                $('#loader, .demo').toggle();
             }
-            if (v_lastname === "" || v_lastname.length <= 0) {
-                $('#valunteer_lastname').focus()
-            }
-
+        });
+        // watch on change
+        $('#demo1 [name="district"]').change(function () {
+            console.log('ตำบล', this.value);
+        });
+        $('#demo1 [name="amphoe"]').change(function () {
+            console.log('อำเภอ', this.value);
+        });
+        $('#demo1 [name="province"]').change(function () {
+            console.log('จังหวัด', this.value);
+        });
+        $('#demo1 [name="zipcode"]').change(function () {
+            console.log('รหัสไปรษณีย์', this.value);
 
         });
 
-        $('.more-btn').click(function () {
-            $('#all').addClass('d-none');
-            $('#chart').removeClass('d-none');
-        });
-
-        $('.lang').click(function () {
-            $('.lang').removeClass('active');
-            $(this).addClass('active');
-        });
-
-        $('.nav-tap').click(function () {
-            $('.nav-tap > span').removeClass('active');
-            $('span', this).addClass('active');
-        });
-
-        $('#home').click(function () {
-            $(window).scrollTop(0);
-        });
-
-        $('#about').click(function () {
-            $('html, body').animate({
-                scrollTop: $("#topic").offset().top
-            }, 1000)
-        });
-        // $('.who-our-about').click(()=>{
-        //     $('html, body').animate({
-        //         scrollTop: $("#topic").offset().top
-        //     }, 1000)
-        // });
-
-        $('#about-footer').click(function () {
-            $('html, body').animate({
-                scrollTop: $("#topic").offset().top
-            }, 1000)
-        });
-
-        $('#register-footer').click(function () {
-            $('html, body').animate({
-                scrollTop: $("#register").offset().top
-            }, 1000)
-        });
-        $('#reg').click(function () {
-            $('html, body').animate({
-                scrollTop: $("#register").offset().top
-            }, 1000)
-        });
-        $("#login-footer").click(function () {
-            $('html, body').animate({
-                scrollTop: $("#login-tap").offset().top
-
-            }, 1000)
-            $('.register-tap > span').removeClass('active');
-            $('span', this).addClass('active');
-            $('#login-form').removeClass('d-none');
-            $('#register-form').addClass('d-none');
-        });
-
-        $('#find-location-footer').click(function () {
-            $('html, body').animate({
-                scrollTop: $("#search").offset().top
-            }, 1000)
-        });
-        $('#what-we-do-footer').click(function () {
-            $('html, body').animate({
-                scrollTop: $("#what-we-do-content").offset().top
-            }, 1000)
-        });
-
-
-    });
-    $.Thailand({
-        database: './jquery.Thailand.js/database/db.json',
-
-        $district: $('#demo1 [name="district"]'),
-        $amphoe: $('#demo1 [name="amphoe"]'),
-        $province: $('#demo1 [name="province"]'),
-        $zipcode: $('#demo1 [name="zipcode"]'),
-        $district: $('#join-modal [name="district"]'),
-        $amphoe: $('#join-modal [name="amphoe"]'),
-        $province: $('#join-modal [name="province"]'),
-        $zipcode: $('#join-modal [name="zipcode"]'),
-
-        onDataFill: function (data) {
-            console.info('Data Filled', data);
-            $('#join-modal [name="volun-district"]').val(data.district);
-            $('#join-modal [name="volun-amphoe"]').val(data.amphoe);
-            $('#join-modal [name="volun-province"]').val(data.province);
-            $('#join-modal [name="volun-zipcode"]').val(data.zipcode);
-        },
-
-        onLoad: function () {
-            console.info('Autocomplete is ready!');
-            $('#loader, .demo').toggle();
-        }
-    });
-    // watch on change
-    $('#demo1 [name="district"]').change(function () {
-        // console.log('ตำบล', this.value);
-    });
-    $('#demo1 [name="amphoe"]').change(function () {
-        // console.log('อำเภอ', this.value);
-    });
-    $('#demo1 [name="province"]').change(function () {
-        // console.log('จังหวัด', this.value);
-    });
-    $('#demo1 [name="zipcode"]').change(function () {
-        // console.log('รหัสไปรษณีย์', this.value);
-
-    });
-}
-
+    }

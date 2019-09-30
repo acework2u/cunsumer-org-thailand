@@ -34,7 +34,7 @@
 
 <!--     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.0.0-beta.20/css/uikit.css"> -->
-    <link rel="stylesheet" href="<?php echo base_url('assets/jquery.thailand.js/dist/jquery.Thailand.min.css')?>">
+    <link rel="stylesheet" href="./jquery.Thailand.js/dist/jquery.Thailand.min.css">
 
 
 
@@ -261,7 +261,7 @@
                     </div>
                     <div class="" id="register-form">
                         <div id="step-1">
-                            <div class="form-container p-4 p-absolute" id="demo1">
+                            <div class="form-container p-4 p-absolute">
 
                                 <input autocomplete="off"  type="text" id="cus-email" name="account-email" placeholder="Email" class="w-100 mb-2 form-input form-control" @keyup="checkUserEmail" v-model="orz_info.cus_email">
                                 <div v-if="alError===true" :class="classObject" role="alert">
@@ -306,6 +306,8 @@
 
 
                                 <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input" v-model="orz_info.address">
+
+                                <div id="add-register-1" class="d-none">
                                 <div class="row m-auto pb-2">
                                     <div class="col-sm-6 p-0">
                                         <label class="control-label">ตำบล / แขวง *</label>
@@ -328,7 +330,8 @@
                                         <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="zipcode" id="zipcode-1"  name="zipcode" class="uk-input w-100 form-input" type="text" v-model="orz_info.zipcode">
                                     </div>
                                 </div>
-                                <div id="googleMap" style="width:100%;height:200px;"></div>
+                                </div>
+
 
 
                                 <div class="d-flex w-100 mt-4 pb-4">
@@ -522,42 +525,82 @@
                             <button class="more-btn px-3 py-1">ดูทั้งหมด <i class="fa fa-caret-right"></i></button>
                             <!-- End -->
                         </div>
-                        <div class="nationwide w-75 text-left m-auto d-none" id="chart" v-for="item,key in orzInZone">
-                            <p class="nationwide-label text-white mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage west"></div>
-                            </div>
+                        <div class="nationwide w-75 text-left m-auto d-none" id="chart">
+                                  <div v-for="item,key in orzInZone">
+
+                                      <p v-if="item.zone_code == 70"  class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 70" class="w-100 chart-bg">
+                                          <div class="percentage bangkok"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 30" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 30" class="w-100 chart-bg">
+                                          <div class="percentage central"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 10" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 10" class="w-100 chart-bg">
+                                          <div class="percentage north"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 50" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 50" class="w-100 chart-bg">
+                                          <div class="percentage west"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 40" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 40" class="w-100 chart-bg">
+                                          <div class="percentage east"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 20" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 20" class="w-100 chart-bg">
+                                          <div class="percentage north-east"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 10" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 10" class="w-100 chart-bg">
+                                          <div class="percentage north"></div>
+                                      </div>
+
+                                      <p v-if="item.zone_code == 60" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
+                                      <div v-if="item.zone_code == 60" class="w-100 chart-bg">
+                                          <div class="percentage southern"></div>
+                                      </div>
+
+
+                                  </div>
 
                             <!--
-                            <p class="nationwide-label text-white mb-1">กรุงเทพฯและปริมณฑล <span class="float-right">{{orz_info.orz_bkk}}</span></p>
+                            <p  class="nationwide-label text-white mb-1">กรุงเทพฯและปริมณฑล <span class="float-right">{{item.zone_code}}s</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage bangkok"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคกลาง <span class="float-right">{{orz_info.orz_m}}</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคกลาง <span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage central"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคเหนือ <span class="float-right">{{orz_info.orz_n}}</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคเหนือ <span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage north"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันตก <span class="float-right">{{orz_info.orz_w}}</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันตก <span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage west"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออก <span class="float-right">{{orz_info.orz_e}}</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออก <span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage east"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออกเฉียงเหนือ <span class="float-right">{{orz_info.orz_sn}}</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออกเฉียงเหนือ <span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage north-east"></div>
                             </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคใต้ <span class="float-right">{{orz_info.orz_s}}</span></p>
+                            <p class="nationwide-label text-white mt-3 mb-1">ภาคใต้ <span class="float-right">{{item.total}}</span></p>
                             <div class="w-100 chart-bg">
                                 <div class="percentage southern"></div>
                             </div>
-                            -->
+-->
 
 
                         </div>
@@ -1036,12 +1079,14 @@
 
     <script type="text/javascript" src="<?php echo base_url('assets/js/uikit.min.js');?>"></script>
     <!-- dependencies for zip mode -->
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dependencies/zip.js/zip.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/zip.js/zip.js')?>"></script>
     <!-- / dependencies for zip mode -->
 
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dependencies/JQL.min.js')?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dependencies/typeahead.bundle.js')?>"></script>
-    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.thailand.js/dist/jquery.Thailand.min.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
+    <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
+<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&callback=myMap_2&libraries=places"></script>-->
+<!--    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8&libraries=places"></script>-->
 
 </body>
 </html>

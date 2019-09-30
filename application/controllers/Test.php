@@ -944,5 +944,15 @@ class Test extends MY_Controller
     }
 
 
+    public function thailand(){
+        $this->load->view('thailand');
+    }
+
+
+    public function user_grant(){
+        echo getUserRoleId();
+    }
+
+
 
 } //end of Class

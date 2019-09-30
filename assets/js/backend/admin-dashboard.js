@@ -1,4 +1,4 @@
-window.onload = function () {
+
     var baseUrl = window.location.origin;
 
 
@@ -895,5 +895,5 @@ window.onload = function () {
 
 
 
-}
+
 
