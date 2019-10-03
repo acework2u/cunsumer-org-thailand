@@ -38,10 +38,13 @@ class Organized_model extends MY_Model
         parent::__construct();
     }
 
-    public function setCreatedDate($date){
+    public function setCreatedDate($date)
+    {
         $this->_created_date = $date;
     }
-    public function setUpdatedDate($date){
+
+    public function setUpdatedDate($date)
+    {
         $this->_updated_date = $date;
     }
 
@@ -76,7 +79,8 @@ class Organized_model extends MY_Model
         $this->_email = $email;
     }
 
-    public function setWebsite($website){
+    public function setWebsite($website)
+    {
         $this->_website = $website;
     }
 
@@ -335,12 +339,12 @@ class Organized_model extends MY_Model
         if (!is_blank($this->_orz_province)) {
             $data['province'] = $this->_orz_province;
         }
-        if(!is_blank($this->_updated_date)){
+        if (!is_blank($this->_updated_date)) {
             $data['updated_date'] = $this->_updated_date;
         }
-        if(getUserRoleId()==1){
+        if (getUserRoleId() == 1) {
 
-        }else{
+        } else {
             $this->db->where('user_id', getUserAid());
         }
 
@@ -356,19 +360,19 @@ class Organized_model extends MY_Model
 
     }
 
-    public function delete(){
+    public function delete()
+    {
 
-        if(!is_blank($this->_orz_id)){
-            $this->db->where('aid',$this->_orz_id);
+        if (!is_blank($this->_orz_id)) {
+            $this->db->where('aid', $this->_orz_id);
             $this->db->delete($this->tbl_organization);
 
-            if($this->db->affected_rows()){
+            if ($this->db->affected_rows()) {
                 return true;
             }
-        }else{
+        } else {
             return false;
         }
-
 
 
     }
@@ -400,16 +404,27 @@ class Organized_model extends MY_Model
 
     }
 
-    public function orz_all(){
-        $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status,orz_in_province.province_code');
+    public function orz_all()
+    {
+        $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status,orz_in_province.province_code','zone_code');
         $this->db->join($this->tbl_orz_status, 'organization.`status` = orz_status.aid', 'left');
-        $this->db->join($this->tbl_orz_in_province,'orz_in_province.orz_aid = organization.aid','left');
-        $query = $this->db->order_by('aid','desc')->get($this->tbl_organization);
-        $result=array();
-        if($query->num_rows() > 0){
-                foreach ($query->result_array() as $row){
-                    $result[] = $row;
-                }
+        $this->db->join($this->tbl_orz_in_province, 'orz_in_province.orz_aid = organization.aid', 'left');
+        $this->db->join($this->tbl_zone_province_mn, 'zone_province_mn.provincy_code = province_code', 'left');
+
+        if (getUserRoleId() == 3) {
+            $this->db->where('zone_code',getUserGroupId());
+        } elseif (getUserRoleId() == 4) {
+            $this->db->where('province_code',getUserGroupId());
+        } else {
+
+        }
+
+        $query = $this->db->order_by('aid', 'desc')->get($this->tbl_organization);
+        $result = array();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $result[] = $row;
+            }
 
         }
         return $result;
@@ -491,32 +506,33 @@ class Organized_model extends MY_Model
     {
         $result = array();
 
-            $this->db->select('*');
-            $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_in_province.orz_aid', 'left');
-            if(!is_blank($this->_orz_province_code) && $this->_orz_province_code != 0){
-                $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
-            }
-            $this->db->where('organization.status','4');
-            $query = $this->db->get($this->tbl_organization);
+        $this->db->select('*');
+        $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_in_province.orz_aid', 'left');
+        if (!is_blank($this->_orz_province_code) && $this->_orz_province_code != 0) {
+            $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
+        }
+        $this->db->where('organization.status', '4');
+        $query = $this->db->get($this->tbl_organization);
 
-            if ($query->num_rows() > 0) {
-                foreach ($query->result_array() as $row) {
-                    $result[] = $row;
-                }
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $result[] = $row;
             }
+        }
 
 
         return $result;
     }
 
-    public function orz_count_all(){
+    public function orz_count_all()
+    {
         $this->db->select('COUNT(*) AS total');
-        $this->db->where('status',4);
+        $this->db->where('status', 4);
         $query = $this->db->get($this->tbl_organization);
 
         $total = 0;
-        if($query->num_rows() >0){
-            foreach ($query->result() as $row){
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
                 $total = $row->total;
             }
         }
@@ -525,26 +541,27 @@ class Organized_model extends MY_Model
 
     }
 
-    public function orz_count_zone(){
+    public function orz_count_zone()
+    {
         $this->db->select('count( * ) AS total,
 	zone.title_th AS zone_title,
 	organization.`status` AS orzstatus,
 	zone_code ');
-        $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_aid','left');
-        $this->db->join($this->tbl_zone_province_mn,'orz_in_province.province_code = zone_province_mn.provincy_code','left');
-        $this->db->join($this->tbl_zone,'zone_province_mn.zone_code = zone.`code` ','left');
-        $this->db->where('organization.`status`',4);
+        $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_aid', 'left');
+        $this->db->join($this->tbl_zone_province_mn, 'orz_in_province.province_code = zone_province_mn.provincy_code', 'left');
+        $this->db->join($this->tbl_zone, 'zone_province_mn.zone_code = zone.`code` ', 'left');
+        $this->db->where('organization.`status`', 4);
         $this->db->group_by('zone_code');
         $query = $this->db->get($this->tbl_organization);
 
         $result = array();
-        if($query->num_rows() > 0){
-            foreach ($query->result() as $row){
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
                 $row = array(
-                    'total'=>$row->total,
-                    'zone_title'=>$row->zone_title,
-                    'orz_status'=>$row->orzstatus,
-                    'zone_code'=>$row->zone_code
+                    'total' => $row->total,
+                    'zone_title' => $row->zone_title,
+                    'orz_status' => $row->orzstatus,
+                    'zone_code' => $row->zone_code
                 );
                 $result[] = $row;
             }

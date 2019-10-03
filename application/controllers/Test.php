@@ -954,5 +954,21 @@ class Test extends MY_Controller
     }
 
 
+    public function test_orz_list(){
+        $this->load->model($this->organized_model, 'orz');
+        $orz_info = $this->orz->orz_all();
+
+        echo $this->db->last_query();
+
+
+        var_dump($orz_info);
+
+
+        var_dump(getUsersSession());
+
+
+    }
+
+
 
 } //end of Class

@@ -82,7 +82,7 @@ class Api extends MY_Controller
     {
         $this->load->model($this->organized_model, 'orz');
         $orz_info = array();
-        if ($this->is_login() && getUserRoleId() == 1) {
+        if ($this->is_login() && getUserRoleId() == 1 || getUserRoleId() < 5) {
             $orz_info = $this->orz->orz_all();
         }
         echo json_encode($orz_info);
