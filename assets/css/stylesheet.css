@@ -900,7 +900,8 @@ input:focus {
 
 @media (min-width: 768px) {
 	.register {
-		height: 1250px;
+		/*height: 1250px;*/
+		height: 1020px;
 	}
 
 	.form-header {
@@ -935,11 +936,13 @@ input:focus {
 	}
 
 	.register-container-shadow {
-		height: 980px;
+		/*height: 980px;*/
+		height: 725px;
 	}
 
 	.register-container-shadow-back {
 		height: 960px;
+
 	}
 
 	.register-modal-container img {
