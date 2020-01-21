@@ -231,7 +231,7 @@
                                         </div>
                                         <label class="col-sm-1 control-label" for="textinput">รหัสไปรษณีย์</label>
                                         <div class="col-sm-11">
-                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orz_user_select.stage_code" readonly>
+                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" :value="orz_user_select.stage_code">
                                         </div>
                                     </div>
                                    <div class="form-group">
