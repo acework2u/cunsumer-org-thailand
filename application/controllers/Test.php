@@ -482,7 +482,7 @@ class Test extends MY_Controller
         $viewsMail = VIEWPATH;
 //        echo $viewsMail;
 
-        $email = 'acework2u@gmail.com';
+        $email = 'consumerthailand.official@gmail.com';
 
 //        $pdfFile = chunk_split(base64_encode(file_get_contents("downloads/invoice/FFC19000001.pdf")));
 //        $pdfFile = file_get_contents("downloads/invoice/FFC19000001.pdf");

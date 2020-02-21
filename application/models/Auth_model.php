@@ -375,6 +375,7 @@ class Auth_model extends MY_Model
         $this->db->select('users.*,user_role.`name` AS role_name,users_status.status_title AS status_title');
         $this->db->join($this->tbl_user_role, 'users.user_role_id = user_role.id', 'left');
         $this->db->join($this->tbl_users_status, 'users.`status` = users_status.aid', 'left');
+        $this->db->order_by('users.id','desc');
         $query = $this->db->get($this->tbl_users);
 
 //        $query = $this->db->order_by('id', 'desc')->limit($limit, $start)->get($this->tbl_users);

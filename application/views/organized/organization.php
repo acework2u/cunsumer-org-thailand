@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -538,11 +538,6 @@
                                           <div class="percentage central"></div>
                                       </div>
 
-                                      <p v-if="item.zone_code == 10" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
-                                      <div v-if="item.zone_code == 10" class="w-100 chart-bg">
-                                          <div class="percentage north"></div>
-                                      </div>
-
                                       <p v-if="item.zone_code == 50" class="nationwide-label text-white mt-3 mb-1">{{item.zone_title}}<span class="float-right">{{item.total}}</span></p>
                                       <div v-if="item.zone_code == 50" class="w-100 chart-bg">
                                           <div class="percentage west"></div>
@@ -571,36 +566,7 @@
 
                                   </div>
 
-                            <!--
-                            <p  class="nationwide-label text-white mb-1">กรุงเทพฯและปริมณฑล <span class="float-right">{{item.zone_code}}s</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage bangkok"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคกลาง <span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage central"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคเหนือ <span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage north"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันตก <span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage west"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออก <span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage east"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคตะวันออกเฉียงเหนือ <span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage north-east"></div>
-                            </div>
-                            <p class="nationwide-label text-white mt-3 mb-1">ภาคใต้ <span class="float-right">{{item.total}}</span></p>
-                            <div class="w-100 chart-bg">
-                                <div class="percentage southern"></div>
-                            </div>
--->
+
 
 
                         </div>
@@ -910,7 +876,7 @@
                 </div>
                 <div class="col-auto col-sm p-0">
                     <p class="footer-header mb-4 mb-2-sm">ADDRESS</p>
-                    <p class="footer-link mb-2">อาคารศูนย์เรียนรู้สุขภาวะ เลขที่ 99/8 ซอยงามดูพลี แขวงทุ่งมหาเมฆ เขตสาทร กรุงเทพฯ 10120</p>
+                    <p class="footer-link mb-2"><b>อาคารศูนย์เรียนรู้สุขภาวะ </b><br>เลขที่ 4/2 ซ.วัฒนโยธิน แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร 10400</p>
                     <p class="footer-link mb-2">โทรศัพท์ 02-343-1500 / โทรสาร 02-343-1551</p>
                 </div>
             </div>

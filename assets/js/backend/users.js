@@ -4,9 +4,11 @@ var date = new Date(), y = date.getFullYear(), m = date.getMonth();
 var firstDay = new Date(y, m, 1);
 var lastDay = new Date(y, m + 1, 0);
 
-
 Vue.use(VueTables.ClientTable);
 Vue.component('pagination', Pagination);
+Vue.use(VueLoading);
+Vue.component('loading', VueLoading)
+
 var appusers = new Vue({
     el: "#appusers",
     data() {
@@ -150,6 +152,8 @@ var appusers = new Vue({
             let user_group_id = this.userClicked.user_role_id
             let api = baseUrl+"/api-v01/user/access-list"
             this.userAccess = []
+
+
             axios.get(api+"?group_id="+user_group_id).then((res)=>{
                 this.userAccess = res.data
             })
@@ -159,21 +163,31 @@ var appusers = new Vue({
         saveUserInfo(){
             console.log(this.userInfo);
             let adminApi = baseUrl+"/api-v01/user/admin-register"
-
             let dataInfo = this.userInfo
             var fromData = this.toFormData(dataInfo)
             axios.post(adminApi,fromData).then((res)=>{
                     console.log(res.data)
             })
 
-
-
-
         },
         updateUserInfo(){
             let updateAdminApi = baseUrl+"/api-v01/user/admin-update"
             let dataInfo = this.userClicked
             var fromData = this.toFormData(dataInfo)
+
+            let loader = this.$loading.show({
+                // Optional parameters
+                color: '#3224d4',
+                loader: 'spinner',
+                width: 64,
+                height: 64,
+                backgroundColor: '#ffffff',
+                opacity: 0.5,
+                zIndex: 999,
+                container: this.fullPage ? null : this.$refs.formContainer,
+                canCancel: true,
+                onCancel: this.onCancel,
+            });
 
             axios.post(updateAdminApi,fromData).then((res)=>{
                 // console.info(res.data)
@@ -185,19 +199,22 @@ var appusers = new Vue({
                 }else{
                     this.errorStatus = res.data.error
                     this.successMsg = res.data.message
-                    this.getDonationlist()
+
                 }
 
                 setTimeout(()=>{
                     this.successMsg = "";
-                },5000)
-
-
+                },500)
 
             })
 
+            setTimeout(() => {
+                loader.hide()
+                this.getDonationlist()
+            },1000)
 
-            console.info(this.userClicked)
+
+
         },
         userStatus(){
             let baseApi = baseUrl+"/api-v01/user/status-list"
