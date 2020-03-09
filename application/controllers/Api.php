@@ -325,12 +325,17 @@ class Api extends MY_Controller
 
     public function user_access()
     {
-        $user_group_id = 3;
+        $user_group_id = "";
         if (!is_blank($this->input->get_post('group_id'))) {
             $user_group_id = $this->input->get_post('group_id');
         }
         $data_info = array();
         $this->load->model($this->province_model, 'province');
+
+        $this->load->model($this->organized_model,'orz');
+
+
+        $result = "";
         switch ($user_group_id) {
             case 3:
                 $result = $this->province->zone_list();
@@ -348,6 +353,15 @@ class Api extends MY_Controller
                     $data_info[] = array(
                         'code' => get_array_value($row, 'code', ''),
                         'title' => get_array_value($row, 'name_in_thai')
+                    );
+                }
+                break;
+            case 5:
+                $result = $this->orz->orz_access();
+                foreach ($result as $row){
+                    $data_info[] = array(
+                        'code' => get_array_value($row, 'aid', 0),
+                        'title' => get_array_value($row, 'title','')
                     );
                 }
 

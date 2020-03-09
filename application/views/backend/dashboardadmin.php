@@ -83,7 +83,7 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <div class="col-xs-12 col-sm-6 col-md-8">
-                            <h3 class="box-title">Organization List1</h3>
+                            <h3 class="box-title">Organization List</h3>
                         </div>
 
                         <vue-datepicker-local v-model="range" range-separator=" to " :local="local" show-buttons

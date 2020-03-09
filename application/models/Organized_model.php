@@ -570,5 +570,31 @@ class Organized_model extends MY_Model
 
     }
 
+    public function orz_access(){
+       $this->db->where('user_id',0);
+       $this->db->order_by('aid','asc');
+       $query = $this->db->get($this->tbl_organization);
+
+        $result = array();
+        if ($query->num_rows() > 0) {
+
+            foreach ($query->result_array() as $row) {
+                $result[] = $row;
+            }
+
+
+        }
+
+
+
+
+
+        return $result;
+
+
+
+
+    }
+
 
 } // end of class

@@ -77,9 +77,6 @@ $route['admin/reports/donor-info'] = "backend/Reports/donorInfo";
 $route['admin/logs/approved-logs'] = "backend/Logs/dashboard";
 $route['admin/reports/approved-logs-exportxls'] = "backend/Reports/approveLogsexportxls";
 
-
-
-
 /***User Profile****/
 $route['signup'] = 'auth/register';
 $route['signin'] = 'auth/login';
@@ -88,8 +85,6 @@ $route['dologin'] = 'auth/doLogin';
 $route['profile'] = 'auth/index';
 $route['userlist'] = 'auth/userList';
 $route['user-list'] = 'auth/users_list';
-
-
 
 /**** User ****/
 $route['api-v01/user/user-list'] = "auth/get_user_list";

@@ -139,7 +139,7 @@ var appusers = new Vue({
         permissionGroup(){
             console.info(this.userInfo.group)
             let user_group_id = this.userInfo.group
-            let api = baseUrl+"/api-v01/user/access-list"
+            let api = baseUrl+"/ "
             this.userAccess = []
             axios.get(api+"?group_id="+user_group_id).then((res)=>{
                 this.userAccess = res.data
