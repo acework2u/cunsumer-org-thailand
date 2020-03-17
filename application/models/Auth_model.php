@@ -378,9 +378,6 @@ class Auth_model extends MY_Model
         $this->db->order_by('users.id','desc');
         $query = $this->db->get($this->tbl_users);
 
-//        $query = $this->db->order_by('id', 'desc')->limit($limit, $start)->get($this->tbl_users);
-
-
         if ($query->num_rows() > 0) {
             $i = 1;
             foreach ($query->result_array() as $row) {

@@ -27,12 +27,11 @@ class Users extends MY_Controller
 
 
     public function jsonUserList(){
+        $userList = array();
         if($this->is_login() && getUserRoleId()==1){
-
-            $userList = array();
             $userList = $this->user->user_list();
-           echo json_encode($userList);
         }
+        echo json_encode($userList);
 
 
     }

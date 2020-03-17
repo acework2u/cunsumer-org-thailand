@@ -92,7 +92,7 @@ class Api extends MY_Controller
     public function admin_update_orz()
     {
 
-        if ($this->is_login() && getUserRoleId() == 1) {
+        if ($this->is_login() && getUserRoleId() != 5) {
             $this->load->model($this->organized_model, 'orz');
             $this->load->model($this->logs_model, 'logs');
 
@@ -326,9 +326,17 @@ class Api extends MY_Controller
     public function user_access()
     {
         $user_group_id = "";
-        if (!is_blank($this->input->get_post('group_id'))) {
+        $user_role_id ="";
+
+;        if (!is_blank($this->input->get_post('group_id'))) {
             $user_group_id = $this->input->get_post('group_id');
         }
+
+        if (!is_blank($this->input->get_post('user_role_id'))) {
+            $user_role_id = $this->input->get_post('user_role_id');
+        }
+
+
         $data_info = array();
         $this->load->model($this->province_model, 'province');
 
@@ -336,7 +344,7 @@ class Api extends MY_Controller
 
 
         $result = "";
-        switch ($user_group_id) {
+        switch ($user_role_id) {
             case 3:
                 $result = $this->province->zone_list();
 
@@ -366,6 +374,11 @@ class Api extends MY_Controller
                 }
 
                 break;
+
+            default:
+                $data_info = array();
+                break;
+
         }
         echo json_encode($data_info);
 

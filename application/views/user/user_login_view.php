@@ -250,7 +250,7 @@
     //Hidden inputs should get their tabindex fixed, not in scope ;)
     //$(function(){ $('input[tabindex="4"]').fadeOut();  })
 </script>
-<script src="https://cdn.jsdelivr.net/npm/vee-validate@latest/dist/vee-validate.js"></script>
+<script src="<?php echo base_url('assets/js/vee-validate.js'); ?>"></script>
 <script>
     var base_url = window.location.origin;
     var apiUrl = base_url + "/api-v01/user/logon";

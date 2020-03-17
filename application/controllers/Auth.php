@@ -290,7 +290,7 @@ class Auth extends MY_Controller
             $first_name = $this->input->post('first_name');
             $last_name = $this->input->post('last_name');
             $email = $this->input->post('email');
-            $password = $this->input->post('password');
+            $password = trim($this->input->post('password'));
             $user_group = $this->input->post('group');
             $user_access = $this->input->post('user_access');
             $user_status = $this->input->post('user_status');
@@ -357,7 +357,7 @@ class Auth extends MY_Controller
             $email = $this->input->post('email');
             $name = $this->input->post('name');
             $last_name = $this->input->post('last_name');
-            $password = $this->input->post('password');
+            $password = trim($this->input->post('password'));
             $user_rule = $this->input->post('user_role_id');
             $user_group = $this->input->post('customer_group_id');
             $status = $this->input->post('status_id');

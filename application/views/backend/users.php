@@ -105,6 +105,12 @@
                                             <label for="email" class="col-sm-2 control-label">Email</label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" v-model="userInfo.email" >
+
+
+                                            </div>
+
+                                            <div class="col-sm-5">
+                                                <span class="mt4 alert-warning" name="msgemail">**email not format</span>
                                             </div>
                                         </div>
 
@@ -130,11 +136,13 @@
                                         </div>
 
 
-                                        <div  class="radio">
+                                        <div  class="form-group">
                                             <label for="user-group" class="col-sm-2 control-label"><b>Group</b></label>
-                                            <div class="col-sm-10">
-                                                <label class="margin-r-5"  v-for="item,index in filterUserGroup"><input dirname="user-group" type="radio" name="s" :value="item.id" v-model="userInfo.group" @change="permissionGroup">{{item.name}}</label>
-
+                                            <div class="col-sm-6">
+<!--                                                <label class="margin-r-5"  v-for="item,index in filterUserGroup"><input dirname="user-group" type="radio" name="s" :value="item.id" v-model="userInfo.group" @change="permissionGroup">{{item.name}}</label>-->
+                                                <select class="form-control dropdown" v-model="userInfo.group" @change="permissionGroup" :required="true">
+                                                    <option v-for="item,index in filterUserGroup" :value="item.id" >{{item.name}}</option>
+                                                </select>
                                             </div>
 
                                         </div>
@@ -142,8 +150,8 @@
                                         <div  class="form-group">
                                             <label for="bank-name" class="col-sm-2 control-label">Access</label>
                                             <div class="col-sm-6">
-                                                <select ref="user_access" class="form-control" v-model="userInfo.user_access" >
-                                                    <option v-for="item,index in userAccess" :value="item.code">{{item.title}}</option>
+                                                <select ref="useraccess" class="form-control dropdown" v-model="userInfo.user_access">
+                                                    <option v-for="item,index in filterUserAccess" :value="item.code">{{item.title}}</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -169,7 +177,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveUserInfo()">Save</button>
+<!--                                <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveUserInfo()">Save</button>-->
+                                <button type="button" class="btn btn-primary"  @click="saveUserInfo()">Save</button>
                             </div>
 
                         </div>
@@ -216,9 +225,9 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <v-client-table ref="table" :columns="columns" :data="filterDonationList" :options="options">
-                            <a  data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"
+                            <a data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"
                                slot-scope="props" target="_blank" :href="props.row.action"
-                               class="glyphicon fa fa-edit"></a>
+                               class="btn glyphicon fa fa-edit"></a>
                             <a  data-toggle="modal" @click="clickUser(props.row)" data-target="#userDeleteModal" slot="delete"
                                 slot-scope="props" target="_blank" :href="props.row.delete"
                                 class="glyphicon fa fa-trash"></a>
@@ -256,7 +265,7 @@
                                                 <div class="form-group">
                                                     <label for="donorName" class="col-sm-2 control-label">Password</label>
                                                     <div class="col-sm-5">
-                                                        <input type="text" class="form-control" v-model="userInfo.password" >
+                                                        <input type="text" class="form-control" v-model="userClicked.password" >
                                                     </div>
                                                 </div>
 
@@ -288,7 +297,7 @@
                                                     <label for="bank-name" class="col-sm-2 control-label">Access</label>
                                                     <div class="col-sm-6">
                                                         <select ref="user_access" class="form-control" v-model="userClicked.customer_group_id" >
-                                                            <option v-for="item,index in userAccess" :value="item.code">{{item.title}}</option>
+                                                            <option v-for="item,index in filterUserAccess" :value="item.code">{{item.title}}</option>
                                                         </select>
                                                     </div>
                                                 </div>

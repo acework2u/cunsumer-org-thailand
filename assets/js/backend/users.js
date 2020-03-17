@@ -14,13 +14,15 @@ var appusers = new Vue({
     data() {
         return {
             donationInfo: [],
+
             donorInfo:[],
             successMsg:"",
             statusWait:false,
             errorStatus:false,
             bankList: [],
             paymentCode: [],
-            userInfo:{group:4,user_status:1,user_access:10},
+            // userInfo:{group:4,user_status:1,user_access:10},
+            userInfo:{},
             usersGroup:[],
             userAccess:[],
             user_status:[],
@@ -44,7 +46,6 @@ var appusers = new Vue({
                 perPageValues: [10, 25, 50, 100, 500, 1000],
 
             },
-
 
             time: new Date(),
             startTime: firstDay,
@@ -95,6 +96,9 @@ var appusers = new Vue({
                 return item.id
             })
         },
+        filterUserAccess(){
+            return this.userAccess
+        },
         fillterStartDated() {
             this.startDated = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
             return moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
@@ -137,25 +141,78 @@ var appusers = new Vue({
             })
         },
         permissionGroup(){
+
+            let api = baseUrl+"/api-v01/user/access-list"
+
+
+            if(typeof this.userInfo.group === 'undefined'){
+                this.userInfo.group = 3
+            }
+
+            if(typeof this.userInfo.user_role_id === 'undefined'){
+                this.userInfo.user_role_id = 3
+            }
+
             console.info(this.userInfo.group)
-            let user_group_id = this.userInfo.group
-            let api = baseUrl+"/ "
             this.userAccess = []
-            axios.get(api+"?group_id="+user_group_id).then((res)=>{
+
+            let user_role_id = this.userInfo.group
+
+            let uaccApi =api+"?user_role_id="+user_role_id
+
+            axios.get(uaccApi).then((res)=>{
                 this.userAccess = res.data
+
+
+
+
+
             })
 
+            this.$refs.useraccess.focus();
+            console.log(this.userInfo);
 
-        },
+
+
+            // axios.get().then((res)=>{
+            //     this.userAccess = res.data
+            // })
+
+            /*
+            if(typeof this.userInfo.group === 'undefined'){
+
+            }else{
+                console.info(this.userInfo.group)
+                let user_group_id = this.userInfo.group
+
+
+
+
+                let api = baseUrl+"/"
+                this.userAccess = []
+                axios.get(api+"?group_id="+user_group_id).then((res)=>{
+                    this.userAccess = res.data
+                })
+            }
+
+            */
+
+
+            },
         updateUserGroup(){
-            console.info(this.userInfo.group)
-            let user_group_id = this.userClicked.user_role_id
+            // console.info(this.userInfo.group)
+
+
+            if(!typeof this.userInfo.group === 'undefined'){
+
+            }
+            let user_group_id = this.userClicked.customer_group_id
+            let user_role_id = this.userClicked.user_role_id
             let api = baseUrl+"/api-v01/user/access-list"
             this.userAccess = []
-
-
-            axios.get(api+"?group_id="+user_group_id).then((res)=>{
+            axios.get(api+"?group_id="+user_group_id+"&user_role_id="+user_role_id).then((res)=>{
                 this.userAccess = res.data
+
             })
 
 
@@ -164,10 +221,23 @@ var appusers = new Vue({
             console.log(this.userInfo);
             let adminApi = baseUrl+"/api-v01/user/admin-register"
             let dataInfo = this.userInfo
+
+
+            console.info(dataInfo)
+
+           if(typeof this.userInfo.user_access === 'undefined'){
+               this.$refs.user_access.focus();
+           }
+
+
+
+            /*
             var fromData = this.toFormData(dataInfo)
             axios.post(adminApi,fromData).then((res)=>{
                     console.log(res.data)
             })
+
+            */
 
         },
         updateUserInfo(){
@@ -314,6 +384,9 @@ var appusers = new Vue({
             this.userClicked = ""
             this.userClicked = itemClick
             console.log(this.userClicked)
+            // this.permissionGroup();
+            console.info(this.userAccess);
+
         },
         toFormData: function (obj) {
             var form_data = new FormData();

@@ -3,8 +3,10 @@
 
 
     var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-    var firstDay = new Date(y, m, 1);
+    var firstDay = new Date(y, 1, 1);
     var lastDay = new Date(y, m + 1, 0);
+
+
 
     Vue.use(CKEditor)
     Vue.use(VueTables.ClientTable);
@@ -69,7 +71,8 @@
         el: "#lastdonate",
         data() {
             return {
-                title: "Last Donate",
+                title: "Organization List",
+                useFilter:false,
                 donationInfo: [],
                 donorTopInfo: [],
                 donorInfo: {},
@@ -151,17 +154,21 @@
                 columns: ['created_date', 'title', 'contact_name', 'email', 'contact_tel', 'province', 'status', 'updated_date', 'action', 'action_1', 'action_2', 'action_3', 'action_4'],
                 options: {
                     headings: {
-                        created_date: 'Register Date',
-                        title: 'Organization Name',
-                        contact_name: 'Contact Name',
-                        orz_register_date: 'Register Date',
-                        orz_status: 'Status',
-                        approved_by: 'Approved',
-                        approved_date: 'Approved Date',
-                        orz_in_province: 'In Province',
+                        created_date: 'วันลงทะเบียน',
+                        title: 'องค์กร',
+                        email:"อีเมล",
+                        contact_name: 'ผู้ติดต่อองค์กร',
+                        contact_tel:"เบอร์โทร",
+                        orz_register_date: 'วันที่ลงทะเบียน',
+                        orz_status: 'สถานะ',
+                        approved_by: 'อนุมัติโดย',
+                        approved_date: 'วันที่อนุมัติ',
+                        status: 'สถานะ',
+                        orz_in_province: 'จังหวัด',
+                        province: 'จังหวัด',
                         orz_in_zone: 'In Zone',
                         orz_volunteer: 'Volunteer',
-                        updated_date: "Updated date",
+                        updated_date: "อัพเดทล่าสุด",
                         action: "",
                         action_1: "",
                         action_2: "",
@@ -350,9 +357,17 @@
                 }
             },
             fillterStartDated() {
-                this.startDated = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
-                return moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
+
+                if(this.useFilter){
+                    this.startDated = ""
+                }else{
+                    this.startDated = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
+                }
+
+                // return moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
                 // this.endTime = this.range[1]
+
+                return this.startDated =""
             },
             fillterEndDated() {
 
@@ -386,6 +401,9 @@
                 this.markers=[]
                 this.coordinates=[]
                 this.latLng = ""
+
+            },
+            filterClear(){
 
             },
             orzUserClick(item) {
@@ -452,7 +470,8 @@
                 let orzApi = baseUrl + ("/api/v1/orz/backend/orz-all");
                 axios.get(orzApi).then((res) => {
                     this.orz_all = res.data
-                    console.info(this.orz_all)
+                    // this.orz_all = []
+                    // console.info(this.orz_all)
                 }).catch((err) => {
                 })
             },

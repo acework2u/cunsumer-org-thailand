@@ -83,12 +83,12 @@
                 <div class="box box-info">
                     <div class="box-header">
                         <div class="col-xs-12 col-sm-6 col-md-8">
-                            <h3 class="box-title">Organization List</h3>
+                            <h3 class="box-title"><?php echo $this->lang->line('organization_list')?></h3>
                         </div>
 
                         <vue-datepicker-local v-model="range" range-separator=" to " :local="local" show-buttons
                                               format="DD-MM-YYYY"></vue-datepicker-local>
-                        <button class="btn btn-info">Filter</button>
+                        <button class="btn btn-info" @click="filterClear">Filter</button>
 
                     </div>
                     <div class="box-body table-responsive no-paddingv connectedSortable">
