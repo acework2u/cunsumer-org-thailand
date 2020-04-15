@@ -3,7 +3,7 @@
 
 
     var date = new Date(), y = date.getFullYear(), m = date.getMonth();
-    var firstDay = new Date(y, 1, 1);
+    var firstDay = new Date(y, 0, 1);
     var lastDay = new Date(y, m + 1, 0);
 
 
@@ -23,8 +23,7 @@
     Vue.component('pagination', Pagination);
     Vue.filter('formatBaht', (value) => {
         if (value) {
-
-            let string = numeral(value).format('0,0.00')
+            let string = numeral(value).format('0,0.00');
 
             return string
         }
@@ -413,6 +412,7 @@
 
                 this.orz_user_select = item
                 this.orzInformation = item
+                console.log("Demo")
                 console.log(item)
 
 

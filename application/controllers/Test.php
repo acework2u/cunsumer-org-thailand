@@ -826,28 +826,28 @@ class Test extends MY_Controller
     public function provice_code()
     {
         $this->load->model($this->province_model, 'province');
-            $zip_code = 45160;
-            $province =12;
+        $zip_code = 45160;
+        $province = 12;
 //            $this->province->setZipCode($zip_code);
 //            $result = $this->province->get_province_code();
-                $this->province->setProvinceCode($province);
-            $result = $this->province->provinces_by_code();
+        $this->province->setProvinceCode($province);
+        $result = $this->province->provinces_by_code();
 
-            echo json_encode($result);
+        echo json_encode($result);
 
 
 //        print_r() ;
     }
 
 
-    public function orz_in_province(){
+    public function orz_in_province()
+    {
         $this->load->model($this->organized_model, 'orz');
-        $orz_stage_code =11120;
+        $orz_stage_code = 11120;
         $orz_id = 1;
-        $province_code ="";
+        $province_code = "";
         $this->load->model($this->province_model, 'province');
         $this->province->setZipCode($orz_stage_code);
-
 
 
         $province_code = $this->province->get_province_code();
@@ -863,8 +863,9 @@ class Test extends MY_Controller
     }
 
 
-    public function volunteer_join_orz(){
-        $this->load->model($this->volunteer_model,'volunteer');
+    public function volunteer_join_orz()
+    {
+        $this->load->model($this->volunteer_model, 'volunteer');
         $orz_id = 1;
         $this->volunteer->setOrzId($orz_id);
         $result = $this->volunteer->volunteer_join_orz();
@@ -873,8 +874,9 @@ class Test extends MY_Controller
 
     }
 
-    public function total_volunteer(){
-        $this->load->model($this->reports_model,'report');
+    public function total_volunteer()
+    {
+        $this->load->model($this->reports_model, 'report');
 
         $report = array();
         $orz_info = $this->report->report_orz_list();
@@ -885,8 +887,9 @@ class Test extends MY_Controller
         echo "<pre>";
     }
 
-    public function user_group(){
-        $this->load->model($this->auth_model,'user');
+    public function user_group()
+    {
+        $this->load->model($this->auth_model, 'user');
 
         $user_group = $this->user->user_group();
 
@@ -895,44 +898,42 @@ class Test extends MY_Controller
 
     }
 
-    public function user_rule(){
-        $this->load->model($this->auth_model,'user');
+    public function user_rule()
+    {
+        $this->load->model($this->auth_model, 'user');
         $user_rule = $this->user->user_rule();
-
 
 
         echo json_encode($user_rule);
 
 
-
-
-
     }
 
-    public function user_access(){
+    public function user_access()
+    {
         $user_group_id = 3;
-        if(!is_blank($this->input->get_post('group_id'))){
+        if (!is_blank($this->input->get_post('group_id'))) {
             $user_group_id = $this->input->get_post('group_id');
         }
         $data_info = array();
         $this->load->model($this->province_model, 'province');
-        switch ($user_group_id){
+        switch ($user_group_id) {
             case 3:
                 $result = $this->province->zone_list();
 
-                foreach ($result as $row){
-                   $data_info[] = array(
-                       'code'=>get_array_value($row,'code',''),
-                       'title'=>get_array_value($row,'title_th')
-                   );
+                foreach ($result as $row) {
+                    $data_info[] = array(
+                        'code' => get_array_value($row, 'code', ''),
+                        'title' => get_array_value($row, 'title_th')
+                    );
                 }
                 break;
             case 4:
-                $result =$this->province->provinces_list();
-                foreach ($result as $row){
+                $result = $this->province->provinces_list();
+                foreach ($result as $row) {
                     $data_info[] = array(
-                        'code'=>get_array_value($row,'code',''),
-                        'title'=>get_array_value($row,'name_in_thai')
+                        'code' => get_array_value($row, 'code', ''),
+                        'title' => get_array_value($row, 'name_in_thai')
                     );
                 }
 
@@ -944,17 +945,20 @@ class Test extends MY_Controller
     }
 
 
-    public function thailand(){
+    public function thailand()
+    {
         $this->load->view('thailand');
     }
 
 
-    public function user_grant(){
+    public function user_grant()
+    {
         echo getUserRoleId();
     }
 
 
-    public function test_orz_list(){
+    public function test_orz_list()
+    {
         $this->load->model($this->organized_model, 'orz');
         $orz_info = $this->orz->orz_all();
 
@@ -970,7 +974,68 @@ class Test extends MY_Controller
     }
 
 
+    public function orz_search()
+    {
+        $this->load->model($this->organized_model, 'orz');
 
+
+        $province_code = 15;
+        $this->orz->setProvinceCode($province_code);
+        $orz_info = $this->orz->orz_for_search();
+
+        $this->load->model($this->province_model, 'province');
+        $this->province->setProvinceCode($province_code);
+        $province_info = $this->province->provinces_by_code();
+
+
+        $orz_in_place = array();
+        if(!is_blank($orz_info)){
+            foreach ($orz_info as $row){
+                $rows = array(
+                    'full_name'=>get_array_value($row,'title'),
+                    'lat'=>get_array_value($row,'latitude','0.00'),
+                    'lng'=>get_array_value($row,'longitude','0.00'),
+                    'full_desc'=>$row  ,
+                );
+
+                $orz_in_place[] = $rows;
+            }
+        }
+
+
+
+
+        $data = array(
+            'province_info'=>$province_info,
+            'orz_info'=>$orz_info,
+            'coordinates'=>$orz_in_place
+        );
+
+
+
+
+
+        echo json_encode($data);
+
+
+        #echo $this->db->last_query();
+
+
+    }
+
+
+    public function volantter_orzlist(){
+        $this->load->model($this->volunteer_model,'volunteer');
+        $orz = 335;
+        $this->volunteer->setOrzId($orz);
+        $result = array();
+        $result = $this->volunteer->volunteer_join_orz();
+
+
+        print_r($result);
+
+
+    }
 
 
 } //end of Class

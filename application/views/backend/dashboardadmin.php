@@ -9,7 +9,7 @@
             <li class="active">Dashboard</li>
         </ol>
         <div>
-            <b-alert show variant="primary">Primary Alert <?php echo getUserRoleId() ?></b-alert>
+            <b-alert show variant="primary"><?php echo getUserRoleId() ?></b-alert>
         </div>
     </section>
     <!-- Main content -->
@@ -85,7 +85,6 @@
                         <div class="col-xs-12 col-sm-6 col-md-8">
                             <h3 class="box-title"><?php echo $this->lang->line('organization_list')?></h3>
                         </div>
-
                         <vue-datepicker-local v-model="range" range-separator=" to " :local="local" show-buttons
                                               format="DD-MM-YYYY"></vue-datepicker-local>
                         <button class="btn btn-info" @click="filterClear">Filter</button>
@@ -104,6 +103,11 @@
                             <a data-toggle="modal" data-target="#viewModal" @click="orzUserClick(props.row)"  slot="action_2"
                                slot-scope="props" target="_blank" :href="props.row.action_2"
                                class="glyphicon fa fa-vcard-o"></a>
+
+                            <a data-toggle="modal" data-target="#orz-user-volunteer" @click="orzUserClick(props.row)"  slot="action_2"
+                               slot-scope="props" target="_blank" :href="props.row.action_2"
+                               class="glyphicon fa fa-vcard-o"></a>
+
 
                             <button slot-scope="props" slot="action_3" @click="approvedOrz(props.row)" class="btn-sm btn-success">อนุมัติ</button>
                             <button slot-scope="props" slot="action_4" @click="cancledOrz(props.row)" class="btn-sm btn-danger">ไม่อนุมัติ</button>
@@ -368,6 +372,70 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+
+                    <div class="modal fade" id="orz-user-volunteer" tabindex="-1" role="dialog">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="exampleModalLabel">อาสาสมัคร</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <ul v-if="volunteers.length >0" class="products-list product-list-in-box">
+                                            <li  v-for="items,index in filterVolunteers" class="item">
+                                                <div class="">
+                                                    <a href="#" @click="volunteerClickInfo(items)" data-toggle="modal" data-target="#myDonor" class="product-title">{{items.name}} {{items.lastname}}
+                                                        <span class="label label-success pull-right"></span></a>
+
+                                                </div>
+                                            </li>
+
+                                        </ul>
+
+fffffffffffffffffffffff
+
+
+                                        <table class="table">
+                                            <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">First</th>
+                                                <th scope="col">Last</th>
+                                                <th scope="col">Handle</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr>
+                                                <th scope="row">1</th>
+                                                <td>Mark</td>
+                                                <td>Otto</td>
+                                                <td>@mdo</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">2</th>
+                                                <td>Jacob</td>
+                                                <td>Thornton</td>
+                                                <td>@fat</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">3</th>
+                                                <td>Larry</td>
+                                                <td>the Bird</td>
+                                                <td>@twitter</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="modal-footer"></div>
+
+                            </div>
+
+                        </div>
+
                     </div>
 
 

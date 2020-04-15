@@ -285,7 +285,7 @@ class Volunteer_model extends MY_Model
             $this->db->join($this->tbl_orz_status,'orz_volunteer_mn.`status` = orz_status.aid','left');
             $this->db->join($this->tbl_organization,'orz_volunteer_mn.orz_aid = organization.aid','left');
             if(getUserRoleId()!=1){
-                $this->db->where('organization.user_id',getUserAid());
+//                $this->db->where('organization.user_id',getUserAid());
             }
             $this->db->where('orz_volunteer_mn.orz_aid',$this->_orz_aid);
             $query = $this->db->get($this->tbl_volunteer);

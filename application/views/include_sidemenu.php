@@ -39,7 +39,7 @@
             </li>
             <?php }?>
 
-            <?php if(getUserRoleId() == 1){ ?>
+            <?php if(getUserRoleId() == 1 || getUserRoleId()==3){ ?>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i>

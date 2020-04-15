@@ -614,23 +614,7 @@
             <div class="col-xl-4 col-lg-5 p-0">
 
                 <div class="location-lg d-none d-lg-block">
-                    <!-- Js line 36 -->
-                    <!--
-                    <div class="location-container p-relative d-none">
-                        <div class="row m-auto h-100">
-                            <div class="col-4 p-0 h-100 bg-white">
-                                <img src="<?php echo base_url('assets/image/location/img-1.png');?>" class="w-100 h-100">
-                            </div>
-                            <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
-                                <div class="px-2">
-                                    <p class="mb-2 w-50"><b>มูลนิธิสร้างรอยยิ้ม <br> Operation Smile Thailand</b></p>
-                                    <p class="mb-0 mt-0">12/2 Soi Methinivete, Sukhumvit Soi 24, Klongton, แขวง คลองเตย เขต คลองเตย กรุงเทพมหานคร 10110</p>
-                                    <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    -->
+
                     <div class="location-container " v-for="item , index in filterOrzList">
                         <div class="row m-auto h-100">
                             <div class="col-4 p-0 h-100 bg-white" @click="userClick(item)">

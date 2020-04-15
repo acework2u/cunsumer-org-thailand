@@ -339,7 +339,8 @@ var base_url = window.location.origin;
                 return (`<div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">${marker.title}</h5>
-    <p class="card-text">${marker.address} ${marker.stage_code}</p>
+    <p class="card-text">${marker.address} ต.${marker.district} อ.${marker.amphoe} จ.${marker.province} ${marker.stage_code}.</p>
+    <p class="card-text">เบอร์โทร. ${marker.contact_tel}</p>
     <a href="https://www.google.com/maps/search/?api=1&query=${marker.latitude},${marker.longitude}" class="btn btn-primary">Go Directions</a>
   </div>
 </div>`);
