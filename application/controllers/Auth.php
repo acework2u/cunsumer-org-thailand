@@ -311,13 +311,13 @@ class Auth extends MY_Controller
 
             if ($chk) {
                 $message = array(
-                    'stats' => true,
+                    'status' => true,
                     'message' => "Create Success"
                 );
             } else {
                 $message = array(
-                    'stats' => false,
-                    'error' => "",
+                    'status' => false,
+                    'error' => true,
                     'message' => "Could not create user"
                 );
             }
@@ -326,8 +326,9 @@ class Auth extends MY_Controller
         } else {
 
             $message = array(
-                'stats' => false,
-                'error' => $this->form_validation->error_array(),
+                'status' => false,
+//                'error' => $this->form_validation->error_array(),
+                'error' => true,
                 'message' => validation_errors()
             );
         }

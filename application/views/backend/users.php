@@ -76,12 +76,12 @@
                 <div class="col-xs-12 col-sm-6 col-md-8">
                     <vue-datepicker-local v-model="range" range-separator=" to " :local="local" show-buttons
                                           format="DD-MM-YYYY"></vue-datepicker-local>
-                    <button class="btn btn-group-sm" @click="getDonationlist">Confirm</button>
+                    <button class="btn btn-group-sm btn-primary" @click="getDonationlist">Confirm</button>
                 </div>
 
             </div>
             <div class="col-xs-6 col-md-4 text-right mx-auto">
-                <a class="btn btn-info" data-toggle="modal" data-target="#new-user">New User</a>
+                <a class="btn btn-info" data-toggle="modal" data-target="#new-user" @click="newUser">New User</a>
                 <a class="btn btn-success" :href="exportExcel">Export .xls</a>
             </div>
 
@@ -166,6 +166,8 @@
                                         </div>
 
                                         <div class="form-group">
+                                                <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
+                                                <div v-if="errorAction" v-html="textError"><</div>
 
                                         </div>
 

@@ -14,11 +14,12 @@ var appusers = new Vue({
     data() {
         return {
             donationInfo: [],
-
             donorInfo:[],
             successMsg:"",
             statusWait:false,
             errorStatus:false,
+            actionStatus:false,
+            textError:"",
             bankList: [],
             paymentCode: [],
             // userInfo:{group:4,user_status:1,user_access:10},
@@ -121,6 +122,9 @@ var appusers = new Vue({
             let apiUrls = baseUrl + "/admin/reports/approved-logs-exportxls?startDate=" + start_date + "&endDate=" + end_date
 
             return apiUrls
+        },
+        errorAction(){
+            return this.errorStatus;
         }
 
     },
@@ -139,6 +143,9 @@ var appusers = new Vue({
             }).catch((err) => {
                 // console.log(err)
             })
+        },
+        newUser(){
+            this.errorStatus = false
         },
         permissionGroup(){
 
@@ -222,22 +229,21 @@ var appusers = new Vue({
             let adminApi = baseUrl+"/api-v01/user/admin-register"
             let dataInfo = this.userInfo
 
-
-            console.info(dataInfo)
+            // console.info(dataInfo)
 
            if(typeof this.userInfo.user_access === 'undefined'){
                this.$refs.user_access.focus();
            }
-
-
-
-            /*
             var fromData = this.toFormData(dataInfo)
             axios.post(adminApi,fromData).then((res)=>{
                     console.log(res.data)
-            })
+                if(res.data.error){
+                    this.errorStatus = res.data.error
+                    this.textError   = res.data.message
+                    this.successMsg   = "การลงข้อมูลผิดพลาด"
+                }
 
-            */
+            })
 
         },
         updateUserInfo(){

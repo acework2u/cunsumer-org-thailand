@@ -266,9 +266,9 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <v-client-table ref="table" :columns="columns" :data="filterDonationList" :options="options">
-                            <a data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"
-                               slot-scope="props" target="_blank" :href="props.row.action"
-                               class="glyphicon fa fa-edit"></a>
+<!--                            <a data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"-->
+<!--                               slot-scope="props" target="_blank" :href="props.row.action"-->
+<!--                               class="glyphicon fa fa-edit"></a>-->
 
                             <a class="btn" @click="donorClicked(props.row)" data-toggle="modal" data-target="#myDonor" slot="first_name" slot-scope="props">{{props.row.first_name}}</a>
                             <span class="float-right" slot="amount"

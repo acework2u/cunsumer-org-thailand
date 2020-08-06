@@ -2,7 +2,7 @@
     <div class="container container-lg pt-5 pt-4-sm">
         <div class="row m-auto pt-5 pt-4-sm pb-4">
             <div class="col p-0">
-                <p class="footer-header mb-4 mb-2-sm">OUR ABOUT</p>
+                <p class="footer-header mb-4 mb-2-sm"><?php echo $this->lang->line('our_about');?></p>
                 <p class="footer-link mb-2 pointer" id="about-footer">เราคือใคร</p>
                 <p class="footer-link mb-2 pointer" id="what-we-do-footer">เราทำอะไร</p>
             </div>

@@ -848,18 +848,18 @@
         <div class="container container-lg pt-5 pt-4-sm">
             <div class="row m-auto pt-5 pt-4-sm pb-4">
                 <div class="col p-0">
-                    <p class="footer-header mb-4 mb-2-sm">OUR ABOUT</p>
+                    <p class="footer-header mb-4 mb-2-sm"><?php echo $this->lang->line('our_about');?></p>
                     <p class="footer-link mb-2 pointer" id="about-footer">เราคือใคร</p>
                     <p class="footer-link mb-2 pointer" id="what-we-do-footer">เราทำอะไร</p>
                 </div>
                 <div class="col p-0">
-                    <p class="footer-header mb-4 mb-2-sm">OUR SERVICER</p>
-                    <p class="footer-link mb-2 pointer" id="register-footer">Register</p>
-                    <p class="footer-link mb-2 pointer" id="login-footer">Ower Login</p>
-                    <p class="footer-link mb-2 pointer" id="find-location-footer">Find Location</p>
+                    <p class="footer-header mb-4 mb-2-sm"><?php echo $this->lang->line('our_service');?></p>
+                    <p class="footer-link mb-2 pointer" id="register-footer"><?php echo $this->lang->line('register');?></p>
+                    <p class="footer-link mb-2 pointer" id="login-footer"><?php echo $this->lang->line('owner_login')?></p>
+                    <p class="footer-link mb-2 pointer" id="find-location-footer"><?php echo $this->lang->line('find_location');?></p>
                 </div>
                 <div class="col-auto col-sm p-0">
-                    <p class="footer-header mb-4 mb-2-sm">ADDRESS</p>
+                    <p class="footer-header mb-4 mb-2-sm"><?php echo $this->lang->line('address');?></p>
                     <p class="footer-link mb-2"><b>อาคารศูนย์เรียนรู้สุขภาวะ </b><br>เลขที่ 4/2 ซ.วัฒนโยธิน แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร 10400</p>
                     <p class="footer-link mb-2">โทรศัพท์ 02-343-1500 / โทรสาร 02-343-1551</p>
                 </div>
