@@ -86,6 +86,10 @@ $route['profile'] = 'auth/index';
 $route['userlist'] = 'auth/userList';
 $route['user-list'] = 'auth/users_list';
 
+/***Help***/
+$route['help'] = 'frontend/help/index';
+
+
 /**** User ****/
 $route['api-v01/user/user-list'] = "auth/get_user_list";
 $route['api-v01/user/group-list'] = "auth/get_group_list";
