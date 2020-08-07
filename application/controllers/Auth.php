@@ -279,10 +279,10 @@ class Auth extends MY_Controller
     public function createAdmin()
     {
         $data = $this->security->xss_clean($_POST);
-        $this->form_validation->set_rules('first_name', 'First Name', 'required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[users.email]');
-        $this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
+        $this->form_validation->set_rules('first_name', 'ชื่อ', 'required');
+        $this->form_validation->set_rules('last_name', 'นามสกุล', 'required');
+        $this->form_validation->set_rules('email', 'อีเมล', 'trim|required|valid_email|is_unique[users.email]');
+        $this->form_validation->set_rules('password', 'รหัสผ่าน', 'trim|required|min_length[8]');
         $message = array();
         if ($this->form_validation->run() == TRUE) {
 

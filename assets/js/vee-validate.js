@@ -2626,7 +2626,7 @@
 
   // This file is generated automatically by `scripts/build/indices.js`. Please, don't change it.
 
-  // 
+  //
 
   /**
    * Custom parse behavior on top of date-fns parse function.
@@ -3543,7 +3543,7 @@
     validate: validate$d
   };
 
-  // 
+  //
 
   var isTextInput = function (el) {
     return includes(['text', 'password', 'search', 'email', 'tel', 'url', 'textarea', 'number'], el.type);
@@ -4662,7 +4662,7 @@
     url: url
   });
 
-  // 
+  //
 
   var LOCALE = 'en';
 
@@ -4828,7 +4828,7 @@
     return drivers[currentDriver];
   };
 
-  // 
+  //
 
   var ErrorBag = function ErrorBag (errorBag, id) {
     if ( errorBag === void 0 ) errorBag = null;
@@ -5724,7 +5724,7 @@
 
   Object.defineProperties( RuleContainer, staticAccessors );
 
-  // 
+  //
 
   var isEvent = function (evt) {
     return (typeof Event !== 'undefined' && isCallable(Event) && evt instanceof Event) || (evt && evt.srcElement);
@@ -5757,7 +5757,7 @@
     el.addEventListener(eventName, cb, supportsPassive ? { passive: true } : false);
   };
 
-  // 
+  //
 
   var DEFAULT_OPTIONS = {
     targetOf: null,
@@ -6458,7 +6458,7 @@
 
   Object.defineProperties( Field.prototype, prototypeAccessors$1 );
 
-  // 
+  //
 
   var FieldBag = function FieldBag (items) {
     if ( items === void 0 ) items = [];
@@ -6695,7 +6695,7 @@
 
   Object.defineProperties( ScopedValidator.prototype, prototypeAccessors$3 );
 
-  // 
+  //
 
   /**
    * Checks if a parent validator instance was requested.
@@ -6786,7 +6786,7 @@
     }
   };
 
-  // 
+  //
 
   /**
    * Finds the requested field by id from the context object.
@@ -6848,7 +6848,7 @@
     }
   };
 
-  // 
+  //
 
   var Validator = function Validator (validations, options) {
     if ( options === void 0 ) options = { fastExit: true };
@@ -7634,7 +7634,7 @@
   Object.defineProperties( Validator.prototype, prototypeAccessors$4 );
   Object.defineProperties( Validator, staticAccessors$1 );
 
-  // 
+  //
 
   var normalize = function (fields) {
     if (Array.isArray(fields)) {
@@ -8240,7 +8240,7 @@
     return hoc;
   }
 
-  // 
+  //
 
   var normalizeValue = function (value) {
     if (isObject(value)) {
@@ -8371,7 +8371,7 @@
 
   Object.defineProperties( I18nDictionary.prototype, prototypeAccessors$5 );
 
-  // 
+  //
 
   var defaultConfig = {
     locale: 'en',
@@ -8659,7 +8659,7 @@
   },
     numeric: function (field) { return ("The " + field + " field may only contain numeric characters."); },
     regex: function (field) { return ("The " + field + " field format is invalid."); },
-    required: function (field) { return ("The " + field + " field is required."); },
+    required: function (field) { return ("The " + field + " field is requiredssss."); },
     size: function (field, ref) {
       var size = ref[0];
 

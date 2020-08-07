@@ -76,7 +76,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-8">
                     <vue-datepicker-local v-model="range" range-separator=" to " :local="local" show-buttons
                                           format="DD-MM-YYYY"></vue-datepicker-local>
-                    <button class="btn btn-group-sm btn-primary" @click="getDonationlist">Confirm</button>
+                    <button class="btn btn-group-sm btn-primary" @click="getUserlist">Confirm</button>
                 </div>
 
             </div>
@@ -94,42 +94,44 @@
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title">New User</h4>
-                                <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>
+                                <h4 class="modal-title"><?php echo $this->lang->line('add_user');?></h4>
                                 <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
                             </div>
                             <div class="modal-body">
                                 <form class="form-horizontal">
                                     <div class="box-body">
                                         <div class="form-group">
-                                            <label for="email" class="col-sm-2 control-label">Email</label>
+                                            <label for="email" class="col-sm-2 control-label"><?php echo $this->lang->line('email');?></label>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" v-model="userInfo.email" >
-
+<!--                                                <input type="text" class="form-control" v-model="userInfo.email" >-->
+                                                <div :class="['input-group', isEmailValid()]">
+                                                    <span class="input-group-addon" id="basic-addon1"><span class="fa fa-envelope"></span></span>
+                                                    <input type="email" class="form-control" placeholder="Email Address" v-model="userInfo.email" />
+                                                </div>
 
                                             </div>
 
                                             <div class="col-sm-5">
-                                                <span class="mt4 alert-warning" name="msgemail">**email not format</span>
+<!--                                                <span class="mt4 alert-warning" name="msgemail">**email not format</span>-->
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="donorName" class="col-sm-2 control-label">Password</label>
+                                            <label for="donorName" class="col-sm-2 control-label"><?php echo $this->lang->line('password')?></label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" v-model="userInfo.password" >
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="donorName" class="col-sm-2 control-label">Name</label>
+                                            <label for="donorName" class="col-sm-2 control-label"><?php echo $this->lang->line('name');?></label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" v-model="userInfo.first_name">
                                             </div>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="donorName" class="col-sm-2 control-label">Lastname</label>
+                                            <label for="donorName" class="col-sm-2 control-label"><?php echo $this->lang->line('last_name');?></label>
                                             <div class="col-sm-5">
                                                 <input type="text" class="form-control" v-model="userInfo.last_name">
                                             </div>
@@ -137,7 +139,7 @@
 
 
                                         <div  class="form-group">
-                                            <label for="user-group" class="col-sm-2 control-label"><b>Group</b></label>
+                                            <label for="user-group" class="col-sm-2 control-label"><b><?php echo $this->lang->line('group');?></b></label>
                                             <div class="col-sm-6">
 <!--                                                <label class="margin-r-5"  v-for="item,index in filterUserGroup"><input dirname="user-group" type="radio" name="s" :value="item.id" v-model="userInfo.group" @change="permissionGroup">{{item.name}}</label>-->
                                                 <select class="form-control dropdown" v-model="userInfo.group" @change="permissionGroup" :required="true">
@@ -148,7 +150,7 @@
                                         </div>
 
                                         <div  class="form-group">
-                                            <label for="bank-name" class="col-sm-2 control-label">Access</label>
+                                            <label for="bank-name" class="col-sm-2 control-label"><?php echo $this->lang->line('user_access')?></label>
                                             <div class="col-sm-6">
                                                 <select ref="useraccess" class="form-control dropdown" v-model="userInfo.user_access">
                                                     <option v-for="item,index in filterUserAccess" :value="item.code">{{item.title}}</option>
@@ -157,7 +159,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="trnsferRef" class="col-sm-2 control-label">Status</label>
+                                            <label for="trnsferRef" class="col-sm-2 control-label"><?php echo $this->lang->line('user_status')?></label>
                                             <div class="col-xs-5">
                                                 <select class="form-control" v-model="userInfo.user_status">
                                                     <option v-for="item,index in user_status" :value="item.aid">{{item.status_title}}</option>
@@ -167,7 +169,7 @@
 
                                         <div class="form-group">
                                                 <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
-                                                <div v-if="errorAction" v-html="textError"><</div>
+                                                <div v-if="errorAction" v-html="textError"></div>
 
                                         </div>
 
@@ -200,7 +202,7 @@
                 <div class="box">
 
                     <div class="box-header">
-                        <h3 class="box-title">User List</h3>
+                        <h3 class="box-title"><?php echo $this->lang->line('user_list')?></h3>
                         <div class="box-tools">
                             <div>
 
@@ -227,17 +229,12 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <v-client-table ref="table" :columns="columns" :data="filterDonationList" :options="options">
-                            <a data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"
+                            <a data-toggle="modal" @click="userEdit(props.row)" data-target="#myModal" slot="action"
                                slot-scope="props" target="_blank" :href="props.row.action"
                                class="btn glyphicon fa fa-edit"></a>
                             <a  data-toggle="modal" @click="clickUser(props.row)" data-target="#userDeleteModal" slot="delete"
                                 slot-scope="props" target="_blank" :href="props.row.delete"
                                 class="glyphicon fa fa-trash"></a>
-
-
-
-
-
                         </v-client-table>
 
                     </div>
@@ -314,7 +311,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-<!--                                                    <div class=".col-md-6 .col-md-offset-3" v-if="errorStatus">{{this.successMsg}}</div>-->
+                                                    <div class=".col-md-6 .col-md-offset-3" v-if="errorStatus">{{this.successMsg}}</div>
 <!--                                                    <div class=".col-md-6 .col-md-offset-3" v-else><h4 class="font-weight-bold">{{this.successMsg}}</h4></div>-->
                                                         <div class="" v-if="successMsg !=='' ">{{successMsg}}</div>
                                                 </div>

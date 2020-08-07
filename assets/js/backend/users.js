@@ -28,26 +28,26 @@ var appusers = new Vue({
             userAccess:[],
             user_status:[],
             userClicked: {},
+            email: '',
+            reg: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/,
             title: "Approved Logs",
-            columns: ['index', 'name', 'last_name', 'status_title','role_name','created_date','updated_date','action','delete'],
+            columns: ['index', 'name', 'last_name', 'status_title','role_name','email','updated_date','action','delete'],
             options: {
                 headings: {
-                    index: 'Index',
-                    name: 'Name',
-                    last_name: 'Last name',
-                    role_name:"Group",
-                    status_title: 'Status',
-                    created_date:'Created Date',
-                    updated_date: 'Updated Date',
+                    index: "ลำดับ",
+                    name: 'ชื่อ',
+                    last_name: 'นามสกุล',
+                    role_name:"ประเภทสมาชิก",
+                    status_title: 'สถานะ',
+                    created_date:'วันที่สมัคร',
+                    updated_date: 'อัพเดทล่าสุด',
                 },
                 pagination: {chunk: 10},
-                sortable: ['index','id', 'name', 'last_name', 'status_title','role_name','created_date','updated_date'],
-                filterable: ['index','id', 'name', 'last_name', 'status_title','role_name','created_date','updated_date'],
+                sortable: ['index','id', 'name', 'last_name', 'status_title','role_name','email','updated_date'],
+                filterable: ['name', 'last_name', 'status_title','role_name','email'],
                 perPage: 10,
                 perPageValues: [10, 25, 50, 100, 500, 1000],
-
             },
-
             time: new Date(),
             startTime: firstDay,
             endTime: lastDay,
@@ -72,14 +72,14 @@ var appusers = new Vue({
             }
         }
     }, created() {
-        this.getDonationlist()
+        this.getUserlist()
         this.getUserRule()
         this.userStatus()
 
     },
     mounted() {
         this.$nextTick(() => {
-            this.getDonationlist()
+            this.getUserlist()
             this.getUserRule()
             this.permissionGroup()
             this.userStatus()
@@ -129,8 +129,10 @@ var appusers = new Vue({
 
     },
     methods: {
-        getDonationlist() {
-            // let baseApi = baseUrl + "/api-01/report/donation-list";
+        isEmailValid: function() {
+            return (this.userInfo.email == "")? "" : (this.reg.test(this.userInfo.email)) ? 'has-success' : 'has-error';
+        },
+        getUserlist() {
             let baseApi = baseUrl + "/api-v01/user/user-list";
             let stDate = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
             let endDate = moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
@@ -139,7 +141,7 @@ var appusers = new Vue({
 
             axios.get(baseApi + "?startDate=" + stDate + "&endDate=" + endDate+"&type=json").then((res) => {
                 this.donationInfo = res.data
-                // console.log(res.data.last_query)
+                console.log(res.data)
             }).catch((err) => {
                 // console.log(err)
             })
@@ -225,12 +227,11 @@ var appusers = new Vue({
 
         },
         saveUserInfo(){
-            console.log(this.userInfo);
+            // console.log(this.userInfo);
             let adminApi = baseUrl+"/api-v01/user/admin-register"
+
             let dataInfo = this.userInfo
-
             // console.info(dataInfo)
-
            if(typeof this.userInfo.user_access === 'undefined'){
                this.$refs.user_access.focus();
            }
@@ -241,9 +242,18 @@ var appusers = new Vue({
                     this.errorStatus = res.data.error
                     this.textError   = res.data.message
                     this.successMsg   = "การลงข้อมูลผิดพลาด"
+                }else{
+                    this.errorStatus = res.data.status
+                    this.successMsg = res.data.message
+                    this.textError = res.data.message
                 }
 
+
+
+
             })
+
+            this.getUserlist()
 
         },
         updateUserInfo(){
@@ -286,7 +296,7 @@ var appusers = new Vue({
 
             setTimeout(() => {
                 loader.hide()
-                this.getDonationlist()
+                this.getUserlist()
             },1000)
 
 
@@ -372,12 +382,12 @@ var appusers = new Vue({
                 }
                 this.successMsg = res.data.message;
 
-                this.getDonationlist()
+                this.getUserlist()
 
             }).catch((err) => {
 
             })
-            appreport.getDonationlist()
+            appreport.getUserlist()
 
             setTimeout(()=>{
                 this.errorStatus = false;
@@ -386,7 +396,7 @@ var appusers = new Vue({
 
 
         },
-        donationEdit(itemClick) {
+        userEdit(itemClick) {
             this.userClicked = ""
             this.userClicked = itemClick
             console.log(this.userClicked)
@@ -441,7 +451,7 @@ var appusers = new Vue({
                 if(res.data.error){
 
                 }else{
-                    this.getDonationlist();
+                    this.getUserlist();
                 }
 
 
