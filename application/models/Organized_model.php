@@ -404,15 +404,15 @@ class Organized_model extends MY_Model
 
     public function orz_all()
     {
-        $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status,orz_in_province.province_code','zone_code');
+        $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status,orz_in_province.province_code', 'zone_code');
         $this->db->join($this->tbl_orz_status, 'organization.`status` = orz_status.aid', 'left');
         $this->db->join($this->tbl_orz_in_province, 'orz_in_province.orz_aid = organization.aid', 'left');
         $this->db->join($this->tbl_zone_province_mn, 'zone_province_mn.provincy_code = province_code', 'left');
 
         if (getUserRoleId() == 3) {
-            $this->db->where('zone_code',getUserGroupId());
+            $this->db->where('zone_code', getUserGroupId());
         } elseif (getUserRoleId() == 4) {
-            $this->db->where('province_code',getUserGroupId());
+            $this->db->where('province_code', getUserGroupId());
         } else {
 
         }
@@ -433,8 +433,34 @@ class Organized_model extends MY_Model
     {
 
         $this->db->select('organization.*,orz_status.`status` AS status_title,orz_status.aid AS aid_status');
+        $this->db->distinct('organization.aid');
         $this->db->join($this->tbl_orz_status, 'organization.`status` = orz_status.aid', 'left');
-        $this->db->where('user_id', getUserAid());
+
+        if (!is_blank(getUserRoleId())) {
+            switch (getUserRoleId()) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+                case 4:
+                    break;
+                case 5:
+                    $this->db->join($this->tbl_users,'users.cus_group_id = organization.aid','inner');
+                    $this->db->where('organization.aid',getUserGroupId());
+                    break;
+                case 6:
+                    break;
+                default:
+                    break;
+            }
+
+
+        }
+
+
+//        $this->db->where('user_id', getUserAid());
         $query = $this->db->get($this->tbl_organization);
 
 //        $query = $this->db->where('user_id',getUserAid())->get($this->tbl_organization);
@@ -504,7 +530,8 @@ class Organized_model extends MY_Model
     {
         $result = array();
 
-        $this->db->select('*');
+        $this->db->select('organization.*');
+        $this->db->distinct('organization.aid');
         $this->db->join($this->tbl_orz_in_province, 'organization.aid = orz_in_province.orz_aid', 'left');
         if (!is_blank($this->_orz_province_code) && $this->_orz_province_code != 0) {
             $this->db->where('orz_in_province.province_code', $this->_orz_province_code);
@@ -568,10 +595,11 @@ class Organized_model extends MY_Model
 
     }
 
-    public function orz_access(){
-       $this->db->where('user_id',0);
-       $this->db->order_by('aid','asc');
-       $query = $this->db->get($this->tbl_organization);
+    public function orz_access()
+    {
+        $this->db->where('user_id', 0);
+        $this->db->order_by('aid', 'asc');
+        $query = $this->db->get($this->tbl_organization);
 
         $result = array();
         if ($query->num_rows() > 0) {
@@ -584,12 +612,7 @@ class Organized_model extends MY_Model
         }
 
 
-
-
-
         return $result;
-
-
 
 
     }

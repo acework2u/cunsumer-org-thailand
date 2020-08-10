@@ -146,7 +146,7 @@ class Organized extends MY_Controller
                         );
 
                         /*** Update Orz in Province **/
-                        $province_code ="";
+                        $province_code = "";
                         $this->load->model($this->province_model, 'province');
                         $this->province->setZipCode($orz_zipcode);
                         $province_code = $this->province->get_province_code();
@@ -164,7 +164,7 @@ class Organized extends MY_Controller
                     }
 
 
-                }else{
+                } else {
                     $message = array(
                         'stats' => false,
                         'error' => true,
@@ -274,7 +274,7 @@ class Organized extends MY_Controller
                 );
 
                 /*** Update Orz in Province **/
-                $province_code ="";
+                $province_code = "";
                 $this->load->model($this->province_model, 'province');
                 $this->province->setZipCode($orz_stage_code);
                 $province_code = $this->province->get_province_code();
@@ -306,65 +306,68 @@ class Organized extends MY_Controller
 
     }
 
-    public function organization_delete(){
-        if($this->is_login()){
-        $orz_id = "";
-        if(!is_blank($this->input->get_post('orz_id'))){
-            $orz_id = $this->input->get_post('orz_id');
-        }
+    public function organization_delete()
+    {
+        if ($this->is_login()) {
+            $orz_id = "";
+            if (!is_blank($this->input->get_post('orz_id'))) {
+                $orz_id = $this->input->get_post('orz_id');
+            }
 
-        $this->load->model($this->organized_model,'orz');
+            $this->load->model($this->organized_model, 'orz');
 
-        $this->orz->setOrzId($orz_id);
-        $del_orz = $this->orz->delete();
+            $this->orz->setOrzId($orz_id);
+            $del_orz = $this->orz->delete();
 
 
-        $data = array();
-        if($del_orz){
+            $data = array();
+            if ($del_orz) {
 
-        }
+            }
 
 
         }
 
     } // end of fun
 
-    public function getOrganizationLast(){
+    public function getOrganizationLast()
+    {
 
-        $this->load->model($this->organized_model,'orz');
+        $this->load->model($this->organized_model, 'orz');
         $result = "";
         $orz_last = $this->orz->organization_last();
-        if(!is_blank($orz_last)){
+        if (!is_blank($orz_last)) {
             $result = $orz_last;
         }
         echo json_encode($result);
     }
 
-    public function searchOrganization(){
+    public function searchOrganization()
+    {
         $province_code = "";
         $province_code = $this->input->get_post('province_code');
 
-        $this->load->model($this->organized_model,'orz');
+        $this->load->model($this->organized_model, 'orz');
 
         $orz_info = array();
-        if(!is_blank($province_code)){
+        if (!is_blank($province_code)) {
             $this->orz->setProvinceCode($province_code);
         }
         $orz_info = $this->orz->orz_for_search();
 
-         $this->load->model($this->province_model, 'province');
+        $this->load->model($this->province_model, 'province');
         $this->province->setProvinceCode($province_code);
         $province_info = $this->province->provinces_by_code();
 
 
         $orz_in_place = array();
-        if(!is_blank($orz_info)){
-            foreach ($orz_info as $row){
+        if (!is_blank($orz_info)) {
+            foreach ($orz_info as $row) {
                 $rows = array(
-                    'full_name'=>get_array_value($row,'title'),
-                    'lat'=>get_array_value($row,'latitude','0.00'),
-                    'lng'=>get_array_value($row,'longitude','0.00'),
-                     'full_desc'=>$row  ,
+                    'full_name' => get_array_value($row, 'title'),
+                    'lat' => get_array_value($row, 'latitude', '0.00'),
+                    'lng' => get_array_value($row, 'longitude', '0.00'),
+                    'full_desc' => $row,
                 );
 
                 $orz_in_place[] = $rows;
@@ -372,24 +375,17 @@ class Organized extends MY_Controller
         }
 
 
-
-
         $data = array(
-            'province_info'=>$province_info,
-            'orz_info'=>$orz_info,
-            'coordinates'=>$orz_in_place
+            'province_info' => $province_info,
+            'orz_info' => $orz_info,
+            'coordinates' => $orz_in_place
         );
-
-
-
 
 
         echo json_encode($data);
 //        echo json_encode($orz_info);
 
     }
-
-
 
 
 }

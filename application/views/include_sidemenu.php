@@ -23,7 +23,7 @@
                     <i class="fa fa-dashboard"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <?php if(getUserRoleId() == 1){ ?>
+            <?php if(getUserRoleId() == 1 || getUserRoleId() == 2 || getUserRoleId() == 3 || getUserRoleId() == 4){ ?>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
@@ -34,10 +34,30 @@
                 </a>
                 <ul class="treeview-menu">
                     <li><a href="<?php echo site_url('admin/reports')?>"><i class="fa fa-circle-o"></i> Organization</a></li>
+                    <li><a href="<?php echo site_url('admin/report/volunteer')?>"><i class="fa fa-feed"></i> Volunteer</a></li>
 
                 </ul>
             </li>
             <?php }?>
+
+            <?php if(getUserRoleId() == 5){ ?>
+                <li class="treeview">
+                    <a href="#">
+                        <i class="fa fa-pie-chart"></i>
+                        <span>Reports</span>
+                        <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li><a href="<?php echo site_url('admin/report/volunteer')?>"><i class="fa fa-feed"></i> Volunteer</a></li>
+
+                    </ul>
+                </li>
+
+
+
+            <?php } ?>
 
             <?php if(getUserRoleId() == 1 || getUserRoleId()==3){ ?>
             <li class="treeview">

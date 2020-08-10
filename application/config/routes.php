@@ -63,6 +63,9 @@ $route['translate_uri_dashes'] = FALSE;
 $route['admin'] = "backend/Dashboard/index";
 $route['admin/dashboard'] = "backend/Dashboard/index";
 $route['admin/reports'] = "backend/Reports/index";
+$route['admin/report/volunteer'] = "backend/Reports/volunteer";
+$route['admin/report/volunteer_json'] = "backend/Reports/jsonVolunteers";
+$route['admin/report/volunteer_exportxls'] = "backend/Reports/volunteerExportxls";
 $route['admin/user-management'] = "backend/Users/index";
 
 /**** Report **/
@@ -117,6 +120,7 @@ $route['api/v1/zone-list'] = "api/zone_list";
 $route['api/v1/province-in-zone'] = "api/province_in_zone";
 $route['api/v1/provinces'] = "api/provinces";
 $route['api/v1/volunteer-register'] = "api/volunteer_register";
+$route['api/v1/volunteer-list'] = "api/volunteer_register";
 $route['api/v1/approved-logs'] = "api/approved_logs";
 
 

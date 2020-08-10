@@ -31,6 +31,7 @@ class MY_Model extends CI_Model
     public $tbl_approved_logs;
     public $tbl_users_status;
     public $tbl_user_group;
+    public $tbl_orz_admin;
 
 
 
@@ -65,6 +66,7 @@ class MY_Model extends CI_Model
         $this->tbl_approved_logs = "approved_logs";
         $this->tbl_users_status = "users_status";
         $this->tbl_user_group = "user_group";
+        $this->tbl_orz_admin = "orz_admin";
 
     }
 

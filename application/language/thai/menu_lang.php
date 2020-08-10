@@ -20,3 +20,11 @@ $lang['last_name'] = "นามสกุล";
 $lang['group']="ประเภทสมาชิก";
 $lang['user_access']="ขอบเขตการจัดการ";
 $lang['user_status']="สถานะการใช้งาน";
+
+
+/***** Report Menu***/
+$lang['report'] = "รายงาน";
+$lang['volunteer_report'] = "รายงาน อาสาสมัคร";
+$lang['volunteer'] = "อาสาสมัคร";
+$lang['volunteer_organization'] = "อาสาสมัครองค์กร";
+$lang['volunteer_list'] = "รายชื่ออาสาสมัครองค์กร";

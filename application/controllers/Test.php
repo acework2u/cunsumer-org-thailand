@@ -1037,5 +1037,20 @@ class Test extends MY_Controller
 
     }
 
+    public function testUserGroupID(){
+        echo getUserRoleId()."\n";
+        echo getUserGroupId()."\n";
+
+//        $this->load->model($this->organized_model, 'orz');
+//        $result = array();
+//        $orz_info = $this->orz->orz_information();
+
+
+        $this->load->model($this->volunteer_model, 'volunteer');
+        $volunteers = $this->volunteer->volunteer_join_orz();
+
+        echo $this->db->last_query();
+    }
+
 
 } //end of Class

@@ -157,6 +157,7 @@ class Reports extends MY_Controller
 
         }
     }
+
     public function organizationList()
     {
         if ($this->is_login()) {
@@ -174,7 +175,7 @@ class Reports extends MY_Controller
             if (!is_blank($this->input->get_post('limit'))) {
                 $limit = $this->input->get_post('limit');
             }
-            $this->load->model($this->reports_model,'report');
+            $this->load->model($this->reports_model, 'report');
 
             $reports_info = array();
 
@@ -184,28 +185,27 @@ class Reports extends MY_Controller
 
             $orz_info = $this->report->report_orz_list();
 
-            $i =1;
-            foreach ($orz_info as $row){
-                $full_name = $row->contact_name."".$row->contact_lastname;
-                $orz_address = $row->address." ".$row->district." ".$row->amphoe." ".$row->province." ".$row->stage_code;
+            $i = 1;
+            foreach ($orz_info as $row) {
+                $full_name = $row->contact_name . "" . $row->contact_lastname;
+                $orz_address = $row->address . " " . $row->district . " " . $row->amphoe . " " . $row->province . " " . $row->stage_code;
                 $reports_info[] = array(
-                    'index'=>$i,
-                    'orz_name'=>$row->title,
-                    'orz_address'=>$orz_address,
-                    'orz_register_date'=>$row->created_date,
-                    'orz_contact'=>$full_name,
-                    'orz_contact_email'=>$row->email,
-                    'orz_contact_tel'=>$row->contact_tel,
-                    'orz_in_province'=>$row->province,
-                    'orz_in_zone'=>$row->zone_title,
-                    'orz_volunteer'=>$this->report->volunteer_count($row->aid),
-                    'orz_status'=>$row->orz_status_title,
-                    'orz_Updated'=>$row->updated_date,
+                    'index' => $i,
+                    'orz_name' => $row->title,
+                    'orz_address' => $orz_address,
+                    'orz_register_date' => $row->created_date,
+                    'orz_contact' => $full_name,
+                    'orz_contact_email' => $row->email,
+                    'orz_contact_tel' => $row->contact_tel,
+                    'orz_in_province' => $row->province,
+                    'orz_in_zone' => $row->zone_title,
+                    'orz_volunteer' => $this->report->volunteer_count($row->aid),
+                    'orz_status' => $row->orz_status_title,
+                    'orz_Updated' => $row->updated_date,
 
                 );
-                $i = $i+1;
+                $i = $i + 1;
             }
-
 
 
             return $reports_info;
@@ -286,6 +286,7 @@ class Reports extends MY_Controller
 
 
     }
+
     public function orzExportxls($data = '')
     {
 
@@ -365,6 +366,7 @@ class Reports extends MY_Controller
 
 
     }
+
     public function approveLogsexportxls($data = '')
     {
 
@@ -430,6 +432,7 @@ class Reports extends MY_Controller
 
 
     }
+
     public function approved_logs()
     {
         if ($this->is_login() && getUserRoleId() == 1) {
@@ -442,7 +445,7 @@ class Reports extends MY_Controller
 
             $res_type = 'arrays';
 
-            if(!is_blank($this->input->get_post('type'))){
+            if (!is_blank($this->input->get_post('type'))) {
                 $res_type = $this->input->get_post('type');
             }
 
@@ -860,10 +863,9 @@ class Reports extends MY_Controller
             }
 
 
-
             if (!is_blank(getUserRoleId()) && getUserRoleId() == 1) {
                 // Super Admin
-                $this->load->model($this->reports_model,'report');
+                $this->load->model($this->reports_model, 'report');
 
                 $report = array();
 
@@ -873,26 +875,26 @@ class Reports extends MY_Controller
 
                 $orz_info = $this->report->report_orz_list();
 
-                $i =1;
-                foreach ($orz_info as $row){
-                    $full_name = $row->contact_name."".$row->contact_lastname;
+                $i = 1;
+                foreach ($orz_info as $row) {
+                    $full_name = $row->contact_name . "" . $row->contact_lastname;
                     $report[] = array(
-                        'index'=>$i,
-                        'orz_name'=>$row->title,
-                        'orz_contact'=>$full_name,
-                        'orz_register_date'=>$row->created_date,
-                        'orz_status'=>$row->orz_status_title,
-                        'approved_by'=>'',
-                        'approved_date'=>$row->updated_date,
-                        'orz_in_province_code'=>$row->province_code,
-                        'orz_in_province'=>$row->province,
-                        'orz_in_zone'=>$row->zone_title,
-                        'orz_in_zone_code'=>$row->zone_code,
-                        'orz_volunteer'=>$this->report->volunteer_count($row->aid),
-                        'updated_date'=>$row->updated_date,
-                        'action'=>''
+                        'index' => $i,
+                        'orz_name' => $row->title,
+                        'orz_contact' => $full_name,
+                        'orz_register_date' => $row->created_date,
+                        'orz_status' => $row->orz_status_title,
+                        'approved_by' => '',
+                        'approved_date' => $row->updated_date,
+                        'orz_in_province_code' => $row->province_code,
+                        'orz_in_province' => $row->province,
+                        'orz_in_zone' => $row->zone_title,
+                        'orz_in_zone_code' => $row->zone_code,
+                        'orz_volunteer' => $this->report->volunteer_count($row->aid),
+                        'updated_date' => $row->updated_date,
+                        'action' => ''
                     );
-                    $i = $i+1;
+                    $i = $i + 1;
                 }
 
 //                echo "<pre>";
@@ -901,9 +903,9 @@ class Reports extends MY_Controller
 //
 //                echo "Super = " . getUserRoleId();
 
-                $data  = array(
-                    'status'=>true,
-                    'data'=>$report
+                $data = array(
+                    'status' => true,
+                    'data' => $report
                 );
 
 
@@ -925,13 +927,216 @@ class Reports extends MY_Controller
             }
 
 
-
-
             echo json_encode($data);
 
         }
 
 
+    }
+
+    public function volunteer()
+    {
+
+
+        $this->data['title'] = "Organization Report";
+
+        $this->load->view('tpl_volunteer', $this->data);
+
+
+    }
+
+    public function jsonVolunteers()
+    {
+
+        $data = array();
+        $start_date = "";
+        $end_date = "";
+        $limit = "";
+
+        if (!is_blank($this->input->get('startDate'))) {
+            $start_date = $this->input->get('startDate');
+            $start_date = date('Y-m-d', strtotime($start_date));
+        }
+        if (!is_blank($this->input->get('endDate'))) {
+            $end_date = $this->input->get('endDate');
+        }
+        if (!is_blank($this->input->get_post('limit'))) {
+            $limit = $this->input->get_post('limit');
+        }
+
+
+        $this->load->model($this->volunteer_model, 'volunteer');
+
+        if(!is_blank($start_date && $end_date)){
+            $this->volunteer->setStartDate($start_date);
+            $this->volunteer->setEndDate($end_date);
+        }
+
+        $volunteers = $this->volunteer->volunteer_join_orz();
+
+
+        if (!is_blank($volunteers)) {
+
+            if (is_array($volunteers)) {
+
+                foreach ($volunteers as $row) {
+                    $full_name = get_array_value($row, 'name', '') . " " . get_array_value($row, 'lastname', '');
+                    $rows = array(
+                        'index' => get_array_value($row, 'aid'),
+                        'fullname' => $full_name,
+                        'tel' => get_array_value($row, 'tel', ''),
+                        'email' => get_array_value($row, 'email', ''),
+                        'join_status' => get_array_value($row, 'volunteer_jpoin_status', ''),
+                        'status' => get_array_value($row, 'status', ''),
+                        'register_datetime' => get_array_value($row, 'created_date', ''),
+                        'register_datetime_thai' => DateTimeThai(get_array_value($row, 'created_date', '')),
+                        'orz_name' => get_array_value($row, 'orz_name', ''),
+                        'orz_province' => get_array_value($row, 'orz_province', ''),
+                        'st_end' => $start_date . " " . $end_date
+                    );
+                    $data[] = $rows;
+                }
+
+
+            }
+
+
+        }
+
+
+//        var_dump($volunteers);
+        echo json_encode($data);
+
+    }
+    public function volunteerExportxls()
+    {
+        $data = array();
+        $start_date = "";
+        $end_date = "";
+        $limit = "";
+
+        if (!is_blank($this->input->get('startDate'))) {
+            $start_date = $this->input->get('startDate');
+            $start_date = date('Y-m-d', strtotime($start_date));
+        }
+        if (!is_blank($this->input->get('endDate'))) {
+            $end_date = $this->input->get('endDate');
+        }
+        if (!is_blank($this->input->get_post('limit'))) {
+            $limit = $this->input->get_post('limit');
+        }
+
+
+        $this->load->model($this->volunteer_model, 'volunteer');
+
+        if(!is_blank($start_date && $end_date)){
+            $this->volunteer->setStartDate($start_date);
+            $this->volunteer->setEndDate($end_date);
+        }
+        $volunteer = array();
+        $volunteer = $this->volunteer->volunteer_join_orz();
+
+//        $data = $this->volunteerArray($volunteer);
+
+
+        if(!is_blank($volunteer)){
+            foreach ($volunteer as $row) {
+                $full_name = get_array_value($row, 'name', '') . " " . get_array_value($row, 'lastname', '');
+                $rows = array(
+                    'index' => get_array_value($row, 'aid'),
+                    'register_datetime_thai' => DateTimeThai(get_array_value($row, 'created_date', '')),
+                    'fullname' => $full_name,
+                    'tel' => get_array_value($row, 'tel', ''),
+                    'email' => get_array_value($row, 'email', ''),
+                    'join_status' => get_array_value($row, 'volunteer_jpoin_status', ''),
+                    'orz_name' => get_array_value($row, 'orz_name', ''),
+                    'orz_province' => get_array_value($row, 'orz_province', ''),
+
+                );
+                $data[] = $rows;
+            }
+        }
+
+
+//        $report_date = "วันที่ " . date('Y-m-d');
+        $report_date = DateThai($start_date)." ถึง ".DateThai($end_date);
+
+        $sp = new Spreadsheet();
+        $sheet = $sp->getActiveSheet();
+        /**** Header ***/
+        $sheet->setCellValue('C1', 'สภาองค์กรผู้บริโภค');
+        $sheet->setCellValue('C2', 'รายงาน สมาชิกอาสาสมัคร');
+        $sheet->setCellValue('B3', $report_date);
+
+        /*** Column ***/
+        $sheet->setCellValue('A4', 'ลำดับที่');
+        $sheet->setCellValue('B4', 'วันที่ลงทะเบียน');
+        $sheet->setCellValue('C4', 'ชื่อ-นามสกุล');
+        $sheet->setCellValue('D4', 'เบอร์โทร');
+        $sheet->setCellValue('E4', 'อีเมล');
+        $sheet->setCellValue('F4', 'สถานะการทะเบียน');
+        $sheet->setCellValue('G4', 'ชื่อองค์กร');
+        $sheet->setCellValue('H4', 'จังหวัด');
+        /**Content */
+
+
+//        if (is_blank($data)) {
+//            $data = $this->organizationList();
+//        }
+
+//        $data = $this->getfiles();
+
+
+        if (is_array($data)) {
+            $sp->getActiveSheet()->fromArray($data, null, 'A5');
+            $last_row = count($data) + 1;
+            $last_cal_row = count($data) + 4;
+            $last_total = $last_row + 4;
+
+            /***** Style ***/
+
+            $sp->getActiveSheet()->getStyle('A4:H4')->getFont()->setBold(true);
+            $sp->getActiveSheet()->getStyle('C1:C2')->getFont()->setBold(true);
+            $i = 1;
+            foreach (range('A', 'L') as $columnID) {
+                $sp->getActiveSheet()->getColumnDimension($columnID)->setAutoSize(true);
+                $i++;
+            }
+            $row_total = 5 + $i;
+        }
+
+
+        $writer = new Xlsx($sp);
+        $filename = 'volunteer-organization-report_' . date('Y-m-d');
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . $filename . '.xlsx"');
+        header('Cache-Control: max-age=0');
+        $writer->save('php://output');
+
+
+    }
+
+    public function volunteerArray($volunteer){
+        $data = array();
+        if(!is_blank($volunteer)){
+            foreach ($volunteer as $row){
+                $rows = array(
+                    'index'=>get_array_value($row,'index',''),
+                    'register_datetime_thai'=>get_array_value($row,'register_datetime_thai',''),
+                    'fullname'=>get_array_value($row,'fullname',''),
+                    'tel'=>get_array_value($row,'tel',''),
+                    'email'=>get_array_value($row,'email',''),
+                    'join_status'=>get_array_value($row,'join_status',''),
+                    'orz_name'=>get_array_value($row,'orz_name',''),
+                    'orz_province'=>get_array_value($row,'orz_province',''),
+
+                );
+                $data[] = $rows;
+            }
+        }
+
+        return $data;
     }
 
 

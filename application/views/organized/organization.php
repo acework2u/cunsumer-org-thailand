@@ -746,7 +746,7 @@
                                 <option v-for="data,index in organizations" :value="data.aid">{{data.title}}</option>
                             </select>
 
-<!--                            <p>{{organizations}}</p>-->
+                           <!-- <p>{{organizations}}</p> -->
                         </div>
                         <div class="col-12 p-0">
                             <hr class="join-hr">

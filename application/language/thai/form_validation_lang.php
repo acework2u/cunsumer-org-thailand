@@ -37,7 +37,7 @@
  */
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$lang['form_validation_required']		= 'The {field} ต้องระบุข้อมูล.';
+$lang['form_validation_required']		= 'ข้อมูล {field} จำเป็นต้องระบุข้อมูล.';
 $lang['form_validation_isset']			= 'The {field} field must have a value.';
 $lang['form_validation_valid_email']		= 'The {field} field must contain a valid email address.';
 $lang['form_validation_valid_emails']		= 'The {field} field must contain all valid email addresses.';
