@@ -408,8 +408,6 @@
             orzUserClick(item) {
 
                 this.userClickClear()
-
-
                 this.orz_user_select = item
                 this.orzInformation = item
                 console.log("Demo")
@@ -516,16 +514,30 @@
             },
             getVolunteers() {
                 setTimeout(() => {
-                    // console.log(this.orzInformation);
+
                     let orz_id = this.orzInformation.aid;
+                    // console.log(this.orzInformation);
                     if (orz_id) {
                         let API = baseUrl + "/api/v1/orz/backend/volunteer?orz_id=" + orz_id;
+
+                        console.log(API)
                         axios.get(API).then((res) => {
                             this.volunteers = res.data
                             // console.log(res.data)
                         })
                     }
                 }, 2000)
+            },
+            orzinVolunteer(item){
+                this.volunteers = []
+                console.log(item)
+                let orz_id = item.aid
+                let API = baseUrl + "/api/v1/orz/backend/volunteer?orz_id=" + orz_id;
+                axios.get(API).then((res) => {
+                    this.volunteers = res.data
+                    console.log(res.data)
+                })
+
             },
             getOrzgroup() {
                 axios.get(baseUrl + '/api/v1/orz-group').then((res) => {

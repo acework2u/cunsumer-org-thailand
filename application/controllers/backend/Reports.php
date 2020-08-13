@@ -848,8 +848,12 @@ class Reports extends MY_Controller
         if ($this->is_login()) {
 
 
-            $startDate = date('Y-m-01 00:00:00');
-            $endDate = date('Y-m-t 12:59:59');
+           // $startDate = date('Y-m-01 00:00:00');
+           // $endDate = date('Y-m-t 12:59:59');
+
+            $startDate = "";
+            $endDate = "";
+
             $limit = "";
 
             if (!is_blank($this->input->get_post('startDate'))) {
@@ -863,9 +867,10 @@ class Reports extends MY_Controller
             }
 
 
-            if (!is_blank(getUserRoleId()) && getUserRoleId() == 1) {
+
                 // Super Admin
                 $this->load->model($this->reports_model, 'report');
+                $this->load->model($this->organized_model,'orz');
 
                 $report = array();
 
@@ -874,6 +879,11 @@ class Reports extends MY_Controller
                 $this->report->setLimit($limit);
 
                 $orz_info = $this->report->report_orz_list();
+//                $orz_info = $this->orz->orz_all();
+//                echo $this->db->last_query();
+
+//            var_dump($orz_info);
+//                exit(0);
 
                 $i = 1;
                 foreach ($orz_info as $row) {
@@ -884,7 +894,7 @@ class Reports extends MY_Controller
                         'orz_contact' => $full_name,
                         'orz_register_date' => $row->created_date,
                         'orz_status' => $row->orz_status_title,
-                        'approved_by' => '',
+                        'approved_by' => $this->report->orz_approve_by_name($row->aid),
                         'approved_date' => $row->updated_date,
                         'orz_in_province_code' => $row->province_code,
                         'orz_in_province' => $row->province,
@@ -896,35 +906,31 @@ class Reports extends MY_Controller
                     );
                     $i = $i + 1;
                 }
-
-//                echo "<pre>";
-//                print_r($report);
-//                echo "</pre>";
-//
-//                echo "Super = " . getUserRoleId();
-
                 $data = array(
                     'status' => true,
                     'data' => $report
                 );
 
 
-            }
-            if (!is_blank(getUserRoleId()) && getUserRoleId() == 2) {
-                // Admin
-
-                echo "Rule = " . getUserRoleId();
-            }
-            if (!is_blank(getUserRoleId()) && getUserRoleId() == 3) {
-
-                echo "Rule = " . getUserRoleId();
-            }
-            if (!is_blank(getUserRoleId()) && getUserRoleId() == 4) {
-                echo "Rule = " . getUserRoleId();
-            }
-            if (!is_blank(getUserRoleId()) && getUserRoleId() == 5) {
-                echo "Rule = " . getUserRoleId();
-            }
+//            if (!is_blank(getUserRoleId()) && getUserRoleId() == 1) {
+//
+//
+//            }
+//            if (!is_blank(getUserRoleId()) && getUserRoleId() == 2) {
+//                // Admin
+//
+//                echo "Rule = " . getUserRoleId();
+//            }
+//            if (!is_blank(getUserRoleId()) && getUserRoleId() == 3) {
+//
+//                echo "Rule = " . getUserRoleId();
+//            }
+//            if (!is_blank(getUserRoleId()) && getUserRoleId() == 4) {
+//
+//            }
+//            if (!is_blank(getUserRoleId()) && getUserRoleId() == 5) {
+//                echo "Rule = " . getUserRoleId();
+//            }
 
 
             echo json_encode($data);

@@ -43,6 +43,12 @@ class Reports_model extends MY_Model
         $this->db->join($this->tbl_zone_province_mn, 'orz_in_province.province_code = zone_province_mn.provincy_code', 'left');
         $this->db->join($this->tbl_zone, 'zone_province_mn.zone_code = zone.`code` ', 'left');
 
+        if (getUserRoleId() == 3) {
+            $this->db->where('zone_code', getUserGroupId());
+        } elseif (getUserRoleId() == 4) {
+            $this->db->where('province_code', getUserGroupId());
+        }
+
 
         if (!is_blank($this->_start_date)) {
             $this->db->where('organization.created_date >=', $this->_start_date);
@@ -57,6 +63,9 @@ class Reports_model extends MY_Model
 
         $this->db->order_by('organization.aid','desc');
         $query = $this->db->get($this->tbl_organization);
+
+
+
         $result = array();
 
         if ($query->num_rows() > 0) {

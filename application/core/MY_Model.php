@@ -146,6 +146,37 @@ class MY_Model extends CI_Model
         return $num_all;
 
     }
+    public function orz_approve_by_name($orz_id=""){
+        $full_name = "";
+
+        if(!is_blank($orz_id)){
+
+            $this->db->select('users.id,users.first_name,users.last_name');
+            $this->db->distinct('users.id');
+            $this->db->join($this->tbl_users,'approved_logs.user_aid = users.id','left');
+            $this->db->where('approved_logs.orz_aid',$orz_id);
+            $this->db->limit(1);
+            $user_data =  $this->db->get($this->tbl_approved_logs)->result();
+
+
+            if(!is_blank($user_data)){
+                foreach ($user_data as $row){
+                    $full_name = $row->first_name." ".$row->last_name;
+                }
+            }
+//            $full_name = $user_data;
+
+
+
+        }
+
+
+
+        return $full_name;
+
+
+
+    }
 
 
 

@@ -20,21 +20,21 @@
             <li class="header">MAIN NAVIGATION</li>
             <li class="active">
                 <a href="<?php echo site_url('admin/dashboard')?>">
-                    <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                    <i class="fa fa-dashboard"></i> <span><?php echo $this->lang->line('dashboard');?></span>
                 </a>
             </li>
             <?php if(getUserRoleId() == 1 || getUserRoleId() == 2 || getUserRoleId() == 3 || getUserRoleId() == 4){ ?>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-pie-chart"></i>
-                    <span>Reports</span>
+                    <span><?php echo $this->lang->line('report');?></span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/reports')?>"><i class="fa fa-circle-o"></i> Organization</a></li>
-                    <li><a href="<?php echo site_url('admin/report/volunteer')?>"><i class="fa fa-feed"></i> Volunteer</a></li>
+                    <li><a href="<?php echo site_url('admin/reports')?>"><i class="fa fa-circle-o"></i><?php echo $this->lang->line('organization_report');?></a></li>
+                    <li><a href="<?php echo site_url('admin/report/volunteer')?>"><i class="fa fa-feed"></i><?php echo $this->lang->line('volunteer_report');?></a></li>
 
                 </ul>
             </li>
@@ -44,13 +44,13 @@
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-pie-chart"></i>
-                        <span>Reports</span>
+                        <span><?php echo $this->lang->line('report');?></span>
                         <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a href="<?php echo site_url('admin/report/volunteer')?>"><i class="fa fa-feed"></i> Volunteer</a></li>
+                        <li><a href="<?php echo site_url('admin/report/volunteer')?>"><i class="fa fa-feed"></i><?php echo $this->lang->line('volunteer_report');?></a></li>
 
                     </ul>
                 </li>
@@ -63,13 +63,13 @@
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-user"></i>
-                    <span>Users</span>
+                    <span><?php echo $this->lang->line('users');?></span>
                     <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
             </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li><a href="<?php echo site_url('admin/user-management')?>"><i class="fa fa-circle-o"></i>User Management</a></li>
+                    <li><a href="<?php echo site_url('admin/user-management')?>"><i class="fa fa-circle-o"></i><?php echo $this->lang->line('users_management')?></a></li>
                 </ul>
             </li>
             <?php } ?>

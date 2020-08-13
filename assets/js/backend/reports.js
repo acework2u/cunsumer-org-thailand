@@ -30,10 +30,10 @@ var appreport = new Vue({
     data() {
         return {
             donationInfo: [],
-            donorInfo:[],
-            successMsg:"",
-            statusWait:false,
-            errorStatus:false,
+            donorInfo: [],
+            successMsg: "",
+            statusWait: false,
+            errorStatus: false,
             bankList: [],
             paymentCode: [],
             userClicked: {},
@@ -41,17 +41,17 @@ var appreport = new Vue({
             columns: ['index', 'orz_name', 'orz_contact', 'orz_register_date', 'orz_status', 'approved_by', 'approved_date', 'orz_in_province', 'orz_in_zone', 'orz_volunteer', 'updated_date', 'action'],
             options: {
                 headings: {
-                    index: 'Index',
-                    orz_name: 'Organization Name',
-                    orz_contact: 'Contact Name',
-                    orz_register_date: 'Register Date',
-                    orz_status: 'Status',
-                    approved_by: 'Approved',
-                    approved_date: 'Approved Date',
-                    orz_in_province: 'In Province',
-                    orz_in_zone: 'In Zone',
-                    orz_volunteer: 'Volunteer',
-                    updated_date: "Updated date",
+                    index: 'ลำดับ',
+                    orz_name: 'ชื่อองค์กรฯ',
+                    orz_contact: 'ผู้ติดต่อ',
+                    orz_register_date: 'วันที่ลงทะเบียน',
+                    orz_status: 'สถานะ',
+                    approved_by: 'อนุมัติโดย',
+                    approved_date: 'วันที่อนุมัติ',
+                    orz_in_province: 'จังหวัด',
+                    orz_in_zone: 'เขต',
+                    orz_volunteer: 'จำนวนอาสาสมัคร(คน)',
+                    updated_date: "วันที่อัพเดทล่าสุด",
                     action: "",
 
 
@@ -188,7 +188,7 @@ var appreport = new Vue({
 
             return apiUrls
         },
-        fillDonorInfo(){
+        fillDonorInfo() {
             return this.donorInfo
         }
 
@@ -197,20 +197,24 @@ var appreport = new Vue({
         getDonationlist() {
             // let baseApi = baseUrl + "/api-01/report/donation-list";
             let baseApi = baseUrl + "/api-01/report/organization-list";
-            let stDate = moment(this.range[0]).format('YYYY-MM-DD H:mm:ss')
-            let endDate = moment(this.range[1]).format('YYYY-MM-DD H:mm:ss')
+            let stDate = moment(this.range[0]).format('YYYY-MM-DD')
+            let endDate = moment(this.range[1]).format('YYYY-MM-DD')
 
             let baseApi2 = baseApi + "?startDate=" + stDate + "&endDate=" + endDate
 
             axios.get(baseApi + "?startDate=" + stDate + "&endDate=" + endDate).then((res) => {
                 this.donationInfo = res.data.data
-                // console.log(res.data.last_query)
+
+                // console.log(res)
+                // console.log(stDate)
+
+                // console.log(this.donationInfo)
             }).catch((err) => {
                 // console.log(err)
             })
 
-            console.log(this.donationInfo)
-            // console.log(baseApi2)
+            // console.log(this.donationInfo)
+            // console.log(baseApi)
 
 
         },
@@ -247,22 +251,22 @@ var appreport = new Vue({
         invoice(donationId) {
             return baseUrl + "/admin/reports/get-invoice/" + donationId
         },
-        sendInvoiceEmail(donationId){
+        sendInvoiceEmail(donationId) {
             let baseApi = baseUrl + "/admin/reports/send-invoice";
 
             this.statusWait = true
-            axios.post(baseApi+"?donation_id="+donationId).then((res)=>{
+            axios.post(baseApi + "?donation_id=" + donationId).then((res) => {
                 console.log(res)
                 this.statusWait = false
                 this.successMsg = res.data.message
 
-            }).catch((err)=>{
+            }).catch((err) => {
                 console.log(err)
             })
 
         },
-        nameInv(item){
-            return "email_inv_"+item
+        nameInv(item) {
+            return "email_inv_" + item
         },
         donationUpdate() {
             let baseApi = baseUrl + "/admin/reports/update-donation";
@@ -276,9 +280,9 @@ var appreport = new Vue({
             axios.post(baseApi, fromData).then((res) => {
                 // console.log(res.data);
 
-                if(res.data.error){
-                    this.errorStatus =true
-                }else{
+                if (res.data.error) {
+                    this.errorStatus = true
+                } else {
                     this.errorStatus = false
                 }
                 this.successMsg = res.data.message;
@@ -290,10 +294,10 @@ var appreport = new Vue({
             })
             appreport.getDonationlist()
 
-            setTimeout(()=>{
+            setTimeout(() => {
                 this.errorStatus = false;
-                this.successMsg=""
-            },1000);
+                this.successMsg = ""
+            }, 1000);
 
 
         },
@@ -327,20 +331,20 @@ var appreport = new Vue({
             // console.log(this.emptyTime)
         },
         checkStatusInvoice(itemStatus) {
-            if (itemStatus === "00" || itemStatus==="000" || itemStatus==="Successful") {
+            if (itemStatus === "00" || itemStatus === "000" || itemStatus === "Successful") {
                 return true
-            }else{
+            } else {
                 return false
             }
         },
-        donorClicked(item){
+        donorClicked(item) {
             let baseApi = baseUrl + "/admin/reports/donor-info";
             let donor_aid = item.doner_aid
 
             // console.log(donor_aid)
 
-            axios.get(baseApi+"?donor_aid="+donor_aid).then((res)=>{
-                    this.donorInfo = res.data
+            axios.get(baseApi + "?donor_aid=" + donor_aid).then((res) => {
+                this.donorInfo = res.data
 
                 // console.log(this.donorInfo)
             }).catch()

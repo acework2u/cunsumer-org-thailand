@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
         <h1>
-            Dashboard
+            <?php echo $this->lang->line('dashboard');?>
             <small>Control panel</small>
         </h1>
         <ol class="breadcrumb">
@@ -104,7 +104,7 @@
                                slot-scope="props" target="_blank" :href="props.row.action_2"
                                class="glyphicon fa fa-vcard-o"></a>
 
-                            <a data-toggle="modal" data-target="#orz-user-volunteer" @click="orzUserClick(props.row)"  slot="action_2"
+                            <a data-toggle="modal" data-target="#orz-user-volunteer" @click="orzinVolunteer(props.row)"  slot="action_2"
                                slot-scope="props" target="_blank" :href="props.row.action_2"
                                class="glyphicon fa fa-vcard-o"></a>
 
@@ -384,7 +384,7 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="row">
-                                        <ul v-if="volunteers.length >0" class="products-list product-list-in-box">
+                                        <ul v-if="volunteers.length >0" class="products-list product-list-in-box hidden">
                                             <li  v-for="items,index in filterVolunteers" class="item">
                                                 <div class="">
                                                     <a href="#" @click="volunteerClickInfo(items)" data-toggle="modal" data-target="#myDonor" class="product-title">{{items.name}} {{items.lastname}}
@@ -394,38 +394,23 @@
                                             </li>
 
                                         </ul>
-
-fffffffffffffffffffffff
-
-
                                         <table class="table">
                                             <thead>
                                             <tr>
-                                                <th scope="col">#</th>
-                                                <th scope="col">First</th>
-                                                <th scope="col">Last</th>
-                                                <th scope="col">Handle</th>
+                                                <th scope="col"><?php echo $this->lang->line('register_date');?></th>
+                                                <th scope="col"><?php echo $this->lang->line('name');?> - <?php echo $this->lang->line('last_name');?></th>
+                                                <th scope="col"><?php echo $this->lang->line('tel')?></th>
+                                                <th scope="col"><?php echo $this->lang->line('status');?></th>
                                             </tr>
                                             </thead>
                                             <tbody>
-                                            <tr>
-                                                <th scope="row">1</th>
-                                                <td>Mark</td>
-                                                <td>Otto</td>
-                                                <td>@mdo</td>
+                                            <tr v-for="items,index in filterVolunteers">
+                                                <th scope="row">{{items.created_date}}</th>
+                                                <td>{{items.name}} {{items.lastname}}</td>
+                                                <td>{{items.tel}}</td>
+                                                <td>{{items.volunteer_jpoin_status}}</td>
                                             </tr>
-                                            <tr>
-                                                <th scope="row">2</th>
-                                                <td>Jacob</td>
-                                                <td>Thornton</td>
-                                                <td>@fat</td>
-                                            </tr>
-                                            <tr>
-                                                <th scope="row">3</th>
-                                                <td>Larry</td>
-                                                <td>the Bird</td>
-                                                <td>@twitter</td>
-                                            </tr>
+
                                             </tbody>
                                         </table>
                                     </div>

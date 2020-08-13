@@ -1052,5 +1052,18 @@ class Test extends MY_Controller
         echo $this->db->last_query();
     }
 
+    public function approvename(){
+        $this->load->model($this->reports_model,'report');
+        $orzId =114;
+        $fuul = $this->report->orz_approve_by_name($orzId);
+
+
+//        echo $this->db->last_query();
+//        print_r($fuul);
+
+        echo $fuul;
+
+    }
+
 
 } //end of Class

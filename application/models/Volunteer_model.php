@@ -322,27 +322,32 @@ class Volunteer_model extends MY_Model
 
         $user_access = getUserRoleId();
         // $user_access = 5;
-        switch ($user_access) {
-            case 1:
-                break;
-            case 2:
-                break;
-            case 3:
-                $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_in_province.orz_aid','left');
-                $this->db->join($this->tbl_zone_province_mn,'zone_province_mn.provincy_code = orz_in_province.province_code','left');
-                $this->db->where('zone_province_mn.zone_code',getUserGroupId());
-                break;
-            case 4:
-                $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_in_province.orz_aid','left');
-                $this->db->where('orz_in_province.province_code',getUserGroupId());
-                break;
-            default:
-//                $this->db->where('orz_volunteer_mn.orz_aid', $this->_orz_aid);
-                $this->db->or_where('orz_volunteer_mn.orz_aid',getUserGroupId());
-                break;
+
+        if(!is_blank($this->_orz_aid)){
+                $this->db->where('orz_volunteer_mn.orz_aid', $this->_orz_aid);
+        }else{
+            switch ($user_access) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_in_province.orz_aid','left');
+                    $this->db->join($this->tbl_zone_province_mn,'zone_province_mn.provincy_code = orz_in_province.province_code','left');
+                    $this->db->where('zone_province_mn.zone_code',getUserGroupId());
+                    break;
+                case 4:
+                    $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_in_province.orz_aid','left');
+                    $this->db->where('orz_in_province.province_code',getUserGroupId());
+                    break;
+                default:
+
+                    $this->db->or_where('orz_volunteer_mn.orz_aid',getUserGroupId());
+                    break;
+            }
         }
 
-        if (!is_blank($this->_startDate)) {
+        if (!is_blank($this->_startDate) && !is_blank($this->_endDate)) {
 
                 $this->db->where("volunteer.created_date >=",$this->_startDate);
                 $this->db->where("volunteer.created_date <=",$this->_endDate);

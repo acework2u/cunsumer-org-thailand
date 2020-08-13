@@ -212,7 +212,7 @@
                 <div class="col-xs-12 col-sm-6 col-md-8">
                     <vue-datepicker-local v-model="range" range-separator=" to " :local="local" show-buttons
                                           format="DD-MM-YYYY"></vue-datepicker-local>
-                    <button class="btn btn-group-sm" @click="getDonationlist">Confirm</button>
+                    <button class="btn btn-group-sm btn-info" @click="getDonationlist">Confirm</button>
                 </div>
 
                 <div>
@@ -238,7 +238,7 @@
                 <div class="box">
 
                     <div class="box-header">
-                        <h3 class="box-title">Organization List</h3>
+                        <h3 class="box-title"><?php echo $this->lang->line('organization_list');?></h3>
                         <div class="box-tools">
                             <div>
 
@@ -266,10 +266,6 @@
                     <!-- /.box-header -->
                     <div class="box-body table-responsive no-padding">
                         <v-client-table ref="table" :columns="columns" :data="filterDonationList" :options="options">
-<!--                            <a data-toggle="modal" @click="donationEdit(props.row)" data-target="#myModal" slot="action"-->
-<!--                               slot-scope="props" target="_blank" :href="props.row.action"-->
-<!--                               class="glyphicon fa fa-edit"></a>-->
-
                             <a class="btn" @click="donorClicked(props.row)" data-toggle="modal" data-target="#myDonor" slot="first_name" slot-scope="props">{{props.row.first_name}}</a>
                             <span class="float-right" slot="amount"
                                   slot-scope="props">{{props.row.amount | formatBaht}}</span>
@@ -293,197 +289,14 @@
 
                     </div>
                 </div>
-                <div id="myModal" class="modal fade" role="dialog">
-                    <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Donation Update</h4>
-                                    <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>
-                                   <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal">
-                                        <div class="box-body">
-
-                                            <div class="form-group">
-                                                <label for="donorName" class="col-sm-2 control-label">Donor</label>
-
-                                                <div class="col-sm-10">
-                                                    <input type="text" readonly class="form-control" id="donorName"
-                                                           :value="userClicked.first_name">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="trnsferRef" class="col-sm-2 control-label">Transfer
-                                                    Ref.no</label>
-
-                                                <div class="col-xs-4">
-                                                    <input type="text" class="form-control" id="transferRef" v-model="userClicked.tranRef">
-                                                </div>
-                                                <div v-if="userClicked.payment_channel !=001" class="col-xs-4">
-                                                    <vue-datepicker-local v-model="emptyTime" clearable format="YYYY-MM-DD HH:mm:ss" :local="local" show-buttons @confirm="covertDatetime"></vue-datepicker-local>
-
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label for="inv-number" class="col-sm-2 control-label">Index</label>
-                                                <div class="col-xs-4 ">
-                                                    <input type="text" readonly class="form-control" id="inv-number"
-                                                           :value="userClicked.inv_number">
-                                                </div>
-
-                                            </div>
-
-                                            <div v-if="userClicked.payment_channel !=001" class="form-group">
-                                                <label for="bank-name" class="col-sm-2 control-label">Bank</label>
-                                                <div class="col-sm-6">
-                                                    <select id="bank-name" class="form-control" v-model="userClicked.bankName">
-                                                        <option v-for="item,index in bankList" :value="item.agent_code">{{item.description_thai}} {{item.booking_no}}</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-
-                                            <div v-if="userClicked.payment_channel !=001" class="form-group">
-                                                <label for="donate-amount" class="col-sm-2 control-label">Amount</label>
-                                                <div class="col-sm-6">
-                                                    <input id="donate-amount" type="number" class="form-control" v-model="userClicked.amount">
-                                                </div>
-                                            </div>
-
-                                            <div class="form-group">
-                                                <label for="donorName" class="col-sm-2 control-label">Payment
-                                                    Status</label>
-                                                <div class="col-sm-6">
-                                                    <select class="form-control" v-model="userClicked.payment_status">
-                                                        <option v-for="item,index in filterPyamentStatus"
-                                                                :value="item.code">{{item.title}}
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-                                    </form>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary" @click="donationUpdate()">Save changes</button>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <!-- /.box -->
-                </div>
-
-                <div id="myDonor" class="modal fade" role="dialog">
-                    <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                    <h4 class="modal-title">Donor Information</h4>
-                                    <span v-if="!errorStatus" class="alert-success">{{successMsg}}</span>
-                                    <span v-if="errorStatus" class="alert-warning">{{successMsg}}</span>
-                                </div>
-                                <div class="modal-body">
-                                    <form class="form-horizontal">
-                                        <div class="box-body">
-
-                                            <div class="form-group">
-                                                <label for="donorName" class="col-sm-2 control-label">Full Name</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" readonly class="form-control" id="donorName"
-                                                           :value="donorInfo.first_name">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="donor_tax" class="col-sm-2 control-label">TaxID.</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" readonly class="form-control" id="donor_tax"
-                                                           :value="donorInfo.tax_code">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="donor_email" class="col-sm-2 control-label">Email</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" readonly class="form-control" id="donor_email"
-                                                           :value="donorInfo.email">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="donor_tel" class="col-sm-2 control-label">Tel.</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" readonly class="form-control" id="donor_tel"
-                                                           :value="donorInfo.tel">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="donor_tel" class="col-sm-2 control-label">Address.</label>
-                                                <div class="col-sm-10">
-                                                    <textarea v-text="donorInfo.address" class="form-control" style="width: 452px;height: 77px" readonly></textarea>
-                                                </div>
-                                            </div>
-
-
-                                        </div>
-
-                                    </form>
-
-
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-
-
-                    <!-- /.box -->
-                </div>
 
 
 
 
 
 
-                <div id="send-invoice" class="modal fade" role="dialog">
-                    <div class="modal-dialog" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
-                        <div class="modal-content">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
 
-                                </div>
-                                <div class="modal-body">
-                                    <span v-if="statusWait"><i class="fa fa-spin fa-refresh"></i> Sending Invoice email to Donor...</span>
-                                    <span v-if="!statusWait" class="alert-success">{{successMsg}}</span>
-                                </div>
 
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
