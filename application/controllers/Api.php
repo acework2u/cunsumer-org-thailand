@@ -374,6 +374,16 @@ class Api extends MY_Controller
                 }
 
                 break;
+            case 6:
+                $result = $this->orz->orz_access();
+                foreach ($result as $row){
+                    $data_info[] = array(
+                        'code' => get_array_value($row, 'aid', 0),
+                        'title' => get_array_value($row, 'title','')
+                    );
+                }
+
+                break;
 
             default:
                 $data_info = array();

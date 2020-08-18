@@ -257,7 +257,7 @@ if($this->uri->segment(3, 0) !=="approved-logs"){ ?>
     <script type="text/javascript">
         var base_url = window.location.origin;
         $.Thailand({
-            database: '../jquery.thailand.js/database/db.json',
+            database: base_url+'/jquery.thailand.js/database/db.json',
 
             $district: $('#demo1 [name="district"]'),
             $amphoe: $('#demo1 [name="amphoe"]'),

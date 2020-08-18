@@ -198,6 +198,38 @@ class MY_Controller extends CI_Controller
 
         $this->image_lib->clear();
     }
+    public function resizeLogoImage($filename,$orz_id)
+    {
+        $source_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.$orz_id."/" . $filename;
+//        $target_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.$orz_id."/thumbnail/";
+        $target_path = $_SERVER['DOCUMENT_ROOT'] . '/uploads/'.$orz_id."/";
+
+//        if (!is_dir($target_path)) {
+//            $dir_upload = mkdir($target_path, 0777, TRUE);
+//
+//        }
+
+        $config_manip = array(
+            'image_library' => 'gd2',
+            'source_image' => $source_path,
+            'new_image' => $target_path,
+            'maintain_ratio' => TRUE,
+            'create_thumb' => TRUE,
+            'thumb_marker' => '',
+            'width' => 250,
+            'height' => 110
+        );
+
+
+        $this->load->library('image_lib', $config_manip);
+        if (!$this->image_lib->resize()) {
+            return $this->image_lib->display_errors();
+        } else {
+
+        }
+
+        $this->image_lib->clear();
+    }
 
     public function resize_image($image_data){
         $this->load->library('image_lib');

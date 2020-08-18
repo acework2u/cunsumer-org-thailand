@@ -266,6 +266,7 @@ class Organized extends MY_Controller
             $this->orz->setUpdatedDate($updated_date);
 
             $orz_new = $this->orz->update();
+
             if ($orz_new) {
                 $message = array(
                     'stats' => true,

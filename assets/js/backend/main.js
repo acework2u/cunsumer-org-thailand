@@ -5,14 +5,20 @@ var date = new Date(), y = date.getFullYear(), m = date.getMonth();
 var firstDay = new Date(y, m, 1);
 var lastDay = new Date(y, m + 1, 0);
 
-Vue.use(CKEditor)
+Vue.use(CKEditor,{
+    config:{
+        fillEmptyBlocks: false
+    }
+})
 Vue.use(VueTables.ClientTable);
 Vue.use(VueGoogleMaps, {
     load: {
-        key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
+        key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8', //AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc
         libraries: "places,geometry",
         region: 'TH',
-        language:'th'
+        language:'th',
+        // fields: ['opening_hours','utc_offset_minutes'],
+        // v: '3.26',
     },
 });
 
@@ -79,6 +85,8 @@ var lastdonate = new Vue({
             editorData: '<p>Content of the editor.</p>',
             editorConfig: {
                 // The configuration of the editor.
+                fillEmptyBlocks:false,
+                allowedContent:true
             },
             file: '',
             uploadPercentage: 0,
@@ -158,7 +166,7 @@ var lastdonate = new Vue({
     created() {
         // this.getDonationlist()
         // this.getTopDonate()
-        // this.getOrzInfo()
+        this.getOrzInfo()
         // this.getOrzgroup()
         // this.getOrganizationList()
         // this.getVolunteers()
@@ -481,8 +489,8 @@ var lastdonate = new Vue({
             /*
               Make the request to the POST /single-file URL
             */
-            // // console.log(formData);
-            axios.post(baseUrl + '/uploadfile',
+            console.log(formData);
+            axios.post(baseUrl + '/logo-uploadfile',
                 formData,
                 {
                     headers: {
@@ -497,12 +505,20 @@ var lastdonate = new Vue({
                 // console.info("Upload logo Successful")
                 full_img = response.data.full_img
                 lastdonate.orzInformation.logo =  full_img;
+                console.log(response)
+
             })
-                .catch(function () {
-                    // console.log('FAILURE!!');
+                .catch(function (e) {
+                    console.log(e);
                 });
 
-            // this.orzInformation.logo =  full_img;
+            this.orzInformation.logo =  full_img;
+
+
+
+
+
+            console.log(this.orzInformation.logo)
 
 
 
@@ -524,19 +540,24 @@ var lastdonate = new Vue({
                 var fromData = this.toFormData(dataInfo)
 
                 this.savingStatus = true;
+
+
                 axios.post(ApiUrl, fromData).then((res) => {
                     this.textSuccess = res.data.message
+
+
+
                     setTimeout(() => {
                         this.savingStatus = false
                         this.textSuccess = ""
                     }, 3000)
-                    // console.info(res.data)
+                    console.info(res.data)
                 });
 
 
             })
 
-            // console.log(this.orzInformation);
+            console.log(this.orzInformation);
         },
         saveOrzInfobyAdmin() {
             let ApiUrl = baseUrl + "/api/v1/orz-update"
@@ -684,7 +705,25 @@ var lastdonate = new Vue({
             //     }
             // }]
 
-            console.log("Info")
+                setTimeout(()=>{
+                    this.markers =[{
+                        position:{
+                            lat: Number(this.orzInformation.latitude),
+                            lng: Number(this.orzInformation.longitude)
+                        },
+
+                    }];
+                    this.center = {lat: Number(this.orzInformation.latitude), lng: Number(this.orzInformation.longitude)}
+                    this.zoom = 7
+                    // this.center = {}
+                    // this.center : {lat: 15.8700, lng: 100.9925}
+
+                    console.log(this.markers)
+                },2000);
+
+
+
+            // console.log("Info")
 
         },
         clearMarker(){

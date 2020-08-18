@@ -21,10 +21,27 @@ class Dashboard extends MY_Controller
 
     }
 
+
+    public function volunteerInOrz(){
+        if ($this->is_login()) {
+            $this->volunteerDashboard();
+        } else {
+            redirect('signin');
+        }
+    }
+
     public function dashboard()
     {
         $this->data['title'] = "Thailand Consumer Concil";
         $this->load->view('tpl_dashboard', $this->data);
+    }
+
+    public function volunteerDashboard()
+    {
+        $this->data['title'] = "Organization Report";
+
+        $this->load->view('tpl_volunteer_dashboard', $this->data);
+
     }
 
     public function topdaonate()
@@ -155,6 +172,89 @@ class Dashboard extends MY_Controller
 
         }
         echo json_encode($res);
+
+
+    }
+    public function upload_img_logo_file()
+    {
+
+        $orz_id = "";
+        $orz_id = $this->input->post('aid');
+
+
+        if(!is_blank($orz_id)){
+            if (!is_dir('uploads/' . $orz_id)) {
+                $dir_upload = mkdir('./uploads/' . $orz_id, 0777, TRUE);
+
+            }
+
+        }
+
+        $img_dir = 'uploads/' . $orz_id;
+        $config['upload_path'] = 'uploads/' . $orz_id;
+
+//        $config['upload_path'] = 'uploads';
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['max_size'] = '10024';
+        $config['overwrite'] = TRUE;
+//        $config['max_width'] = '1024';
+//        $config['max_height'] = '574';
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+
+        if (!$this->upload->do_upload('file')) {
+
+//            $data = array('upload_data' => $this->upload->data(), 'error' => $this->upload->display_errors());
+//            $this->load->view('test', $data);
+
+            $error = array('error' => $this->upload->display_errors());
+
+            $res['error'] = true;
+            $res['message'] = "Upload fail";
+
+            echo json_encode($error);
+
+
+        } else {
+
+            $uploadedImage = $this->upload->data();
+//            $this->resizeImage($uploadedImage['file_name']);
+//            $this->resize_image($uploadedImage);
+            $this->resizeLogoImage($this->upload->data('file_name'),$orz_id);
+
+
+            $res['message'] = "Upload Success";
+            $res['upload_data'] = $this->upload->data();
+            $res['file_name'] = $this->upload->data('file_name');
+
+
+            $this->load->model($this->organized_model, 'orz');
+
+            $img_full = $img_dir . "/" . $this->upload->data('file_name');
+
+
+
+
+
+        }
+
+
+
+        $this->orz->setLogo($img_full);
+
+        $this->orz->setOrzId($orz_id);
+
+        $this->orz->orz_logo();
+
+        $res['full_img'] = $img_full;
+
+
+        echo json_encode($res);
+
+
+
+//        exit(0);
 
 
     }

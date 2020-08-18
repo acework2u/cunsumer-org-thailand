@@ -343,7 +343,7 @@ class Organized_model extends MY_Model
             $data['updated_date'] = $this->_updated_date;
         }
         if (getUserRoleId() == 5) {
-            $this->db->where('user_id', getUserAid());
+//            $this->db->where('user_id', getUserAid());
         }
 
         $this->db->where('aid', $this->_orz_id);

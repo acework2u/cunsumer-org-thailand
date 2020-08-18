@@ -2,7 +2,8 @@ var base_url = window.location.origin;
 
     Vue.use(VueGoogleMaps, {
         load: {
-            key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
+            // key: 'AIzaSyBl8RuJrQ_ua1xcCiVCGSi_vGmnvrWrZZc',
+            key: 'AIzaSyBO0MLSEr7KK02AdUEbGjTH1c_HwTvNHo8',
             libraries: "places",
             region: 'TH',
         },

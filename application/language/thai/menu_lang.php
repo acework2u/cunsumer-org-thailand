@@ -7,6 +7,7 @@ $lang['address'] = "ที่ตั้งองค์กรผู้บริโ
 $lang['register'] = "ลงทะเบียนสมาชิก";
 $lang['owner_login'] = "เข้าสู่ระบบสมาชิก";
 $lang['find_location'] = "ค้นหาองค์กรผู้บริโภคทั่วประเทศ";
+$lang['organization_information'] = "ข้อมูลองค์กร";
 
 /***Users **/
 $lang['user_list'] = "รายการสมาชิก";
@@ -27,6 +28,7 @@ $lang['volunteer_report'] = "รายงาน อาสาสมัคร";
 $lang['volunteer'] = "อาสาสมัคร";
 $lang['volunteer_organization'] = "อาสาสมัครองค์กร";
 $lang['volunteer_list'] = "รายชื่ออาสาสมัครองค์กร";
+$lang['volunteer_info'] = "ข้อมูลอาสาสมัคร";
 $lang['register_date'] = "วันที่ลงทะเบียน";
 $lang['status'] = "สถานะ";
 $lang['organization_report'] = "รายงาน องค์กรฯ";
@@ -34,4 +36,5 @@ $lang['organization_report'] = "รายงาน องค์กรฯ";
 
 $lang['users']="ผู้ใช้งาน";
 $lang['users_management']="บริหารจัดการ ผู้ใช้งาน";
+$lang['volunteer_dashboard']="บริหารจัดการอาสาสมัคร";
 $lang['dashboard']="บริหารจัดการองค์กรฯ";

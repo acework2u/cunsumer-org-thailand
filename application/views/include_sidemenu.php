@@ -18,9 +18,14 @@
         <!-- sidebar menu: : style can be found in sidebar.less -->
         <ul class="sidebar-menu" data-widget="tree">
             <li class="header">MAIN NAVIGATION</li>
-            <li class="active">
+            <li class="">
                 <a href="<?php echo site_url('admin/dashboard')?>">
                     <i class="fa fa-dashboard"></i> <span><?php echo $this->lang->line('dashboard');?></span>
+                </a>
+            </li>
+            <li class="">
+                <a href="<?php echo site_url('admin/volunteer-management')?>">
+                    <i class="fa fa-user"></i> <span><?php echo $this->lang->line('volunteer_dashboard');?></span>
                 </a>
             </li>
             <?php if(getUserRoleId() == 1 || getUserRoleId() == 2 || getUserRoleId() == 3 || getUserRoleId() == 4){ ?>

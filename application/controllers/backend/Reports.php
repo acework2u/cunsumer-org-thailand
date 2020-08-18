@@ -982,13 +982,15 @@ class Reports extends MY_Controller
 
 
         if (!is_blank($volunteers)) {
-
+                $i = 1;
             if (is_array($volunteers)) {
-
                 foreach ($volunteers as $row) {
                     $full_name = get_array_value($row, 'name', '') . " " . get_array_value($row, 'lastname', '');
                     $rows = array(
-                        'index' => get_array_value($row, 'aid'),
+                        'index' => $i,
+                        'aid'=>get_array_value($row, 'aid'),
+                        'name'=>get_array_value($row, 'name', ''),
+                        'lastname'=>get_array_value($row, 'lastname', ''),
                         'fullname' => $full_name,
                         'tel' => get_array_value($row, 'tel', ''),
                         'email' => get_array_value($row, 'email', ''),
@@ -1000,7 +1002,9 @@ class Reports extends MY_Controller
                         'orz_province' => get_array_value($row, 'orz_province', ''),
                         'st_end' => $start_date . " " . $end_date
                     );
+
                     $data[] = $rows;
+                    $i++;
                 }
 
 

@@ -4974,4 +4974,8 @@ table.text-center th {
   .table-responsive > .table tr td {
     white-space: normal !important;
   }
+  .img-preview img{
+    width:100%;
+    max-width: 90px;
+  }
 }

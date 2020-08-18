@@ -62,6 +62,7 @@ $route['translate_uri_dashes'] = FALSE;
 /*** Backend Dashboard ***/
 $route['admin'] = "backend/Dashboard/index";
 $route['admin/dashboard'] = "backend/Dashboard/index";
+$route['admin/volunteer-management'] = "backend/Dashboard/volunteerInOrz";
 $route['admin/reports'] = "backend/Reports/index";
 $route['admin/report/volunteer'] = "backend/Reports/volunteer";
 $route['admin/report/volunteer_json'] = "backend/Reports/jsonVolunteers";
@@ -160,4 +161,5 @@ $route['api/v1/orz/backend/orz-update-status'] = "api/admin_update_orz";
 
 
 $route['uploadfile'] = "backend/dashboard/upload_file";
+$route['logo-uploadfile'] = "backend/dashboard/upload_img_logo_file";
 
