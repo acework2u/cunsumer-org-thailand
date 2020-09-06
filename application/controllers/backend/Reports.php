@@ -992,6 +992,11 @@ class Reports extends MY_Controller
                         'name'=>get_array_value($row, 'name', ''),
                         'lastname'=>get_array_value($row, 'lastname', ''),
                         'fullname' => $full_name,
+                        'address'=>get_array_value($row,'address',''),
+                        'district'=>get_array_value($row,'district',''),
+                        'amphoe'=>get_array_value($row,'amphoe',''),
+                        'province'=>get_array_value($row,'province',''),
+                        'zipcode'=>get_array_value($row,'zipcode',''),
                         'tel' => get_array_value($row, 'tel', ''),
                         'email' => get_array_value($row, 'email', ''),
                         'join_status' => get_array_value($row, 'volunteer_jpoin_status', ''),
@@ -999,6 +1004,8 @@ class Reports extends MY_Controller
                         'register_datetime' => get_array_value($row, 'created_date', ''),
                         'register_datetime_thai' => DateTimeThai(get_array_value($row, 'created_date', '')),
                         'orz_name' => get_array_value($row, 'orz_name', ''),
+                        'join_orz_aid' => get_array_value($row, 'orz_aid', ''),
+                        'orz_volunteer_mn_id' => get_array_value($row, 'orz_volunteer_mn_id', ''),
                         'orz_province' => get_array_value($row, 'orz_province', ''),
                         'st_end' => $start_date . " " . $end_date
                     );

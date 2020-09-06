@@ -49,16 +49,16 @@ var base_url = window.location.origin;
                 this.$nextTick(() => { // ES6 arrow function
                     // this.$refs.input_name.focus()
 
-                    let zipcode = this.$refs.zipcode.value
-                    let district = this.$refs.district.value
-                    let amphoe = this.$refs.amphoe.value
-                    let province = this.$refs.province.value
+                    // let zipcode = this.$refs.zipcode.value
+                    // let district = this.$refs.district.value
+                    // let amphoe = this.$refs.amphoe.value
+                    // let province = this.$refs.province.value
 
-                    this.orz_info.district = district
-                    this.orz_info.amphoe = amphoe
-                    this.orz_info.province = province
-                    this.orz_info.stage_code = zipcode
-                    this.orz_info.zip_code = zipcode
+                    // this.orz_info.district = district
+                    // this.orz_info.amphoe = amphoe
+                    // this.orz_info.province = province
+                    // this.orz_info.stage_code = zipcode
+                    // this.orz_info.zip_code = zipcode
 
 
                     let dataInfo = this.orz_info
@@ -437,7 +437,7 @@ var base_url = window.location.origin;
         el: "#join-modal",
         data() {
             return {
-                volunteer_info: {organization: 0, province: 0},
+                volunteer_info: {organization: 0, province: 0,gender:1},
                 provinces: "",
                 province: 0,
                 organizations: "",
@@ -485,14 +485,24 @@ var base_url = window.location.origin;
             valunteerRegister() {
                 let volunApi = base_url + "/api/v1/volunteer-register"
 
-
+                // console.log(this.volunteer_info)
+                //
+                // return;
                 this.$nextTick(() => {
+                    // this.volunteer_info.province = this.province
+                    // this.volunteer_info.organization = this.organization
+                    // this.volunteer_info.district2 = this.$refs.volun_district.value
+                    // this.volunteer_info.amphoe2 = this.$refs.volun_amphoe.value
+                    // this.volunteer_info.province2 = this.$refs.volun_province.value
+                    // this.volunteer_info.zipcode2 = this.$refs.volun_zipcode.value
+
                     this.volunteer_info.province = this.province
                     this.volunteer_info.organization = this.organization
-                    this.volunteer_info.district2 = this.$refs.volun_district.value
-                    this.volunteer_info.amphoe2 = this.$refs.volun_amphoe.value
-                    this.volunteer_info.province2 = this.$refs.volun_province.value
-                    this.volunteer_info.zipcode2 = this.$refs.volun_zipcode.value
+                    this.volunteer_info.district2 = this.$refs.valunteer_district.value
+                    this.volunteer_info.amphoe2 = this.$refs.valunteer_amphoe.value
+                    this.volunteer_info.province2 = this.$refs.valunteer_province.value
+                    this.volunteer_info.zipcode2 = this.$refs.valunteer_zipcode.value
+
                     let dataInfo = this.volunteer_info
                     let fromData = this.toFormData(dataInfo)
 
@@ -589,8 +599,10 @@ var base_url = window.location.origin;
 
 
     /***** JQUERY *****/
-    window.onload = function () {
+
         $(document).ready(function () {
+            $('input').attr('autocomplete', 'off');
+            $('input').val("");
 
             $("#login-tap").click(function () {
                 $('.register-tap > span').removeClass('active');
@@ -611,7 +623,26 @@ var base_url = window.location.origin;
                 $('#step-2').removeClass('d-none');
             });
 
-            $('#register-step-3').click(function () {
+            $('#register-nextstep-3').click(function () {
+
+                var title =  $('#orz-1-title').val()
+                var contact_name = $('#orz-1-contact_name').val()
+                var contact_lname = $('#orz-1-contact_lname').val()
+                if(title==""){
+                    $('#orz-1-title').focus()
+                    return
+                }
+                if(contact_name==""){
+                    $('#orz-1-contact_name').focus()
+                    return
+                }
+                if(contact_lname==""){
+                    $('#orz-1-contact_lname').focus()
+                    return
+                }
+
+
+
                 $('#step-2').addClass('d-none');
                 $('#step-3').removeClass('d-none');
             });
@@ -728,8 +759,10 @@ var base_url = window.location.origin;
 
 
         });
+
+window.onload = function () {
         $.Thailand({
-            database: '../assets/jquerythailand/database/db.json',
+            database: base_url+'/assets/jquerythailand/database/db.json',
 
             $district_1: $('#add-register-1 [name="district"]'),
             $amphoe_1: $('#add-register-1 [name="amphoe"]'),
@@ -743,8 +776,6 @@ var base_url = window.location.origin;
 
             onDataFill: function (data) {
                 console.info('Data Filled', data);
-
-
             },
 
             onLoad: function () {
@@ -753,18 +784,18 @@ var base_url = window.location.origin;
             }
         });
         // watch on change
-        $('#demo1 [name="district"]').change(function () {
-            console.log('ตำบล', this.value);
-        });
-        $('#demo1 [name="amphoe"]').change(function () {
-            console.log('อำเภอ', this.value);
-        });
-        $('#demo1 [name="province"]').change(function () {
-            console.log('จังหวัด', this.value);
-        });
-        $('#demo1 [name="zipcode"]').change(function () {
-            console.log('รหัสไปรษณีย์', this.value);
-
-        });
+        // $('#demo1 [name="district"]').change(function () {
+        //     console.log('ตำบล', this.value);
+        // });
+        // $('#demo1 [name="amphoe"]').change(function () {
+        //     console.log('อำเภอ', this.value);
+        // });
+        // $('#demo1 [name="province"]').change(function () {
+        //     console.log('จังหวัด', this.value);
+        // });
+        // $('#demo1 [name="zipcode"]').change(function () {
+        //     console.log('รหัสไปรษณีย์', this.value);
+        //
+        // });
 
     }

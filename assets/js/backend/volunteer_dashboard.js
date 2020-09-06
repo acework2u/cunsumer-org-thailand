@@ -31,6 +31,7 @@ var appreport = new Vue({
         return {
             volunteerInfo: [],
             volunteerDetail:{},
+            volunteerClickDetail:[],
             donorInfo: [],
             successMsg: "",
             statusWait: false,
@@ -152,6 +153,9 @@ var appreport = new Vue({
         filterVolunteerList() {
             return this.volunteerInfo
         },
+        filterVolunteerDetail(){
+            return this.volunteerClickDetail
+        },
         filDonateTotal() {
             let total = 0
             return this.volunteerInfo.reduce((total, value) => {
@@ -249,17 +253,18 @@ var appreport = new Vue({
 
             let baseApi2 = baseApi + "?startDate=" + startDate + "&endDate=" + endDate
 
-            console.log(baseApi2);
+            // console.log(baseApi2);
 
             axios.get(baseApi2).then((res) => {
                 this.volunteerInfo = res.data
-                // console.log(res.data)
+                console.log(res.data)
             }).catch((err) => {
                 // console.log(err)
             })
 
             console.log(this.volunteerInfo)
-            // console.log(baseApi2)
+            console.log(baseApi2)
+            console.log("Volunteer getDonationlist")
 
 
         },
@@ -394,6 +399,79 @@ var appreport = new Vue({
             //     // console.log(this.donorInfo)
             // }).catch()
 
+
+        },
+        clickVolunteer(item) {
+            console.info(item)
+            this.successMsg =""
+
+            this.userClicked.aid = item.aid
+            let volunteerData = this.volunteerInfo.filter((el)=>{
+                return el.aid === item.aid
+            })
+
+            volunteerData.forEach((val,index)=>{
+                this.volunteerDetail = val
+                console.log(val)
+            })
+        },
+        saveVolunteer(){
+            this.volunteerDetail.district = this.$refs.district.value
+            this.volunteerDetail.amphoe = this.$refs.amphoe.value
+            this.volunteerDetail.province = this.$refs.province.value
+            this.volunteerDetail.zipcode = this.$refs.zipcode.value
+
+            let baseApi = baseUrl + "/admin/volunteer-update";
+            let dataInfo = this.volunteerDetail
+            var fromData = this.toFormData(dataInfo)
+
+            axios.post(baseApi, fromData).then((res) => {
+                console.log(res.data);
+
+                if (res.data.error) {
+                    this.errorStatus = true
+                } else {
+                    this.errorStatus = false
+                }
+                this.successMsg = res.data.message;
+
+                this.getDonationlist()
+
+            }).catch((err) => {
+
+            })
+
+
+
+            console.log(this.volunteerDetail)
+        },
+        delVolunteer(){
+            let baseApi = baseUrl + "/admin/volunteer-delete";
+
+
+
+
+            let uid = this.volunteerDetail.aid
+            let orz_id = this.volunteerDetail.join_orz_aid
+
+            let urlApi = baseApi+"?aid="+uid+"&orz_aid="+orz_id
+
+            console.log(urlApi)
+
+            axios.get(urlApi).then((res)=>{
+
+                if(res.error){
+
+                }else{
+
+                    console.log(res.data)
+                    this.successMsg = res.data.message;
+
+                    this.getDonationlist()
+
+                }
+
+            }).catch()
 
         }
 

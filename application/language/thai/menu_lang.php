@@ -38,3 +38,5 @@ $lang['users']="ผู้ใช้งาน";
 $lang['users_management']="บริหารจัดการ ผู้ใช้งาน";
 $lang['volunteer_dashboard']="บริหารจัดการอาสาสมัคร";
 $lang['dashboard']="บริหารจัดการองค์กรฯ";
+$lang['save'] = "บันทึกข้อมูล";
+$lang['close'] = "ปิด";

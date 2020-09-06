@@ -261,8 +261,8 @@
                     <div class="box-body table-responsive no-padding">
                         <v-client-table ref="table" :columns="columns" :data="filterVolunteerList" :options="options">
 
-                                                        <a  href="#" class="click-donate" @click="donorClicked(props.row)" data-toggle="modal" data-target="#volunteer-info" slot="action" slot-scope="props"><i class="fa fa-address-card"></i></a>
-                                                        <a  href="#" class="click-donate " @click="donorClicked(props.row)" data-toggle="modal" data-target="#volunteer-info" slot="action_delete" slot-scope="props"><i style="color:red" class="fa fa-trash"></i></a>
+                                                        <a  href="#" class="click-donate" @click="clickVolunteer(props.row)" data-toggle="modal" data-target="#volunteer-info" slot="action" slot-scope="props"><i class="fa fa-address-card"></i></a>
+                                                        <a  href="#" class="click-donate " @click="clickVolunteer(props.row)" data-toggle="modal" data-target="#volunteer-del" slot="action_delete" slot-scope="props"><i style="color:red" class="fa fa-trash"></i></a>
 <!--                                                        <span class="float-right" slot="amount"-->
 <!--                                                              slot-scope="props">{{props.row.amount | formatBaht}}</span>-->
 <!--                                                        <a :href="invoice(props.row.aid)" target="_blank" class="" slot="inv_number"-->
@@ -282,10 +282,11 @@
                                     <h4 class="modal-title" id="myModalLabel"><?php echo $this->lang->line('volunteer_info');?></h4>
                                 </div>
                                 <div class="modal-body">
-                                        {{volunteerDetail}}
+
+
                                     <div class="box box-primary">
                                         <div class="box-header with-border">
-                                            <h3 class="box-title">Address & Location</h3>
+                                            <h3 class="box-title"></h3>
                                             <!--
                                             <div class="box-tools pull-right">
                                                 <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
@@ -303,6 +304,14 @@
                                                 <div class="form-group">
                                                            <label class="col-sm-2 control-label">วันที่ลงทะเบียน </label>
                                                     <div class="col-sm-10"><span style="font-weight: bold">{{volunteerDetail.register_datetime}}</span></div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label class="col-sm-2 control-label">สถานะ</label>
+                                                    <div class="col-sm-10">
+                                                    <input type="radio" id="one" value="1" v-model="volunteerDetail.status" ><label for="one">รอตรวจสอบ</label>
+                                                    <input type="radio" id="two" value="4" v-model="volunteerDetail.status" ><label for="two">อนุมัติ</label>
+                                                    <input type="radio" id="three" value="3" v-model="volunteerDetail.status" ><label for="three">ไม่อนุมัติ</label>
+                                                    </div>
                                                 </div>
 
                                                 <div class="form-group">
@@ -323,44 +332,65 @@
                                                 <div class="form-group">
                                                     <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
                                                     <div class="col-sm-10">
-                                                        <textarea class="form-control " rows="3" placeholder="Enter ..."></textarea>
+                                                        <textarea class="form-control " rows="3" v-model="volunteerDetail.address"></textarea>
                                                     </div>
                                                 </div>
 
                                                 <div id="demo1" >
                                                     <div class="form-group">
                                                         <label for="districtLabel" class="col-sm-2 control-label">ตำบล / แขวง</label>
-                                                        <div class="col-sm-4"><input ref="district"  name="district" class="uk-input form-control" type="text"> </div>
+                                                        <div class="col-sm-4"><input ref="district"  name="district" class="uk-input form-control" type="text" v-model="volunteerDetail.district"> </div>
                                                         <label for="amphoe" class="col-sm-2 control-label">อำเภอ</label>
-                                                        <div class="col-sm-4"><input ref="amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe"> </div>
+                                                        <div class="col-sm-4"><input ref="amphoe" name="amphoe" class="uk-input form-control" type="text" id="amphoe" v-model="volunteerDetail.amphoe"> </div>
 
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="province" class="col-sm-2 control-label">จังหวัด</label>
-                                                        <div class="col-sm-4"><input ref="province"  name="province" class="uk-input form-control" type="text"> </div>
+                                                        <div class="col-sm-4"><input ref="province"  name="province" class="uk-input form-control" type="text" v-model="volunteerDetail.province"> </div>
                                                         <label for="zipcode" class="col-sm-2 control-label">รหัสไปรษณีย์</label>
                                                         <div class="col-sm-4">
                                                             <input class="form-control hidden" value="">
-                                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" >
+                                                            <input ref="zipcode"  name="zipcode" class="uk-input form-control" type="text" v-model="volunteerDetail.zipcode" >
 
                                                         </div>
                                                     </div>
                                                 </div>
                                             </form>
-
-
-
                                         </div>
                                         <!-- /.box-body -->
                                         <div class="box-footer text-center">
-                                            <!--                            <a href="javascript:void(0)" class="uppercase">View All Products</a>-->
+                                            <span style="font-size: medium" v-if ="successMsg !==''" class="label label-pill label-success">{{successMsg}}</span>
+<!--                                            <span v-else>{{errorStatus}} {{successMsg}}</span>-->
                                         </div>
                                         <!-- /.box-footer -->
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"><?php echo $this->lang->line('close')?></button>
+                                    <button type="button" class="btn btn-primary" @click="saveVolunteer"><?php echo $this->lang->line('save')?></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="modal fade" id="volunteer-del" tabindex="-1" role="dialog" aria-labelledby="VolunteerDeleteConfirm" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="VolunteerDeleteConfirm">ยืนยันการลบข้อมูล</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                  <span v-if="successMsg ==''" >ต้องการลบข้อมูลนี้หรือไม่!!</span>
+                                  <span style="font-size: medium;color: green" v-else>{{successMsg}}</span>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">ยกเลิก</button>
+                                    <button type="button" class="btn btn-danger" @click="delVolunteer">ลบ</button>
                                 </div>
                             </div>
                         </div>

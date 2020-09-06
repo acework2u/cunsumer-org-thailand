@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 class Volunteer_model extends MY_Model
 {
     private $_volunteerId;
+    private $_volunteerMnId;
     private $_name;
     private $_lastname;
     private $_tel;
@@ -30,7 +31,9 @@ class Volunteer_model extends MY_Model
         parent::__construct();
     }
 
-
+    public function setvolunteerMnId($volunteerMnId){
+        $this->_volunteerMnId = $volunteerMnId;
+    }
     public function setId($volunteer_id)
     {
         $this->_volunteerId = $volunteer_id;
@@ -199,6 +202,9 @@ class Volunteer_model extends MY_Model
             if (!is_blank($this->_zipcode)) {
                 $data['zipcode'] = $this->_zipcode;
             }
+            if (!is_blank($this->_update_date)) {
+                $data['updated_date'] = $this->_update_date;
+            }
             $this->db->where('aid', $this->_volunteerId);
             $this->db->update($this->tbl_volunteer, $data);
 
@@ -226,6 +232,21 @@ class Volunteer_model extends MY_Model
         }
 
         return false;
+
+    }
+    public function orz_volunteer_mn_delete($orz_id="",$volunteer_id=""){
+            if(!is_blank($orz_id) && !is_blank($volunteer_id)){
+                $this->db->delete($this->tbl_orz_volunteer_mn,array('orz_aid'=>$orz_id,'volunteer_aid'=>$volunteer_id));
+
+                if($this->db->affected_rows() >0){
+                    return true;
+                }else{
+                    return false;
+                }
+
+
+            }
+
 
     }
 
@@ -311,7 +332,7 @@ class Volunteer_model extends MY_Model
 //        if(!is_blank($this->_orz_aid)){
         $this->db->select('volunteer.*,
 	orz_status.`status` AS volunteer_jpoin_status,
-	orz_volunteer_mn.`status` AS orz_join_status_id,organization.title as orz_name,organization.province as orz_province');
+	orz_volunteer_mn.`status` AS orz_join_status_id,organization.title as orz_name,organization.province as orz_province,orz_volunteer_mn.orz_aid as orz_aid,orz_volunteer_mn.aid as orz_volunteer_mn_id');
         $this->db->join($this->tbl_orz_volunteer_mn, 'orz_volunteer_mn.volunteer_aid = volunteer.aid', 'left');
         $this->db->join($this->tbl_orz_status, 'orz_volunteer_mn.`status` = orz_status.aid', 'left');
         $this->db->join($this->tbl_organization, 'orz_volunteer_mn.orz_aid = organization.aid', 'left');
@@ -366,6 +387,36 @@ class Volunteer_model extends MY_Model
         }
 //        }
         return $result;
+    }
+
+    public function volunteerOrzUpdateStatus(){
+
+
+
+        if(!is_blank($this->_volunteerMnId)){
+
+
+
+            $data = array(
+                'status'=>$this->_status,
+                'updated_date'=>$this->_update_date
+            );
+
+
+
+
+            $this->db->where('aid',$this->_volunteerMnId);
+            $this->db->update($this->tbl_orz_volunteer_mn,$data);
+            $aff_num = $this->db->affected_rows();
+            if ($aff_num > 0) {
+                return true;
+            }else{
+                return false;
+            }
+
+
+        }
+
     }
 
 

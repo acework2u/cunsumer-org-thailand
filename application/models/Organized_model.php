@@ -447,8 +447,15 @@ class Organized_model extends MY_Model
                 case 4:
                     break;
                 case 5:
-                    $this->db->join($this->tbl_users,'users.cus_group_id = organization.aid','inner');
-                    $this->db->where('organization.aid',getUserGroupId());
+                    if(!is_blank(getUserGroupId())){
+                        $this->db->join($this->tbl_users,'users.cus_group_id = organization.aid','inner');
+                        $this->db->or_where('organization.aid',getUserGroupId());
+                    }
+                   if(!is_blank(getUserAid())){
+
+                       $this->db->or_where('organization.user_id',getUserAid());
+                   }
+
                     break;
                 case 6:
                     break;

@@ -259,11 +259,13 @@
                         </div>
                         <div class="login-container-shadow p-absolute"></div>
                     </div>
+
                     <div class="" id="register-form">
+
                         <div id="step-1">
                             <div class="form-container p-4 p-absolute">
 
-                                <input autocomplete="off"  type="text" id="cus-email" name="account-email" placeholder="Email" class="w-100 mb-2 form-input form-control" @keyup="checkUserEmail" v-model="orz_info.cus_email">
+                                <input autocomplete="off"  type="email" id="cus-email" name="account-email" placeholder="Email" class="w-100 mb-2 form-input form-control" @keyup="checkUserEmail" v-model="orz_info.cus_email">
                                 <div v-if="alError===true" :class="classObject" role="alert">
                                     ** {{msgSuccess}}
                                 </div>
@@ -277,7 +279,7 @@
                                 </div>
                                 <div class="d-flex w-100">
                                     <label class="label-container">นิติบุคคล
-                                        <input type="radio" name="type" value="1" checked="checked" v-model="orz_info.categories">
+                                        <input  type="radio" name="type" value="1" checked="checked" v-model="orz_info.categories">
                                         <span class="checkmark-o"></span>
                                     </label>
                                     <label class="label-container">บุคคลธรรมดา
@@ -289,15 +291,15 @@
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
-                                <input type="text" name="foundation" placeholder="มูลนิธิ*" class="w-100 mb-2 form-input" v-model="orz_info.title">
+                                <input id="orz-1-title" type="text" name="foundation" placeholder="มูลนิธิ*" class="w-100 mb-2 form-input form-control" v-model="orz_info.title">
 
                                 <label class="pt-2">ชื่อผู้ติดต่อ</label>
                                 <div class="row m-auto pb-2 pb-0-sm">
                                     <div class="col-5 p-0">
-                                        <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input" v-model="orz_info.contact_name">
+                                        <input autocomplete="off" id="orz-1-contact_name" readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="name" placeholder="ชื่อ*" class="w-100 mb-2 form-input form-control" v-model="orz_info.contact_name">
                                     </div>
                                     <div class="col-7 pl-2 pr-0">
-                                        <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input" v-model="orz_info.contact_lastname">
+                                        <input autocomplete="off" id="orz-1-contact_lname" readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="lastname" placeholder="นามสกุล*" class="w-100 mb-2 form-input form-control" v-model="orz_info.contact_lastname">
                                     </div>
                                 </div>
                                 <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" type="text" name="tel" class="w-100 mb-2 form-input" placeholder="เบอร์ติดต่อ*" v-model="orz_info.tel">
@@ -305,13 +307,24 @@
 
 
 
-                                <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input" v-model="orz_info.address">
+
 
                                 <div id="add-register-1" class="d-none">
+                                    <input type="text" name="address" placeholder="ที่อยู่*" class="w-100 mb-2 form-input" v-model="orz_info.address">
+                                    <div class="col-sm-6 pl-2 pr-0 pl-0-sm">
+                                        <label class="control-label">รหัสไปรษณีย์ *</label>
+                                        <input type="text" name="zipcode"  placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input" >
+<!--                                        <input ref="zipcode" id="zipcode-1"  name="zipcode" class="uk-input w-100 form-input" type="text" v-model="orz_info.zipcode">-->
+<!--                                        <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="zipcode" id="zipcode-1"  name="zipcode" class="uk-input w-100 form-input" type="text" v-model="orz_info.zipcode">-->
+
+
+                                    </div>
+
                                 <div class="row m-auto pb-2">
                                     <div class="col-sm-6 p-0">
                                         <label class="control-label">ตำบล / แขวง *</label>
-                                        <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="district" id="district-1" v-model="orz_info.district" name="district" class="uk-input  form-input w-100" type="text">
+<!--                                        <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="district" id="district-1" v-model="orz_info.district" name="district" class="uk-input  form-input w-100" type="text">-->
+                                        <input  id="district-1" v-model="orz_info.district" name="district" class="uk-input  form-input w-100" type="text">
 
                                     </div>
                                     <div class="col-sm-6 pl-2 pr-0 pl-0-sm">
@@ -325,10 +338,7 @@
                                         <label class="control-label">จังหวัด *</label>
                                         <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }"  ref="province" id="province-1" v-model="orz_info.province" name="province" class="uk-input  form-input w-100" type="text">
                                     </div>
-                                    <div class="col-sm-6 pl-2 pr-0 pl-0-sm">
-                                        <label class="control-label">รหัสไปรษณีย์ *</label>
-                                        <input readonly onfocus="if (this.hasAttribute('readonly')) { this.removeAttribute('readonly'); this.blur(); this.focus();  }" ref="zipcode" id="zipcode-1"  name="zipcode" class="uk-input w-100 form-input" type="text" v-model="orz_info.zipcode">
-                                    </div>
+
                                 </div>
                                 </div>
 
@@ -336,7 +346,7 @@
 
                                 <div class="d-flex w-100 mt-4 pb-4">
                                     <!-- Js line 16 -->
-                                    <button class="form-btn text-white py-2 px-4" id="register-step-3">หน้าต่อไป</button>
+                                    <button class="form-btn text-white py-2 px-4" id="register-nextstep-3">หน้าต่อไป>>></button>
                                     <!-- End -->
                                 </div>
 
@@ -432,68 +442,6 @@
 
                             </div>
                             <div class="step-4-shadow-back p-absolute"></div>
-                        </div>
-
-                        <div class="modal" id="register-modal">
-                            <div class="modal-dialog register-modal">
-                                <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
-                                    <div class="d-flex">
-                                        <img src="<?php echo base_url('assets/image/register-modal.png');?>" class="w-auto py-2">
-                                    </div>
-                                    <div class="row m-auto">
-                                        <div class="col-sm">
-                                            <p class="mb-1">วัตถุประสงค์</p>
-                                            <ol class="modal-ol">
-                                                <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษา แก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                                                <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ์</li>
-                                                <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                                                <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
-                                            </ol>
-                                            <p class="mb-1">ผู้ประสานงานหลัก : <span class="modal-span">คุณกำพล วัชรพล</span></p>
-                                            <p class="mb-1">E-mail : <span class="modal-span">Vichen@thairath.co.th </span></p>
-                                            <p class="mb-1">Website : <span class="modal-span">http://www.thairath-found.or.th/</span></p>
-                                            <p>เบอร์ติดต่อองค์กร : <span class="modal-span">02 127 1064</span></p>
-                                            <p class="mb-1">รายชื่อคณะกรรมการ</p>
-                                            <ol class="modal-ol pb-5 pb-0-sm">
-                                                <li>คุณหญิงประณีตศิลป์ วัชรพล (ประธานกรรมการ)</li>
-                                                <li>นางยิ่งลักษณ์ วัชรพล (รองประธานกรรมการและเหรัญญิก)</li>
-                                                <li>นายวิเชน โพชนุกูล (กรรมการและเลขาธิการ)</li>
-                                                <li>นายมานิจ สุขสมจิตร (กรรมการ)</li>
-                                                <li>นายเลิศ อัศเวศน์ (กรรมการ)</li>
-                                                <li>นายสมชาย กรุสวนสมบัติ (กรรมการ)</li>
-                                                <li>นายไพโรจน์ โล่ห์สุนทร (กรรมการ)</li>
-                                                <li>นายสราวุธ วัชรพล (กรรมการ)</li>
-                                                <li>นายสมปอง พรทวีวัฒน์ (กรรมการ)</li>
-                                                <li>นายธงชัย ณ นคร (กรรมการ)</li>
-                                                <li>นายดำฤทธิ์ วิริยะกุล (กรรมการ)</li>
-                                                <li>นายวัชร วัชรพล (กรรมการ)</li>
-                                                <li>นางฐิติวรรณ ไสวแสนยากร (กรรมการ)</li>
-                                                <li>นางสาวจิตสุภา วัชรพล (กรรมการ)</li>
-                                                <li>นางสาวสิริพร โคตระวีระ (กรรมการ)</li>
-                                            </ol>
-                                        </div>
-                                        <div class="col-sm">
-                                            <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                                            <ol class="modal-ol">
-                                                <li>ส่งเสริมด้านการศึกษา และช่วยเหลือกิจกรรมเกี่ยวกับการศึกษาแก่นักเรียนที่ยากจนและนักเรียนดีทั่วไป</li>
-                                                <li>ส่งเสริมการศึกษา ค้นคว้าวิจัยงานหนังสือพิมพ</li>
-                                                <li>ร่วมมือกับองค์กรการกุศลอื่นๆ เพื่อสาธารณประโยชน์</li>
-                                                <li>ไม่ดำเนินการเกี่ยวข้องกับการเมือง ไม่ว่าประการใดๆ</li>
-                                            </ol>
-                                            <p class="mb-1">ผลงานย้อนหลังในรอบ 10 ปี</p>
-                                            <ol class="modal-ol">
-                                                <li>กำพล วัชรพล</li>
-                                            </ol>
-                                        </div>
-                                    </div>
-                                    <div class="modal-btn-container d-flex d-sm-none my-4">
-                                        <!-- Js line 26 - 34 -->
-                                        <button class="edit-btn text-white mx-2" data-dismiss="modal">แก้ไข</button>
-                                        <button class="save-btn text-white mx-2" data-dismiss="modal" @click="onSave">บันทึก</button>
-                                        <!-- End -->
-                                    </div>
-                                </div>
-                            </div>
                         </div>
 
 
@@ -755,7 +703,7 @@
                             <div class="row m-auto">
                                 <div class="col p-0">
                                     <label class="label-container">นาย
-                                        <input type="radio" name="prefix" value="1" checked="checked" v-model="volunteer_info.gender">
+                                        <input v-validate="'required'" type="radio" name="prefix" value="1" checked="checked" v-model="volunteer_info.gender">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
@@ -767,7 +715,7 @@
                                 </div>
                                 <div class="col p-0">
                                     <label class="label-container">นางสาว
-                                        <input v-validate="'required'" type="radio" name="prefix" value="3" v-model="volunteer_info.gender">
+                                        <input v-validate="'required'"  type="radio" name="prefix" value="3" v-model="volunteer_info.gender">
                                         <span class="checkmark-o"></span>
                                     </label>
                                 </div>
@@ -797,7 +745,7 @@
                             <input type="text" name="valunteer_address" placeholder="ที่อยู่*" id="valunteer_address" class="w-100 mb-2 form-input" v-model="volunteer_info.address">
                         </div>
                         <div class="col-5 pl-0 pr-1 pb-2">
-                            <input v-validate="'required'" type="text" name="district" id="valunteer_district" class="w-100 mb-2 form-control form-input"   placeholder="ตำบล/แขวง">
+                            <input  type="text" name="district" ref="valunteer_district" id="valunteer_district" class="w-100 mb-2 form-control form-input"   placeholder="ตำบล/แขวง">
 
                         </div>
                         <div class="col-5 pl-1 pr-0 pb-2">
@@ -810,10 +758,12 @@
                         <div class="col-5 pl-0 pr-1">
                             <input type="text" name="zipcode" ref="valunteer_zipcode" placeholder="รหัสไปรษณีย์*" class="w-100 mb-2 form-input" >
                         </div>
-                        <input type="hidden" ref="volun_district" name="volun-district">
-                        <input type="hidden" ref="volun_amphoe" name="volun-amphoe" >
-                        <input type="hidden" ref="volun_province" name="volun-province">
-                        <input type="hidden" ref="volun_zipcode" name="volun-zipcode">
+
+<!--                        <input type="hidden" ref="volun_district" name="volun-district">-->
+<!--                        <input type="hidden" ref="volun_amphoe" name="volun-amphoe" >-->
+<!--                        <input type="hidden" ref="volun_province" name="volun-province">-->
+<!--                        <input type="hidden" ref="volun_zipcode" name="volun-zipcode">-->
+
                     </div>
 
                     <div class="col-12 p-0">
@@ -961,7 +911,7 @@
 <script src="<?php echo base_url('assets/js/jquery.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/popper.min.js')?>"></script>
 <script src="<?php echo base_url('assets/js/bootstrap.min.js')?>"></script>
-    <script src="<?php echo base_url('assets/js/organization.js'); ?>"></script>
+<!--    <script src="--><?php //echo base_url('assets/js/organization.js'); ?><!--"></script>-->
     <script src="<?php echo base_url('assets/js/vue-organization.js'); ?>"></script>
 
     <script type="text/javascript" src="<?php echo base_url('assets/js/uikit.min.js');?>"></script>
