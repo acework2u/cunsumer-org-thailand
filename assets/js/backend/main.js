@@ -338,7 +338,10 @@ var lastdonate = new Vue({
         orzUserClick(item) {
             this.orz_user_select = item
             this.orzInformation = item
-            console.log(item)
+           // console.log(item)
+            this.imagePreview=""
+            this.uploadPercentage=0
+
         },
         approvedOrz(item) {
             // console.info(item)

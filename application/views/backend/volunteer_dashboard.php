@@ -327,8 +327,6 @@
                                                     </div>
                                                 </div>
 
-
-
                                                 <div class="form-group">
                                                     <label for="orzmileStone" class="col-sm-2 control-label">ที่อยู่</label>
                                                     <div class="col-sm-10">

@@ -203,7 +203,33 @@ class Dashboard extends MY_Controller
         }//end if login
     }
 
+    public function orz_delete(){
+        if($this->is_login()){
+            $orz_id = "";
+            if(!is_blank($this->input->get_post('orz_id'))){
+                $orz_id = $this->input->get_post('orz_id');
+            }
+            $this->load->model($this->organized_model, 'orz');
+            $this->orz->setOrzId($orz_id);
 
+
+            if($this->orz->delete()){
+               $data = array(
+                 'status'=>true,
+                 'statusCode'=>200,
+                 'message'=>"Delete Success"
+               );
+            }else{
+                $data = array(
+                    'error'=>true,
+                    'statusCode'=>400,
+                    'message'=>"ไม่สามารถทำการลบข้อมูลได้"
+                );
+            }
+            echo json_encode($data);
+
+        }
+    }
     public function topdaonate()
     {
         if ($this->is_login()) {

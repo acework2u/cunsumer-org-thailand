@@ -200,6 +200,7 @@ class Organized extends MY_Controller
         /*** Orz Information ****/
 
         $orz_id = $this->input->post('aid');
+        $orz_register_no = $this->input->post('register_no');
         $orz_board_of_directore = $this->input->post('board_of_directors');
         $orz_orz_group_id = $this->input->post('orz_group_id');
         $orz_orz_type_id = $this->input->post('orz_type_id');
@@ -242,6 +243,7 @@ class Organized extends MY_Controller
 
             $this->orz->setOrzId($orz_id);
             $this->orz->setTitle($orz_title);
+            $this->orz->setRegisterNo($orz_register_no);
             $this->orz->setOrzGroupId($orz_orz_group_id);
             $this->orz->setOrzType($orz_orz_type_id);
             $this->orz->setAddress($orz_address);

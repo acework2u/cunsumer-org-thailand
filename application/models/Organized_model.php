@@ -6,6 +6,7 @@ class Organized_model extends MY_Model
 {
 
     private $_title;
+    private $_register_no;
     private $_address;
     private $_contact_name;
     private $_contact_lastname;
@@ -52,6 +53,10 @@ class Organized_model extends MY_Model
     {
         $this->_title = $title;
     }
+    public function setRegisterNo($registerNo){
+        $this->_register_no = $registerNo;
+    }
+
 
     public function setAddress($address)
     {
@@ -275,6 +280,9 @@ class Organized_model extends MY_Model
         if (!is_blank($this->_title)) {
             $data['title'] = $this->_title;
         }
+        if (!is_blank($this->_register_no)) {
+            $data['register_no'] = $this->_register_no;
+        }
         if (!is_blank($this->_address)) {
             $data['address'] = $this->_address;
         }
@@ -364,6 +372,40 @@ class Organized_model extends MY_Model
         if (!is_blank($this->_orz_id)) {
             $this->db->where('aid', $this->_orz_id);
             $this->db->delete($this->tbl_organization);
+
+            if ($this->db->affected_rows()) {
+                $this->orz_in_province_delete();
+                $this->orz_volunteer_delete();
+                return true;
+            }
+        } else {
+            return false;
+        }
+
+
+    }
+    public function orz_in_province_delete()
+    {
+
+        if (!is_blank($this->_orz_id)) {
+            $this->db->where('orz_aid', $this->_orz_id);
+            $this->db->delete($this->tbl_orz_in_province);
+
+            if ($this->db->affected_rows()) {
+                return true;
+            }
+        } else {
+            return false;
+        }
+
+
+    }
+    public function orz_volunteer_delete()
+    {
+
+        if (!is_blank($this->_orz_id)) {
+            $this->db->where('orz_aid', $this->_orz_id);
+            $this->db->delete($this->tbl_orz_volunteer_mn);
 
             if ($this->db->affected_rows()) {
                 return true;

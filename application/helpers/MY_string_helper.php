@@ -930,6 +930,13 @@ function Convert($amount_number)
         $ret .= "ถ้วน";
     return $ret;
 }
+function wrapTxt($text){
+    $subject = $text;
+    if(strlen($subject)>55) {
+    $subject = substr($subject,0,55)."...";
+   }
+
+}
 
 
 ?>

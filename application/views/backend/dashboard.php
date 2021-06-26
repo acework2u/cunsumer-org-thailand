@@ -437,11 +437,13 @@
                                                 <span class="form-control"> {{volunteer.address}},{{volunteer.district}} {{volunteer.amphoe}} {{volunteer.province}} {{volunteer.zipcode}}.</span>
                                             </div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group hidden">
                                             <label for="donor_email" class="col-sm-3 control-label">สถานะ</label>
                                             <div class="col-sm-9">
                                                 <select class="form-control">
-                                                    <option></option>
+                                                    <option>---ยังไม่ระบุข้อมูล-----</option>
+                                                    <option value="1">อนุมัติ</option>
+                                                    <option value="0">ไม่อนุมัติ</option>
                                                 </select>
                                             </div>
                                         </div>

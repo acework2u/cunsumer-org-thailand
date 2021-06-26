@@ -1,4 +1,18 @@
 var base_url = window.location.origin;
+Vue.filter('wrapText', function (text) {
+    let longText = text;
+    var str = "";
+    if(longText.length > 80){
+        let a = text.substring(0,80);
+         str = a+"...";
+    }else{
+        str = longText
+    }
+
+
+
+    return str.trim()
+});
 
     Vue.use(VueGoogleMaps, {
         load: {
@@ -312,7 +326,7 @@ var base_url = window.location.origin;
                     this.orz_list = res.data.orz_info
                     // coordinates
                     this.coordinates = res.data.coordinates
-                    console.log(this.orz_list)
+                   // console.log(this.orz_list)
                 })
                 // console.log(orzApi)
 

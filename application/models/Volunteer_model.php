@@ -336,6 +336,8 @@ class Volunteer_model extends MY_Model
         $this->db->join($this->tbl_orz_volunteer_mn, 'orz_volunteer_mn.volunteer_aid = volunteer.aid', 'left');
         $this->db->join($this->tbl_orz_status, 'orz_volunteer_mn.`status` = orz_status.aid', 'left');
         $this->db->join($this->tbl_organization, 'orz_volunteer_mn.orz_aid = organization.aid', 'left');
+
+
         if (getUserRoleId() != 1) {
 //                $this->db->where('organization.user_id',getUserAid());
         }
@@ -361,8 +363,10 @@ class Volunteer_model extends MY_Model
                     $this->db->join($this->tbl_orz_in_province,'organization.aid = orz_in_province.orz_aid','left');
                     $this->db->where('orz_in_province.province_code',getUserGroupId());
                     break;
+                    case 5:
+                        $this->db->or_where('orz_volunteer_mn.orz_aid',getUserGroupId());
+                    break;
                 default:
-
                     $this->db->or_where('orz_volunteer_mn.orz_aid',getUserGroupId());
                     break;
             }

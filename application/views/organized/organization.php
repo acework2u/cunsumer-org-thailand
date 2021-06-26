@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>สภาองค์กรผู้บริโภค</title>
+    <title>สภาองค์กรของผู้บริโภค</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css')?>" >
     <link href="<?php echo base_url('assets/css/font-awesome.min.css');?>" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="<?php echo base_url('assets/css/stylesheet.css'); ?>" rel="stylesheet" media="screen" />
@@ -107,7 +107,7 @@
     <div id="topic" class="topic">
         <div class="container container-lg text-left py-5 py-4-sm">
             <h1 class="topic-header pt-5 pt-0-sm pb-4 pb-2-sm text-center">เราคือใคร</h1>
-            <p class="topic-paragraph px-3 px-4-sm">“สภาองค์กรผู้บริโภค”  เกิดขึ้น โดยมีแนวคิดริเริ่มจากการผลักดันให้เกิด<br>
+            <p class="topic-paragraph px-3 px-4-sm">“สภาองค์กรของผู้บริโภค”  เกิดขึ้น โดยมีแนวคิดริเริ่มจากการผลักดันให้เกิด<br>
                 “องค์กรอิสระเพื่อการคุ้มครองผู้บริโภค” ถือกำเนิดและก่อร่างสร้างตัวขึ้นในรัฐธรรมนูญปี 2540 และระบุชัดเจนมากขึ้นในรัฐธรรมนูญปี 2550 และได้มีการจัดทำร่างกฎหมายเหลือเพียงการพิจารณาของสส. หลังจากขั้นตอนผ่านกรรมาธิการร่วม เกิดการยุบสภาและรัฐประหาร ต่อมาเมื่อมีรัฐธรรรมนูญปี 2560 มาตรา 46 ได้บัญญัติรับรองการคุ้มครองสิทธิผู้บริโภคไว้และกำหนดให้องค์กรผู้บริโภครวมตัวกันจัดตั้งองค์กรที่มีความเป็นอิสระเพื่อให้เกิดพลังในการคุ้มครองและพิทักษ์สิทธิของผู้บริโภค หลักเกณฑ์และวิธีการจัดตั้ง อำนาจในการเป็นตัวแทนผู้บริโภคให้มีการออกกฎหมาย โดยได้รับการสนับสนุนด้านการเงินจากรัฐ
                 โดยคณะรัฐมนตรีได้มอบหมายให้สำนักงานคณะกรรมการคุ้มครองผู้บริโภค หรือ สคบ. เป็นเจ้าภาพในการจัดทำร่างกฎหมายตามมาตรา46 ดังกล่าว มีการยกร่างกฎหมายและจัดเวทีรับฟังความคิดเห็นจากองค์กรผู้บริโภคในภูมิภาคต่างๆ และถูกส่งต่อไปพิจารณาในคณะกรรมการกฤษฎีกาคณะพิเศษ ถูกปรับแก้ไขหลักการกฎหมาย เป็นร่างกฎหมายการจัดตั้งสภาองค์กรของผู้บริโภค ส่งกลับให้คณะรัฐมนตรีเห็นชอบ และวันที่ 15 กุมภาพันธ์ 2562 สภานิติบัญญัติได้มีมติเห็นชอบผ่านร่างพระราชบัญญัติการจัดตั้งสภาองค์กรของผู้บริโภค ซึ่งทำให้องค์กรผู้บริโภคสามารถรวมตัวกันเพื่อจัดตั้งเป็นสภาองค์กรของผู้บริโภค เป็นนิติบุคคลที่มีวัตถุประสงค์คุ้มครองผู้บริโภคในทุกด้าน มีอำนาจเป็นตัวแทนของผู้บริโภค มีความเป็นอิสระจากหน่วยงานรัฐ และพรรคการเมือง โดยรัฐสนับสนุนด้านการเงิน
             </p>
@@ -570,7 +570,7 @@
                             </div>
                             <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                 <div class="px-2" data-toggle="modal" data-target="#search-modal" @click="userOrzInfoClick(item)">
-                                    <p class="mb-2 w-50"><b>{{item.title}}</b></p>
+                                    <p class="mb-2 w-80"><b>{{item.title | wrapText}}</b></p>
                                     <p class="mb-0 mt-0">{{item.address}} {{item.district}} {{item.amphoe}} {{item.province}} {{item.stage_code}}</p>
                                     <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                 </div>
@@ -592,7 +592,7 @@
                                     </div>
                                     <div class="col-8 pl-2 pr-0 text-left d-flex location-container-bg">
                                         <div class="px-2" data-toggle="modal" data-target="#search-modal" @click="userOrzInfoClick(item)">
-                                            <p class="mb-2 w-50"><b>{{item.title}}</b></p>
+                                            <p class="mb-2 w-80"><b>{{item.title}}</b></p>
                                             <p class="mb-0 mt-0">{{item.address}} {{item.district}} {{item.amphoe}} {{item.province}} {{item.stage_code}}</p>
                                             <button class="location-btn p-absolute text-white" data-toggle="modal" data-target="#search-modal">เส้นทาง <img src="<?php echo base_url('assets/image/turn-right.png');?>"></button>
                                         </div>
@@ -613,6 +613,7 @@
                 <div class="modal-content register-modal-container w-100 px-3 py-2 p-relative">
                     <div class="d-flex">
                         <img :src="orz_info.logo" class="w-auto py-2" style="max-height: 134px">
+                        <p style="margin-left: 4%" v-html="orz_info.title"></p>
                     </div>
                     <div class="row m-auto text-left">
                         <div class="col-sm">
@@ -810,8 +811,9 @@
                 </div>
                 <div class="col-auto col-sm p-0">
                     <p class="footer-header mb-4 mb-2-sm"><?php echo $this->lang->line('address');?></p>
-                    <p class="footer-link mb-2"><b>อาคารศูนย์เรียนรู้สุขภาวะ </b><br>เลขที่ 4/2 ซ.วัฒนโยธิน แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร 10400</p>
-                    <p class="footer-link mb-2">โทรศัพท์ 02-343-1500 / โทรสาร 02-343-1551</p>
+                    <p class="footer-link mb-2"><b>อาคารสำนักงานมูลนิธิเพื่อผู้บริโภค </b><br>เลขที่ 4/2 ซ.วัฒนโยธิน แขวงถนนพญาไท เขตราชเทวี กรุงเทพฯ 10400</p>
+                    <p class="footer-link mb-2">เบอร์โทรศัพท์ 02-24834-37</p>
+                    <p class="footer-link mb-2">เบอร์โทรสาร 02-2483733</p>
                 </div>
             </div>
             <p class="footer-header">CONTACT US</p>
@@ -921,6 +923,7 @@
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/JQL.min.js')?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dependencies/typeahead.bundle.js')?>"></script>
     <script type="text/javascript" src="<?php echo base_url('assets/js/jquery.Thailand.js/dist/jquery.Thailand.min.js')?>"></script>
+
 
 </body>
 </html>

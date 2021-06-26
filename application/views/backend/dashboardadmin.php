@@ -96,7 +96,7 @@
                             <a data-toggle="modal" @click="orzUserClick(props.row)" data-target="#editModal" slot="action"
                                                                     slot-scope="props" target="_blank" :href="props.row.action"
                                                                     class="glyphicon fa fa-edit"></a>
-                            <a data-toggle="modal" @click="orzUserClick(props.row)" data-target="#viewModal" slot="action_1"
+                            <a data-toggle="modal" @click="orzUserClick(props.row)" data-target="#delModal" slot="action_1"
                                slot-scope="props" target="_blank" :href="props.row.action_1"
                                class="glyphicon fa fa-trash-o"></a>
 
@@ -148,8 +148,16 @@
                                     </div>
                                     </div>
                                     <div class="form-group">
+
+                                        <div class="col-sm-6">
                                             <label for="recipient-name" class="control-label">ชื่อ องค์กร /มูลนิธิ:</label>
                                             <input type="text" class="form-control" id="recipient-name" v-model="orz_user_select.title">
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label for="recipient-name" class="control-label">เลขที่ทะเบียนจดแจ้งองค์กร</label>
+                                            <input type="text" class="form-control" id="recipient-registerno" v-model="orz_user_select.register_no">
+                                        </div>
+
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label">กลุ่มมูลนิธิ</label>
@@ -310,6 +318,31 @@
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal" @click="userClickClear">Close</button>
                                     <button type="button" class="btn btn-primary" data-dismiss="modal" @click="saveOrzInfobyAdmin">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="modal" tabindex="-1" role="dialog" id="delModal">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title orange">ยืนยันการลบข้อมูลองค์กร</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <span class="red">ต้องการลบข้อมูล <b style="color: red">{{orz_user_select.title}} </b>ใช่หรือไม่?</span>
+                                    <p>หากทำการลบแล้ว ข้อมูลนี้จะถูกลบถาวร</p>
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal" @click="deleteOrz(orz_user_select.aid)">Delete</button>
                                 </div>
                             </div>
                         </div>

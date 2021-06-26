@@ -406,13 +406,26 @@
             filterClear(){
 
             },
-            orzUserClick(item) {
+            deleteOrz(id){
+                // console.log(id)
+                let orz_id = id
+                let url = baseUrl+"/admin/orz-delete";
 
+                axios.get(url+"?orz_id="+orz_id).then((res)=>{
+                    // console.log(res.data)
+                    this.getOrganizationList()
+                }).catch()
+
+
+            },
+            orzUserClick(item) {
                 this.userClickClear()
                 this.orz_user_select = item
                 this.orzInformation = item
-                console.log("Demo")
-                console.log(item)
+                // console.log("Demo")
+                // console.log(item)
+                this.imagePreview = ""
+                this.uploadPercentage=0
 
 
                 this.coordinates = [{
@@ -440,7 +453,7 @@
                 let orz_id = item.aid
                 let orz_status = 4
                 let baseAPi = baseUrl + "/api/v1/orz/backend/orz-update-status?status=" + orz_status + "&id=" + orz_id
-                console.log(baseAPi)
+                // console.log(baseAPi)
                 axios.get(baseAPi).then((res) => {
                     if (res.error) {
 
@@ -455,7 +468,7 @@
                 let orz_id = item.aid
                 let orz_status = 3
                 let baseAPi = baseUrl + "/api/v1/orz/backend/orz-update-status?status=" + orz_status + "&id=" + orz_id
-                console.log(baseAPi)
+                // console.log(baseAPi)
                 axios.get(baseAPi).then((res) => {
                     if (res.error) {
 
@@ -531,18 +544,18 @@
             },
             orzinVolunteer(item){
                 this.volunteers = []
-                console.log(item)
+                // console.log(item)
                 let orz_id = item.aid
                 let API = baseUrl + "/api/v1/orz/backend/volunteer?orz_id=" + orz_id;
                 axios.get(API).then((res) => {
                     this.volunteers = res.data
-                    console.log(res.data)
+                    // console.log(res.data)
                 })
 
             },
             getOrzgroup() {
                 axios.get(baseUrl + '/api/v1/orz-group').then((res) => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     this.orz_group = res.data
                 })
             },
@@ -598,8 +611,8 @@
                 /*
                   Make the request to the POST /single-file URL
                 */
-                // // console.log(formData);
-                axios.post(baseUrl + '/uploadfile',
+                // console.log(formData);
+                axios.post(baseUrl + '/logo-uploadfile',
                     formData,
                     {
                         headers: {
@@ -614,12 +627,20 @@
                     // console.info("Upload logo Successful")
                     full_img = response.data.full_img
                     lastdonate.orzInformation.logo =  full_img;
+                    // console.log(response)
+
                 })
-                    .catch(function () {
-                        // console.log('FAILURE!!');
+                    .catch(function (e) {
+                        // console.log(e);
                     });
 
-                // this.orzInformation.logo =  full_img;
+                this.orzInformation.logo =  full_img;
+
+
+
+
+
+                // console.log(this.orzInformation.logo)
 
 
 
@@ -672,6 +693,10 @@
                     var fromData = this.toFormData(dataInfo)
 
                     this.savingStatus = true;
+
+                    console.info(this.orzInformation)
+
+
                     axios.post(ApiUrl, fromData).then((res) => {
                         this.textSuccess = res.data.message
                         setTimeout(() => {
@@ -679,14 +704,16 @@
                             this.textSuccess = ""
                         }, 3000)
                         // console.info(res.data)
+
+
+                        this.getOrganizationList()
+                        this.userClickClear()
                     });
-                    this.getOrganizationList()
-                    this.userClickClear()
+
 
 
                 })
 
-                // console.log(this.orzInformation);
             },
             toFormData: function (obj) {
                 var form_data = new FormData();

@@ -14,8 +14,9 @@
             </div>
             <div class="col-auto col-sm p-0">
                 <p class="footer-header mb-4 mb-2-sm">ADDRESS</p>
-                <p class="footer-link mb-2"><b>อาคารศูนย์เรียนรู้สุขภาวะ </b><br>เลขที่ 4/2 ซ.วัฒนโยธิน แขวงถนนพญาไท เขตราชเทวี กรุงเทพมหานคร 10400</p>
-                <p class="footer-link mb-2">โทรศัพท์ 02-343-1500 / โทรสาร 02-343-1551</p>
+                <p class="footer-link mb-2"><b>อาคารสำนักงานมูลนิธิเพื่อผู้บริโภค </b><br>เลขที่ 4/2 ซ.วัฒนโยธิน แขวงถนนพญาไท เขตราชเทวี กรุงเทพฯ 10400</p>
+                <p class="footer-link mb-2">เบอร์โทรศัพท์ 02-24834-37</p>
+                <p class="footer-link mb-2">เบอร์โทรสาร 02-2483733</p>
             </div>
         </div>
         <p class="footer-header">CONTACT US</p>

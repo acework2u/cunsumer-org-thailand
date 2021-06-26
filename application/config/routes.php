@@ -62,6 +62,7 @@ $route['translate_uri_dashes'] = FALSE;
 /*** Backend Dashboard ***/
 $route['admin'] = "backend/Dashboard/index";
 $route['admin/dashboard'] = "backend/Dashboard/index";
+$route['admin/orz-delete'] = "backend/Dashboard/orz_delete";
 $route['admin/volunteer-management'] = "backend/Dashboard/volunteerInOrz";
 $route['admin/volunteer-update'] = "backend/Dashboard/volunteer_update";
 $route['admin/volunteer-delete'] = "backend/Dashboard/volunteer_delete";
